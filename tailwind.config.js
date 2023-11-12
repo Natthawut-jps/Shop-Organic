@@ -1,12 +1,66 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "gray-scale-white": "#fff",
+        "gray-scale-gray-800": "#333",
+        "gray-scale-gray-400": "#999",
+        gray: {
+          "100": "#1a1a1a",
+          "200": "rgba(255, 255, 255, 0.85)",
+          "300": "rgba(255, 255, 255, 0.6)",
+          "400": "rgba(255, 255, 255, 0.8)",
+        },
+        "gray-scale-gray-700": "#4d4d4d",
+        "branding-success-dark": "#2c742f",
+        "gray-scale-gray-200": "#ccc",
+        "gray-scale-gray-100": "#e6e6e6",
+        "branding-success": "#00b207",
+        "gray-scale-gray-500": "#808080",
+        "gren-gray-scale-900": "#002603",
+        "gray-scale-gray-600": "#666",
+        gold: "#fcc900",
+        "branding-warning": "#ff8a00",
+        "branding-success-bright": "#84d187",
+        "branding-error": "#ea4b48",
+        whitesmoke: "#f7f7f7",
+        "gray-scale-gray-50": "#f2f2f2",
+        "gray-scale-gray-300": "#b3b3b3",
+      },
+      spacing: {},
+      fontFamily: {
+        "body-tiny-body-tiny-400": "Poppins",
+      },
+      borderRadius: {
+        "24xl": "43px",
+        "8xs": "5px",
+        "3xs": "10px",
+        "34xl": "53px",
+        "7xs-3": "5.3px",
+        "481xl": "500px",
+        "27xl": "46px",
+      },
+    },
+    fontSize: {
+      sm: "14px",
+      "2xs": "11px",
+      "3xs": "10px",
+      mini: "15px",
+      "13xl": "32px",
+      xs: "12px",
+      "21xl": "40px",
+      lg: "18px",
+      xl: "20px",
+      "5xl": "24px",
+      base: "16px",
+      "29xl": "48px",
+      "37xl": "56px",
+      inherit: "inherit",
+    },
   },
-  plugins: [],
-}
-
+  corePlugins: {
+    preflight: false,
+  },
+};
