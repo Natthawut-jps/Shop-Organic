@@ -3,10 +3,17 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors: {
+      colors: { 
+        limegreen: {
+          "100": "rgba(32, 181, 38, 0.2)",
+          "200": "rgba(32, 181, 38, 0.1)",
+        },
+        "gray-scale-gray-900": "#1a1a1a",
         "gray-scale-white": "#fff",
         "gray-scale-gray-800": "#333",
         "gray-scale-gray-400": "#999",
+        dimgray: "#555",
+        tomato: "rgba(234, 75, 72, 0.1)",
         gray: {
           "100": "#1a1a1a",
           "200": "rgba(255, 255, 255, 0.85)",
@@ -32,6 +39,8 @@ module.exports = {
       spacing: {},
       fontFamily: {
         "body-tiny-body-tiny-400": "Poppins",
+        "body-medium-body-medium-600": "Poppins",
+        "dancing-script": "'Dancing Script'",
       },
       borderRadius: {
         "24xl": "43px",
@@ -41,6 +50,9 @@ module.exports = {
         "7xs-3": "5.3px",
         "481xl": "500px",
         "27xl": "46px",
+        "81xl": "100px",
+        "151xl": "170px",   
+        "10xs": "3px",
       },
     },
     fontSize: {
@@ -51,12 +63,18 @@ module.exports = {
       "13xl": "32px",
       xs: "12px",
       "21xl": "40px",
+      "2xs": "11px",
       lg: "18px",
       xl: "20px",
       "5xl": "24px",
       base: "16px",
       "29xl": "48px",
       "37xl": "56px",
+      "13xl": "32px",
+      "5xl": "24px",
+      "3xs": "10px",
+      smi: "13px",
+      "17xl": "36px",
       inherit: "inherit",
     },
   },
