@@ -1,10 +1,10 @@
 import { faSistrix } from "@fortawesome/free-brands-svg-icons"
-import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown, faAngleRight, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Menu, MenuItem } from "@mui/material";
 import { FunctionComponent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
@@ -77,7 +77,7 @@ export const Header: FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-[1920px] flex flex-row items-center justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
+                <div className="w-[1920px] bg-gray-scale-gray-800 flex flex-row items-center justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
                     <div className="flex flex-row items-center justify-start gap-[32px]">
                         <div
                             onClick={handleClick}
@@ -120,7 +120,7 @@ export const Header: FunctionComponent = () => {
                                 minHeight: null
                             }}
                         >
-                            <Link to={'/product/vagetables'} className=" no-underline text-black">
+                            <Link to={'/product/vegetables'} className=" no-underline text-black">
                                 <MenuItem onClick={handleClose}> <img src="/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
                             </Link>
                             <MenuItem onClick={handleClose}><img src="/fish.svg" alt="" width={25} height={25} />River Fish</MenuItem>
@@ -131,7 +131,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0"
                                 alt=""
-                                src="/chevron-down1.svg"
+                                src="/chevron-down2.svg"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[4px]">

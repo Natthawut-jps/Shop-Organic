@@ -1,8 +1,10 @@
 import { FunctionComponent } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
+import { Link } from "react-router-dom";
 
 const Homepage: FunctionComponent = () => {
+  window.scroll(0,0)
   return (
 
     <div className="relative bg-gray-scale-white w-full h-[5574px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
@@ -770,7 +772,7 @@ const Homepage: FunctionComponent = () => {
             />
           </a>
         </div>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/vegetables/Apple'} state={{ categories: 'vegetables', product: 'Apple' }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
           <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
             <img
               className="relative w-[254px] h-[230px] object-cover"
@@ -829,7 +831,7 @@ const Homepage: FunctionComponent = () => {
             <div className="relative leading-[150%]">Sale</div>
             <div className="relative leading-[150%] font-medium">50%</div>
           </div>
-        </a>
+        </Link>
         <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[265px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
           <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
             <img

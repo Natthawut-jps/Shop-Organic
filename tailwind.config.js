@@ -14,6 +14,7 @@ module.exports = {
         "gray-scale-gray-400": "#999",
         dimgray: "#555",
         tomato: "rgba(234, 75, 72, 0.1)",
+        darkorange: "#ff8a00",
         gray: {
           "100": "#1a1a1a",
           "200": "rgba(255, 255, 255, 0.85)",
@@ -43,6 +44,9 @@ module.exports = {
         "dancing-script": "'Dancing Script'",
       },
       borderRadius: {
+        "11xl": "30px",
+        "13xl": "32px",
+        "111xl": "130px",
         "24xl": "43px",
         "8xs": "5px",
         "3xs": "10px",
