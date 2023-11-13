@@ -4,10 +4,10 @@ import { Foorter } from "./unities/Foorter";
 
 const Homepage: FunctionComponent = () => {
   return (
-    
+
     <div className="relative bg-gray-scale-white w-full h-[5574px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
       {/* header template */}
-      <Header/>
+      <Header />
       {/* 11 */}
       <div className="absolute top-[4711px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
         <div className="absolute top-[0px] left-[471px] leading-[120%] font-semibold">
@@ -1443,7 +1443,7 @@ const Homepage: FunctionComponent = () => {
       </div>
       {/* 2 */}
       <div className="absolute top-[218px] left-[50px] w-[1980px] h-[600px] overflow-hidden text-gray-scale-white">
-        <a href="#" className=" text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] h-[600px] bg-[url('/public/bannar-big@3x.png')] bg-cover bg-no-repeat bg-[top] text-29xl">
+        <a href="#" className=" text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] h-[600px] bg-[url('/bannar-big@3x.png')] bg-cover bg-no-repeat bg-[top] text-29xl">
           <div className="absolute top-[155px] left-[60px] flex flex-col items-start justify-start gap-[28px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[596px]">
               <p className="m-0">{`Fresh & Healthy`}</p>
@@ -1769,7 +1769,7 @@ const Homepage: FunctionComponent = () => {
         </a>
       </div>
       {/* foorter template */}
-     <Foorter />
+      <Foorter />
     </div >
   );
 };

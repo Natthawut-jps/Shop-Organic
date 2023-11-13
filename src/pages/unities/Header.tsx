@@ -1,10 +1,10 @@
 import { faSistrix } from "@fortawesome/free-brands-svg-icons"
-import { faLemon } from "@fortawesome/free-regular-svg-icons";
-import { faAngleDown, faBars, faDrumstickBite, faLeaf, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Menu, MenuItem } from "@mui/material";
 import { FunctionComponent, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
@@ -36,7 +36,7 @@ export const Header: FunctionComponent = () => {
                     </div>
                 </div>
                 <div className="relative w-[1920px] h-[93px] text-13xl text-gren-gray-scale-900">
-                    <a href="#" className=" no-underline text-black absolute top-[27.5px] left-[300px] flex flex-row items-center justify-start gap-[8px]">
+                    <Link to={'/'} className=" no-underline text-black absolute top-[27.5px] left-[300px] flex flex-row items-center justify-start gap-[8px]">
                         <img
                             className="relative w-8 h-8 overflow-hidden shrink-0"
                             alt=""
@@ -45,7 +45,7 @@ export const Header: FunctionComponent = () => {
                         <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
                             Ecobazar
                         </div>
-                    </a>
+                    </Link>
                     <div onClick={() => ''} className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute top-[24px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100">
                         <div className="w-[500px] flex flex-row items-center justify-start py-3 pr-[18px] pl-4 box-border gap-[8px]">
                             <FontAwesomeIcon icon={faSistrix} className=" relative w-5 h-5 overflow-hidden shrink-0 opacity-50" />
@@ -77,7 +77,7 @@ export const Header: FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-gray-scale-gray-800 w-[1920px] flex flex-row items-center justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
+                <div className="w-[1920px] flex flex-row items-center justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
                     <div className="flex flex-row items-center justify-start gap-[32px]">
                         <div
                             onClick={handleClick}
@@ -101,7 +101,6 @@ export const Header: FunctionComponent = () => {
                                     paddingTop: '8px',
                                     paddingBottom: '0px',
                                     width: '175px',
-
                                 },
                                 "& .MuiMenuItem-root": {
                                     minHeight: '50px',
@@ -112,15 +111,19 @@ export const Header: FunctionComponent = () => {
                                         background: 'rgba(76, 175, 80, 0.2)',
                                         color: 'black',
                                         translate: '3px',
-
+                                    },
+                                    ":active": {
+                                        backgroundColor: 'white',
                                     }
                                 },
                                 cursor: 'pointer',
                                 minHeight: null
                             }}
                         >
-                            <MenuItem onClick={handleClose} className=""><FontAwesomeIcon icon={faLeaf} />Vegetables</MenuItem>
-                            <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faLemon} />River Fish</MenuItem>
+                            <Link to={'/product/vagetables'} className=" no-underline text-black">
+                                <MenuItem onClick={handleClose}> <img src="/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
+                            </Link>
+                            <MenuItem onClick={handleClose}><img src="/fish.svg" alt="" width={25} height={25} />River Fish</MenuItem>
                             <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat</MenuItem>
                         </Menu>
                         <div className="flex flex-row items-center justify-start gap-[4px]">

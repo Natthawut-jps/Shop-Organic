@@ -605,7 +605,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
           </div>
         </div>
       </div>
-      <div className="absolute top-[186px] left-[-225px] w-[1920px] h-[120px] bg-[url('/public/Breadcrumbs.svg')] bg-cover bg-no-repeat bg-[top] text-base text-gray-scale-gray-500">
+      <div className="absolute top-[186px] left-[-225px] w-[1920px] h-[120px] bg-[url('/Breadcrumbs.svg')] bg-cover bg-no-repeat bg-[top] text-base text-gray-scale-gray-500">
         <div className="absolute top-[calc(50%_-_12px)] left-[350px] flex flex-row items-center justify-start gap-[12px]">
           <NavLink to={'/'} className={({ isActive }) => isActive ? "" : ""}>
             <img
