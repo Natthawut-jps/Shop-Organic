@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { Header } from "./unities/Header";
+import { HeaderContext } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
 
@@ -9,7 +9,7 @@ const Homepage: FunctionComponent = () => {
 
     <div className="relative bg-gray-scale-white w-full h-[5574px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
       {/* header template */}
-      <Header />
+      <HeaderContext />
       {/* 11 */}
       <div className="absolute top-[4711px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
         <div className="absolute top-[0px] left-[471px] leading-[120%] font-semibold">

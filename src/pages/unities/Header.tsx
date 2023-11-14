@@ -1,14 +1,25 @@
 import { faSistrix } from "@fortawesome/free-brands-svg-icons"
-import { faAngleDown, faAngleRight, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Menu, MenuItem } from "@mui/material";
 import { FunctionComponent, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { CartContextProviders, CartProvider } from "./HandleCart";
+import { Cart } from "./Cart";
+
+export const HeaderContext = () => {
+    return (
+        <CartProvider>
+            <Header />
+        </CartProvider>
+    )
+};
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const propContext = CartContextProviders();
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
         setCategries(true);
@@ -19,6 +30,7 @@ export const Header: FunctionComponent = () => {
     };
     return (
         <>
+            <Cart />
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
@@ -59,7 +71,7 @@ export const Header: FunctionComponent = () => {
                             <FavoriteIcon className="relative hover:text-red-600 text-black opacity-50" fontSize="large" />
                         </a>
                         <div className="relative box-border w-px h-[25px] border-r-[1px] border-solid border-gray-scale-gray-200" />
-                        <div className=" hover:text-green-600 cursor-pointer flex flex-row items-center justify-start gap-[12px] text-black">
+                        <div onClick={() => propContext.setOpens(true)} className=" hover:text-green-600 cursor-pointer flex flex-row items-center justify-start gap-[12px] text-black">
                             <div className="relative w-[34px] h-[34px]">
                                 <FontAwesomeIcon icon={faShoppingCart} className="absolute top-[0px] left-[0px] w-[30px] h-[34px]" />
                                 <div className=" absolute  top-[-5px] left-[17px] rounded-2xl bg-branding-success-dark box-border w-[22px] h-[22px] overflow-hidden border-[1px] border-solid border-gray-scale-white">

@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import { Outlet, useParams } from "react-router-dom";
 import { Foorter } from "./unities/Foorter";
-import { Header } from "./unities/Header";
+import { HeaderContext } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { product } from "./unities/data-develop/product";
 
@@ -17,7 +17,7 @@ const Categories: FunctionComponent = () => {
     <>
       { categories &&
         <div className="relative bg-gray-scale-white w-full h-[3233px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
-          <Header />
+          <HeaderContext />
           <Breadcrumbs categoies={categories} tltle={undefined} />
           <div className="absolute top-[2587px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
             <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">

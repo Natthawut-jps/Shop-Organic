@@ -5,13 +5,21 @@ import { Outlet, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { NoPage } from "./unities/NoPage";
 import { product } from "./unities/data-develop/product";
+import { CartProvider } from "./unities/HandleCart";
 
+export const ProductsDetailsDescriptionContext = () => {
+  return (
+    <CartProvider>
+      <ProductsDetailsDescription />
+    </CartProvider>
+  )
+};
 export const ProductsDetailsDescription: FunctionComponent = () => {
   const { categoriesP, productList } = useParams();
   window.scroll(0, 0);
   return (
     <>
-      {product.some((product => product.categories === categoriesP && product.title === productList )) ?
+      {product.some((product => product.categories === categoriesP && product.title === productList)) ?
         <div className="relative bg-gray-scale-white w-full h-[2595px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* header template */}
           <Header />
@@ -443,7 +451,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                       />
                     </div>
                   </div>
-                  <div className="rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                  <div className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                     <div className="relative leading-[120%] font-semibold">
                       Add to Cart
                     </div>
@@ -619,6 +627,6 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
         <NoPage />
       }
     </>
-
-  );
+  )
 };
+
