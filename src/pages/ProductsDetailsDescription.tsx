@@ -1,11 +1,14 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Outlet, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { NoPage } from "./unities/NoPage";
 import { product } from "./unities/data-develop/product";
-import { CartProvider } from "./unities/HandleCart";
+import { CartContextProviders, CartProvider } from "./unities/HandleCart";
+import { Rating } from "@mui/material";
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export const ProductsDetailsDescriptionContext = () => {
   return (
@@ -14,9 +17,23 @@ export const ProductsDetailsDescriptionContext = () => {
     </CartProvider>
   )
 };
+// datatype tester
+interface datatypes {
+  id: number,
+  name: string,
+  price: number,
+  imgURL: string,
+}
 export const ProductsDetailsDescription: FunctionComponent = () => {
+  const [fav, setFav] = useState<number | null>();
   const { categoriesP, productList } = useParams();
-  window.scroll(0, 0);
+  const { increaseCartQuantity, cartItem, favoriteItem, increaseFavoriteQuantity, removeFavoriteItem } = CartContextProviders();
+  const data: datatypes = {
+    id: 1,
+    name: 'Chinese Cabbage',
+    price: 10,
+    imgURL: '/product-image@2x.png'
+  }
   return (
     <>
       {product.some((product => product.categories === categoriesP && product.title === productList)) ?
@@ -430,39 +447,56 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
-                  <div className="rounded-151xl bg-gray-scale-white flex flex-row items-center justify-center p-2 border-[1px] border-solid border-gray-scale-gray-100">
-                    <div className="relative w-[34px] h-[34px]">
-                      <div className="absolute top-[0px] left-[0px] rounded-151xl bg-gray-scale-gray-50 w-[34px] h-[34px]" />
+                  {cartItem.length > 0 ?
+                    <div onClick={() => increaseCartQuantity(data)} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                      <div className="relative leading-[120%] font-semibold">
+                        สินค้าอยู่ในตะกล้าแล้ว กดที่นี้!! เพิ่มสินค้าอีก
+                      </div>
                       <img
-                        className="absolute top-[10px] left-[10px] w-3.5 h-3.5 overflow-hidden"
+                        className="relative w-[16.3px] h-[16.3px]"
                         alt=""
-                        src="/minus.svg"
+                        src="/rectangle.svg"
                       />
                     </div>
-                    <div className="relative leading-[150%] inline-block w-10 shrink-0">
-                      5
-                    </div>
-                    <div className="relative w-[34px] h-[34px]">
-                      <div className="absolute top-[0px] left-[0px] rounded-151xl bg-gray-scale-gray-50 w-[34px] h-[34px]" />
+                    :
+                    <div onClick={() => increaseCartQuantity(data)} className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                      <div className="relative leading-[120%] font-semibold">
+                        Add to Cart
+                      </div>
                       <img
-                        className="absolute top-[10px] left-[10px] w-3.5 h-3.5 overflow-hidden"
+                        className="relative w-[16.3px] h-[16.3px]"
                         alt=""
-                        src="/plus-1.svg"
+                        src="/rectangle.svg"
                       />
                     </div>
-                  </div>
-                  <div className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
-                    <div className="relative leading-[120%] font-semibold">
-                      Add to Cart
-                    </div>
-                    <img
-                      className="relative w-[16.3px] h-[16.3px]"
-                      alt=""
-                      src="/rectangle.svg"
+                  }
+                  <div onClick={() => {
+                    if (fav === 1) {
+                      removeFavoriteItem(data.id)
+                    } else {
+                      increaseFavoriteQuantity(data)
+                    }
+                  }} className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
+                    <Rating
+                      name="hover-feedback"
+                      precision={1}
+                      value={fav}
+                      max={1}
+                      icon={<FavoriteIcon fontSize="inherit" />}
+                      onChange={(event, newValue) => {
+                        { event }
+                       setFav(newValue)
+                      }}
+                      emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+                      sx={{
+                        '& .MuiRating-iconFilled': {
+                          color: '#ff6d75',
+                        },
+                        '& .MuiRating-iconHover': {
+                          color: '#ff3d47',
+                        },
+                      }}
                     />
-                  </div>
-                  <div className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
-                    <img className="relative w-5 h-5" alt="" src="/heart.svg" />
                   </div>
                 </div>
                 <div className="flex flex-col items-start justify-start gap-[12px]">

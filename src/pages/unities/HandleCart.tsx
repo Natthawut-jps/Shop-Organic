@@ -1,28 +1,174 @@
 import { createContext, useContext, useState } from "react";
 
-// context
-interface dataTypes {
-    open: boolean,
-    setOpens: (e: boolean) => void,
-};
+// context CartShopping
 interface Provider {
     children: JSX.Element
 };
-export const CartContext = createContext<dataTypes>({
-    open: false,
-    setOpens: () => {}
-});
+interface increaseCartQuantityType {
+    id: number,
+    name: string,
+    price: number,
+    imgURL: string,
+};
+interface dataTypes {
+    getItemQuantityCart: (id: number) => void;
+    increaseCartQuantity: (props: increaseCartQuantityType) => void;
+    decreaseCartQuantity: (id: number) => void;
+    removeCartItem: (id: number) => void;
+    removeCartItemAll: (removeAll: boolean) => void;
+    cartItem: setCart[],
+    getItemQuantityFavorite: (id: number) => void;
+    increaseFavoriteQuantity: (props: increaseFavoriteQuantityType) => void;
+    decreaseFavoriteQuantity: (id: number) => void;
+    removeFavoriteItem: (id: number) => void;
+    removeFavoriteItemAll: (removeAll: boolean) => void;
+    favoriteItem: setFavorite[]
+};
+interface setCart {
+    id: number,
+    name: string,
+    price: number,
+    quantity: number,
+    imgURL: string,
+};
+// Favorite
+// context FavoriteShopping
+interface ProviderFav {
+    children: JSX.Element
+};
+interface increaseFavoriteQuantityType {
+    id: number,
+    name: string,
+    price: number,
+    imgURL: string,
+};
+interface setFavorite {
+    id: number,
+    name: string,
+    price: number,
+    quantity: number,
+    imgURL: string,
+};
+export const CartContext = createContext<dataTypes>({} as dataTypes)
 export const CartContextProviders = () => {
     return useContext(CartContext);
-}
+};
 export const CartProvider = ({ children }: Provider) => {
-    const [open, setOpen] = useState<boolean>(false);
-    const dataContext: dataTypes = {
-        open: open,
-        setOpens: setOpen,
+    const [cartItem, setCartItem] = useState<setCart[]>([]);
+
+    const getItemQuantityCart = (id: number) => {
+        return cartItem.find(item => item.id === id)?.quantity || 0
     };
+
+    const increaseCartQuantity = (prop: increaseCartQuantityType) => {
+        setCartItem(curr => {
+            if (curr.find(item => item.id === prop.id) == null) {
+                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL }]
+            } else {
+                return curr.map((item) => {
+                    if (item.id === prop.id) {
+                        return { ...item, quantity: item.quantity + 1 }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        })
+    }
+
+    const decreaseCartQuantity = (id: number) => {
+        setCartItem(curr => {
+            if (curr.find(item => item.id === id)?.quantity === 1) {
+                return curr.filter(item => item)
+            } else {
+                return curr.map((item) => {
+                    if (item.id === id) {
+                        return { ...item, quantity: item.quantity - 1 }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        })
+    }
+
+    const removeCartItem = (id: number) => {
+        setCartItem(currItem => {
+            return currItem.filter(item => item.id !== id)
+        })
+    }
+
+    const removeCartItemAll = (removeAll: boolean) => {
+        if (removeAll) {
+            setCartItem([])
+        }
+    }
+
+    // Favorite
+    const [favoriteItem, setFavoritetItem] = useState<setFavorite[]>([]);
+
+    const getItemQuantityFavorite = (id: number) => {
+        return favoriteItem.find(item => item.id === id)?.quantity || 0
+    };
+
+    const increaseFavoriteQuantity = (prop: increaseFavoriteQuantityType) => {
+        setFavoritetItem(curr => {
+            if (curr.find(item => item.id === prop.id) == null) {
+                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL }]
+            } else {
+                return curr.map((item) => {
+                    if (item.id === prop.id) {
+                        return { ...item, quantity: item.quantity + 1 }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        })
+    }
+    const decreaseFavoriteQuantity = (id: number) => {
+        setFavoritetItem(curr => {
+            if (curr.find(item => item.id === id)?.quantity === 1) {
+                return curr.filter(item => item)
+            } else {
+                return curr.map((item) => {
+                    if (item.id === id) {
+                        return { ...item, quantity: item.quantity - 1 }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        })
+    }
+
+    const removeFavoriteItem = (id: number) => {
+        setFavoritetItem(currItem => {
+            return currItem.filter(item => item.id !== id)
+        })
+    }
+
+    const removeFavoriteItemAll = (removeAll: boolean) => {
+        if (removeAll) {
+            setFavoritetItem([])
+        }
+    }
+
     return (
-        <CartContext.Provider value={dataContext}>
+        <CartContext.Provider value={{
+            getItemQuantityCart,
+            increaseCartQuantity,
+            decreaseCartQuantity,
+            removeCartItem,
+            removeCartItemAll,
+            cartItem,
+            getItemQuantityFavorite,
+            increaseFavoriteQuantity,
+            decreaseFavoriteQuantity,
+            removeFavoriteItem,
+            removeFavoriteItemAll,
+            favoriteItem,
+        }}>
             {children}
         </CartContext.Provider>
     )
