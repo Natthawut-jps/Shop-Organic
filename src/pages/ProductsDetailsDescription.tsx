@@ -1,7 +1,7 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { NoPage } from "./unities/NoPage";
 import { product } from "./unities/data-develop/product";
@@ -25,15 +25,21 @@ interface datatypes {
   imgURL: string,
 }
 export const ProductsDetailsDescription: FunctionComponent = () => {
-  const [fav, setFav] = useState<number | null>();
   const { categoriesP, productList } = useParams();
-  const { increaseCartQuantity, cartItem, favoriteItem, increaseFavoriteQuantity, removeFavoriteItem } = CartContextProviders();
+  const { state }  = useLocation();
+  const { increaseCartQuantity, cartItem, addFavorite, favItem, increaseFavoriteQuantity, removeFavoriteItem } = CartContextProviders();
   const data: datatypes = {
     id: 1,
     name: 'Chinese Cabbage',
     price: 10,
     imgURL: '/product-image@2x.png'
   }
+  useEffect(() => {
+    if (state.status) {
+      window.scroll(0, 0);
+    }
+  }, [])
+
   return (
     <>
       {product.some((product => product.categories === categoriesP && product.title === productList)) ?
@@ -447,7 +453,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
-                  {cartItem.length > 0 ?
+                  {cartItem.find(check => check.id === data.id) ?
                     <div onClick={() => increaseCartQuantity(data)} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                       <div className="relative leading-[120%] font-semibold">
                         สินค้าอยู่ในตะกล้าแล้ว กดที่นี้!! เพิ่มสินค้าอีก
@@ -470,23 +476,18 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                       />
                     </div>
                   }
-                  <div onClick={() => {
-                    if (fav === 1) {
-                      removeFavoriteItem(data.id)
-                    } else {
-                      increaseFavoriteQuantity(data)
-                    }
-                  }} className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
+                  <div className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
                     <Rating
                       name="hover-feedback"
                       precision={1}
-                      value={fav}
+                      value={favItem.some((item) => item === data.id) ? 1 : 0}
+                      onChange={() => {
+                        increaseFavoriteQuantity(data);
+                        addFavorite(data.id);
+                        favItem.some((item) => item === data.id) && removeFavoriteItem(data.id)
+                      }}
                       max={1}
                       icon={<FavoriteIcon fontSize="inherit" />}
-                      onChange={(event, newValue) => {
-                        { event }
-                       setFav(newValue)
-                      }}
                       emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                       sx={{
                         '& .MuiRating-iconFilled': {

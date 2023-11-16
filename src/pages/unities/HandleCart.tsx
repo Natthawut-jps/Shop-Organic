@@ -22,6 +22,8 @@ interface dataTypes {
     decreaseFavoriteQuantity: (id: number) => void;
     removeFavoriteItem: (id: number) => void;
     removeFavoriteItemAll: (removeAll: boolean) => void;
+    addFavorite: (id: number) => void;
+    favItem: number[],
     favoriteItem: setFavorite[]
 };
 interface setCart {
@@ -33,9 +35,6 @@ interface setCart {
 };
 // Favorite
 // context FavoriteShopping
-interface ProviderFav {
-    children: JSX.Element
-};
 interface increaseFavoriteQuantityType {
     id: number,
     name: string,
@@ -106,9 +105,19 @@ export const CartProvider = ({ children }: Provider) => {
 
     // Favorite
     const [favoriteItem, setFavoritetItem] = useState<setFavorite[]>([]);
+    const [favItem, setFavItem] = useState<number[]>([]);
 
     const getItemQuantityFavorite = (id: number) => {
         return favoriteItem.find(item => item.id === id)?.quantity || 0
+    };
+    const addFavorite = (id: number) => {
+        setFavItem(curr => {
+            if(curr.find(item => item === id) == null){
+                return [...curr, id]
+            } else {
+               return curr.filter((item) => item !== id)
+            }
+        })
     };
 
     const increaseFavoriteQuantity = (prop: increaseFavoriteQuantityType) => {
@@ -151,6 +160,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeFavoriteItemAll = (removeAll: boolean) => {
         if (removeAll) {
             setFavoritetItem([])
+            setFavItem([])
         }
     }
 
@@ -167,6 +177,8 @@ export const CartProvider = ({ children }: Provider) => {
             decreaseFavoriteQuantity,
             removeFavoriteItem,
             removeFavoriteItemAll,
+            addFavorite,
+            favItem,
             favoriteItem,
         }}>
             {children}

@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactElement, Ref, forwardRef } from 'react'
-import { faMinus, faPlus, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faMinus, faPlus, faTrash, faV, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Dialog, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
@@ -25,11 +25,9 @@ interface open {
     }
 }
 export const Favorite: FunctionComponent<open> = (props) => {
-    const { favoriteItem, increaseFavoriteQuantity, decreaseFavoriteQuantity, removeFavoriteItem, removeFavoriteItemAll } = CartContextProviders();
-    const price = favoriteItem.map(item => item.price * item.quantity);
-    const priceSum = price.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue
-    }, 0);
+    const { favoriteItem, cartItem, increaseCartQuantity, increaseFavoriteQuantity, addFavorite, removeFavoriteItem, removeFavoriteItemAll } = CartContextProviders();
+    const test = favoriteItem.find(item => item.id === 1)
+    console.log(Object(test))
     return (
         <>
             <Dialog
@@ -39,7 +37,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                 open={props.Favorite.openFavorite}
                 TransitionComponent={Transition}
             >
-                <div>
+                <div className=' pb-[150px] box-border'>
                     <div className="box-border relative top-5 right-10">
                         <FontAwesomeIcon onClick={() => props.Favorite.setOpenFavorite(false)} icon={faXmark} size="lg" className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right " />
                     </div>
@@ -59,7 +57,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                             }
                         </div>
                         {favoriteItem.length > 0 && favoriteItem.map((item) => (
-                            <div key={item.id} className=" relative top-[40px] w-full h-[96px] grid grid-flow-col">
+                            <div key={item.id} className=" relative top-[40px] w-full grid grid-flow-col">
                                 <div className=' flex justify-center items-center'>
                                     <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/product-image@2x.png" />
                                 </div>
@@ -74,26 +72,47 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                 </div>
                                 <div className=' flex items-center justify-center'>
                                     <div className=" relative top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
-                                        {item.price * item.quantity + '฿'}
+                                        {(item.price).toFixed(2) + '฿'}
                                     </div>
                                 </div>
-                                <div className='flex items-center justify-center '>
-                                    <div className=" relative w-[87px] h-[31px]">
-                                        <div className="relative w-[81px] h-[31px] bg-[#ffffff33] rounded-[4px] border border-solid border-[#33343566]">
-                                            <div onClick={() => increaseFavoriteQuantity(item)} className=" hover:bg-[#666666]/20 rounded-s-sm cursor-pointer w-[28px] h-[32px] top-[0px] left-[0px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] absolute tracking-[0] leading-[normal]">
-                                                <FontAwesomeIcon icon={faPlus} className='relative top-[8px] left-[10px]' />
+                                {cartItem.find(check => check.id === item.id) ?
+                                    <div className=' flex justify-center items-center'>
+                                        <div onClick={() => {
+                                            increaseCartQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
+                                            increaseFavoriteQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
+                                        }} className=" cursor-pointer rounded-xl bg-yellow-400 w-[220px] flex text-[15px] flex-row items-center justify-center py-4 px-5 box-border gap-[16px] text-left text-gray-scale-white">
+                                            <div className="relative leading-[100%] font-semibold">
+                                                สินค้าอยู่ในตะกล้าแล้ว
                                             </div>
-                                            <div className="absolute w-[10px] h-[24px] top-[6px] left-[35px] [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#333435e6] text-[14px] tracking-[0] leading-[normal]">
-                                                {item.quantity}
-                                            </div>
-                                            <div onClick={() => decreaseFavoriteQuantity(item.id)} className="hover:bg-[#666666]/20 cursor-pointer rounded-s-sm w-[29px] h-[32px] top-[0px] left-[52px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] whitespace-nowrap absolute tracking-[0] leading-[normal]">
-                                                <FontAwesomeIcon icon={faMinus} className=' relative top-[7px] left-2' />
-                                            </div>
+                                            <img
+                                                className="relative w-[16.3px] h-[16.3px]"
+                                                alt=""
+                                                src="/rectangle.svg"
+                                            />
                                         </div>
                                     </div>
-                                </div>
+                                    :
+                                    <div className=' flex justify-center items-center'>
+                                        <div onClick={() => {
+                                            increaseCartQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
+                                            increaseFavoriteQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
+                                        }} className=" cursor-pointer rounded-xl bg-branding-success w-[200px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                                            <div className="relative leading-[120%] font-semibold">
+                                                Add to Cart
+                                            </div>
+                                            <img
+                                                className="relative w-[16.3px] h-[16.3px]"
+                                                alt=""
+                                                src="/rectangle.svg"
+                                            />
+                                        </div>
+                                    </div>
+                                }
                                 <div className='flex justify-center items-center'>
-                                    <div onClick={() => removeFavoriteItem(item.id)} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
+                                    <div onClick={() => {
+                                        removeFavoriteItem(item.id)
+                                        addFavorite(item.id);
+                                    }} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
                                         <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                             ลบ
                                         </div>
@@ -103,13 +122,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                             </div>
                         ))
                         }
-                        {favoriteItem.length > 0 ?
-                            <div className=" relative w-full h-[100px] top-[0px] ">
-                                <div onClick={() => props.Favorite.setOpenFavorite(false)} className=" cursor-pointer top-[229px] left-[128px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-black text-[14px] absolute tracking-[0] leading-[normal]">
-                                    ช้อปปิ้งต่อ
-                                </div>
-                            </div>
-                            :
+                        {favoriteItem.length === 0 &&
                             <div className=" relative w-full h-[300px] top-[120px] flex justify-center">
                                 ไม่มีสินค้าในรายการที่ชอบ
                             </div>

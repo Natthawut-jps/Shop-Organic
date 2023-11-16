@@ -74,7 +74,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                                 </div>
                                 <div className=' flex items-center justify-center'>
                                     <div className=" relative top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
-                                        {item.price * item.quantity + '฿'}
+                                        {(item.price * item.quantity).toFixed(2) + '฿'}
                                     </div>
                                 </div>
                                 <div className='flex items-center justify-center '>
@@ -104,7 +104,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                         ))
                         }
                         {cartItem.length > 0 ?
-                            <div className=" relative w-full h-[320px] top-[60px] bg-[#f7f7f7]">
+                            <div className=" relative w-full pb-[320px] box-border top-[60px] bg-[#f7f7f7]">
                                 <div>
                                     <div className="top-[98px] left-[384px] font-normal absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
                                         ฿50.00
@@ -139,7 +139,6 @@ export const Cart: FunctionComponent<open> = (props) => {
                             <div className='className=" relative w-full h-[350px] top-[120px] flex justify-center'>
                                 ไม่มีสินค้าในตะกล้า
                             </div>
-
                         }
                     </div>
                 </div>
