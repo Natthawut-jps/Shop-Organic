@@ -8,6 +8,7 @@ module.exports = {
           "100": "rgba(32, 181, 38, 0.2)",
           "200": "rgba(32, 181, 38, 0.1)",
         },
+        "gren-gray-scale-50": "#edf2ee",
         "gray-scale-gray-900": "#1a1a1a",
         "gray-scale-white": "#fff",
         "gray-scale-gray-800": "#333",
@@ -42,6 +43,8 @@ module.exports = {
         "body-tiny-body-tiny-400": "Poppins",
         "body-medium-body-medium-600": "Poppins",
         "dancing-script": "'Dancing Script'",
+        "body-small-body-small-400": "Poppins",
+        "heading-05-heading-05-600": "Poppins",
       },
       borderRadius: {
         "11xl": "30px",
