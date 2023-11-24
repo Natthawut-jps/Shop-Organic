@@ -32,7 +32,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
     id: 1,
     name: 'Chinese Cabbage',
     price: 10,
-    imgURL: '/product-image@2x.png'
+    imgURL: '/product-image5@2x.png'
   }
   useEffect(() => {
     if (state.status) {
@@ -54,7 +54,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <img
                     className="relative w-[302px] h-[302px] object-cover"
                     alt=""
-                    src="/image@2x.png"
+                    src="/image5@2x.png"
                   />
                 </div>
                 <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
