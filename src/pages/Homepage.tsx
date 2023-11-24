@@ -1,9 +1,18 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { HeaderContext } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Homepage: FunctionComponent = () => {
+  const [product, setProduct] = useState([]);
+ async function Test() {
+    const { data } = await axios.get('/data/dev.json')
+    setProduct(data.person)
+  };
+  useEffect(() => {
+      Test()
+  }, []);
   return (
 
     <div className="relative bg-gray-scale-white w-full h-[5574px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
