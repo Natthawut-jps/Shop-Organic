@@ -30,28 +30,28 @@ export const Foorter = () => {
                             <img
                                 className="relative w-10 h-10"
                                 alt=""
-                                src="/social-media.svg"
+                                src="/img/social-media.svg"
                             />
                         </a>
                         <a href="#">
                             <img
                                 className="relative w-10 h-10 rounded-full"
                                 alt=""
-                                src="/social-media1.svg"
+                                src="/img/social-media1.svg"
                             />
                         </a>
                         <a href="#">
                             <img
                                 className="relative w-10 h-10 rounded-full"
                                 alt=""
-                                src="/social-media2.svg"
+                                src="/img/social-media2.svg"
                             />
                         </a>
                         <a href="#">
                             <img
                                 className="relative w-10 h-10 rounded-full"
                                 alt=""
-                                src="/social-media3.svg"
+                                src="/img/social-media3.svg"
                             />
                         </a>
                     </div>
@@ -63,7 +63,7 @@ export const Foorter = () => {
                                 <img
                                     className="relative w-8 h-8 overflow-hidden shrink-0"
                                     alt=""
-                                    src="/plant-1.svg"
+                                    src="/img/plant-1.svg"
                                 />
                                 <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
                                     Ecobazar
@@ -140,29 +140,29 @@ export const Foorter = () => {
                             <img
                                 className="relative w-[45px] h-[31.76px]"
                                 alt=""
-                                src="/methodapplepay.svg"
+                                src="/img/methodapplepay.svg"
                             />
                             <img
                                 className="relative w-[45px] h-[31.76px]"
                                 alt=""
-                                src="/methodvisa.svg"
+                                src="/img/methodvisa.svg"
                             />
                             <img
                                 className="relative w-[45px] h-[31.76px]"
                                 alt=""
-                                src="/methoddiscover.svg"
+                                src="/img/methoddiscover.svg"
                             />
                             <img
                                 className="relative w-[45px] h-[31.76px]"
                                 alt=""
-                                src="/methodmastercard.svg"
+                                src="/img/methodmastercard.svg"
                             />
                             <div className="relative w-[65px] h-8">
                                 <div className="absolute top-[calc(50%_-_16px)] left-[calc(50%_-_32.5px)] rounded-[5.29px] bg-gray-100 box-border w-[65px] h-8 border-[1px] border-solid border-gray-scale-gray-800" />
                                 <img
                                     className="absolute top-[4px] left-[5px] w-[11px] h-[11px] overflow-hidden"
                                     alt=""
-                                    src="/lock-1.svg"
+                                    src="/img/lock-1.svg"
                                 />
                                 <div className="absolute top-[4px] left-[18px] leading-[100%]">
                                     Secure

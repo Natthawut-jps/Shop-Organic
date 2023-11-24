@@ -1,0 +1,84 @@
+{
+    "PopularProduct": [
+        {
+            "id": "1",
+            "name": "Green Apple",
+            "price": "14.99",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image7@2x.png"
+        },
+        {
+            "id": "2",
+            "name": "Fresh Indian Malta",
+            "price": "20.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image8@2x.png"
+        },
+        {
+            "id": "3",
+            "name": "Chinese cabbage",
+            "price": "12.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image9@2x.png"
+        },
+        {
+            "id": "4",
+            "name": "Green Lettuce",
+            "price": "9.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image10@2x.png"
+        },
+        {
+            "id": "5",
+            "name": "Eggplant",
+            "price": "34.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image11@2x.png"
+        },
+        {
+            "id": "6",
+            "name": "Big Potatoes",
+            "price": "20.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image12@2x.png"
+        },
+        {
+            "id": "7",
+            "name": "Corn",
+            "price": "12.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image13@2x.png"
+        },
+        {
+            "id": "8",
+            "name": "Fresh Cauliflower",
+            "price": "9.00",
+            "categories": "Fresh Fruit",
+            "rating": "4",
+            "imgURL": "/img/image14@2x.png"
+        },
+        {
+            "id": "9",
+            "name": "Chinese cabbage",
+            "price": "12.00",
+            "categories": "vegetables",
+            "rating": "4",
+            "imgURL": "/img/image15@2x.png"
+        },
+        {
+            "id": "10",
+            "name": "Green Lettuce",
+            "price": "9.00",
+            "categories": "meat&Fish",
+            "rating": "4",
+            "imgURL": "/img/image16@2x.png"
+        }
+    ]
+}

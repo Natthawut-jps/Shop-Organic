@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Homepage: FunctionComponent = () => {
-  const [product, setProduct] = useState([]);
- async function Test() {
-    const { data } = await axios.get('/data/dev.json')
-    setProduct(data.person)
+  const [popularProduct, setPopularProduct] = useState([]);
+  async function Test() {
+    const { data } = await axios.get('/data/popularProduct.json')
+    setPopularProduct(data.PopularProduct)
   };
   useEffect(() => {
-      Test()
+    Test()
   }, []);
   return (
 
@@ -27,71 +27,71 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute top-[70px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
-            src="/-instagram-post@2x.png"
+            src="/img/-instagram-post@2x.png"
           />
         </a>
         <a href="#">
           <img
             className="absolute top-[70px] left-[448px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
-            src="/-instagram-post1@2x.png"
+            src="/img/-instagram-post1@2x.png"
           />
         </a>
         <a href="#">
           <img
             className="absolute top-[70px] left-[672px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
-            src="/-instagram-post2@2x.png"
+            src="/img/-instagram-post2@2x.png"
           />
         </a>
         <a href="#">
           <img
             className="absolute top-[70px] left-[896px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
-            src="/-instagram-post3@2x.png"
+            src="/img/-instagram-post3@2x.png"
           />
         </a>
         <a href="#">
           <img
             className="absolute top-[70px] left-[1120px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
-            src="/-instagram-post4@2x.png"
+            src="/img/-instagram-post4@2x.png"
           />
         </a>
         <a href="#" className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all">
           <img
             className="absolute top-[0px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover"
             alt=""
-            src="/-instagram-post5@2x.png"
+            src="/img/-instagram-post5@2x.png"
           />
           <img
             className="absolute top-[84px] left-[84px] w-8 h-8 overflow-hidden"
             alt=""
-            src="/icons.svg"
+            src="/img/icons.svg"
           />
         </a>
       </div>
       {/* 10 */}
       <div className="absolute top-[4559px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
-        <img className="relative w-[81.58px] h-8" alt="" src="/vector.svg" />
+        <img className="relative w-[81.58px] h-8" alt="" src="/img/vector.svg" />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
-        <img className="relative w-[66.94px] h-8" alt="" src="/mango1.svg" />
+        <img className="relative w-[66.94px] h-8" alt="" src="/img/mango1.svg" />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
-        <img className="relative w-[59.94px] h-8" alt="" src="/group.svg" />
+        <img className="relative w-[59.94px] h-8" alt="" src="/img/group.svg" />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
           className="relative w-[82.64px] h-8 overflow-hidden shrink-0"
           alt=""
-          src="/food.svg"
+          src="/img/food.svg"
         />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
           className="relative w-[131.02px] h-8 overflow-hidden shrink-0"
           alt=""
-          src="/bookoffcorporationlogo.svg"
+          src="/img/bookoffcorporationlogo.svg"
         />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
-        <img className="relative w-[95.5px] h-8" alt="" src="/group1.svg" />
+        <img className="relative w-[95.5px] h-8" alt="" src="/img/group1.svg" />
       </div>
       {/* 9 */}
       <div className="absolute top-[4108px] left-[-158px] bg-gray-scale-gray-50 flex flex-col items-center justify-center py-[60px] px-0 gap-[32px] text-center text-13xl">
@@ -103,12 +103,12 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[45px] h-[45px]"
               alt=""
-              src="/aoorw.svg"
+              src="/img/aoorw.svg"
             />
             <img
               className="relative w-[45px] h-[45px]"
               alt=""
-              src="/aoorw1.svg"
+              src="/img/aoorw1.svg"
             />
           </div>
         </div>
@@ -117,7 +117,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-8 h-[26px] opacity-[0.3]"
               alt=""
-              src="/vector1.svg"
+              src="/img/vector1.svg"
             />
             <div className="relative leading-[150%] inline-block w-[376px]">
               Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
@@ -129,7 +129,7 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative rounded-[50%] w-14 h-14 object-cover"
                   alt=""
-                  src="/image@2x.png"
+                  src="/img/image@2x.png"
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
@@ -144,27 +144,27 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
               </div>
             </div>
@@ -173,7 +173,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-8 h-[26px] opacity-[0.3]"
               alt=""
-              src="/vector1.svg"
+              src="/img/vector1.svg"
             />
             <div className="relative leading-[150%] inline-block w-[376px]">
               Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
@@ -185,7 +185,7 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative rounded-[50%] w-14 h-14 object-cover"
                   alt=""
-                  src="/image1@2x.png"
+                  src="/img/image1@2x.png"
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
@@ -200,27 +200,27 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
               </div>
             </div>
@@ -229,7 +229,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-8 h-[26px] opacity-[0.3]"
               alt=""
-              src="/vector1.svg"
+              src="/img/vector1.svg"
             />
             <div className="relative leading-[150%] inline-block w-[376px]">
               Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
@@ -241,7 +241,7 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative rounded-[50%] w-14 h-14 object-cover"
                   alt=""
-                  src="/image2@2x.png"
+                  src="/img/image2@2x.png"
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
@@ -256,27 +256,27 @@ const Homepage: FunctionComponent = () => {
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
                 <img
                   className="relative w-5 h-5 overflow-hidden shrink-0"
                   alt=""
-                  src="/star-6.svg"
+                  src="/img/star-6.svg"
                 />
               </div>
             </div>
@@ -293,7 +293,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
               alt=""
-              src="/image3@2x.png"
+              src="/img/image3@2x.png"
             />
             <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-scale-white w-[58px] h-[58px]">
               <div className="absolute top-[6px] left-[19px] leading-[150%] font-medium">
@@ -311,7 +311,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/tag-1.svg"
+                    src="/img/tag-1.svg"
                   />
                   <div className="relative leading-[150%]">Food</div>
                 </div>
@@ -319,7 +319,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/user-3-1.svg"
+                    src="/img/user-3-1.svg"
                   />
                   <div className="relative leading-[150%]">
                     <span>By</span>
@@ -330,7 +330,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                     alt=""
-                    src="/chatcentered-1.svg"
+                    src="/img/chatcentered-1.svg"
                   />
                   <div className="relative leading-[150%]">65 Comments</div>
                 </div>
@@ -347,7 +347,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-[16.5px] h-[13.55px]"
                 alt=""
-                src="/arrow.svg"
+                src="/img/arrow.svg"
               />
             </a>
           </div>
@@ -357,7 +357,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
               alt=""
-              src="/image4@2x.png"
+              src="/img/image4@2x.png"
             />
             <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-200 w-[58px] h-[58px]">
               <div className="absolute top-[6px] left-[17px] leading-[150%] font-medium">
@@ -375,7 +375,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/tag-11.svg"
+                    src="/img/tag-11.svg"
                   />
                   <div className="relative leading-[150%]">Food</div>
                 </div>
@@ -383,7 +383,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/user-3-11.svg"
+                    src="/img/user-3-11.svg"
                   />
                   <div className="relative leading-[150%]">
                     <span>By</span>
@@ -394,7 +394,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                     alt=""
-                    src="/chatcentered-1.svg"
+                    src="/img/chatcentered-1.svg"
                   />
                   <div className="relative leading-[150%]">65 Comments</div>
                 </div>
@@ -410,7 +410,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-[16.5px] h-[13.55px]"
                 alt=""
-                src="/arrow.svg"
+                src="/img/arrow.svg"
               />
             </div>
           </div>
@@ -420,7 +420,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
               alt=""
-              src="/image5@2x.png"
+              src="/img/image5@2x.png"
             />
             <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-200 w-[58px] h-[58px]">
               <div className="absolute top-[6px] left-[20px] leading-[150%] font-medium">
@@ -438,7 +438,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/tag-11.svg"
+                    src="/img/tag-11.svg"
                   />
                   <div className="relative leading-[150%]">Food</div>
                 </div>
@@ -446,7 +446,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-5 h-5 overflow-hidden shrink-0"
                     alt=""
-                    src="/user-3-11.svg"
+                    src="/img/user-3-11.svg"
                   />
                   <div className="relative leading-[150%]">
                     <span>By</span>
@@ -457,7 +457,7 @@ const Homepage: FunctionComponent = () => {
                   <img
                     className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                     alt=""
-                    src="/chatcentered-1.svg"
+                    src="/img/chatcentered-1.svg"
                   />
                   <div className="relative leading-[150%]">65 Comments</div>
                 </div>
@@ -473,7 +473,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-[16.5px] h-[13.55px]"
                 alt=""
-                src="/arrow.svg"
+                src="/img/arrow.svg"
               />
             </div>
           </div>
@@ -490,7 +490,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[16.5px] h-[13.55px]"
               alt=""
-              src="/group2.svg"
+              src="/img/group2.svg"
             />
           </a>
         </div>
@@ -499,7 +499,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[254px] h-[230px] object-cover"
               alt=""
-              src="/image6@2x.png"
+              src="/img/image6@2x.png"
             />
           </div>
           <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
@@ -520,34 +520,34 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-5.svg"
+                src="/img/star-5.svg"
               />
             </div>
           </div>
           <img
             className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/add-to-cart.svg"
+            src="/img/add-to-cart.svg"
           />
           <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
             <div className="relative leading-[150%]">Sale</div>
@@ -559,7 +559,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[254px] h-[230px] object-cover"
               alt=""
-              src="/image7@2x.png"
+              src="/img/image7@2x.png"
             />
           </div>
           <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
@@ -577,34 +577,34 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-5.svg"
+                src="/img/star-5.svg"
               />
             </div>
           </div>
           <img
             className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/add-to-cart1.svg"
+            src="/img/add-to-cart1.svg"
           />
         </div>
         <div className="absolute top-[69.5px] left-[791.5px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
@@ -612,7 +612,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[254px] h-[230px] object-cover"
               alt=""
-              src="/image8@2x.png"
+              src="/img/image8@2x.png"
             />
           </div>
           <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
@@ -628,34 +628,34 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-5.svg"
+                src="/img/star-5.svg"
               />
             </div>
           </div>
           <img
             className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/add-to-cart1.svg"
+            src="/img/add-to-cart1.svg"
           />
         </div>
         <div className="absolute top-[69.5px] left-[1055.5px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
@@ -663,7 +663,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[254px] h-[230px] object-cover"
               alt=""
-              src="/image9@2x.png"
+              src="/img/image9@2x.png"
             />
           </div>
           <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
@@ -681,34 +681,34 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-5.svg"
+                src="/img/star-5.svg"
               />
             </div>
           </div>
           <img
             className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/add-to-cart1.svg"
+            src="/img/add-to-cart1.svg"
           />
         </div>
         <a href="#" className="absolute top-[69.5px] left-[527.5px] bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[265px] h-[328px] border-gray-scale-gray-100 hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
@@ -716,7 +716,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[254px] h-[230px] object-cover"
               alt=""
-              src="/image10@2x.png"
+              src="/img/image10@2x.png"
             />
           </div>
           <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
@@ -734,39 +734,39 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-1.svg"
+                src="/img/star-1.svg"
               />
               <img
                 className="relative w-3 h-3 overflow-hidden shrink-0"
                 alt=""
-                src="/star-5.svg"
+                src="/img/star-5.svg"
               />
             </div>
           </div>
           <img
             className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
             alt=""
-            src="/add-to-cart1.svg"
+            src="/img/add-to-cart1.svg"
           />
         </a>
       </div>
       {/* 5 */}
-      <div className="absolute top-[1608px] left-[130px] w-[1320px] h-[714px] text-gray-scale-gray-700">
+      <div className="absolute top-[1400px] left-[130px] w-[1320px] h-[714px] text-gray-scale-gray-700">
         <div className="absolute top-[-10px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-100">
           <div className="relative leading-[120%] font-semibold">
             Popular Products
@@ -776,684 +776,115 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[16.5px] h-[13.55px]"
               alt=""
-              src="/group4.svg"
+              src="/img/group4.svg"
             />
           </a>
         </div>
-        <Link to={'/product/vegetables/Apple'} state={{ categories: 'vegetables', product: 'Apple', status: 'toTop' }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image6@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Green Apple
+        <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
+          {popularProduct && popularProduct.map((item: any) => (
+            <Link key={item.id} to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
+              <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
+                <img
+                  className="relative w-[254px] h-[230px] object-cover"
+                  alt=""
+                  src={item.imgURL}
+                />
               </div>
-              <div className="flex flex-row items-start justify-start gap-[2px] text-base">
-                <div className="relative leading-[150%] font-medium">
-                  $14.99
+              <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
+                <div className="flex flex-col items-start justify-start">
+                  <div className="relative leading-[150%] inline-block w-60">
+                    {item.name}
+                  </div>
+                  <div className="flex flex-row items-start justify-start gap-[2px] text-base">
+                    <div className="relative leading-[150%] font-medium">
+                      {`฿${item.price}`}
+                    </div>
+                    <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
+                      $20.99
+                    </div>
+                  </div>
                 </div>
-                <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                  $20.99
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-52.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart.svg"
-          />
-          <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
-            <div className="relative leading-[150%]">Sale</div>
-            <div className="relative leading-[150%] font-medium">50%</div>
-          </div>
-        </Link>
-        <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[265px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image7@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Fresh Indian Malta
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $20.00
+                <div className="flex flex-row items-start justify-start">
+                  <img
+                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    alt=""
+                    src="/img/star-12.svg"
+                  />
+                  <img
+                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    alt=""
+                    src="/img/star-12.svg"
+                  />
+                  <img
+                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    alt=""
+                    src="/img/star-12.svg"
+                  />
+                  <img
+                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    alt=""
+                    src="/img/star-12.svg"
+                  />
+                  <img
+                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    alt=""
+                    src="/img/star-52.svg"
+                  />
                 </div>
               </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
               <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
+                className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
                 alt=""
-                src="/star-12.svg"
+                src="/img/add-to-cart.svg"
               />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-52.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
+              <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
+                <div className="relative leading-[150%]">Sale</div>
+                <div className="relative leading-[150%] font-medium">50%</div>
+              </div>
+            </Link>
+          ))
+          }
         </div>
-        <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[386.5px] left-[265px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image13@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Corn
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $20.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-51.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </div>
-        <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[386.5px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image19@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Big Potatoes
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $20.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-51.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </div>
-        <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[386.5px] left-[529px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image11@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Fresh Cauliflower
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $12.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-51.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </div>
-        <div className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[59px] left-[793px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image8@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Green Lettuce
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">$9.00</div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-52.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </div>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark absolute top-[386.5px] left-[793px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image15@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Green Capsicum
-              </div>
-              <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">$9.00</div>
-                <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                  $20.99
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-51.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart.svg"
-          />
-          <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
-            <div className="relative leading-[150%]">Sale</div>
-            <div className="relative leading-[150%] font-medium">50%</div>
-          </div>
-        </a>
-        <a href="#" className="absolute top-[59px] left-[1058px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image9@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Eggplant
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $34.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-52.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </a>
-        <a href="#" className="absolute top-[386.5px] left-[1058px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image17@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Green Chili
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $34.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-11.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-51.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </a>
-        <a href="#" className="absolute top-[59px] left-[529px] border-gray-scale-gray-100 bg-gray-scale-white border-[1px] box-border w-[265px] h-[328px] border-solid hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark">
-          <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-            <img
-              className="relative w-[254px] h-[230px] object-cover"
-              alt=""
-              src="/image10@2x.png"
-            />
-          </div>
-          <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-            <div className="flex flex-col items-start justify-start">
-              <div className="relative leading-[150%] inline-block w-60">
-                Chinese cabbage
-              </div>
-              <div className="flex flex-row items-start justify-start text-base text-gray-100">
-                <div className="relative leading-[150%] font-medium">
-                  $12.00
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-12.svg"
-              />
-              <img
-                className="relative w-3 h-3 overflow-hidden shrink-0"
-                alt=""
-                src="/star-52.svg"
-              />
-            </div>
-          </div>
-          <img
-            className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-            alt=""
-            src="/add-to-cart1.svg"
-          />
-        </a>
       </div>
       {/* 4 */}
       <div className="absolute top-[1028px] left-[130px] w-[1320px] h-[520px] text-center text-lg">
-        <a href="#" className=" hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[671px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-1@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Diabetic Food
-          </div>
-        </a>
         <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
-            src="/image-11@2x.png"
+            src="/img/image-11@2x.png"
           />
           <div className="relative leading-[150%] font-medium inline-block w-[200px]">
             Fresh Fruit
           </div>
         </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/vegetables'} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
-            src="/image-12@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">{`Bread & Bakery`}</div>
-        </a>
-        <a href="#" className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-13@2x.png"
+            src="/img/image-13@2x.png"
           />
           <div className="relative leading-[150%] font-medium inline-block w-[200px]">
             Fresh Vegetables
           </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-14@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Baking Needs
-          </div>
-        </a>
+        </Link>
         <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
-            src="/image-15@2x.png"
+            src="/img/image-15@2x.png"
           />
           <div className="relative leading-[150%] font-medium inline-block w-[200px]">{`Meat & Fish`}</div>
         </a>
-        <a href="#" className=" hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-16@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Cooking
-          </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[671px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-17@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Snacks
-          </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[895px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-18@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Beverages
-          </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[895px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-19@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Dish Detergents
-          </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[306px] left-[1119px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-110@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Oil
-          </div>
-        </a>
-        <a href="#" className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[1119px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/image-111@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">{`Beauty & Health`}</div>
-        </a>
         <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
           <div className="relative leading-[120%] font-semibold">
-            Popular Categories
+            Categories
           </div>
-          <a href="#" className="rounded-24xl flex flex-row items-center justify-center gap-[12px] text-base text-branding-success no-underline hover:translate-x-1">
-            <div className="relative leading-[150%] font-medium">View All</div>
-            <img
-              className="relative w-[16.5px] h-[13.55px]"
-              alt=""
-              src="/group4.svg"
-            />
-          </a>
         </div>
       </div>
       {/* 2 */}
       <div className="absolute top-[218px] left-[50px] w-[1980px] h-[600px] overflow-hidden text-gray-scale-white">
-        <a href="#" className=" text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] h-[600px] bg-[url('/bannar-big@3x.png')] bg-cover bg-no-repeat bg-[top] text-29xl">
+        <a href="#" className=" text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] h-[600px] bg-[url('/img/bannar-big@3x.png')] bg-cover bg-no-repeat bg-[top] text-29xl">
           <div className="absolute top-[155px] left-[60px] flex flex-col items-start justify-start gap-[28px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[596px]">
               <p className="m-0">{`Fresh & Healthy`}</p>
@@ -1484,7 +915,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="absolute h-[26.57%] w-[8.64%] top-[36.72%] right-[20.55%] bottom-[36.72%] left-[70.81%] max-w-full overflow-hidden max-h-full"
                 alt=""
-                src="/group5.svg"
+                src="/img/group5.svg"
               />
             </div>
           </div>
@@ -1493,7 +924,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""
-            src="/bg@2x.png"
+            src="/img/bg@2x.png"
           />
           <div className="absolute top-[32px] left-[32px] flex flex-col items-start justify-start gap-[24px]">
             <div className="flex flex-col items-start justify-start gap-[12px]">
@@ -1514,7 +945,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-[16.5px] h-[13.55px]"
                 alt=""
-                src="/group6.svg"
+                src="/img/group6.svg"
               />
             </div>
           </div>
@@ -1523,7 +954,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""
-            src="/bg1@2x.png"
+            src="/img/bg1@2x.png"
           />
           <div className="absolute top-[67px] left-[40px] flex flex-col items-center justify-start gap-[32px]">
             <div className="flex flex-col items-center justify-center gap-[12px]">
@@ -1541,7 +972,7 @@ const Homepage: FunctionComponent = () => {
               <img
                 className="relative w-[16.5px] h-[13.55px]"
                 alt=""
-                src="/group7.svg"
+                src="/img/group7.svg"
               />
             </div>
           </div>
@@ -1553,7 +984,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0"
             alt=""
-            src="/deliverytruck-1.svg"
+            src="/img/deliverytruck-1.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
@@ -1568,22 +999,22 @@ const Homepage: FunctionComponent = () => {
           <img
             className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0"
             alt=""
-            src="/headphones-1.svg"
+            src="/img/headphones-1.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
@@ -1598,22 +1029,22 @@ const Homepage: FunctionComponent = () => {
           <img
             className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-11 h-11 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0"
             alt=""
-            src="/shoppingbag.svg"
+            src="/img/shoppingbag.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
@@ -1628,22 +1059,22 @@ const Homepage: FunctionComponent = () => {
           <img
             className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-11 h-11 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
             alt=""
-            src="/shipping.svg"
+            src="/img/shipping.svg"
           />
           <img
             className="relative w-10 h-10 overflow-hidden shrink-0"
             alt=""
-            src="/package.svg"
+            src="/img/package.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
@@ -1661,7 +1092,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg max-w-full overflow-hidden max-h-full object-cover"
             alt=""
-            src="/rectangle-54@2x.png"
+            src="/img/rectangle-54@2x.png"
           />
           <div className="absolute w-full top-[12.13%] left-[0%] text-21xl leading-[120%] font-semibold inline-block">
             Sale of the Month
@@ -1713,7 +1144,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[16.5px] h-[13.55px]"
               alt=""
-              src="/arrow.svg"
+              src="/img/arrow.svg"
             />
           </div>
         </a>
@@ -1721,7 +1152,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg max-w-full overflow-hidden max-h-full object-cover"
             alt=""
-            src="/rectangle-541@2x.png"
+            src="/img/rectangle-541@2x.png"
           />
           <div className="absolute h-[5.6%] w-[38.92%] top-[23.41%] right-[30.42%] bottom-[70.99%] left-[30.66%] flex flex-row items-center justify-start gap-[8px] text-lg">
             <div className="relative leading-[150%]">Started at</div>
@@ -1742,7 +1173,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[16.5px] h-[13.55px]"
               alt=""
-              src="/arrow.svg"
+              src="/img/arrow.svg"
             />
           </div>
         </a>
@@ -1750,7 +1181,7 @@ const Homepage: FunctionComponent = () => {
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-lg max-w-full overflow-hidden max-h-full object-cover"
             alt=""
-            src="/rectangle-542@2x.png"
+            src="/img/rectangle-542@2x.png"
           />
           <div className="absolute h-[7.28%] w-[37.74%] top-[22.57%] right-[31.13%] bottom-[70.15%] left-[31.13%] flex flex-row items-center justify-start gap-[12px] text-lg">
             <div className="relative leading-[150%]">Up to</div>
@@ -1773,7 +1204,7 @@ const Homepage: FunctionComponent = () => {
             <img
               className="relative w-[16.5px] h-[13.55px]"
               alt=""
-              src="/arrow.svg"
+              src="/img/arrow.svg"
             />
           </div>
         </a>
@@ -1785,7 +1216,4 @@ const Homepage: FunctionComponent = () => {
 };
 
 export default Homepage;
-function useParams(): { categoriesP: any; productList: any; } {
-  throw new Error("Function not implemented.");
-}
 

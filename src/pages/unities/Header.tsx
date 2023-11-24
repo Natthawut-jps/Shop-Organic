@@ -46,7 +46,7 @@ export const Header: FunctionComponent = () => {
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
-                        <img className="relative w-4 h-[19px]" alt="" src="/map-pin.svg" />
+                        <img className="relative w-4 h-[19px]" alt="" src="/img/map-pin.svg" />
                         <div className="relative leading-[130%]">
                             Store Location: Lincoln- 344, Illinois, Chicago, Thailand
                         </div>
@@ -64,7 +64,7 @@ export const Header: FunctionComponent = () => {
                         <img
                             className="relative w-8 h-8 overflow-hidden shrink-0"
                             alt=""
-                            src="/plant-11.svg"
+                            src="/img/plant-11.svg"
                         />
                         <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
                             Ecobazar
@@ -145,9 +145,9 @@ export const Header: FunctionComponent = () => {
                             }}
                         >
                             <Link to={'/product/vegetables'} className=" no-underline text-black">
-                                <MenuItem onClick={handleClose}> <img src="/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
+                                <MenuItem onClick={handleClose}> <img src="/img/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
                             </Link>
-                            <MenuItem onClick={handleClose}><img src="/fish.svg" alt="" width={25} height={25} />River Fish</MenuItem>
+                            <MenuItem onClick={handleClose}><img src="/img/fish.svg" alt="" width={25} height={25} />River Fish</MenuItem>
                             <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat</MenuItem>
                         </Menu>
                         <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -155,7 +155,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0"
                                 alt=""
-                                src="/chevron-down2.svg"
+                                src="/img/chevron-down2.svg"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -163,7 +163,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0"
                                 alt=""
-                                src="/chevron-down2.svg"
+                                src="/img/chevron-down2.svg"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -171,7 +171,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0"
                                 alt=""
-                                src="/chevron-down2.svg"
+                                src="/img/chevron-down2.svg"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -181,7 +181,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
                                 alt=""
-                                src="/shipping.svg"
+                                src="/img/shipping.svg"
                             />
                         </div>
                         <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -191,7 +191,7 @@ export const Header: FunctionComponent = () => {
                             <img
                                 className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
                                 alt=""
-                                src="/shipping.svg"
+                                src="/img/shipping.svg"
                             />
                         </div>
                     </div>
@@ -199,7 +199,7 @@ export const Header: FunctionComponent = () => {
                         <img
                             className="relative w-7 h-7 overflow-hidden shrink-0"
                             alt=""
-                            src="/phonecall-1.svg"
+                            src="/img/phonecall-1.svg"
                         />
                         <div className="relative leading-[150%] font-medium">
                             (+66) 061-505-9483

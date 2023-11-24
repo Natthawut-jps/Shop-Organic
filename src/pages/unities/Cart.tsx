@@ -61,7 +61,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                         {cartItem.length > 0 && cartItem.map((item) => (
                             <div key={item.id} className=" relative top-[40px] w-full h-[96px] grid grid-flow-col">
                                 <div className=' flex justify-center items-center'>
-                                    <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/product-image@2x.png" />
+                                    <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/img/product-image@2x.png" />
                                 </div>
                                 <div className=' flex justify-center items-center'>
                                     <div className=" relative top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">

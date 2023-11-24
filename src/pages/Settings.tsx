@@ -19,7 +19,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-5 h-5 overflow-hidden shrink-0"
               alt=""
-              src="/eyeopen-1.svg"
+              src="/img/eyeopen-1.svg"
             />
           </div>
         </div>
@@ -32,7 +32,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-5 h-5 overflow-hidden shrink-0"
               alt=""
-              src="/eyeopen-1.svg"
+              src="/img/eyeopen-1.svg"
             />
           </div>
         </div>
@@ -45,7 +45,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-5 h-5 overflow-hidden shrink-0"
               alt=""
-              src="/eyeopen-1.svg"
+              src="/img/eyeopen-1.svg"
             />
           </div>
         </div>
@@ -110,7 +110,7 @@ const Settings: FunctionComponent = () => {
           <img
             className="absolute top-[0px] left-[0px] rounded-[50%] w-56 h-56 object-cover"
             alt=""
-            src="/image@2x.png"
+            src="/img/image@2x.png"
           />
         </div>
       </div>
@@ -122,7 +122,7 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-6 h-6 overflow-hidden shrink-0"
             alt=""
-            src="/dashboard-2.svg"
+            src="/img/dashboard-2.svg"
           />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Dashboard
@@ -132,20 +132,20 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-6 h-6 overflow-hidden shrink-0"
             alt=""
-            src="/refresh-02-1.svg"
+            src="/img/refresh-02-1.svg"
           />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Order History
           </div>
         </div>
         <div className="flex flex-row items-center justify-center py-4 px-5 gap-[10px]">
-          <img className="relative w-6 h-6" alt="" src="/dashboard-21.svg" />
+          <img className="relative w-6 h-6" alt="" src="/img/dashboard-21.svg" />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Wishlist
           </div>
         </div>
         <div className="flex flex-row items-center justify-center py-4 px-5 gap-[10px]">
-          <img className="relative w-6 h-6" alt="" src="/dashboard-22.svg" />
+          <img className="relative w-6 h-6" alt="" src="/img/dashboard-22.svg" />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Shopping Cart
           </div>
@@ -154,7 +154,7 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-6 h-6 overflow-hidden shrink-0"
             alt=""
-            src="/settings-1.svg"
+            src="/img/settings-1.svg"
           />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Settings
@@ -164,7 +164,7 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-6 h-6 overflow-hidden shrink-0"
             alt=""
-            src="/dashboard-23.svg"
+            src="/img/dashboard-23.svg"
           />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
             Log-out
@@ -176,24 +176,24 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-6 h-6 overflow-hidden shrink-0"
             alt=""
-            src="/home1-1.svg"
+            src="/img/home1-1.svg"
           />
           <img
             className="relative w-[5.08px] h-[9.17px]"
             alt=""
-            src="/group.svg"
+            src="/img/group.svg"
           />
           <div className="relative leading-[150%] hidden">Home</div>
           <img
             className="relative w-[8.17px] h-[4.08px] hidden"
             alt=""
-            src="/vector.svg"
+            src="/img/vector.svg"
           />
           <div className="relative leading-[150%] hidden">Home</div>
           <img
             className="relative w-[8.17px] h-[4.08px] hidden"
             alt=""
-            src="/vector.svg"
+            src="/img/vector.svg"
           />
           <div className="relative leading-[150%] text-gray-scale-gray-400">
             Account
@@ -201,13 +201,13 @@ const Settings: FunctionComponent = () => {
           <img
             className="relative w-[5.08px] h-[9.17px]"
             alt=""
-            src="/vector1.svg"
+            src="/img/vector1.svg"
           />
           <div className="relative leading-[150%] hidden">Order History</div>
           <img
             className="relative w-[8.17px] h-[4.08px] hidden"
             alt=""
-            src="/vector.svg"
+            src="/img/vector.svg"
           />
           <div className="relative leading-[150%] text-branding-success">
             Settings
@@ -273,7 +273,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-4 h-4 overflow-hidden shrink-0"
               alt=""
-              src="/chevron-down.svg"
+              src="/img/chevron-down.svg"
             />
           </div>
         </div>
@@ -294,7 +294,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-4 h-4 overflow-hidden shrink-0"
               alt=""
-              src="/chevron-down.svg"
+              src="/img/chevron-down.svg"
             />
           </div>
         </div>
@@ -315,7 +315,7 @@ const Settings: FunctionComponent = () => {
       <div className="absolute top-[0px] left-[0px] bg-gray-scale-white flex flex-col items-center justify-start text-xs text-gray-scale-gray-300">
         <div className="bg-gray-scale-gray-800 shadow-[0px_1px_0px_#e5e5e5] w-[1920px] flex flex-row items-center justify-between py-3 px-[300px] box-border">
           <div className="flex flex-row items-center justify-start gap-[8px]">
-            <img className="relative w-4 h-[19px]" alt="" src="/map-pin.svg" />
+            <img className="relative w-4 h-[19px]" alt="" src="/img/map-pin.svg" />
             <div className="relative leading-[130%]">
               Store Location: Lincoln- 344, Illinois, Chicago, USA
             </div>
@@ -326,7 +326,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-2 h-[4.5px]"
                 alt=""
-                src="/group1.svg"
+                src="/img/group1.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[6px]">
@@ -334,7 +334,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-2 h-[4.5px]"
                 alt=""
-                src="/group1.svg"
+                src="/img/group1.svg"
               />
             </div>
             <div className="relative box-border w-px h-4 opacity-[0.52] border-r-[1px] border-solid border-gray-scale-gray-300" />
@@ -350,7 +350,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-8 h-8 overflow-hidden shrink-0"
               alt=""
-              src="/plant-1.svg"
+              src="/img/plant-1.svg"
             />
             <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
               Ecobazar
@@ -361,7 +361,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-5 h-5 overflow-hidden shrink-0"
                 alt=""
-                src="/search.svg"
+                src="/img/search.svg"
               />
               <div className="relative leading-[21px] inline-block w-[400px] shrink-0">
                 Search
@@ -374,14 +374,14 @@ const Settings: FunctionComponent = () => {
             </div>
           </div>
           <div className="absolute top-[29.5px] left-[1429px] flex flex-row items-center justify-start gap-[16px] text-center text-3xs text-gray-scale-white">
-            <img className="relative w-8 h-8" alt="" src="/heart.svg" />
+            <img className="relative w-8 h-8" alt="" src="/img/heart.svg" />
             <div className="relative box-border w-px h-[25px] border-r-[1px] border-solid border-gray-scale-gray-200" />
             <div className="flex flex-row items-center justify-start gap-[12px]">
               <div className="relative w-[34px] h-[34px]">
                 <img
                   className="absolute top-[0px] left-[0px] w-[34px] h-[34px]"
                   alt=""
-                  src="/bag.svg"
+                  src="/img/bag.svg"
                 />
                 <div className="absolute top-[-3px] left-[17px] rounded-2xl bg-branding-success-dark box-border w-5 h-5 overflow-hidden border-[1px] border-solid border-gray-scale-white">
                   <div className="absolute top-[calc(50%_-_6.5px)] left-[calc(50%_-_4px)] leading-[10px] font-medium">
@@ -405,7 +405,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down1.svg"
+                src="/img/chevron-down1.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -413,7 +413,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down2.svg"
+                src="/img/chevron-down2.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -421,7 +421,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down2.svg"
+                src="/img/chevron-down2.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -429,7 +429,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down2.svg"
+                src="/img/chevron-down2.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -439,7 +439,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
                 alt=""
-                src="/vector.svg"
+                src="/img/vector.svg"
               />
             </div>
             <div className="flex flex-row items-center justify-start gap-[4px]">
@@ -449,7 +449,7 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
                 alt=""
-                src="/vector.svg"
+                src="/img/vector.svg"
               />
             </div>
           </div>
@@ -457,7 +457,7 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-7 h-7 overflow-hidden shrink-0"
               alt=""
-              src="/phonecall-1.svg"
+              src="/img/phonecall-1.svg"
             />
             <div className="relative leading-[150%] font-medium">
               (219) 555-0114
@@ -493,22 +493,22 @@ const Settings: FunctionComponent = () => {
             <img
               className="relative w-10 h-10"
               alt=""
-              src="/social-media.svg"
+              src="/img/social-media.svg"
             />
             <img
               className="relative rounded-481xl w-10 h-10"
               alt=""
-              src="/social-media1.svg"
+              src="/img/social-media1.svg"
             />
             <img
               className="relative rounded-481xl w-10 h-10"
               alt=""
-              src="/social-media2.svg"
+              src="/img/social-media2.svg"
             />
             <img
               className="relative rounded-481xl w-10 h-10"
               alt=""
-              src="/social-media3.svg"
+              src="/img/social-media3.svg"
             />
           </div>
         </div>
@@ -519,7 +519,7 @@ const Settings: FunctionComponent = () => {
                 <img
                   className="relative w-8 h-8 overflow-hidden shrink-0"
                   alt=""
-                  src="/plant-11.svg"
+                  src="/img/plant-11.svg"
                 />
                 <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
                   Ecobazar
@@ -596,29 +596,29 @@ const Settings: FunctionComponent = () => {
               <img
                 className="relative w-[45px] h-[31.77px]"
                 alt=""
-                src="/methodapplepay.svg"
+                src="/img/methodapplepay.svg"
               />
               <img
                 className="relative w-[45px] h-[31.77px]"
                 alt=""
-                src="/methodvisa.svg"
+                src="/img/methodvisa.svg"
               />
               <img
                 className="relative w-[45px] h-[31.77px]"
                 alt=""
-                src="/methoddiscover.svg"
+                src="/img/methoddiscover.svg"
               />
               <img
                 className="relative w-[45px] h-[31.77px]"
                 alt=""
-                src="/methodmastercard.svg"
+                src="/img/methodmastercard.svg"
               />
               <div className="relative w-[65px] h-8">
                 <div className="absolute top-[calc(50%_-_16px)] left-[calc(50%_-_32.5px)] rounded-[5.29px] bg-gray-scale-gray-900 box-border w-[65px] h-8 border-[1px] border-solid border-gray-scale-gray-800" />
                 <img
                   className="absolute top-[4px] left-[5px] w-[11px] h-[11px] overflow-hidden"
                   alt=""
-                  src="/lock-1.svg"
+                  src="/img/lock-1.svg"
                 />
                 <div className="absolute top-[4px] left-[18px] leading-[100%]">
                   Secure

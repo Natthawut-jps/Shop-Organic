@@ -11,12 +11,13 @@ function App() {
       <Routes>
         <Route index element={<Homepage />} />
         <Route path="/product">
-          <Route path=":categories" element={<Categories />} />
-            <Route path=":categoriesP/:productList" element={<ProductsDetailsDescriptionContext />} />
+          <Route path=":categoriesParam" element={<Categories />} />
+          <Route path=":categoriesP/:productList" element={<ProductsDetailsDescriptionContext />} />
         </Route>
         <Route path="*" element={<NoPage />} />
       </Routes>
     </div>
-  )};
+  )
+};
 
 export default App

@@ -26,8 +26,8 @@ interface open {
 }
 export const Favorite: FunctionComponent<open> = (props) => {
     const { favoriteItem, cartItem, increaseCartQuantity, increaseFavoriteQuantity, addFavorite, removeFavoriteItem, removeFavoriteItemAll } = CartContextProviders();
-    const test = favoriteItem.find(item => item.id === 1)
-    console.log(Object(test))
+    // const test = favoriteItem.find(item => item.id === 1)
+    // console.log(Object(test))
     return (
         <>
             <Dialog
@@ -59,7 +59,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                         {favoriteItem.length > 0 && favoriteItem.map((item) => (
                             <div key={item.id} className=" relative top-[40px] w-full grid grid-flow-col">
                                 <div className=' flex justify-center items-center'>
-                                    <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/product-image@2x.png" />
+                                    <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/img/product-image@2x.png" />
                                 </div>
                                 <div className=' flex justify-center items-center'>
                                     <div className=" relative top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">
@@ -87,7 +87,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                             <img
                                                 className="relative w-[16.3px] h-[16.3px]"
                                                 alt=""
-                                                src="/rectangle.svg"
+                                                src="/img/rectangle.svg"
                                             />
                                         </div>
                                     </div>
@@ -103,7 +103,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                             <img
                                                 className="relative w-[16.3px] h-[16.3px]"
                                                 alt=""
-                                                src="/rectangle.svg"
+                                                src="/img/rectangle.svg"
                                             />
                                         </div>
                                     </div>

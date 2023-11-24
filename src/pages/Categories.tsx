@@ -1,30 +1,33 @@
-import { FunctionComponent } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { FunctionComponent, useEffect, useState } from "react";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { Foorter } from "./unities/Foorter";
 import { HeaderContext } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { product } from "./unities/data-develop/product";
+import axios from "axios";
 
 const Categories: FunctionComponent = () => {
-  const { categories } = useParams();
-  const items = product.filter((item) => {
-    return (
-      item.title === categories
-    )
-  });
+  const { categoriesParam } = useParams();
+  const [categories, setCategories] = useState([]);
+  async function Test() {
+    const { data } = await axios.get('/data/popularProduct.json')
+    setCategories(data.PopularProduct.filter((item: any) => item.categories === categoriesParam));
+  };
+  useEffect(() => {
+    Test()
+  }, []);
   window.scroll(0, 0);
   return (
     <>
-      { categories &&
+      {categories.length > 0 &&
         <div className="relative bg-gray-scale-white w-full h-[3233px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
           <HeaderContext />
-          <Breadcrumbs categoies={categories} tltle={undefined} />
+          <Breadcrumbs categoies={categoriesParam} tltle={undefined} />
           <div className="absolute top-[2587px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
             <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">
               <img
                 className="relative w-5 h-5 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down.svg"
+                src="/img/chevron-down.svg"
               />
             </div>
             <div className="flex flex-row items-start justify-start">
@@ -68,869 +71,79 @@ const Categories: FunctionComponent = () => {
               <img
                 className="relative w-5 h-5 overflow-hidden shrink-0"
                 alt=""
-                src="/chevron-down1.svg"
+                src="/img/chevron-down1.svg"
               />
             </div>
           </div>
-          <div className="absolute top-[347px] left-[60px] w-[1320px] h-[2200px] text-sm text-gray-scale-gray-700">
-            <div className="absolute top-[69px] left-[336px] w-[984px] h-[2131px]">
-              <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image5@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Big Potatos
+          {/* 5x3 */}
+          <div className=" relative top-[347px] left-[60px] w-[1220px] text-sm text-gray-scale-gray-700">
+            <div className=" grid grid-cols-3 gap-x-[300px] gap-y-2 relative ml-[370px] box-border">
+              {categories.map((item: any) => (
+                <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} key={item.id} className=" relative top-[69px] w-[984px]">
+                  <div className=" relative top-[0px] left-[0px] bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[312px] h-[407px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
+                    <div className=" relative w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
+                      <img
+                        className="relative w-[302px] h-[302px] object-cover"
+                        alt=""
+                        src="/img/image5@2x.png"
+                      />
                     </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
+                    <div className="absolute h-[0%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
+                      <div className="flex flex-col items-start justify-start">
+                        <div className="relative leading-[150%] inline-block w-[280px]">
+                          Chanise Cabbage
+                        </div>
+                        <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
+                          <div className="relative leading-[150%] font-medium">
+                            $14.99
+                          </div>
+                          <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
+                            $20.99
+                          </div>
+                        </div>
                       </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[431px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image1@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Eggplant
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
+                      <div className="flex flex-row items-start justify-start">
+                        <img
+                          className="relative w-3 h-3 overflow-hidden shrink-0"
+                          alt=""
+                          src="/img/star-1.svg"
+                        />
+                        <img
+                          className="relative w-3 h-3 overflow-hidden shrink-0"
+                          alt=""
+                          src="/img/star-1.svg"
+                        />
+                        <img
+                          className="relative w-3 h-3 overflow-hidden shrink-0"
+                          alt=""
+                          src="/img/star-1.svg"
+                        />
+                        <img
+                          className="relative w-3 h-3 overflow-hidden shrink-0"
+                          alt=""
+                          src="/img/star-1.svg"
+                        />
+                        <img
+                          className="relative w-3 h-3 overflow-hidden shrink-0"
+                          alt=""
+                          src="/img/star-5.svg"
+                        />
                       </div>
                     </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
                     <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
                       alt=""
-                      src="/star-1.svg"
+                      src="/img/add-to-cart1.svg"
                     />
                     <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      className="absolute h-[21.13%] w-[12.82%] top-[4.91%] right-[6.41%] bottom-[73.96%] left-[80.77%] max-w-full overflow-hidden max-h-full"
                       alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
+                      src="/img/group-1.svg"
                     />
                   </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[862px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image2@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Capsicum
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[1293px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image3@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Littuce
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[1724px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image4@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Red Chili
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[0px] left-[336px] rounded-lg bg-gray-scale-white shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[312px] h-[407px] text-branding-success-dark border-[1px] border-solid border-branding-success-dark">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image5@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Chanise Cabbage
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart1.svg"
-                />
-                <img
-                  className="absolute h-[21.13%] w-[12.82%] top-[4.91%] right-[6.41%] bottom-[73.96%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/group-1.svg"
-                />
-              </div>
-              <div className="absolute top-[0px] left-[672px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image6@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Ladies Finger
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-                <div className="absolute top-[calc(50%_-_187.5px)] left-[16px] rounded bg-gray-scale-gray-900 flex flex-row items-center justify-center py-[3px] px-2 text-gray-scale-white">
-                  <div className="relative leading-[150%]">Out of Stock</div>
-                </div>
-              </div>
-              <div className="absolute top-[431px] left-[672px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image7@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Apple
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[862px] left-[672px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image8@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Cucumber
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-                <div className="absolute top-[calc(50%_-_187.5px)] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
-                  <div className="relative leading-[150%]">Sale</div>
-                  <div className="relative leading-[150%] font-medium">50%</div>
-                </div>
-              </div>
-              <div className="absolute top-[1293px] left-[672px] rounded-lg bg-gray-scale-white shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[312px] h-[407px] text-branding-success-dark border-[1px] border-solid border-branding-success-dark">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image9@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Capsicum
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart1.svg"
-                />
-                <img
-                  className="absolute h-[21.13%] w-[12.82%] top-[4.91%] right-[6.41%] bottom-[73.96%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/group-11.svg"
-                />
-              </div>
-              <div className="absolute top-[1724px] left-[672px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image10@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Fresh Mango
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[431px] left-[336px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image11@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Fresh Cauliflower
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[862px] left-[336px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image12@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Green Chili
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-1.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-5.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[1293px] left-[336px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image13@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Ladies Finger
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
-              <div className="absolute top-[1724px] left-[336px] rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute h-[76.66%] w-full top-[0%] right-[0%] bottom-[23.34%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[302px] h-[302px] object-cover"
-                    alt=""
-                    src="/image14@2x.png"
-                  />
-                </div>
-                <div className="absolute h-[23.34%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-[280px]">
-                      Red Tomato
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                      <div className="relative leading-[150%] font-medium">
-                        $14.99
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-11.svg"
-                    />
-                    <img
-                      className="relative w-3 h-3 overflow-hidden shrink-0"
-                      alt=""
-                      src="/star-51.svg"
-                    />
-                  </div>
-                </div>
-                <img
-                  className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                  alt=""
-                  src="/add-to-cart.svg"
-                />
-              </div>
+                </Link>
+              ))
+              }
             </div>
             <div className="absolute top-[69px] left-[0px] flex flex-col items-start justify-start text-xl text-gray-scale-gray-900">
               <div className="flex flex-col items-start justify-start text-sm">
@@ -938,7 +151,7 @@ const Categories: FunctionComponent = () => {
                   <div className="relative leading-[150%] font-medium">
                     All Categories
                   </div>
-                  <img className="relative w-3.5 h-2" alt="" src="/vector.svg" />
+                  <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
                 <div className="flex flex-row items-center justify-center pt-0 px-0 pb-2.5 gap-[8px]">
                   <div className="relative w-5 h-5">
@@ -1030,12 +243,12 @@ const Categories: FunctionComponent = () => {
               <div className="flex flex-col items-start justify-center pt-0 px-0 pb-6 gap-[16px]">
                 <div className="shadow-[0px_-1px_0px_#e5e5e5] w-[312px] flex flex-row items-center justify-between pt-5 px-0 pb-1 box-border">
                   <div className="relative leading-[150%] font-medium">Price</div>
-                  <img className="relative w-3.5 h-2" alt="" src="/vector.svg" />
+                  <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
                 <img
                   className="relative w-[312px] h-[18px]"
                   alt=""
-                  src="/slider.svg"
+                  src="/img/slider.svg"
                 />
                 <div className="relative text-sm leading-[150%] text-gray-scale-gray-700">
                   <span>Price:</span>
@@ -1049,7 +262,7 @@ const Categories: FunctionComponent = () => {
               <div className="flex flex-col items-start justify-start text-sm">
                 <div className="bg-gray-scale-white w-[312px] flex flex-row items-center justify-between py-5 px-0 box-border text-xl">
                   <div className="relative leading-[150%] font-medium">Rating</div>
-                  <img className="relative w-3.5 h-2" alt="" src="/vector.svg" />
+                  <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
                 <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
                   <div className="relative w-5 h-5">
@@ -1059,27 +272,27 @@ const Categories: FunctionComponent = () => {
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-12.svg"
+                      src="/img/star-12.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <div className="relative leading-[150%]"> 5.0</div>
                   </div>
@@ -1090,34 +303,34 @@ const Categories: FunctionComponent = () => {
                     <img
                       className="absolute h-4/5 w-4/5 top-[10%] right-[10%] bottom-[10%] left-[10%] max-w-full overflow-hidden max-h-full"
                       alt=""
-                      src="/check-1.svg"
+                      src="/img/check-1.svg"
                     />
                   </div>
                   <div className="flex flex-row items-center justify-start">
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-12.svg"
+                      src="/img/star-12.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <div className="relative leading-[150%]">{` 4.0 & up`}</div>
                   </div>
@@ -1130,27 +343,27 @@ const Categories: FunctionComponent = () => {
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-12.svg"
+                      src="/img/star-12.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <div className="relative leading-[150%]">{` 3.0 & up`}</div>
                   </div>
@@ -1163,27 +376,27 @@ const Categories: FunctionComponent = () => {
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-12.svg"
+                      src="/img/star-12.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-2.svg"
+                      src="/img/star-2.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <div className="relative leading-[150%]">{` 2.0 & up`}</div>
                   </div>
@@ -1196,27 +409,27 @@ const Categories: FunctionComponent = () => {
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-12.svg"
+                      src="/img/star-12.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <img
                       className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
                       alt=""
-                      src="/star-52.svg"
+                      src="/img/star-52.svg"
                     />
                     <div className="relative leading-[150%]">{`  1.0 & up`}</div>
                   </div>
@@ -1228,7 +441,7 @@ const Categories: FunctionComponent = () => {
                   <div className="relative leading-[150%] font-medium">
                     Popular Tag
                   </div>
-                  <img className="relative w-3.5 h-2" alt="" src="/vector.svg" />
+                  <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
                 <div className="relative w-[294px] h-[197px] text-sm">
                   <div className="absolute top-[0px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
@@ -1272,7 +485,7 @@ const Categories: FunctionComponent = () => {
                   </div>
                 </div>
               </div>
-              <div className="rounded-[10px] flex flex-col items-center justify-start pt-0 px-0 pb-[180px] gap-[12px] bg-[url('/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
+              <div className="rounded-[10px] flex flex-col items-center justify-start pt-0 px-0 pb-[180px] gap-[12px] bg-[url('/img/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
                 <div className="flex flex-col items-center justify-center pt-5 px-0 pb-0 gap-[2px]">
                   <div className="relative inline-block w-[312px]">
                     <span>
@@ -1294,7 +507,7 @@ const Categories: FunctionComponent = () => {
                   <img
                     className="relative w-[16.5px] h-[13.55px]"
                     alt=""
-                    src="/arrow.svg"
+                    src="/img/arrow.svg"
                   />
                 </div>
               </div>
@@ -1308,7 +521,7 @@ const Categories: FunctionComponent = () => {
                       <img
                         className="relative w-[102px] h-[102px] object-cover"
                         alt=""
-                        src="/image15@2x.png"
+                        src="/img/image15@2x.png"
                       />
                     </div>
                     <div className="flex flex-col items-start justify-center pt-6 px-3 pb-[25px] gap-[6px]">
@@ -1329,27 +542,27 @@ const Categories: FunctionComponent = () => {
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-13.svg"
+                          src="/img/star-13.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-13.svg"
+                          src="/img/star-13.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-13.svg"
+                          src="/img/star-13.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-13.svg"
+                          src="/img/star-13.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-53.svg"
+                          src="/img/star-53.svg"
                         />
                       </div>
                     </div>
@@ -1359,7 +572,7 @@ const Categories: FunctionComponent = () => {
                       <img
                         className="relative w-[102px] h-[102px] object-cover"
                         alt=""
-                        src="/image16@2x.png"
+                        src="/img/image16@2x.png"
                       />
                     </div>
                     <div className="flex flex-col items-start justify-center pt-6 px-3 pb-[25px] gap-[6px]">
@@ -1380,27 +593,27 @@ const Categories: FunctionComponent = () => {
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-54.svg"
+                          src="/img/star-54.svg"
                         />
                       </div>
                     </div>
@@ -1410,7 +623,7 @@ const Categories: FunctionComponent = () => {
                       <img
                         className="relative w-[102px] h-[102px] object-cover"
                         alt=""
-                        src="/image17@2x.png"
+                        src="/img/image17@2x.png"
                       />
                     </div>
                     <div className="flex flex-col items-start justify-center pt-6 px-3 pb-[25px] gap-[6px]">
@@ -1431,27 +644,27 @@ const Categories: FunctionComponent = () => {
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-14.svg"
+                          src="/img/star-14.svg"
                         />
                         <img
                           className="relative w-3 h-3 overflow-hidden shrink-0"
                           alt=""
-                          src="/star-54.svg"
+                          src="/img/star-54.svg"
                         />
                       </div>
                     </div>
@@ -1465,7 +678,7 @@ const Categories: FunctionComponent = () => {
                 <img
                   className="relative w-[21.5px] h-[18.5px]"
                   alt=""
-                  src="/filter-24px.svg"
+                  src="/img/filter-24px.svg"
                 />
               </div>
               <div className="absolute top-[2px] left-[336px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
@@ -1477,7 +690,7 @@ const Categories: FunctionComponent = () => {
                   <img
                     className="relative w-3.5 h-3.5 overflow-hidden shrink-0"
                     alt=""
-                    src="/chevron-down2.svg"
+                    src="/img/chevron-down2.svg"
                   />
                 </div>
               </div>
@@ -1501,3 +714,4 @@ const Categories: FunctionComponent = () => {
 };
 
 export default Categories;
+
