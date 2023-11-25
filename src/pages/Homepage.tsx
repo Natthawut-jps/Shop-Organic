@@ -1,11 +1,28 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { HeaderContext } from "./unities/Header";
+import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-const Homepage: FunctionComponent = () => {
-  const [popularProduct, setPopularProduct] = useState([]);
+import { CartContextProviders, CartProvider } from "./unities/HandleCart";
+export const HomePageContext = () => {
+  return (
+    <CartProvider>
+      <Homepage />
+    </CartProvider>
+  )
+};
+interface datatypes {
+  id: number,
+  name: string,
+  price: number,
+  categories: string,
+  rating: number,
+  imgURL: string,
+};
+export const Homepage: FunctionComponent = () => {
+  const { cartItem, increaseCartQuantity } = CartContextProviders();
+  const [popularProduct, setPopularProduct] = useState<datatypes[]>([]);
+  console.log(cartItem)
   async function Test() {
     const { data } = await axios.get('/data/popularProduct.json')
     setPopularProduct(data.PopularProduct)
@@ -17,7 +34,7 @@ const Homepage: FunctionComponent = () => {
 
     <div className="relative bg-gray-scale-white w-full h-[5574px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
       {/* header template */}
-      <HeaderContext />
+      <Header />
       {/* 11 */}
       <div className="absolute top-[4711px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
         <div className="absolute top-[0px] left-[471px] leading-[120%] font-semibold">
@@ -781,67 +798,81 @@ const Homepage: FunctionComponent = () => {
           </a>
         </div>
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
-          {popularProduct && popularProduct.map((item: any) => (
-            <Link key={item.id} to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)]  hover:text-branding-success-dark text-gray-100 hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-              <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                <img
-                  className="relative w-[254px] h-[230px] object-cover"
-                  alt=""
-                  src={item.imgURL}
-                />
-              </div>
-              <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-                <div className="flex flex-col items-start justify-start">
-                  <div className="relative leading-[150%] inline-block w-60">
-                    {item.name}
-                  </div>
-                  <div className="flex flex-row items-start justify-start gap-[2px] text-base">
-                    <div className="relative leading-[150%] font-medium">
-                      {`฿${item.price}`}
-                    </div>
-                    <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                      $20.99
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-start justify-start">
+          {popularProduct && popularProduct.map((item: datatypes) => (
+            <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
+              <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
+                <div className="absolute h-[73.17%] w-[99.62%] top-[0%] right-[0.38%] bottom-[26.83%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
                   <img
-                    className="relative w-3 h-3 overflow-hidden shrink-0"
+                    className="relative w-[254px] h-[230px] object-cover"
                     alt=""
-                    src="/img/star-12.svg"
-                  />
-                  <img
-                    className="relative w-3 h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/star-12.svg"
-                  />
-                  <img
-                    className="relative w-3 h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/star-12.svg"
-                  />
-                  <img
-                    className="relative w-3 h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/star-12.svg"
-                  />
-                  <img
-                    className="relative w-3 h-3 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/star-52.svg"
+                    src={item.imgURL}
                   />
                 </div>
-              </div>
-              <img
-                className="absolute h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
-                alt=""
-                src="/img/add-to-cart.svg"
-              />
+                <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
+                  <div className="flex flex-col items-start justify-start">
+                    <div className="relative leading-[150%] inline-block w-60">
+                      {item.name}
+                    </div>
+                    <div className="flex flex-row items-start justify-start gap-[2px] text-base">
+                      <div className="relative leading-[150%] font-medium">
+                        {`฿${item.price}`}
+                      </div>
+                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
+                        $20.99
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-start justify-start">
+                    <img
+                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      alt=""
+                      src="/img/star-12.svg"
+                    />
+                    <img
+                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      alt=""
+                      src="/img/star-12.svg"
+                    />
+                    <img
+                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      alt=""
+                      src="/img/star-12.svg"
+                    />
+                    <img
+                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      alt=""
+                      src="/img/star-12.svg"
+                    />
+                    <img
+                      className="relative w-3 h-3 overflow-hidden shrink-0"
+                      alt=""
+                      src="/img/star-52.svg"
+                    />
+                  </div>
+                </div>
+              </Link>
+              {cartItem.find(check => check.id === item.id) ?
+                <div onClick={() => increaseCartQuantity(item)}>
+                  <img
+                    className="absolute cursor-pointer h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src='/img/add-to-cart2.svg'
+                  />
+                </div>
+                :
+                <div onClick={() => increaseCartQuantity(item)}>
+                  <img
+                    className="absolute cursor-pointer h-[12.2%] w-[15.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[78.49%] max-w-full overflow-hidden max-h-full"
+                    alt=""
+                    src='/img/add-to-cart.svg'
+                  />
+                </div>
+              }
               <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
                 <div className="relative leading-[150%]">Sale</div>
                 <div className="relative leading-[150%] font-medium">50%</div>
               </div>
-            </Link>
+            </div>
           ))
           }
         </div>
@@ -1215,5 +1246,5 @@ const Homepage: FunctionComponent = () => {
   );
 };
 
-export default Homepage;
+
 

@@ -21,6 +21,8 @@ interface datatypes {
   id: number,
   name: string,
   price: number,
+  categories: string,
+  rating: number,
   imgURL: string,
 }
 export const ProductsDetailsDescription: FunctionComponent = () => {
@@ -31,6 +33,8 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
     id: 1,
     name: 'Chinese Cabbage',
     price: 10,
+    categories: 'vegetables',
+    rating: 4,
     imgURL: '/product-image5@2x.png'
   }
   useEffect(() => {
@@ -38,7 +42,6 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
       window.scroll(0, 0);
     }
   }, [])
-console.log(state)
   return (
     <>
       {productList === state.product.name ?

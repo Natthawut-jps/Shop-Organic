@@ -1,10 +1,17 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Link, Outlet, useParams } from "react-router-dom";
 import { Foorter } from "./unities/Foorter";
-import { HeaderContext } from "./unities/Header";
+import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import axios from "axios";
-
+import { CartProvider } from "./unities/HandleCart";
+export const CategoriesContext = () => {
+  return (
+    <CartProvider>
+      <Categories />
+    </CartProvider>
+  )
+};
 const Categories: FunctionComponent = () => {
   const { categoriesParam } = useParams();
   const [categories, setCategories] = useState([]);
@@ -20,7 +27,7 @@ const Categories: FunctionComponent = () => {
     <>
       {categories.length > 0 &&
         <div className="relative bg-gray-scale-white w-full h-[3233px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
-          <HeaderContext />
+          <Header />
           <Breadcrumbs categoies={categoriesParam} tltle={undefined} />
           <div className="absolute top-[2587px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
             <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">

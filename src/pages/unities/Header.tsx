@@ -3,19 +3,13 @@ import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortaweso
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Menu, MenuItem } from "@mui/material";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent,  useState } from "react";
 import { Link } from "react-router-dom";
-import { CartContextProviders, CartProvider } from "./HandleCart";
+import { CartContextProviders } from "./HandleCart";
 import { Cart } from "./Cart";
 import { Favorite } from "./Favorite";
 
-export const HeaderContext = () => {
-    return (
-        <CartProvider>
-            <Header />
-        </CartProvider>
-    )
-};
+
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
@@ -41,7 +35,7 @@ export const Header: FunctionComponent = () => {
     };
     return (
         <>
-                <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
+            <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
             <Cart Carts={{ openCart, setOpenCart }} />
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">

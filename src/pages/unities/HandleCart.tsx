@@ -1,4 +1,6 @@
 import { createContext, useContext, useState } from "react";
+import { Header } from "./Header";
+import Categories from "../Categories";
 
 // context CartShopping
 interface Provider {
@@ -8,6 +10,8 @@ interface increaseCartQuantityType {
     id: number,
     name: string,
     price: number,
+    categories: string,
+    rating: number,
     imgURL: string,
 };
 interface dataTypes {
@@ -30,6 +34,8 @@ interface setCart {
     id: number,
     name: string,
     price: number,
+    categories: string,
+    rating: number,
     quantity: number,
     imgURL: string,
 };
@@ -39,12 +45,16 @@ interface increaseFavoriteQuantityType {
     id: number,
     name: string,
     price: number,
+    categories: string,
+    rating: number,
     imgURL: string,
 };
 interface setFavorite {
     id: number,
     name: string,
     price: number,
+    categories: string,
+    rating: number,
     quantity: number,
     imgURL: string,
 };
@@ -62,7 +72,7 @@ export const CartProvider = ({ children }: Provider) => {
     const increaseCartQuantity = (prop: increaseCartQuantityType) => {
         setCartItem(curr => {
             if (curr.find(item => item.id === prop.id) == null) {
-                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL }]
+                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL, categories: prop.categories, rating: prop.rating }]
             } else {
                 return curr.map((item) => {
                     if (item.id === prop.id) {
@@ -123,7 +133,7 @@ export const CartProvider = ({ children }: Provider) => {
     const increaseFavoriteQuantity = (prop: increaseFavoriteQuantityType) => {
         setFavoritetItem(curr => {
             if (curr.find(item => item.id === prop.id) == null) {
-                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL }]
+                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL, categories: prop.categories, rating: prop.rating}]
             } else {
                 return curr.map((item) => {
                     if (item.id === prop.id) {
@@ -150,7 +160,7 @@ export const CartProvider = ({ children }: Provider) => {
             }
         })
     }
-
+    
     const removeFavoriteItem = (id: number) => {
         setFavoritetItem(currItem => {
             return currItem.filter(item => item.id !== id)
