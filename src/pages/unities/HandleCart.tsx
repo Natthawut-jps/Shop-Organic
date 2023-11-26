@@ -1,6 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { Header } from "./Header";
-import Categories from "../Categories";
 
 // context CartShopping
 interface Provider {
@@ -101,7 +99,7 @@ export const CartProvider = ({ children }: Provider) => {
         })
     }
 
-    const removeCartItem = (id: number) => {
+    const removeCartItem = (id?: number) => {
         setCartItem(currItem => {
             return currItem.filter(item => item.id !== id)
         })

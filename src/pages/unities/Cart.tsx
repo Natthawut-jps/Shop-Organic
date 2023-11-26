@@ -1,7 +1,7 @@
-import { FunctionComponent, ReactElement, Ref, forwardRef } from 'react'
+import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from 'react'
 import { faMinus, faPlus, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Dialog, Slide } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
 
@@ -23,15 +23,96 @@ interface open {
         openCart: boolean,
         setOpenCart: (e: boolean) => void,
     }
-}
+};
+interface confirmremoveall {
+    Angree: {
+        angreeOpen: boolean,
+        setAngreeOpen: (e: boolean) => void,
+    }
+};
+interface subconfirmremoveProps {
+    open: boolean,
+    id?: number,
+};
+interface confirmremove {
+    confirm: {
+        confirmOpen: {
+            open: boolean,
+            id?: number,
+        },
+        setConfirmOpen: (props: subconfirmremoveProps) => void,
+    }
+};
+export const ConfirmRemoveAll: FunctionComponent<confirmremoveall> = (props) => {
+    const { removeCartItemAll } = CartContextProviders();
+    return (
+        <>
+            <Dialog
+                open={props.Angree.angreeOpen}
+                onClose={() => props.Angree.setAngreeOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className=' text-red-600'>
+                    {"คุณต้องการลบสินค้าทั้งหมดหรือไม่"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {"สินค้าจะไม่สามารถกู้คืนได้"}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => props.Angree.setAngreeOpen(false)}>ยกเลิก</Button>
+                    <Button onClick={() => {
+                        props.Angree.setAngreeOpen(false);
+                        removeCartItemAll(true);
+                    }} >ตกลง</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+};
+export const ConfirmRemove: FunctionComponent<confirmremove> = (props) => {
+    const { removeCartItem } = CartContextProviders();
+    return (
+        <>
+            <Dialog
+                open={props.confirm.confirmOpen.open}
+                onClose={() => props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id })}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className=' text-red-600'>
+                    {"คุณต้องการลบสินค้านี้หรือไม่"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {"สินค้าจะไม่สามารถกู้คืนได้"}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id })}>ยกเลิก</Button>
+                    <Button onClick={() => {
+                        props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id });
+                        removeCartItem(props.confirm.confirmOpen.id!);
+                    }} >ตกลง</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+};
 export const Cart: FunctionComponent<open> = (props) => {
-    const { cartItem, removeCartItem, removeCartItemAll, increaseCartQuantity, decreaseCartQuantity } = CartContextProviders();
+    const [angreeOpen, setAngreeOpen] = useState<boolean>(false);
+    const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
+    const { cartItem, increaseCartQuantity, decreaseCartQuantity } = CartContextProviders();
     const price = cartItem.map(item => item.price * item.quantity);
     const priceSum = price.reduce((accumulator, currentValue) => {
         return accumulator + currentValue
     }, 0);
     return (
         <>
+            <ConfirmRemove confirm={{ confirmOpen, setConfirmOpen }} />
+            <ConfirmRemoveAll Angree={{ angreeOpen, setAngreeOpen }} />
             <Dialog
                 fullWidth
                 maxWidth={'md'}
@@ -50,7 +131,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                             </div>
                             <div className=" border-solid border-[#666666] border-opacity-30 relative w-full top-[40px] box-border border-[1px] " />
                             {cartItem.length > 0 &&
-                                <div onClick={() => cartItem.length > 0 && removeCartItemAll(true)} className="text-red-600 hover:text-red-700 cursor-pointer relative flex w-[65px] h-[14px] box-border top-[5px] right-[150px] float-right">
+                                <div onClick={() => setAngreeOpen(true)} className="text-red-600 hover:text-red-700 cursor-pointer relative flex w-[65px] h-[14px] box-border top-[5px] right-[150px] float-right">
                                     <div className="h-[12px] top-0 [font-family:'Montserrat',Helvetica] font-normal   hover:text-opacity-50  text-[13px] text-right whitespace-nowrap relative tracking-[0] leading-[normal]">
                                         ลบสินค้าทั้งหมด
                                     </div>
@@ -93,11 +174,11 @@ export const Cart: FunctionComponent<open> = (props) => {
                                     </div>
                                 </div>
                                 <div className='flex justify-center items-center'>
-                                    <div onClick={() => removeCartItem(item.id)} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
+                                    <div onClick={() => setConfirmOpen({ open: true, id: item.id })} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
                                         <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                             ลบ
                                         </div>
-                                        <FontAwesomeIcon icon={faTrash} className="absolute w-[11px] h-[11px] top-[2px] left-0"/>
+                                        <FontAwesomeIcon icon={faTrash} className="absolute w-[11px] h-[11px] top-[2px] left-0" />
                                     </div>
                                 </div>
                             </div>

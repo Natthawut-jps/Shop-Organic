@@ -1,7 +1,7 @@
-import { FunctionComponent, ReactElement, Ref, forwardRef } from 'react'
-import { faMinus, faPlus, faTrash, faV, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from 'react'
+import { faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Dialog, Slide } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
 
@@ -24,12 +24,93 @@ interface open {
         setOpenFavorite: (e: boolean) => void,
     }
 }
+interface confirmremoveall {
+    Angree: {
+        angreeOpen: boolean,
+        setAngreeOpen: (e: boolean) => void,
+    }
+};
+interface subconfirmremoveProps {
+    open: boolean,
+    id?: number,
+};
+interface confirmremove {
+    confirm: {
+        confirmOpen: {
+            open: boolean,
+            id?: number,
+        },
+        setConfirmOpen: (props: subconfirmremoveProps) => void,
+    }
+};
+export const ConfirmRemoveAll: FunctionComponent<confirmremoveall> = (props) => {
+    const { removeFavoriteItemAll } = CartContextProviders();
+    return (
+        <>
+            <Dialog
+                open={props.Angree.angreeOpen}
+                onClose={() => props.Angree.setAngreeOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className=' text-red-600'>
+                    {"คุณต้องการลบรายการที่ชอบทั้งหมดหรือไม่"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {"สินค้าจะไม่สามารถกู้คืนได้"}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => props.Angree.setAngreeOpen(false)}>ยกเลิก</Button>
+                    <Button onClick={() => {
+                        props.Angree.setAngreeOpen(false);
+                        removeFavoriteItemAll(true);
+                    }} >ตกลง</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+};
+export const ConfirmRemove: FunctionComponent<confirmremove> = (props) => {
+    const { removeFavoriteItem } = CartContextProviders();
+    return (
+        <>
+            <Dialog
+                open={props.confirm.confirmOpen.open}
+                onClose={() => props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id })}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title" className=' text-red-600'>
+                    {"คุณต้องการลบรายการที่ชอบนี้หรือไม่"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {"สินค้าจะไม่สามารถกู้คืนได้"}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id })}>ยกเลิก</Button>
+                    <Button onClick={() => {
+                        props.confirm.setConfirmOpen({ open: false, id: props.confirm.confirmOpen.id });
+                        removeFavoriteItem(props.confirm.confirmOpen.id!);
+                    }} >ตกลง</Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    )
+};
 export const Favorite: FunctionComponent<open> = (props) => {
     const { favoriteItem, cartItem, increaseCartQuantity, increaseFavoriteQuantity, addFavorite, removeFavoriteItem, removeFavoriteItemAll } = CartContextProviders();
+    const [angreeOpen, setAngreeOpen] = useState<boolean>(false);
+    const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
     // const test = favoriteItem.find(item => item.id === 1)
     // console.log(Object(test))
     return (
         <>
+            <ConfirmRemove confirm={{ confirmOpen, setConfirmOpen }} />
+            <ConfirmRemoveAll Angree={{ angreeOpen, setAngreeOpen }} />
             <Dialog
                 fullWidth
                 maxWidth={'md'}
@@ -48,9 +129,9 @@ export const Favorite: FunctionComponent<open> = (props) => {
                             </div>
                             <div className=" border-solid border-[#666666] border-opacity-30 relative w-full top-[40px] box-border border-[1px] " />
                             {favoriteItem.length > 0 &&
-                                <div onClick={() => favoriteItem.length > 0 && removeFavoriteItemAll(true)} className="text-red-600 hover:text-red-700 cursor-pointer relative flex w-[65px] h-[14px] box-border top-[5px] right-[150px] float-right">
+                                <div onClick={() => setAngreeOpen(true)} className="text-red-600 hover:text-red-700 cursor-pointer relative flex w-[65px] h-[14px] box-border top-[5px] right-[150px] float-right">
                                     <div className="h-[12px] top-0 [font-family:'Montserrat',Helvetica] font-normal   hover:text-opacity-50  text-[13px] text-right whitespace-nowrap relative tracking-[0] leading-[normal]">
-                                        ลบสินค้าทั้งหมด
+                                        ลบรายการที่ชอบทั้งหมด
                                     </div>
                                     <FontAwesomeIcon icon={faTrash} className="relative w-[12px] h-[12px] top-[1px] left-[5px]" />
                                 </div>
@@ -110,7 +191,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                 }
                                 <div className='flex justify-center items-center'>
                                     <div onClick={() => {
-                                        removeFavoriteItem(item.id)
+                                        setConfirmOpen({ open: true, id: item.id });
                                         addFavorite(item.id);
                                     }} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
                                         <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">

@@ -1,10 +1,13 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams, useNavigate, useLocation } from "react-router-dom";
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import axios from "axios";
-import { CartProvider } from "./unities/HandleCart";
+import { CartContextProviders, CartProvider } from "./unities/HandleCart";
+import Rating from "@mui/material/Rating";
+import StarIcon from '@mui/icons-material/Star';
+import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
 export const CategoriesContext = () => {
   return (
     <CartProvider>
@@ -12,24 +15,42 @@ export const CategoriesContext = () => {
     </CartProvider>
   )
 };
-const Categories: FunctionComponent = () => {
+interface datatypes {
+  id: number,
+  name: string,
+  price: number,
+  categories: string,
+  rating: number,
+  imgURL: string,
+};
+export const Categories: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const state: { status: boolean } = useLocation().state;
+  const { cartItem, increaseCartQuantity, removeCartItem } = CartContextProviders();
   const { categoriesParam } = useParams();
-  const [categories, setCategories] = useState([]);
-  async function Test() {
+  const [categories, setCategories] = useState<datatypes[]>([]);
+  const [amoutcategories, setAmoutcategories] = useState<string[]>([]);
+  const allCategories = [...new Set(amoutcategories)];
+  const [snackbar, setSnackbar] = useState<boolean>(false);
+  async function Api() {
     const { data } = await axios.get('/data/popularProduct.json')
-    setCategories(data.PopularProduct.filter((item: any) => item.categories === categoriesParam));
+    setCategories(data.PopularProduct.filter((item: datatypes) => item.categories === categoriesParam));
+    setAmoutcategories(data.PopularProduct.map((item: datatypes) => item.categories));
   };
   useEffect(() => {
-    Test()
-  }, []);
-  window.scroll(0, 0);
+    Api()
+    if (state?.status) {
+      window.scroll(0, 0)
+    }
+  }, [categoriesParam]);
+
   return (
     <>
-      {categories.length > 0 &&
-        <div className="relative bg-gray-scale-white w-full h-[3233px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
+      {
+        <div className="relative bg-gray-scale-white w-full h-[2833px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
           <Header />
           <Breadcrumbs categoies={categoriesParam} tltle={undefined} />
-          <div className="absolute top-[2587px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
+          <div className="absolute top-[2187px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
             <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">
               <img
                 className="relative w-5 h-5 overflow-hidden shrink-0"
@@ -75,22 +96,17 @@ const Categories: FunctionComponent = () => {
               </div>
             </div>
             <div className="rounded-481xl bg-gray-scale-white flex flex-row items-start justify-start p-2 [transform:_rotate(180deg)] [transform-origin:0_0] border-[1px] border-solid border-gray-scale-gray-100">
-              <img
-                className="relative w-5 h-5 overflow-hidden shrink-0"
-                alt=""
-                src="/img/chevron-down1.svg"
-              />
+
             </div>
           </div>
-          {/* 5x3 */}
-          <div className=" relative top-[347px] left-[60px] w-[1220px] text-sm text-gray-scale-gray-700">
-            <div className=" grid grid-cols-3 gap-x-[300px] gap-y-2 relative ml-[370px] box-border">
-              {categories.map((item: any) => (
-                <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} key={item.id} className=" relative top-[69px] w-[984px]">
-                  <div className=" relative top-[0px] left-[0px] bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[312px] h-[407px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
+          <div className=" relative top-[347px] left-[60px] w-[1520px] text-sm text-gray-scale-gray-700">
+            <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
+              {categories.map((item: datatypes) => (
+                <div key={item.id} className=" relative top-[69px] left-[0px] border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[262px] h-[307px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
+                  <Link key={item.id} to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
                     <div className=" relative w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
                       <img
-                        className="relative w-[302px] h-[302px] object-cover"
+                        className="relative w-[252px] h-[202px] object-cover"
                         alt=""
                         src="/img/image5@2x.png"
                       />
@@ -110,141 +126,76 @@ const Categories: FunctionComponent = () => {
                         </div>
                       </div>
                       <div className="flex flex-row items-start justify-start">
-                        <img
-                          className="relative w-3 h-3 overflow-hidden shrink-0"
-                          alt=""
-                          src="/img/star-1.svg"
-                        />
-                        <img
-                          className="relative w-3 h-3 overflow-hidden shrink-0"
-                          alt=""
-                          src="/img/star-1.svg"
-                        />
-                        <img
-                          className="relative w-3 h-3 overflow-hidden shrink-0"
-                          alt=""
-                          src="/img/star-1.svg"
-                        />
-                        <img
-                          className="relative w-3 h-3 overflow-hidden shrink-0"
-                          alt=""
-                          src="/img/star-1.svg"
-                        />
-                        <img
-                          className="relative w-3 h-3 overflow-hidden shrink-0"
-                          alt=""
-                          src="/img/star-5.svg"
-                        />
+                        <Rating
+                          name="read-only"
+                          sx={{
+                            fontSize: '13px'
+                          }}
+                          precision={0.1}
+                          value={item.rating}
+                          emptyIcon={<StarIcon fontSize="inherit" />}
+                          readOnly />
                       </div>
                     </div>
-                    <img
-                      className="absolute h-[9.83%] w-[12.82%] top-[83.42%] right-[6.41%] bottom-[6.76%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                      alt=""
-                      src="/img/add-to-cart1.svg"
-                    />
-                    <img
-                      className="absolute h-[21.13%] w-[12.82%] top-[4.91%] right-[6.41%] bottom-[73.96%] left-[80.77%] max-w-full overflow-hidden max-h-full"
-                      alt=""
-                      src="/img/group-1.svg"
-                    />
-                  </div>
-                </Link>
+                  </Link>
+                  {cartItem.find(check => check.id === item.id) ?
+                    <div onClick={() => removeCartItem(item.id)}>
+                      <img
+                        className=" cursor-pointer absolute h-[15.83%] w-[15.82%] top-[80.42%] right-[6.41%] bottom-[6.76%] left-[75.77%] max-w-full overflow-hidden max-h-full"
+                        alt=""
+                        src="/img/add-to-cart2.svg"
+                      />
+                    </div>
+                    :
+                    <div onClick={() => {
+                      increaseCartQuantity(item);
+                      setSnackbar(true);
+                    }}>
+                      <img
+                        className="absolute cursor-pointer h-[15.83%] w-[15.82%] top-[80.42%] right-[6.41%] bottom-[6.76%] left-[75.77%] max-w-full overflow-hidden max-h-full"
+                        alt=""
+                        src="/img/add-to-cart.svg"
+                      />
+                      <Snackbar open={snackbar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                        autoHideDuration={1000}
+                        sx={{ width: '100%' }}
+                        onClose={() => setSnackbar(false)}
+                      >
+                        <Alert severity="success">Add to Cart successfully</Alert>
+                      </Snackbar>
+                    </div>
+                  }
+                </div>
               ))
               }
             </div>
             <div className="absolute top-[69px] left-[0px] flex flex-col items-start justify-start text-xl text-gray-scale-gray-900">
-              <div className="flex flex-col items-start justify-start text-sm">
+              <div className="flex flex-col items-start justify-start text-sm pb-10">
                 <div className="w-[312px] flex flex-row items-center justify-between pt-0 px-0 pb-5 box-border text-xl">
                   <div className="relative leading-[150%] font-medium">
                     All Categories
                   </div>
                   <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
-                <div className="flex flex-row items-center justify-center pt-0 px-0 pb-2.5 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">Fresh Fruit (25)</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (134)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1.5px] border-solid border-branding-success" />
-                    <div className="absolute h-3/5 w-3/5 top-[20%] right-[20%] bottom-[20%] left-[20%] rounded-13xl bg-branding-success" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">Vegetables</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (150)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">Cooking</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (54)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">Snacks</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (47)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">Beverages</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (43)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">{`Beauty & Health`}</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (38)
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center pt-2.5 px-0 pb-[26px] gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <div className="relative leading-[150%]">{`Bread & Bakery`}</div>
-                    <div className="relative leading-[150%] text-gray-scale-gray-500">
-                      {" "}
-                      (15)
-                    </div>
-                  </div>
-                </div>
+                <FormControl>
+                  <RadioGroup
+                    value={categoriesParam}
+                    sx={{
+                      '& .Mui-checked': {
+                        color: 'green'
+                      },
+                    }}
+                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      navigate(`/product/${event.target.value}`)
+                    }}
+                  >
+                    {allCategories.map((item) => (
+                      <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
+                    ))
+                    }
+                  </RadioGroup>
+                </FormControl>
               </div>
               <div className="relative box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
               <div className="flex flex-col items-start justify-center pt-0 px-0 pb-6 gap-[16px]">
@@ -457,39 +408,6 @@ const Categories: FunctionComponent = () => {
                   <div className="absolute top-[0px] left-[94px] rounded-11xl bg-branding-success flex flex-row items-start justify-start py-1.5 px-4 text-gray-scale-white">
                     <div className="relative leading-[150%]">Low fat</div>
                   </div>
-                  <div className="absolute top-[0px] left-[184px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Vegetarian</div>
-                  </div>
-                  <div className="absolute top-[82px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Meat</div>
-                  </div>
-                  <div className="absolute top-[41px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Kid foods</div>
-                  </div>
-                  <div className="absolute top-[41px] left-[105px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Vitamins</div>
-                  </div>
-                  <div className="absolute top-[82px] left-[76px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Snacks</div>
-                  </div>
-                  <div className="absolute top-[123px] left-[177px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Breackfast</div>
-                  </div>
-                  <div className="absolute top-[82px] left-[166px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Tiffin</div>
-                  </div>
-                  <div className="absolute top-[123px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Launch</div>
-                  </div>
-                  <div className="absolute top-[123px] left-[91px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Dinner</div>
-                  </div>
-                  <div className="absolute top-[41px] left-[207px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Bread</div>
-                  </div>
-                  <div className="absolute top-[164px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Fruit</div>
-                  </div>
                 </div>
               </div>
               <div className="rounded-[10px] flex flex-col items-center justify-start pt-0 px-0 pb-[180px] gap-[12px] bg-[url('/img/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
@@ -679,7 +597,7 @@ const Categories: FunctionComponent = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[0px] left-[0px] w-[1317px] h-[45px] text-gray-scale-white">
+            <div className="absolute top-[0px] left-[0px] w-[1617px] h-[45px] text-gray-scale-white">
               <div className="absolute top-[0px] left-[0px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 gap-[12px]">
                 <div className="relative leading-[120%] font-semibold">Filter</div>
                 <img
@@ -688,7 +606,7 @@ const Categories: FunctionComponent = () => {
                   src="/img/filter-24px.svg"
                 />
               </div>
-              <div className="absolute top-[2px] left-[336px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
+              <div className="absolute top-[2px] left-[376px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
                 <div className="relative leading-[150%]">Sort by:</div>
                 <div className="rounded flex flex-row items-center justify-start py-2.5 px-4 text-gray-scale-gray-700 border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[150%] inline-block w-[120px] shrink-0">
@@ -701,9 +619,9 @@ const Categories: FunctionComponent = () => {
                   />
                 </div>
               </div>
-              <div className="absolute top-[11px] left-[1183px] text-base text-gray-scale-gray-900">
+              <div className="absolute top-[11px] left-[1320px] text-base text-gray-scale-gray-900">
                 <span>
-                  <span className="leading-[120%] font-semibold">52</span>
+                  <span className="leading-[120%] font-semibold">{categories.length}</span>
                 </span>
                 <span className="leading-[150%] text-gray-scale-gray-600">
                   <span>{` `}</span>
@@ -719,6 +637,3 @@ const Categories: FunctionComponent = () => {
     </>
   );
 };
-
-export default Categories;
-

@@ -1,15 +1,13 @@
-import { faSistrix } from "@fortawesome/free-brands-svg-icons"
+import { faApple, faSistrix } from "@fortawesome/free-brands-svg-icons"
 import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Menu, MenuItem } from "@mui/material";
-import { FunctionComponent,  useState } from "react";
+import { FunctionComponent, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContextProviders } from "./HandleCart";
 import { Cart } from "./Cart";
 import { Favorite } from "./Favorite";
-
-
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
@@ -54,7 +52,7 @@ export const Header: FunctionComponent = () => {
                     </div>
                 </div>
                 <div className="relative w-[1920px] h-[93px] text-13xl text-gren-gray-scale-900">
-                    <Link to={'/'} className=" no-underline text-black absolute top-[27.5px] left-[300px] flex flex-row items-center justify-start gap-[8px]">
+                    <Link to={'/'} className=" hover:translate-y-[-2px] no-underline text-black absolute top-[27.5px] left-[300px] flex flex-row items-center justify-start gap-[8px]">
                         <img
                             className="relative w-8 h-8 overflow-hidden shrink-0"
                             alt=""
@@ -96,7 +94,7 @@ export const Header: FunctionComponent = () => {
                     </div>
                 </div>
                 <div className="w-[1920px] bg-gray-scale-gray-800 flex flex-row items-center justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
-                    <div className="flex flex-row items-center justify-start gap-[32px]">
+                    <div className="flex flex-row items-center justify-start">
                         <div
                             onClick={handleClick}
                             className=" cursor-pointer flex flex-row items-center justify-start box-border p-[15px]  bg-branding-success gap-[12px] text-gray-scale-white hover:translate-x-1 transition-all"
@@ -141,52 +139,22 @@ export const Header: FunctionComponent = () => {
                             <Link to={'/product/vegetables'} className=" no-underline text-black">
                                 <MenuItem onClick={handleClose}> <img src="/img/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
                             </Link>
-                            <MenuItem onClick={handleClose}><img src="/img/fish.svg" alt="" width={25} height={25} />River Fish</MenuItem>
-                            <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat</MenuItem>
+                            <Link to={'/product/FreshFruit'} className=" no-underline text-black" >
+                                <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faApple} />Fresh Fruit</MenuItem>
+                            </Link>
+                            <Link to={'/product/Meat&Fish'} className=" no-underline text-black"  >
+                                <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat & Fish</MenuItem>
+                            </Link>
                         </Menu>
-                        <div className="flex flex-row items-center justify-start gap-[4px]">
-                            <div className="relative leading-[150%] font-medium">Shop</div>
-                            <img
-                                className="relative w-4 h-4 overflow-hidden shrink-0"
-                                alt=""
-                                src="/img/chevron-down2.svg"
-                            />
-                        </div>
-                        <div className="flex flex-row items-center justify-start gap-[4px]">
-                            <div className="relative leading-[150%] font-medium">Pages</div>
-                            <img
-                                className="relative w-4 h-4 overflow-hidden shrink-0"
-                                alt=""
-                                src="/img/chevron-down2.svg"
-                            />
-                        </div>
-                        <div className="flex flex-row items-center justify-start gap-[4px]">
-                            <div className="relative leading-[150%] font-medium">Blog</div>
-                            <img
-                                className="relative w-4 h-4 overflow-hidden shrink-0"
-                                alt=""
-                                src="/img/chevron-down2.svg"
-                            />
-                        </div>
-                        <div className="flex flex-row items-center justify-start gap-[4px]">
+                        <div className=" py-[15px] pl-[40px] pr-[40px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
                             <div className="relative leading-[150%] font-medium">
                                 About Us
                             </div>
-                            <img
-                                className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
-                                alt=""
-                                src="/img/shipping.svg"
-                            />
                         </div>
-                        <div className="flex flex-row items-center justify-start gap-[4px]">
+                        <div className=" divide-y-2 divide-solid divide-white py-[15px] pl-[20px] pr-[20px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
                             <div className="relative leading-[150%] font-medium">
                                 Contact Us
                             </div>
-                            <img
-                                className="relative w-4 h-4 overflow-hidden shrink-0 hidden"
-                                alt=""
-                                src="/img/shipping.svg"
-                            />
                         </div>
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[8px] text-gray-scale-white">

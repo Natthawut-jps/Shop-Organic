@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Green Apple",
-            "price": "14.99",
+            "price": 14.99,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image7@2x.png"
@@ -11,7 +11,7 @@
         {
             "id": 2,
             "name": "Fresh Indian Malta",
-            "price": "20.00",
+            "price": 20,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image8@2x.png"
@@ -19,7 +19,7 @@
         {
             "id": 3,
             "name": "Chinese cabbage",
-            "price": "12.00",
+            "price": 12,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image9@2x.png"
@@ -27,7 +27,7 @@
         {
             "id": 4,
             "name": "Green Lettuce",
-            "price": "9.00",
+            "price": 9,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image10@2x.png"
@@ -35,7 +35,7 @@
         {
             "id": 5,
             "name": "Eggplant",
-            "price": "34.00",
+            "price": 34,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image11@2x.png"
@@ -43,7 +43,7 @@
         {
             "id": 6,
             "name": "Big Potatoes",
-            "price": "20.00",
+            "price": 20,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image12@2x.png"
@@ -51,7 +51,7 @@
         {
             "id": 7,
             "name": "Corn",
-            "price": "12.00",
+            "price": 12,
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png"
@@ -59,26 +59,171 @@
         {
             "id": 8,
             "name": "Fresh Cauliflower",
-            "price": "9.00",
-            "categories": "Fresh Fruit",
+            "price": 9,
+            "categories": "FreshFruit",
             "rating": 4,
             "imgURL": "/img/image14@2x.png"
         },
         {
             "id": 9,
             "name": "Chinese cabbage",
-            "price": "12.00",
+            "price": 12,
             "categories": "vegetables",
-            "rating": 4,
-            "imgURL": "/img/image15@2x.png"
+            "rating": 1.5,
+            "imgURL": "/img/image3@2x.png"
         },
         {
             "id": 10,
             "name": "Green Lettuce",
-            "price": "9.00",
-            "categories": "meat&Fish",
+            "price": 9,
+            "categories": "Meat&Fish",
             "rating": 4,
-            "imgURL": "/img/image16@2x.png"
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 11,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "Meat&Fish",
+            "rating": 4,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 12,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "Meat&Fish",
+            "rating": 3.6,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 13,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "Meat&Fish",
+            "rating": 2,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 14,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "Meat&Fish",
+            "rating": 2,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 15,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "vegetables",
+            "rating": 5,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 16,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 17,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 18,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "vegetables",
+            "rating": 2,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 19,
+            "name": "Green Lettuce",
+            "price": 9,
+            "categories": "vegetables",
+            "rating": 1,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 20,
+            "name": "Green Lettuce",
+            "price": 9.00,
+            "categories": "Meat&Fish",
+            "rating": 4,
+            "imgURL": "/img/image4@2x.png"
+        },
+        {
+            "id": 21,
+            "name": "Corn",
+            "price": 12.00,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image13@2x.png"
+        },
+        {
+            "id": 22,
+            "name": "Fresh Cauliflower",
+            "price": 9.00,
+            "categories": "FreshFruit",
+            "rating": 4,
+            "imgURL": "/img/image14@2x.png"
+        },
+        {
+            "id": 23,
+            "name": "Chinese cabbage",
+            "price": 12.00,
+            "categories": "vegetables",
+            "rating": 1.5,
+            "imgURL": "/img/image3@2x.png"
+        },
+        {
+            "id": 24,
+            "name": "Corn",
+            "price": 12.00,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image13@2x.png"
+        },
+        {
+            "id": 25,
+            "name": "Fresh Cauliflower",
+            "price": 9.00,
+            "categories": "FreshFruit",
+            "rating": 4,
+            "imgURL": "/img/image14@2x.png"
+        },
+        {
+            "id": 26,
+            "name": "Corn",
+            "price": 12.00,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image13@2x.png"
+        },
+        {
+            "id": 27,
+            "name": "Fresh Cauliflower",
+            "price": 9.00,
+            "categories": "FreshFruit",
+            "rating": 4,
+            "imgURL": "/img/image14@2x.png"
+        },
+        {
+            "id": 28,
+            "name": "Corn",
+            "price": 12.00,
+            "categories": "vegetables",
+            "rating": 4,
+            "imgURL": "/img/image13@2x.png"
         }
+        
     ]
 }
