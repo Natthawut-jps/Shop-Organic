@@ -8,7 +8,7 @@ interface Prop {
     tltle: string | undefined
     categoies: string | undefined
 }
-export const Breadcrumbs: FunctionComponent<Prop> = ( props ) => {
+export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
     return (
         <>
             <div className="absolute top-[186px] left-[-225px] w-[1920px] h-[120px] bg-[url('/img/Breadcrumbs.svg')] bg-cover bg-no-repeat bg-[top] text-base text-gray-scale-gray-500">
@@ -21,18 +21,33 @@ export const Breadcrumbs: FunctionComponent<Prop> = ( props ) => {
                         />
                     </NavLink>
                     <FontAwesomeIcon icon={faAngleRight} className=" relative" />
-                    <NavLink to={`/product/${props.categoies}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" 
-                     : " no-underline text-gray-scale-gray-400" } end >
-                        <div className="relative leading-[150%]">
-                            {props.categoies}
-                        </div>
-                    </NavLink>
-                    { props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" /> }
-                    <NavLink to={`/product/${props.categoies}/${props.tltle}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
-                        <div className="relative leading-[150%]">
-                            {props.tltle}
-                        </div>
-                    </NavLink>
+                    {props.categoies === 'Login' || 'SignUp' ?
+                        'Acount'
+                        :
+                        <NavLink to={`/product/${props.categoies}`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                            : " no-underline text-gray-scale-gray-400"} end >
+                            <div className="relative leading-[150%]">
+                                {props.categoies}
+                            </div>
+                        </NavLink>
+                    }
+                    {props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
+                    {props.categoies === 'Login' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
+                    {props.categoies === 'SignUp' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
+                    {props.categoies === 'Login' || 'SignUp' ?
+                        <NavLink to={`/Acount/${props.categoies}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
+                            <div className="relative leading-[150%]">
+                                {props.categoies}
+                            </div>
+                        </NavLink>
+                            :
+                            <NavLink to={`/product/${props.categoies}/${props.tltle}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
+                                <div className="relative leading-[150%]">
+                                    {props.tltle}
+                                </div>
+                            </NavLink>
+                    }
+
                 </div>
             </div>
         </>

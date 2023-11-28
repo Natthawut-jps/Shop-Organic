@@ -144,11 +144,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                 </div>
                                 <div className=' flex justify-center items-center'>
                                     <div className=" relative top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">
-                                        (LN) ผมโดนกลุ่มผู้กล้า
-                                        <br />
-                                        ขับไสเลยต้องไปสโลว์ไลฟ์
-                                        <br />
-                                        ที่ชายแดนเล่ม 9
+                                        {item.name}
                                     </div>
                                 </div>
                                 <div className=' flex items-center justify-center'>

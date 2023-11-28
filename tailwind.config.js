@@ -3,7 +3,7 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      colors: { 
+      colors: {
         limegreen: {
           "100": "rgba(32, 181, 38, 0.2)",
           "200": "rgba(32, 181, 38, 0.1)",

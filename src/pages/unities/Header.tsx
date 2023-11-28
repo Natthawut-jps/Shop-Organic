@@ -8,11 +8,13 @@ import { Link } from "react-router-dom";
 import { CartContextProviders } from "./HandleCart";
 import { Cart } from "./Cart";
 import { Favorite } from "./Favorite";
+import { Search } from "./Search";
 
 export const Header: FunctionComponent = () => {
     const [Categries, setCategries] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openCart, setOpenCart] = useState<boolean>(false);
+    const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [openFavorite, setOpenFavorite] = useState<boolean>(false);
     const { cartItem } = CartContextProviders();
     const quantity = cartItem.map((item) => item.quantity);
@@ -35,6 +37,7 @@ export const Header: FunctionComponent = () => {
         <>
             <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
             <Cart Carts={{ openCart, setOpenCart }} />
+            <Search Search={{ openSearch, setOpenSearch}}/>
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
@@ -45,9 +48,9 @@ export const Header: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">
                         <div className="flex flex-row relative left-16 items-start justify-start gap-[4px] text-left">
-                            <a href={'#'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</a>
+                            <Link to={'/Acount/Login'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
                             <div className="relative leading-[130%]">/</div>
-                            <a href={'#'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</a>
+                            <Link to={'/Acount/SignUp'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</Link>
                         </div>
                     </div>
                 </div>
@@ -62,7 +65,7 @@ export const Header: FunctionComponent = () => {
                             Ecobazar
                         </div>
                     </Link>
-                    <div onClick={() => ''} className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute top-[24px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100">
+                    <div onClick={() => setOpenSearch(true)} className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute top-[24px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100">
                         <div className="w-[500px] flex flex-row items-center justify-start py-3 pr-[18px] pl-4 box-border gap-[8px]">
                             <FontAwesomeIcon icon={faSistrix} className=" relative w-5 h-5 overflow-hidden shrink-0 opacity-50" />
                             <div className="relative leading-[21px] inline-block w-[400px] shrink-0">
