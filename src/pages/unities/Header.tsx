@@ -33,6 +33,8 @@ export const Header: FunctionComponent = () => {
         setCategries(false);
         setAnchorEl(null);
     };
+    
+
     return (
         <>
             <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
@@ -43,7 +45,7 @@ export const Header: FunctionComponent = () => {
                     <div className="flex flex-row items-center justify-start gap-[8px]">
                         <img className="relative w-4 h-[19px]" alt="" src="/img/map-pin.svg" />
                         <div className="relative leading-[130%]">
-                            Store Location: Lincoln- 344, Illinois, Chicago, Thailand
+                           Store Location: Lincoln- 344, Illinois, Chicago, Thailand
                         </div>
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">

@@ -8,6 +8,7 @@ import { CartContextProviders, CartProvider } from "./unities/HandleCart";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
 import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+
 export const CategoriesContext = () => {
   return (
     <CartProvider>
@@ -43,7 +44,6 @@ export const Categories: FunctionComponent = () => {
       window.scroll(0, 0)
     }
   }, [categoriesParam]);
-
   return (
     <>
       {

@@ -11,7 +11,6 @@ function App() {
       <Routes>
         <Route index element={<HomePageContext />} />
         <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUpContext />}/>
-        <Route path="/signUp"/>
         <Route path="/product">
           <Route path=":categoriesParam" element={<CategoriesContext />} />
           <Route path=":categoriesP/:productList" element={<ProductsDetailsDescriptionContext />} />

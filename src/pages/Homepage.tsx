@@ -21,18 +21,36 @@ interface datatypes {
   categories: string,
   rating: number,
   imgURL: string,
+  uid: number,
 };
 export const Homepage: FunctionComponent = () => {
-  const { cartItem, increaseCartQuantity, removeCartItem } = CartContextProviders();
+  const { cartItem, removeCartItem } = CartContextProviders();
+  const [cartItems, setCartitems] = useState<datatypes[]>([])
   const [popularProduct, setPopularProduct] = useState<datatypes[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
+  const increaseCartQuantity = async(prop: datatypes) => {
+    await axios({
+        method: 'post',
+        url: 'http://localhost:8080/cartAndFavorite/increaseCart',
+        data: prop
+    }).then((res) => setCartitems(res.data))
+};
   async function Test() {
     const { data } = await axios.get('/data/popularProduct.json')
     setPopularProduct(data.PopularProduct)
   };
+  async function Cart() {
+    const { data } = await axios({
+      method: 'get',
+      url: 'http://localhost:8080/cartAndFavorite',
+    })
+    setCartitems(data)
+  };
   useEffect(() => {
+    Cart()
     Test()
   }, []);
+  console.log(cartItems)
   return (
 
     <div className="relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
@@ -244,7 +262,7 @@ export const Homepage: FunctionComponent = () => {
       </div>
       {/* Categories */}
       <div className="absolute top-[1028px] left-[130px] w-[1320px] h-[320px] text-center text-lg">
-        <Link to={'/product/FreshFruit'} state={{status: true}} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/FreshFruit'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -254,7 +272,7 @@ export const Homepage: FunctionComponent = () => {
             Fresh Fruit
           </div>
         </Link>
-        <Link to={'/product/vegetables'} state={{status: true}} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
+        <Link to={'/product/vegetables'} state={{ status: true }} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -264,7 +282,7 @@ export const Homepage: FunctionComponent = () => {
             Fresh Vegetables
           </div>
         </Link>
-        <Link to={'/product/Meat&Fish'} state={{status: true}} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/Meat&Fish'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -288,7 +306,7 @@ export const Homepage: FunctionComponent = () => {
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
           {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypes) => (
             <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-              <Link  to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
+              <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
                 <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
                   <img
                     className="relative w-[254px] h-[230px] object-cover"
@@ -312,14 +330,14 @@ export const Homepage: FunctionComponent = () => {
                   </div>
                   <div className="flex flex-row items-start justify-start">
                     <Rating
-                     name="read-only" 
-                     sx={{
-                      fontSize: '13px'
-                     }}
-                     precision={0.1}
-                     value={item.rating} 
-                     emptyIcon={<StarIcon fontSize="inherit" />}
-                     readOnly />
+                      name="read-only"
+                      sx={{
+                        fontSize: '13px'
+                      }}
+                      precision={0.1}
+                      value={item.rating}
+                      emptyIcon={<StarIcon fontSize="inherit" />}
+                      readOnly />
                   </div>
                 </div>
               </Link>
@@ -335,20 +353,20 @@ export const Homepage: FunctionComponent = () => {
                 <div onClick={() => {
                   increaseCartQuantity(item);
                   setSnackbar(true);
-                  }}>
+                }}>
                   <img
                     className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
                     alt=""
                     src='/img/add-to-cart.svg'
                   />
-                   <Snackbar open={snackbar}
-                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                        autoHideDuration={1000}
-                        sx={{ width: '100%' }}
-                        onClose={() => setSnackbar(false)}
-                      >
-                        <Alert severity="success">Add to Cart successfully</Alert>
-                      </Snackbar>
+                  <Snackbar open={snackbar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    autoHideDuration={1000}
+                    sx={{ width: '100%' }}
+                    onClose={() => setSnackbar(false)}
+                  >
+                    <Alert severity="success">Add to Cart successfully</Alert>
+                  </Snackbar>
                 </div>
               }
               <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useContext, useState } from "react";
 
 // context CartShopping
@@ -67,21 +68,14 @@ export const CartProvider = ({ children }: Provider) => {
         return cartItem.find(item => item.id === id)?.quantity || 0
     };
 
-    const increaseCartQuantity = (prop: increaseCartQuantityType) => {
-        setCartItem(curr => {
-            if (curr.find(item => item.id === prop.id) == null) {
-                return [...curr, { id: prop.id, name: prop.name, price: prop.price, quantity: 1, imgURL: prop.imgURL, categories: prop.categories, rating: prop.rating }]
-            } else {
-                return curr.map((item) => {
-                    if (item.id === prop.id) {
-                        return { ...item, quantity: item.quantity + 1 }
-                    } else {
-                        return item
-                    }
-                })
-            }
-        })
-    }
+    const increaseCartQuantity = async(prop: increaseCartQuantityType) => {
+        await axios({
+            method: 'post',
+            url: 'http://localhost:8080/cartAndFavorite/increaseCart',
+            data: prop
+        });
+        
+    };
 
     const decreaseCartQuantity = (id: number) => {
         setCartItem(curr => {

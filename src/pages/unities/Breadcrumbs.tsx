@@ -21,7 +21,7 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                         />
                     </NavLink>
                     <FontAwesomeIcon icon={faAngleRight} className=" relative" />
-                    {props.categoies === 'Login' || 'SignUp' ?
+                    {props.categoies === "Login" || props.categoies === "SignUp" ?
                         'Acount'
                         :
                         <NavLink to={`/product/${props.categoies}`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
@@ -34,18 +34,18 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                     {props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'Login' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'SignUp' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
-                    {props.categoies === 'Login' || 'SignUp' ?
+                    {props.categoies === "Login" || props.categoies === "SignUp" ?
                         <NavLink to={`/Acount/${props.categoies}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
                             <div className="relative leading-[150%]">
                                 {props.categoies}
                             </div>
                         </NavLink>
-                            :
-                            <NavLink to={`/product/${props.categoies}/${props.tltle}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
-                                <div className="relative leading-[150%]">
-                                    {props.tltle}
-                                </div>
-                            </NavLink>
+                        :
+                        <NavLink to={`/product/${props.categoies}/${props.tltle}`} className={({ isActive }) => isActive ? " no-underline text-branding-success" : " no-underline text-gray-scale-gray-400"} end >
+                            <div className="relative leading-[150%]">
+                                {props.tltle}
+                            </div>
+                        </NavLink>
                     }
 
                 </div>
