@@ -6,7 +6,7 @@ import { Breadcrumbs } from "./unities/Breadcrumbs";
 import axios from "axios";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
-import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup, Pagination } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
 
 interface datatypesProduct {
@@ -25,82 +25,49 @@ interface datatypesProduct {
 
 export const Categories: FunctionComponent = () => {
   const navigate = useNavigate();
-  const state: { status: boolean } = useLocation().state;
-
   const { categoriesParam } = useParams();
-  const { addTocart, removeCartItem, cartItems } = CartContextProviders();
+  const state: { status: boolean } = useLocation().state;
+  const [snackbar, setSnackbar] = useState<boolean>(false);
   const [amoutcategories, setAmoutcategories] = useState<string[]>([]);
   const allCategories = [...new Set(amoutcategories)];
-  const [snackbar, setSnackbar] = useState<boolean>(false);
+  const countCategories = allCategories.map(item => [item, amoutcategories.filter(el => el === item).length])
+  const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
-  // productItem
-  async function Product() {
-    const { data } = await axios.get('/data/popularProduct.json')
-    setProduct(data.PopularProduct.filter((item: datatypesProduct) => item.categories === categoriesParam))
-    setAmoutcategories(data.PopularProduct.map((item: datatypesProduct) => item.categories))
-  };
-
+  const [itemOffset, setItemOffset] = useState(0);
+  const [pageCount, setPageCount] = useState<number>(0);
+  const [lenProduct, setLenproduct] = useState<number>(0);
+  const [page, setPage] = useState(1);
+  // product
   useEffect(() => {
-    Product()
+    const fetchs = async () => {
+      await axios.get('/data/popularProduct.json').then((res) => {
+        const product: datatypesProduct[] = res.data.PopularProduct.filter((item: datatypesProduct) => item.categories === categoriesParam);
+        const endOffset = itemOffset + 20;
+        setProduct(product.slice(itemOffset, endOffset))
+        setPageCount(Math.ceil(product.length / 20));
+        setLenproduct(product.length)
+        setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories))
+      })
+    }
+    fetchs()
     if (state?.status) {
       window.scroll(0, 0)
     }
-  }, [categoriesParam]);
+  }, [categoriesParam, itemOffset]);
+  // handlePagination
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const newOffset = ((value - 1) * 20) % lenProduct;
+    setItemOffset(newOffset)
+    setPage(value)
+    { event }
+  };
+  console.log(countCategories.map(item => item[1]))
   return (
     <>
       {
-        <div className="relative bg-gray-scale-white w-full h-[2833px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600">
+        <div className="relative bg-gray-scale-white w-full h-[2750px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
           <Header />
           <Breadcrumbs categoies={categoriesParam} tltle={undefined} />
-          <div className="absolute top-[2187px] left-[954px] flex flex-row items-start justify-start gap-[12px] text-center">
-            <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">
-              <img
-                className="relative w-5 h-5 overflow-hidden shrink-0"
-                alt=""
-                src="/img/chevron-down.svg"
-              />
-            </div>
-            <div className="flex flex-row items-start justify-start">
-              <div className="rounded-111xl bg-branding-success flex flex-col items-start justify-start p-2 text-gray-scale-white">
-                <div className="relative leading-[150%] font-medium flex items-center justify-center w-5 h-5 shrink-0">
-                  1
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  2
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  3
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  4
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  5
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  ...
-                </div>
-              </div>
-              <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-                <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                  21
-                </div>
-              </div>
-            </div>
-            <div className="rounded-481xl bg-gray-scale-white flex flex-row items-start justify-start p-2 [transform:_rotate(180deg)] [transform-origin:0_0] border-[1px] border-solid border-gray-scale-gray-100">
-
-            </div>
-          </div>
           <div className=" relative top-[347px] left-[60px] w-[1520px] text-sm text-gray-scale-gray-700">
             <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
               {ProductsItem.map((item: datatypesProduct) => (
@@ -172,6 +139,12 @@ export const Categories: FunctionComponent = () => {
               ))
               }
             </div>
+            <div className=" relative top-[130px] left-[800px] flex flex-row items-start justify-start gap-[12px] text-center">
+              {/* paginate */}
+              <div className="flex flex-row items-start justify-start">
+                <Pagination count={pageCount} variant="outlined" shape="rounded" page={page} boundaryCount={1} onChange={handleChange} sx={{ '& .Mui-selected': { bgcolor: 'rgba(22, 163, 5, 0.3)', border: 'solid 1px rgb(22,163,10)' } }} />
+              </div>
+            </div>
             <div className="absolute top-[69px] left-[0px] flex flex-col items-start justify-start text-xl text-gray-scale-gray-900">
               <div className="flex flex-col items-start justify-start text-sm pb-10">
                 <div className="w-[312px] flex flex-row items-center justify-between pt-0 px-0 pb-5 box-border text-xl">
@@ -189,11 +162,15 @@ export const Categories: FunctionComponent = () => {
                       },
                     }}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      navigate(`/product/${event.target.value}`)
+                      navigate(`/product/${event.target.value}`);
+                      handleChange(event, 1)
                     }}
                   >
-                    {allCategories.map((item) => (
-                      <FormControlLabel key={item} value={item} control={<Radio />} label={item} />
+                    {countCategories.map((item, index) => (
+                      <div>
+                        <FormControlLabel key={index} value={item[0]} control={<Radio />} label={item[0]} />
+                        {`(${item[1]})`}
+                      </div>
                     ))
                     }
                   </RadioGroup>
@@ -623,7 +600,7 @@ export const Categories: FunctionComponent = () => {
               </div>
               <div className="absolute top-[11px] left-[1320px] text-base text-gray-scale-gray-900">
                 <span>
-                  <span className="leading-[120%] font-semibold">{ProductsItem.length}</span>
+                  <span className="leading-[120%] font-semibold">{countCategories.find(item => item[0] === categoriesParam)?.map((item, index) => index === 1 && item)}</span>
                 </span>
                 <span className="leading-[150%] text-gray-scale-gray-600">
                   <span>{` `}</span>
