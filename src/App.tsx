@@ -1,19 +1,19 @@
 import { Route, Routes } from "react-router-dom"
-import { HomePageContext } from "./pages/Homepage"
-import { CategoriesContext } from "./pages/Categories"
+import { Homepage } from "./pages/Homepage"
+import { Categories } from "./pages/Categories"
 import { NoPage } from "./pages/unities/NoPage"
-import { ProductsDetailsDescriptionContext } from "./pages/ProductsDetailsDescription"
-import { SignInAndSignUpContext } from "./pages/SignInAndSignUp"
+import { ProductsDetailsDescription } from "./pages/ProductsDetailsDescription"
+import { SignInAndSignUp } from "./pages/SignInAndSignUp"
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route index element={<HomePageContext />} />
-        <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUpContext />}/>
+        <Route index element={<Homepage />} />
+        <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUp />}/>
         <Route path="/product">
-          <Route path=":categoriesParam" element={<CategoriesContext />} />
-          <Route path=":categoriesP/:productList" element={<ProductsDetailsDescriptionContext />} />
+          <Route path=":categoriesParam" element={<Categories />} />
+          <Route path=":categoriesP/:productList" element={<ProductsDetailsDescription />} />
         </Route>
         <Route path="*" element={<NoPage />} />
       </Routes>

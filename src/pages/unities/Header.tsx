@@ -2,23 +2,23 @@ import { faApple, faSistrix } from "@fortawesome/free-brands-svg-icons"
 import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Menu, MenuItem } from "@mui/material";
+import { Badge, Menu, MenuItem } from "@mui/material";
 import { FunctionComponent, useState } from "react";
 import { Link } from "react-router-dom";
-import { CartContextProviders } from "./HandleCart";
+import { Search } from "./Search";
 import { Cart } from "./Cart";
 import { Favorite } from "./Favorite";
-import { Search } from "./Search";
+import { CartContextProviders } from "./HandleCart";
 
 export const Header: FunctionComponent = () => {
+    const { cartItems, favoriteItem } = CartContextProviders();
     const [Categries, setCategries] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [openCart, setOpenCart] = useState<boolean>(false);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [openFavorite, setOpenFavorite] = useState<boolean>(false);
-    const { cartItem } = CartContextProviders();
-    const quantity = cartItem.map((item) => item.quantity);
-    const price = cartItem.map(item => item.price * item.quantity);
+    const quantity = cartItems.map((item) => item.quantity);
+    const price = cartItems.map(item => item.price * item.quantity);
     const priceSum = price.reduce((accumulator, currentValue) => {
         return accumulator + currentValue
     }, 0);
@@ -32,20 +32,19 @@ export const Header: FunctionComponent = () => {
     const handleClose = () => {
         setCategries(false);
         setAnchorEl(null);
-    };
-    
+    }
 
     return (
         <>
             <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
             <Cart Carts={{ openCart, setOpenCart }} />
-            <Search Search={{ openSearch, setOpenSearch}}/>
+            <Search Search={{ openSearch, setOpenSearch }} />
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
                         <img className="relative w-4 h-[19px]" alt="" src="/img/map-pin.svg" />
                         <div className="relative leading-[130%]">
-                           Store Location: Lincoln- 344, Illinois, Chicago, Thailand
+                            Store Location: Lincoln- 344, Illinois, Chicago, Thailand
                         </div>
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">
@@ -77,19 +76,18 @@ export const Header: FunctionComponent = () => {
                     </div>
                     <div className="absolute top-[29.5px] left-[1429px] flex flex-row items-center justify-start gap-[16px] text-center text-3xs text-gray-scale-white">
                         <div onClick={() => setOpenFavorite(true)} className="rounded-2xl cursor-pointer">
-                            <FavoriteIcon className="relative hover:text-red-600 text-black opacity-50" fontSize="large" />
+                            <Badge badgeContent={favoriteItem.length} color="error">
+                                <FavoriteIcon className="relative hover:text-red-400 text-red-600 opacity-50" fontSize="large" />
+                            </Badge>
                         </div>
-                        <div className="relative box-border w-px h-[25px] border-r-[1px] border-solid border-gray-scale-gray-200" />
-                        <div onClick={() => setOpenCart(true)} className=" hover:text-green-600 cursor-pointer flex flex-row items-center justify-start gap-[12px] text-black">
+                        <div className="relative box-border h-[25px] border-r-[1px] border-solid border-gray-scale-gray-200" />
+                        <div onClick={() => setOpenCart(true)} className=" hover:opacity-80 cursor-pointer flex flex-row items-center justify-start gap-[20px] text-black">
                             <div className="relative w-[34px] h-[34px]">
-                                <FontAwesomeIcon icon={faShoppingCart} className="absolute top-[0px] left-[0px] w-[30px] h-[34px]" />
-                                <div className=" absolute  top-[-5px] left-[17px] rounded-2xl bg-branding-success-dark box-border w-[22px] h-[22px] overflow-hidden border-[1px] border-solid border-gray-scale-white">
-                                    <div className="absolute z-10 top-[calc(50%_-_5.5px)] left-[calc(50%_-_5px)] leading-[12px] font-medium text-white">
-                                        {quantitySum}
-                                    </div>
-                                </div>
+                                <Badge badgeContent={quantitySum} color="primary">
+                                    <FontAwesomeIcon icon={faShoppingCart} className="absolute top-[-8px] left-[0px] w-[30px] h-[34px] text-green-600" />
+                                </Badge>
                             </div>
-                            <div className="flex flex-col items-start justify-start gap-[7px] text-left text-2xs ">
+                            <div className="text-green-700 flex flex-col items-start justify-start gap-[7px] text-left text-2xs ">
                                 <div className="relative leading-[120%] ">Shopping cart:</div>
                                 <div className="relative text-sm leading-[100%] font-medium">
                                     {priceSum.toFixed(2) + '฿'}

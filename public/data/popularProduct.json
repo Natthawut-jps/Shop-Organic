@@ -7,7 +7,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image7@2x.png",
-            "uid": 1
+            "uid": 1,
+            "shoppingHanding": 50
         },
         {
             "id": 2,
@@ -16,7 +17,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image8@2x.png",
-            "uid": 2
+            "uid": 2,
+            "shoppingHanding": 50
         },
         {
             "id": 3,
@@ -25,7 +27,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image9@2x.png",
-            "uid": 3
+            "uid": 3,
+            "shoppingHanding": 50
         },
         {
             "id": 4,
@@ -34,7 +37,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image10@2x.png",
-            "uid": 4
+            "uid": 4,
+            "shoppingHanding": 50
         },
         {
             "id": 5,
@@ -43,7 +47,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image11@2x.png",
-            "uid": 5
+            "uid": 5,
+            "shoppingHanding": 50
         },
         {
             "id": 6,
@@ -52,7 +57,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image12@2x.png",
-            "uid": 6
+            "uid": 6,
+            "shoppingHanding": 50
         },
         {
             "id": 7,
@@ -61,7 +67,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png",
-            "uid": 7
+            "uid": 7,
+            "shoppingHanding": 50
         },
         {
             "id": 8,
@@ -70,7 +77,8 @@
             "categories": "FreshFruit",
             "rating": 4,
             "imgURL": "/img/image14@2x.png",
-            "uid": 8
+            "uid": 8,
+            "shoppingHanding": 50
         },
         {
             "id": 9,
@@ -79,7 +87,8 @@
             "categories": "vegetables",
             "rating": 1.5,
             "imgURL": "/img/image3@2x.png",
-            "uid": 9
+            "uid": 9,
+            "shoppingHanding": 50
         },
         {
             "id": 10,
@@ -88,7 +97,8 @@
             "categories": "Meat&Fish",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 10
+            "uid": 10,
+            "shoppingHanding": 50
         },
         {
             "id": 11,
@@ -97,7 +107,8 @@
             "categories": "Meat&Fish",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 11
+            "uid": 11,
+            "shoppingHanding": 50
         },
         {
             "id": 12,
@@ -106,7 +117,8 @@
             "categories": "Meat&Fish",
             "rating": 3.6,
             "imgURL": "/img/image4@2x.png",
-            "uid": 12
+            "uid": 12,
+            "shoppingHanding": 50
         },
         {
             "id": 13,
@@ -115,7 +127,8 @@
             "categories": "Meat&Fish",
             "rating": 2,
             "imgURL": "/img/image4@2x.png",
-            "uid": 13
+            "uid": 13,
+            "shoppingHanding": 50
         },
         {
             "id": 14,
@@ -124,7 +137,8 @@
             "categories": "Meat&Fish",
             "rating": 2,
             "imgURL": "/img/image4@2x.png",
-            "uid": 14
+            "uid": 14,
+            "shoppingHanding": 50
         },
         {
             "id": 15,
@@ -133,7 +147,8 @@
             "categories": "vegetables",
             "rating": 5,
             "imgURL": "/img/image4@2x.png",
-            "uid": 15
+            "uid": 15,
+            "shoppingHanding": 50
         },
         {
             "id": 16,
@@ -142,7 +157,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 16
+            "uid": 16,
+            "shoppingHanding": 50
         },
         {
             "id": 17,
@@ -151,7 +167,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 17
+            "uid": 17,
+            "shoppingHanding": 50
         },
         {
             "id": 18,
@@ -160,7 +177,8 @@
             "categories": "vegetables",
             "rating": 2,
             "imgURL": "/img/image4@2x.png",
-            "uid": 18
+            "uid": 18,
+            "shoppingHanding": 50
         },
         {
             "id": 19,
@@ -169,7 +187,8 @@
             "categories": "vegetables",
             "rating": 1,
             "imgURL": "/img/image4@2x.png",
-            "uid": 19
+            "uid": 19,
+            "shoppingHanding": 50
         },
         {
             "id": 20,
@@ -178,7 +197,8 @@
             "categories": "Meat&Fish",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 20
+            "uid": 20,
+            "shoppingHanding": 50
         },
         {
             "id": 21,
@@ -187,7 +207,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png",
-            "uid": 21
+            "uid": 21,
+            "shoppingHanding": 50
         },
         {
             "id": 22,
@@ -196,7 +217,8 @@
             "categories": "FreshFruit",
             "rating": 4,
             "imgURL": "/img/image14@2x.png",
-            "uid": 22
+            "uid": 22,
+            "shoppingHanding": 50
         },
         {
             "id": 23,
@@ -205,7 +227,8 @@
             "categories": "vegetables",
             "rating": 1.5,
             "imgURL": "/img/image3@2x.png",
-            "uid": 23
+            "uid": 23,
+            "shoppingHanding": 50
         },
         {
             "id": 24,
@@ -214,7 +237,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png",
-            "uid": 24
+            "uid": 24,
+            "shoppingHanding": 50
         },
         {
             "id": 25,
@@ -223,7 +247,8 @@
             "categories": "FreshFruit",
             "rating": 4,
             "imgURL": "/img/image14@2x.png",
-            "uid": 25
+            "uid": 25,
+            "shoppingHanding": 50
         },
         {
             "id": 26,
@@ -232,7 +257,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png",
-            "uid": 26
+            "uid": 26,
+            "shoppingHanding": 50
         },
         {
             "id": 27,
@@ -241,7 +267,8 @@
             "categories": "FreshFruit",
             "rating": 4,
             "imgURL": "/img/image14@2x.png",
-            "uid": 27
+            "uid": 27,
+            "shoppingHanding": 50
         },
         {
             "id": 28,
@@ -250,7 +277,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image13@2x.png",
-            "uid": 28
+            "uid": 28,
+            "shoppingHanding": 50
         },
         {
             "id": 29,
@@ -259,7 +287,8 @@
             "categories": "Meat&Fish",
             "rating": 2,
             "imgURL": "/img/image4@2x.png",
-            "uid": 29
+            "uid": 29,
+            "shoppingHanding": 50
         },
         {
             "id": 30,
@@ -268,7 +297,8 @@
             "categories": "vegetables",
             "rating": 5,
             "imgURL": "/img/image4@2x.png",
-            "uid": 30
+            "uid": 30,
+            "shoppingHanding": 50
         },
         {
             "id": 31,
@@ -277,7 +307,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 31
+            "uid": 31,
+            "shoppingHanding": 50
         },
         {
             "id": 32,
@@ -286,7 +317,8 @@
             "categories": "vegetables",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 32
+            "uid": 32,
+            "shoppingHanding": 50
         },
         {
             "id": 33,
@@ -295,7 +327,9 @@
             "categories": "vegetables",
             "rating": 2,
             "imgURL": "/img/image4@2x.png",
-            "uid": 33
+            "uid": 33,
+            "shoppingHanding": 50
+
         },
         {
             "id": 34,
@@ -304,7 +338,8 @@
             "categories": "Meat&Fish",
             "rating": 4,
             "imgURL": "/img/image4@2x.png",
-            "uid": 34
+            "uid": 34,
+            "shoppingHanding": 50
         }
         
     ]

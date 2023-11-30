@@ -3,18 +3,12 @@ import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { CartContextProviders, CartProvider } from "./unities/HandleCart";
 import Rating from "@mui/material/Rating/Rating";
 import StarIcon from '@mui/icons-material/Star';
 import { Alert, Snackbar } from "@mui/material";
-export const HomePageContext = () => {
-  return (
-    <CartProvider>
-      <Homepage />
-    </CartProvider>
-  )
-};
-interface datatypes {
+import { CartContextProviders } from "./unities/HandleCart";
+
+interface datatypesProduct {
   id: number,
   name: string,
   price: number,
@@ -22,35 +16,26 @@ interface datatypes {
   rating: number,
   imgURL: string,
   uid: number,
+  shoppingHanding: number,
+  createdAt: string,
+  updatedAt: string,
 };
+
 export const Homepage: FunctionComponent = () => {
-  const { cartItem, removeCartItem } = CartContextProviders();
-  const [cartItems, setCartitems] = useState<datatypes[]>([])
-  const [popularProduct, setPopularProduct] = useState<datatypes[]>([]);
+  const { addTocart, removeCartItem, cartItems } = CartContextProviders();
+  const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
-  const increaseCartQuantity = async(prop: datatypes) => {
-    await axios({
-        method: 'post',
-        url: 'http://localhost:8080/cartAndFavorite/increaseCart',
-        data: prop
-    }).then((res) => setCartitems(res.data))
-};
-  async function Test() {
+
+  // productItem
+  async function Product() {
     const { data } = await axios.get('/data/popularProduct.json')
     setPopularProduct(data.PopularProduct)
   };
-  async function Cart() {
-    const { data } = await axios({
-      method: 'get',
-      url: 'http://localhost:8080/cartAndFavorite',
-    })
-    setCartitems(data)
-  };
+
   useEffect(() => {
-    Cart()
-    Test()
+    Product()
   }, []);
-  console.log(cartItems)
+
   return (
 
     <div className="relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
@@ -304,7 +289,7 @@ export const Homepage: FunctionComponent = () => {
           </div>
         </div>
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
-          {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypes) => (
+          {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypesProduct) => (
             <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
               <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
                 <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
@@ -341,7 +326,7 @@ export const Homepage: FunctionComponent = () => {
                   </div>
                 </div>
               </Link>
-              {cartItem.some(check => check.id === item.id) ?
+              {cartItems.some(check => check.pid === item.id) ?
                 <div onClick={() => removeCartItem(item.id)}>
                   <img
                     className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
@@ -351,7 +336,7 @@ export const Homepage: FunctionComponent = () => {
                 </div>
                 :
                 <div onClick={() => {
-                  increaseCartQuantity(item);
+                  addTocart(item);
                   setSnackbar(true);
                 }}>
                   <img
@@ -384,7 +369,7 @@ export const Homepage: FunctionComponent = () => {
           Latest News
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
-          {popularProduct.slice(-3).map((item: datatypes) => (
+          {popularProduct.slice(-3).map((item: datatypesProduct) => (
             <div key={item.id} className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start">
               <div className="relative w-[424px] h-[324px]">
                 <img

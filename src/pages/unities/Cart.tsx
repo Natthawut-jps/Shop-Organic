@@ -1,8 +1,9 @@
-import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from 'react'
+import { FunctionComponent, ReactElement, Ref, forwardRef, useEffect, useState } from 'react'
 import { faMinus, faPlus, faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
+import axios from 'axios';
 import { CartContextProviders } from './HandleCart';
 
 // Cart
@@ -74,6 +75,7 @@ export const ConfirmRemoveAll: FunctionComponent<confirmremoveall> = (props) => 
 };
 export const ConfirmRemove: FunctionComponent<confirmremove> = (props) => {
     const { removeCartItem } = CartContextProviders();
+
     return (
         <>
             <Dialog
@@ -101,14 +103,46 @@ export const ConfirmRemove: FunctionComponent<confirmremove> = (props) => {
         </>
     )
 };
+
+interface datatypesProduct {
+    id: number,
+    name: string,
+    price: number,
+    categories: string,
+    rating: number,
+    imgURL: string,
+    uid: number,
+    shoppingHanding: number,
+    createdAt: string,
+    updatedAt: string,
+};
 export const Cart: FunctionComponent<open> = (props) => {
+    const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
+    const { increaseCartQuantity, decreaseCartQuantity, setCartitems, cartItems } = CartContextProviders();
     const [angreeOpen, setAngreeOpen] = useState<boolean>(false);
     const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
-    const { cartItem, increaseCartQuantity, decreaseCartQuantity } = CartContextProviders();
-    const price = cartItem.map(item => item.price * item.quantity);
+    const price = cartItems.map(item => item.price);
     const priceSum = price.reduce((accumulator, currentValue) => {
         return accumulator + currentValue
     }, 0);
+    // productItem
+    async function Product() {
+        const { data } = await axios.get('/data/popularProduct.json')
+        setPopularProduct(data.PopularProduct)
+    };
+    // get CartItem
+    async function CartItem() {
+        const { data } = await axios({
+            method: 'get',
+            url: 'http://localhost:8080/cartAndFavorite/cart',
+        })
+        setCartitems(data)
+    };
+
+    useEffect(() => {
+        CartItem()
+        Product()
+    }, []);
     return (
         <>
             <ConfirmRemove confirm={{ confirmOpen, setConfirmOpen }} />
@@ -130,7 +164,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                                 ตะกร้าสินค้า
                             </div>
                             <div className=" border-solid border-[#666666] border-opacity-30 relative w-full top-[40px] box-border border-[1px] " />
-                            {cartItem.length > 0 &&
+                            {cartItems.length > 0 &&
                                 <div onClick={() => setAngreeOpen(true)} className="text-red-600 hover:text-red-700 cursor-pointer relative flex w-[65px] h-[14px] box-border top-[5px] right-[150px] float-right">
                                     <div className="h-[12px] top-0 [font-family:'Montserrat',Helvetica] font-normal   hover:text-opacity-50  text-[13px] text-right whitespace-nowrap relative tracking-[0] leading-[normal]">
                                         ลบสินค้าทั้งหมด
@@ -139,7 +173,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                                 </div>
                             }
                         </div>
-                        {cartItem.length > 0 && cartItem.map((item) => (
+                        {cartItems.length > 0 && cartItems.map((item) => (
                             <div key={item.id} className=" relative top-[40px] w-full h-[96px] grid grid-flow-col">
                                 <div className=' flex justify-center items-center'>
                                     <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/img/product-image@2x.png" />
@@ -151,26 +185,26 @@ export const Cart: FunctionComponent<open> = (props) => {
                                 </div>
                                 <div className=' flex items-center justify-center'>
                                     <div className=" relative top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
-                                        {(item.price * item.quantity).toFixed(2) + '฿'}
+                                        {(item.price).toFixed(2) + '฿'}
                                     </div>
                                 </div>
                                 <div className='flex items-center justify-center '>
                                     <div className=" relative w-[87px] h-[31px]">
                                         <div className="relative w-[81px] h-[31px] bg-[#ffffff33] rounded-[4px] border border-solid border-[#33343566]">
-                                            <div onClick={() => increaseCartQuantity(item)} className=" hover:bg-[#666666]/20 rounded-s-sm cursor-pointer w-[28px] h-[32px] top-[0px] left-[0px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] absolute tracking-[0] leading-[normal]">
+                                            <div onClick={() => increaseCartQuantity(item.pid, popularProduct.find(price => price.id === item.pid)?.price!)} className=" hover:bg-[#666666]/20 rounded-s-sm cursor-pointer w-[28px] h-[32px] top-[0px] left-[0px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] absolute tracking-[0] leading-[normal]">
                                                 <FontAwesomeIcon icon={faPlus} className='relative top-[8px] left-[10px]' />
                                             </div>
                                             <div className="absolute w-[10px] h-[24px] top-[6px] left-[35px] [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#333435e6] text-[14px] tracking-[0] leading-[normal]">
                                                 {item.quantity}
                                             </div>
-                                            <div onClick={() => decreaseCartQuantity(item.id)} className="hover:bg-[#666666]/20 cursor-pointer rounded-s-sm w-[29px] h-[32px] top-[0px] left-[52px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] whitespace-nowrap absolute tracking-[0] leading-[normal]">
+                                            <div onClick={() => decreaseCartQuantity(item.pid, popularProduct.find(price => price.id === item.pid)?.price!)} className="hover:bg-[#666666]/20 cursor-pointer rounded-s-sm w-[29px] h-[32px] top-[0px] left-[52px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                                 <FontAwesomeIcon icon={faMinus} className=' relative top-[7px] left-2' />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div className='flex justify-center items-center'>
-                                    <div onClick={() => setConfirmOpen({ open: true, id: item.id })} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
+                                    <div onClick={() => setConfirmOpen({ open: true, id: item.pid })} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
                                         <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                             ลบ
                                         </div>
@@ -180,14 +214,14 @@ export const Cart: FunctionComponent<open> = (props) => {
                             </div>
                         ))
                         }
-                        {cartItem.length > 0 ?
+                        {cartItems.length > 0 ?
                             <div className=" relative w-full pb-[320px] box-border top-[60px] bg-[#f7f7f7]">
                                 <div>
                                     <div className="top-[98px] left-[384px] font-normal absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        ฿50.00
+                                        {'฿'+ popularProduct.slice(-1).map(item => item.shoppingHanding)[0]}
                                     </div>
                                     <div className="top-[139px] left-[386px] font-bold absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {priceSum.toFixed(2) + '฿'}
+                                        {'฿'+(priceSum + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]).toFixed(2)}
                                     </div>
                                     <div className="absolute top-[142px] left-[123px] [font-family:'Noto_Serif_Thai',Helvetica] font-bold text-[#666666] text-[12px] tracking-[0] leading-[normal]">
                                         ราคาสุทธิ

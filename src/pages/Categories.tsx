@@ -4,42 +4,44 @@ import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import axios from "axios";
-import { CartContextProviders, CartProvider } from "./unities/HandleCart";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
 import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup } from "@mui/material";
+import { CartContextProviders } from "./unities/HandleCart";
 
-export const CategoriesContext = () => {
-  return (
-    <CartProvider>
-      <Categories />
-    </CartProvider>
-  )
-};
-interface datatypes {
+interface datatypesProduct {
   id: number,
   name: string,
   price: number,
   categories: string,
   rating: number,
   imgURL: string,
+  pid: number,
+  uid: number,
+  shoppingHanding: number,
+  createdAt: string,
+  updatedAt: string,
 };
+
 export const Categories: FunctionComponent = () => {
   const navigate = useNavigate();
   const state: { status: boolean } = useLocation().state;
-  const { cartItem, increaseCartQuantity, removeCartItem } = CartContextProviders();
+
   const { categoriesParam } = useParams();
-  const [categories, setCategories] = useState<datatypes[]>([]);
+  const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [amoutcategories, setAmoutcategories] = useState<string[]>([]);
   const allCategories = [...new Set(amoutcategories)];
   const [snackbar, setSnackbar] = useState<boolean>(false);
-  async function Api() {
+  const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
+  // productItem
+  async function Product() {
     const { data } = await axios.get('/data/popularProduct.json')
-    setCategories(data.PopularProduct.filter((item: datatypes) => item.categories === categoriesParam));
-    setAmoutcategories(data.PopularProduct.map((item: datatypes) => item.categories));
+    setProduct(data.PopularProduct.filter((item: datatypesProduct) => item.categories === categoriesParam))
+    setAmoutcategories(data.PopularProduct.map((item: datatypesProduct) => item.categories))
   };
+
   useEffect(() => {
-    Api()
+    Product()
     if (state?.status) {
       window.scroll(0, 0)
     }
@@ -101,7 +103,7 @@ export const Categories: FunctionComponent = () => {
           </div>
           <div className=" relative top-[347px] left-[60px] w-[1520px] text-sm text-gray-scale-gray-700">
             <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
-              {categories.map((item: datatypes) => (
+              {ProductsItem.map((item: datatypesProduct) => (
                 <div key={item.id} className=" relative top-[69px] left-[0px] border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[262px] h-[307px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
                   <Link key={item.id} to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
                     <div className=" relative w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
@@ -138,7 +140,7 @@ export const Categories: FunctionComponent = () => {
                       </div>
                     </div>
                   </Link>
-                  {cartItem.find(check => check.id === item.id) ?
+                  {cartItems.find(check => check.pid === item.id) ?
                     <div onClick={() => removeCartItem(item.id)}>
                       <img
                         className=" cursor-pointer absolute h-[15.83%] w-[15.82%] top-[80.42%] right-[6.41%] bottom-[6.76%] left-[75.77%] max-w-full overflow-hidden max-h-full"
@@ -148,7 +150,7 @@ export const Categories: FunctionComponent = () => {
                     </div>
                     :
                     <div onClick={() => {
-                      increaseCartQuantity(item);
+                      addTocart(item);
                       setSnackbar(true);
                     }}>
                       <img
@@ -621,7 +623,7 @@ export const Categories: FunctionComponent = () => {
               </div>
               <div className="absolute top-[11px] left-[1320px] text-base text-gray-scale-gray-900">
                 <span>
-                  <span className="leading-[120%] font-semibold">{categories.length}</span>
+                  <span className="leading-[120%] font-semibold">{ProductsItem.length}</span>
                 </span>
                 <span className="leading-[150%] text-gray-scale-gray-600">
                   <span>{` `}</span>

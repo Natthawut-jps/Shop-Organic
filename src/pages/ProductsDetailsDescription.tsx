@@ -4,19 +4,12 @@ import { Foorter } from "./unities/Foorter";
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { NoPage } from "./unities/NoPage";
-import { CartContextProviders, CartProvider } from "./unities/HandleCart";
 import { Alert, Rating, Snackbar } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import axios from "axios";
+import { CartContextProviders } from "./unities/HandleCart";
 
-export const ProductsDetailsDescriptionContext = () => {
-  return (
-    <CartProvider>
-      <ProductsDetailsDescription />
-    </CartProvider>
-  )
-};
-// datatype tester
 interface datatypes {
   product: {
     id: number,
@@ -25,14 +18,19 @@ interface datatypes {
     categories: string,
     rating: number,
     imgURL: string,
+    uid: number,
+    shoppingHanding: number,
+    createdAt: string,
+    updatedAt: string,
   }
   status: string,
 }
 export const ProductsDetailsDescription: FunctionComponent = () => {
+  const { cartItems, favoriteItem, addFavorite, removeCartItem, addTocart, removeFavoriteItem} = CartContextProviders();
   const [snackbar, setSnackbar] = useState<boolean>(false);
   const { categoriesP, productList } = useParams();
   const state: datatypes = useLocation().state;
-  const { increaseCartQuantity, removeCartItem, cartItem, addFavorite, favItem, increaseFavoriteQuantity, removeFavoriteItem } = CartContextProviders();
+
   useEffect(() => {
     if (state.status) {
       window.scroll(0, 0);
@@ -451,7 +449,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
-                  {cartItem.some(check => check.id === state.product.id) ?
+                  {cartItems.some(check => check.pid === state.product.id) ?
                     <div onClick={() => removeCartItem(state.product.id)} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                       <div className="relative leading-[120%] font-semibold">
                         Remove
@@ -472,9 +470,9 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                     </div>
                     :
                     <div onClick={() => {
-                      increaseCartQuantity(state.product);
+                      addTocart(state.product);
                       setSnackbar(true);
-                      }}
+                    }}
                       className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                       <div className="relative leading-[120%] font-semibold">
                         Add to Cart
@@ -490,11 +488,10 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                     <Rating
                       name="hover-feedback"
                       precision={1}
-                      value={favItem.some((item) => item === state.product.id) ? 1 : 0}
+                      value={favoriteItem.some((item) => item.pid === state.product.id) ? 1 : 0}
                       onChange={() => {
-                        increaseFavoriteQuantity(state.product);
-                        addFavorite(state.product.id);
-                        favItem.some((item) => item === state.product.id) && removeFavoriteItem(state.product.id)
+                        addFavorite(state.product);
+                        favoriteItem.some((item) => item.pid === state.product.id) && removeFavoriteItem(state.product.id)
                       }}
                       max={1}
                       icon={<FavoriteIcon fontSize="inherit" />}

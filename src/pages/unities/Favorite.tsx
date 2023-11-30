@@ -1,9 +1,10 @@
-import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from 'react'
+import { FunctionComponent, ReactElement, Ref, forwardRef, useEffect, useState } from 'react'
 import { faTrash, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
+import axios from 'axios';
 
 // Favorite
 export const Transition = forwardRef(function Transition(
@@ -101,12 +102,23 @@ export const ConfirmRemove: FunctionComponent<confirmremove> = (props) => {
         </>
     )
 };
+
 export const Favorite: FunctionComponent<open> = (props) => {
-    const { favoriteItem, cartItem, increaseCartQuantity, increaseFavoriteQuantity, addFavorite, removeFavoriteItem, removeFavoriteItemAll } = CartContextProviders();
+    const { favoriteItem, cartItems, setFavoritetItem, addTocart } = CartContextProviders();
     const [angreeOpen, setAngreeOpen] = useState<boolean>(false);
     const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
-    // const test = favoriteItem.find(item => item.id === 1)
-    // console.log(Object(test))
+    // get FavoriteItem
+    async function FavoriteItem() {
+        const { data } = await axios({
+            method: 'get',
+            url: 'http://localhost:8080/cartAndFavorite/favorite',
+        })
+        setFavoritetItem(data)
+    };
+
+    useEffect(() => {
+        FavoriteItem()
+    }, []);
     return (
         <>
             <ConfirmRemove confirm={{ confirmOpen, setConfirmOpen }} />
@@ -152,12 +164,9 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                         {(item.price).toFixed(2) + '฿'}
                                     </div>
                                 </div>
-                                {cartItem.find(check => check.id === item.id) ?
+                                {cartItems.some(check => check.pid === item.pid) ?
                                     <div className=' flex justify-center items-center'>
-                                        <div onClick={() => {
-                                            increaseCartQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
-                                            increaseFavoriteQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
-                                        }} className=" cursor-pointer rounded-xl bg-yellow-400 w-[220px] flex text-[15px] flex-row items-center justify-center py-4 px-5 box-border gap-[16px] text-left text-gray-scale-white">
+                                        <div className=" cursor-pointer rounded-xl bg-yellow-400 w-[220px] flex text-[15px] flex-row items-center justify-center py-4 px-5 box-border gap-[16px] text-left text-gray-scale-white">
                                             <div className="relative leading-[100%] font-semibold">
                                                 สินค้าอยู่ในตะกล้าแล้ว
                                             </div>
@@ -171,8 +180,18 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                     :
                                     <div className=' flex justify-center items-center'>
                                         <div onClick={() => {
-                                            increaseCartQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
-                                            increaseFavoriteQuantity(favoriteItem.filter((fav) => fav.id === item.id)[0])
+                                            addTocart({
+                                                id: item.pid,
+                                                name: item.name,
+                                                price: item.price,
+                                                categories: item.categories,
+                                                rating: item.rating,
+                                                imgURL: item.imgURL,
+                                                uid: item.uid,
+                                                shoppingHanding: item.shoppingHanding,
+                                                createdAt: item.createdAt,
+                                                updatedAt: item.updatedAt,
+                                            })
                                         }} className=" cursor-pointer rounded-xl bg-branding-success w-[200px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                                             <div className="relative leading-[120%] font-semibold">
                                                 Add to Cart
@@ -187,8 +206,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                 }
                                 <div className='flex justify-center items-center'>
                                     <div onClick={() => {
-                                        setConfirmOpen({ open: true, id: item.id });
-                                        addFavorite(item.id);
+                                        setConfirmOpen({ open: true, id: item.pid });
                                     }} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
                                         <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                             ลบ

@@ -1,17 +1,10 @@
 import { FunctionComponent } from "react";
 import { Header } from "./unities/Header";
-import { CartProvider } from "./unities/HandleCart";
 import { Link, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Foorter } from "./unities/Foorter";
-export const SignInAndSignUpContext = () => {
-  return (
-    <CartProvider>
-      <SignInAndSignUp />
-    </CartProvider>
-  )
-};
-const SignInAndSignUp: FunctionComponent = () => {
+
+export const SignInAndSignUp: FunctionComponent = () => {
   const { SignInAndSignUp } = useParams();
   return (
     <>
@@ -145,5 +138,3 @@ const SignInAndSignUp: FunctionComponent = () => {
     </>
   );
 };
-
-export default SignInAndSignUpContext;
