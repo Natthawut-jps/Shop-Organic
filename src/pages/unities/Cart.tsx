@@ -174,21 +174,21 @@ export const Cart: FunctionComponent<open> = (props) => {
                             }
                         </div>
                         {cartItems.length > 0 && cartItems.map((item) => (
-                            <div key={item.id} className=" relative top-[40px] w-full h-[96px] grid grid-flow-col">
-                                <div className=' flex justify-center items-center'>
+                            <div key={item.id} className="flex flex-initial relative top-[40px] w-full h-[96px] gap-5">
+                                <div className=' flex justify-center items-center w-[120px] ml-7'>
                                     <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/img/product-image@2x.png" />
                                 </div>
-                                <div className=' flex justify-center items-center'>
+                                <div className=' flex justify-center items-center w-[170px]'>
                                     <div className=" relative top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">
                                         {item.name}
                                     </div>
                                 </div>
-                                <div className=' flex items-center justify-center'>
+                                <div className=' flex items-center justify-center w-[200px]'>
                                     <div className=" relative top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
-                                        {(item.price).toFixed(2) + '฿'}
+                                        {(item.price).toFixed(2)+'฿'}
                                     </div>
                                 </div>
-                                <div className='flex items-center justify-center '>
+                                <div className='flex items-center justify-start w-[150px]'>
                                     <div className=" relative w-[87px] h-[31px]">
                                         <div className="relative w-[81px] h-[31px] bg-[#ffffff33] rounded-[4px] border border-solid border-[#33343566]">
                                             <div onClick={() => increaseCartQuantity(item.pid, popularProduct.find(price => price.id === item.pid)?.price!)} className=" hover:bg-[#666666]/20 rounded-s-sm cursor-pointer w-[28px] h-[32px] top-[0px] left-[0px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] absolute tracking-[0] leading-[normal]">
@@ -203,9 +203,9 @@ export const Cart: FunctionComponent<open> = (props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex justify-center items-center'>
-                                    <div onClick={() => setConfirmOpen({ open: true, id: item.pid })} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
-                                        <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
+                                <div className='flex justify-center items-center w-[100px]'>
+                                    <div onClick={() => setConfirmOpen({ open: true, id: item.pid })} className="cursor-pointer relative w-[35px] h-[20px] hover:text-red-700 text-red-600">
+                                        <div className="h-[12px] top-[2px] left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
                                             ลบ
                                         </div>
                                         <FontAwesomeIcon icon={faTrash} className="absolute w-[11px] h-[11px] top-[2px] left-0" />

@@ -150,22 +150,22 @@ export const Favorite: FunctionComponent<open> = (props) => {
                             }
                         </div>
                         {favoriteItem.length > 0 && favoriteItem.map((item) => (
-                            <div key={item.id} className=" relative top-[40px] w-full grid grid-flow-col">
-                                <div className=' flex justify-center items-center'>
+                            <div key={item.id} className=" flex relative top-[40px] w-full gap-5">
+                                <div className=' flex justify-center items-center w-[120px] ml-7'>
                                     <img className=" relative  w-[100px] h-[100px] top-0 left-0" alt="Image" src="/img/product-image@2x.png" />
                                 </div>
-                                <div className=' flex justify-center items-center'>
+                                <div className=' flex justify-center items-center w-[170px]'>
                                     <div className=" relative top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">
                                         {item.name}
                                     </div>
                                 </div>
-                                <div className=' flex items-center justify-center'>
+                                <div className=' flex items-center justify-center w-[150px]'>
                                     <div className=" relative top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
                                         {(item.price).toFixed(2) + '฿'}
                                     </div>
                                 </div>
                                 {cartItems.some(check => check.pid === item.pid) ?
-                                    <div className=' flex justify-center items-center'>
+                                    <div className=' flex justify-center items-center w-[220px]'>
                                         <div className=" cursor-pointer rounded-xl bg-yellow-400 w-[220px] flex text-[15px] flex-row items-center justify-center py-4 px-5 box-border gap-[16px] text-left text-gray-scale-white">
                                             <div className="relative leading-[100%] font-semibold">
                                                 สินค้าอยู่ในตะกล้าแล้ว
@@ -178,7 +178,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                         </div>
                                     </div>
                                     :
-                                    <div className=' flex justify-center items-center'>
+                                    <div className=' flex justify-center items-center w-[220px]'>
                                         <div onClick={() => {
                                             addTocart({
                                                 id: item.pid,
@@ -204,11 +204,11 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                         </div>
                                     </div>
                                 }
-                                <div className='flex justify-center items-center'>
+                                <div className='flex justify-center items-center w-[110px]'>
                                     <div onClick={() => {
                                         setConfirmOpen({ open: true, id: item.pid });
-                                    }} className="cursor-pointer relative w-[32px] h-[15px] hover:text-red-700 text-red-600">
-                                        <div className="h-[12px] top-0 left-[15px] [font-family:'Montserrat',Helvetica] font-normal  text-[12px] text-right whitespace-nowrap absolute tracking-[0] leading-[normal]">
+                                    }} className="cursor-pointer relative w-[35px] h-[20px] hover:text-red-700 text-red-600">
+                                        <div className="h-[12px] absolute top-[2px] left-[15px] [font-family:'Montserrat',Helvetica] font-normal text-[12px] text-right whitespace-nowrap tracking-[0] leading-[normal]">
                                             ลบ
                                         </div>
                                         <FontAwesomeIcon icon={faTrash} className="absolute w-[11px] h-[11px] top-[2px] left-0" />
