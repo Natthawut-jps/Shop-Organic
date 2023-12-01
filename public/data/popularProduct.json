@@ -66,7 +66,7 @@
             "price": 12,
             "categories": "vegetables",
             "rating": 4,
-            "imgURL": "/img/image13@2x.png",
+            "imgURL": "/img/image4@2x.png",
             "uid": 7,
             "shoppingHanding": 50
         },
@@ -76,7 +76,7 @@
             "price": 9,
             "categories": "FreshFruit",
             "rating": 4,
-            "imgURL": "/img/image14@2x.png",
+            "imgURL": "/img/image4@2x.png",
             "uid": 8,
             "shoppingHanding": 50
         },
@@ -216,7 +216,7 @@
             "price": 9.00,
             "categories": "FreshFruit",
             "rating": 4,
-            "imgURL": "/img/image14@2x.png",
+            "imgURL": "/img/image3@2x.png",
             "uid": 22,
             "shoppingHanding": 50
         },
@@ -242,11 +242,11 @@
         },
         {
             "id": 25,
-            "name": "Fresh Cauliflower",
+            "name": "Aresh Cauliflower",
             "price": 9.00,
             "categories": "FreshFruit",
             "rating": 4,
-            "imgURL": "/img/image14@2x.png",
+            "imgURL": "/img/image12@2x.png",
             "uid": 25,
             "shoppingHanding": 50
         },
@@ -276,7 +276,7 @@
             "price": 12.00,
             "categories": "vegetables",
             "rating": 4,
-            "imgURL": "/img/image13@2x.png",
+            "imgURL": "/img/image4@2x.png",
             "uid": 28,
             "shoppingHanding": 50
         },
@@ -286,7 +286,7 @@
             "price": 9,
             "categories": "Meat&Fish",
             "rating": 2,
-            "imgURL": "/img/image4@2x.png",
+            "imgURL": "/img/image2@2x.png",
             "uid": 29,
             "shoppingHanding": 50
         },
@@ -305,7 +305,7 @@
             "name": "Green Lettuce",
             "price": 9,
             "categories": "vegetables",
-            "rating": 4,
+            "rating": 3,
             "imgURL": "/img/image4@2x.png",
             "uid": 31,
             "shoppingHanding": 50
@@ -315,7 +315,7 @@
             "name": "Green Lettuce",
             "price": 9,
             "categories": "vegetables",
-            "rating": 4,
+            "rating": 3,
             "imgURL": "/img/image4@2x.png",
             "uid": 32,
             "shoppingHanding": 50
@@ -336,7 +336,7 @@
             "name": "Green Lettucee",
             "price": 9.00,
             "categories": "Meat&Fish",
-            "rating": 4,
+            "rating": 3,
             "imgURL": "/img/image4@2x.png",
             "uid": 34,
             "shoppingHanding": 50

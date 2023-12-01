@@ -6,7 +6,17 @@ import { Breadcrumbs } from "./unities/Breadcrumbs";
 import axios from "axios";
 import Rating from "@mui/material/Rating";
 import StarIcon from '@mui/icons-material/Star';
-import { Snackbar, Alert, FormControl, FormControlLabel, Radio, RadioGroup, Pagination } from "@mui/material";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Slider from "@mui/material/Slider";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Snackbar from "@mui/material/Snackbar";
+import FormControl from "@mui/material/FormControl";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Alert from "@mui/material/Alert";
+import Select from "@mui/material/Select";
+import { Pagination, SelectChangeEvent } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
 
 interface datatypesProduct {
@@ -25,6 +35,8 @@ interface datatypesProduct {
 
 export const Categories: FunctionComponent = () => {
   const navigate = useNavigate();
+  const [sortBy, setSortby] = useState<string>('');
+  const [sortRating, setSortRating] = useState<number | null>(0);
   const { categoriesParam, pageParam } = useParams<{ categoriesParam: string, pageParam: string }>();
   const state: { status: boolean } = useLocation().state;
   const [snackbar, setSnackbar] = useState<boolean>(false);
@@ -40,11 +52,63 @@ export const Categories: FunctionComponent = () => {
       await axios.get('/data/popularProduct.json').then((res) => {
         const product: datatypesProduct[] = res.data.PopularProduct.filter((item: datatypesProduct) => item.categories === categoriesParam);
         if (parseInt(pageParam!) <= Math.ceil(product.length / 20)) {
-          const itemOffset = ((parseInt(pageParam!) - 1) * 20) % product.length;
-          const endOffset = itemOffset + 20;
-          setProduct(product.slice(itemOffset, endOffset))
-          setPageCount(Math.ceil(product.length / 20));
-          setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories))
+          if (sortBy === 'sortmin') {
+            const sortByMin = product.sort((a, b) => a.name.localeCompare(b.name));
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByMin.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByMin.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByMin.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortBy === 'Latest') {
+            const sortByLstest = product.sort((a, b) => b.id - a.id);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByLstest.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByLstest.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByLstest.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortRating === 1) {
+            const sortByRaing1 = product.filter((item) => item.rating === 1);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByRaing1.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByRaing1.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByRaing1.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortRating === 2) {
+            const sortByRaing2 = product.filter((item) => item.rating === 2);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByRaing2.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByRaing2.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByRaing2.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortRating === 3) {
+            const sortByRaing3 = product.filter((item) => item.rating === 3);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByRaing3.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByRaing3.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByRaing3.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortRating === 4) {
+            const sortByRaing4 = product.filter((item) => item.rating === 4);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByRaing4.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByRaing4.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByRaing4.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else if (sortRating === 5) {
+            const sortByRaing5 = product.filter((item) => item.rating === 5);
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % sortByRaing5.length;
+            const endOffset = itemOffset + 20;
+            setProduct(sortByRaing5.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(sortByRaing5.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          } else {
+            const itemOffset = ((parseInt(pageParam!) - 1) * 20) % product.length;
+            const endOffset = itemOffset + 20;
+            setProduct(product.slice(itemOffset, endOffset));
+            setPageCount(Math.ceil(product.length / 20));
+            setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories));
+          }
+
         } else {
           navigate('/error')
         }
@@ -54,7 +118,12 @@ export const Categories: FunctionComponent = () => {
     if (state?.status) {
       window.scroll(0, 0)
     }
-  }, [categoriesParam, pageParam]);
+  }, [categoriesParam, pageParam, sortBy, sortRating]);
+  const handleChangeSortBy = (event: SelectChangeEvent) => {
+    setSortby(event.target.value);
+    setSortRating(0);
+  };
+  console.log(sortRating)
   return (
     <>
       {
@@ -70,17 +139,17 @@ export const Categories: FunctionComponent = () => {
                       <img
                         className="relative w-[252px] h-[202px] object-cover"
                         alt=""
-                        src="/img/image5@2x.png"
+                        src={item.imgURL}
                       />
                     </div>
                     <div className="absolute h-[0%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
                       <div className="flex flex-col items-start justify-start">
                         <div className="relative leading-[150%] inline-block w-[280px]">
-                          Chanise Cabbage
+                          {item.name}
                         </div>
                         <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
                           <div className="relative leading-[150%] font-medium">
-                            $14.99
+                            {`฿${item.price}`}
                           </div>
                           <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
                             $20.99
@@ -158,6 +227,8 @@ export const Categories: FunctionComponent = () => {
                       },
                     }}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                      setSortby('');
+                      setSortRating(0);
                       navigate(`/product/categories/${event.target.value}/1`);
                     }}
                   >
@@ -177,16 +248,18 @@ export const Categories: FunctionComponent = () => {
                   <div className="relative leading-[150%] font-medium">Price</div>
                   <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
-                <img
-                  className="relative w-[312px] h-[18px]"
-                  alt=""
-                  src="/img/slider.svg"
-                />
+                <Slider
+                  sx={{ width: 300 }}
+                  max={1000}
+                  valueLabelDisplay="auto"
+                  marks={[{ value: 0, label: '0' }, { value: 500, label: '500' }, { value: 1000, label: '1,000' }]}
+                >
+                </Slider>
                 <div className="relative text-sm leading-[150%] text-gray-scale-gray-700">
                   <span>Price:</span>
                   <span className="font-medium text-gray-scale-gray-900">
                     {" "}
-                    50 — 1,500
+                    0 — 5,000
                   </span>
                 </div>
               </div>
@@ -197,217 +270,41 @@ export const Categories: FunctionComponent = () => {
                   <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
                 </div>
                 <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-12.svg"
+                  <div className="flex flex-row items-center justify-start gap-5">
+                    <Rating
+                      name="select"
+                      sx={{
+                        fontSize: '30px'
+                      }}
+                      precision={1}
+                      value={sortRating}
+                      emptyIcon={<StarIcon fontSize="inherit" />}
+                      onChange={(event, newValue) => {
+                        setSortRating(newValue);
+                        setSortby('');
+                        { event }
+                      }}
                     />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <div className="relative leading-[150%]"> 5.0</div>
+                    <div className="relative leading-[150%]">{`5.0`}</div>
                   </div>
                 </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-10xs bg-branding-success" />
-                    <img
-                      className="absolute h-4/5 w-4/5 top-[10%] right-[10%] bottom-[10%] left-[10%] max-w-full overflow-hidden max-h-full"
-                      alt=""
-                      src="/img/check-1.svg"
-                    />
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-12.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <div className="relative leading-[150%]">{` 4.0 & up`}</div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-12.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <div className="relative leading-[150%]">{` 3.0 & up`}</div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-12.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-2.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <div className="relative leading-[150%]">{` 2.0 & up`}</div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center pt-2.5 px-0 pb-6 gap-[8px]">
-                  <div className="relative w-5 h-5">
-                    <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200" />
-                  </div>
-                  <div className="flex flex-row items-center justify-start">
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-12.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <img
-                      className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                      alt=""
-                      src="/img/star-52.svg"
-                    />
-                    <div className="relative leading-[150%]">{`  1.0 & up`}</div>
-                  </div>
-                </div>
+                <span className="font-medium text-gray-scale-gray-900 flex gap-3">
+                  <span>
+                    Rating:
+                    {" "}
+                  </span>
+                  <Rating
+                    size="small"
+                    value={5}
+                    emptyIcon={<StarIcon fontSize="inherit" />}
+                    readOnly />
+                </span>
               </div>
-              <div className="relative box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
-              <div className="flex flex-col items-start justify-center pt-0 px-0 pb-[26px]">
-                <div className="shadow-[0px_-1px_0px_#e5e5e5] w-[312px] flex flex-row items-center justify-between py-5 px-0 box-border">
-                  <div className="relative leading-[150%] font-medium">
-                    Popular Tag
-                  </div>
-                  <img className="relative w-3.5 h-2" alt="" src="/img/vector.svg" />
-                </div>
-                <div className="relative w-[294px] h-[197px] text-sm">
-                  <div className="absolute top-[0px] left-[0px] rounded-11xl bg-gray-scale-gray-50 flex flex-row items-start justify-start py-1.5 px-4">
-                    <div className="relative leading-[150%]">Healthy</div>
-                  </div>
-                  <div className="absolute top-[0px] left-[94px] rounded-11xl bg-branding-success flex flex-row items-start justify-start py-1.5 px-4 text-gray-scale-white">
-                    <div className="relative leading-[150%]">Low fat</div>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-[10px] flex flex-col items-center justify-start pt-0 px-0 pb-[180px] gap-[12px] bg-[url('/img/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
+              <div className="relative box-border w-[313px] mt-10" />
+              <div className="rounded-[10px] flex flex-col items-center justify-start pt-10 px-0 pb-[300px] gap-[12px] bg-[url('/img/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
                 <div className="flex flex-col items-center justify-center pt-5 px-0 pb-0 gap-[2px]">
                   <div className="relative inline-block w-[312px]">
-                    <span>
-                      <span className="leading-[120%] font-semibold">79%</span>
-                    </span>
-                    <span className="text-5xl leading-[150%] text-gray-scale-gray-900">
-                      <span>{` `}</span>
-                      <span>Discount</span>
-                    </span>
                   </div>
-                  <div className="relative text-base leading-[150%] text-gray-scale-gray-700 inline-block w-[312px]">
-                    on your first order
-                  </div>
-                </div>
-                <div className="rounded-24xl flex flex-row items-center justify-start gap-[12px] text-left text-base text-branding-success">
-                  <div className="relative leading-[120%] font-semibold">
-                    Shop Now
-                  </div>
-                  <img
-                    className="relative w-[16.5px] h-[13.55px]"
-                    alt=""
-                    src="/img/arrow.svg"
-                  />
                 </div>
               </div>
               <div className="flex flex-col items-start justify-center pt-5 px-0 pb-0 gap-[12px]">
@@ -580,18 +477,20 @@ export const Categories: FunctionComponent = () => {
                   src="/img/filter-24px.svg"
                 />
               </div>
-              <div className="absolute top-[2px] left-[376px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
+              <div className="relative top-[2px] left-[376px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
                 <div className="relative leading-[150%]">Sort by:</div>
-                <div className="rounded flex flex-row items-center justify-start py-2.5 px-4 text-gray-scale-gray-700 border-[1px] border-solid border-gray-scale-gray-100">
-                  <div className="relative leading-[150%] inline-block w-[120px] shrink-0">
-                    Latest
-                  </div>
-                  <img
-                    className="relative w-3.5 h-3.5 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/chevron-down2.svg"
-                  />
-                </div>
+
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-select-small-label">Sort by</InputLabel>
+                  <Select
+                    value={sortBy}
+                    onChange={handleChangeSortBy}
+                    label="Sort by"
+                  >
+                    <MenuItem value={'Latest'}>Latest</MenuItem>
+                    <MenuItem value={'sortmin'}>Sort a-z</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
               <div className="absolute top-[11px] left-[1320px] text-base text-gray-scale-gray-900">
                 <span>
