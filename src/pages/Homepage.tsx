@@ -247,7 +247,7 @@ export const Homepage: FunctionComponent = () => {
       </div>
       {/* Categories */}
       <div className="absolute top-[1028px] left-[130px] w-[1320px] h-[320px] text-center text-lg">
-        <Link to={'/product/FreshFruit'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/categories/FreshFruit/1'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -257,7 +257,7 @@ export const Homepage: FunctionComponent = () => {
             Fresh Fruit
           </div>
         </Link>
-        <Link to={'/product/vegetables'} state={{ status: true }} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
+        <Link to={'/product/categories/vegetables/1'} state={{ status: true }} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -267,7 +267,7 @@ export const Homepage: FunctionComponent = () => {
             Fresh Vegetables
           </div>
         </Link>
-        <Link to={'/product/Meat&Fish'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
+        <Link to={'/product/categories/Meat&Fish/1'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
           <img
             className="relative w-[190px] h-[130px] object-cover"
             alt=""
@@ -291,7 +291,7 @@ export const Homepage: FunctionComponent = () => {
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
           {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypesProduct) => (
             <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-              <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
+              <Link to={`/product/detail/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
                 <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
                   <img
                     className="relative w-[254px] h-[230px] object-cover"

@@ -7,7 +7,6 @@ import { NoPage } from "./unities/NoPage";
 import { Alert, Rating, Snackbar } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import axios from "axios";
 import { CartContextProviders } from "./unities/HandleCart";
 
 interface datatypes {

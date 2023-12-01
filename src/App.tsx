@@ -10,10 +10,14 @@ function App() {
     <div>
       <Routes>
         <Route index element={<Homepage />} />
-        <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUp />}/>
+        <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUp />} />
         <Route path="/product">
-          <Route path=":categoriesParam" element={<Categories />} />
-          <Route path=":categoriesP/:productList" element={<ProductsDetailsDescription />} />
+          <Route path="categories">
+            <Route path=":categoriesParam/:pageParam" element={<Categories />} />
+          </Route>
+          <Route path="detail">
+            <Route path=":categoriesP/:productList" element={<ProductsDetailsDescription />} />
+          </Route>
         </Route>
         <Route path="*" element={<NoPage />} />
       </Routes>

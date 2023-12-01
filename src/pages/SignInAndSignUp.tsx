@@ -8,7 +8,7 @@ export const SignInAndSignUp: FunctionComponent = () => {
   const { SignInAndSignUp } = useParams();
   return (
     <>
-      {SignInAndSignUp === 'Login' &&
+      {SignInAndSignUp === 'SignIn' &&
         <div className="relative bg-gray-scale-white w-full h-[1476px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
           <Header />
           <Breadcrumbs categoies={SignInAndSignUp} tltle={undefined} />

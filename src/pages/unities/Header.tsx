@@ -49,7 +49,7 @@ export const Header: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">
                         <div className="flex flex-row relative left-16 items-start justify-start gap-[4px] text-left">
-                            <Link to={'/Acount/Login'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
+                            <Link to={'/Acount/SignIn'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
                             <div className="relative leading-[130%]">/</div>
                             <Link to={'/Acount/SignUp'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</Link>
                         </div>
@@ -139,13 +139,13 @@ export const Header: FunctionComponent = () => {
                                 minHeight: null
                             }}
                         >
-                            <Link to={'/product/vegetables'} className=" no-underline text-black">
+                            <Link to={'/product/categories/vegetables/1'} className=" no-underline text-black">
                                 <MenuItem onClick={handleClose}> <img src="/img/vegetables-pumpkin-svgrepo-com.svg" width={25} height={25} alt="" />Vegetables</MenuItem>
                             </Link>
-                            <Link to={'/product/FreshFruit'} className=" no-underline text-black" >
+                            <Link to={'/product/categories/FreshFruit/1'} className=" no-underline text-black" >
                                 <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faApple} />Fresh Fruit</MenuItem>
                             </Link>
-                            <Link to={'/product/Meat&Fish'} className=" no-underline text-black"  >
+                            <Link to={'/product/categories/Meat&Fish/1'} className=" no-underline text-black"  >
                                 <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat & Fish</MenuItem>
                             </Link>
                         </Menu>

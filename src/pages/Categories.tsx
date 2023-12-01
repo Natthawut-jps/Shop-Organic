@@ -25,7 +25,7 @@ interface datatypesProduct {
 
 export const Categories: FunctionComponent = () => {
   const navigate = useNavigate();
-  const { categoriesParam } = useParams();
+  const { categoriesParam, pageParam } = useParams<{ categoriesParam: string, pageParam: string }>();
   const state: { status: boolean } = useLocation().state;
   const [snackbar, setSnackbar] = useState<boolean>(false);
   const [amoutcategories, setAmoutcategories] = useState<string[]>([]);
@@ -33,35 +33,28 @@ export const Categories: FunctionComponent = () => {
   const countCategories = allCategories.map(item => [item, amoutcategories.filter(el => el === item).length])
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
-  const [itemOffset, setItemOffset] = useState(0);
   const [pageCount, setPageCount] = useState<number>(0);
-  const [lenProduct, setLenproduct] = useState<number>(0);
-  const [page, setPage] = useState(1);
   // product
   useEffect(() => {
     const fetchs = async () => {
       await axios.get('/data/popularProduct.json').then((res) => {
         const product: datatypesProduct[] = res.data.PopularProduct.filter((item: datatypesProduct) => item.categories === categoriesParam);
-        const endOffset = itemOffset + 20;
-        setProduct(product.slice(itemOffset, endOffset))
-        setPageCount(Math.ceil(product.length / 20));
-        setLenproduct(product.length)
-        setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories))
+        if (parseInt(pageParam!) <= Math.ceil(product.length / 20)) {
+          const itemOffset = ((parseInt(pageParam!) - 1) * 20) % product.length;
+          const endOffset = itemOffset + 20;
+          setProduct(product.slice(itemOffset, endOffset))
+          setPageCount(Math.ceil(product.length / 20));
+          setAmoutcategories(res.data.PopularProduct.map((item: datatypesProduct) => item.categories))
+        } else {
+          navigate('/error')
+        }
       })
     }
     fetchs()
     if (state?.status) {
       window.scroll(0, 0)
     }
-  }, [categoriesParam, itemOffset]);
-  // handlePagination
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    const newOffset = ((value - 1) * 20) % lenProduct;
-    setItemOffset(newOffset)
-    setPage(value)
-    { event }
-  };
-  console.log(countCategories.map(item => item[1]))
+  }, [categoriesParam, pageParam]);
   return (
     <>
       {
@@ -72,7 +65,7 @@ export const Categories: FunctionComponent = () => {
             <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
               {ProductsItem.map((item: datatypesProduct) => (
                 <div key={item.id} className=" relative top-[69px] left-[0px] border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[262px] h-[307px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
-                  <Link key={item.id} to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
+                  <Link key={item.id} to={`/product/detail/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
                     <div className=" relative w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
                       <img
                         className="relative w-[252px] h-[202px] object-cover"
@@ -142,7 +135,10 @@ export const Categories: FunctionComponent = () => {
             <div className=" relative top-[130px] left-[800px] flex flex-row items-start justify-start gap-[12px] text-center">
               {/* paginate */}
               <div className="flex flex-row items-start justify-start">
-                <Pagination count={pageCount} variant="outlined" shape="rounded" page={page} boundaryCount={1} onChange={handleChange} sx={{ '& .Mui-selected': { bgcolor: 'rgba(22, 163, 5, 0.3)', border: 'solid 1px rgb(22,163,10)' } }} />
+                <Pagination count={pageCount} variant="outlined" shape="rounded" page={parseInt(pageParam!)} boundaryCount={1} onChange={(event: React.ChangeEvent<unknown>, value: number) => {
+                  navigate(`/product/categories/${categoriesParam}/${value}`);
+                  { event }
+                }} sx={{ '& .Mui-selected': { bgcolor: 'rgba(22, 163, 5, 0.3)', border: 'solid 1px rgb(22,163,10)' } }} />
               </div>
             </div>
             <div className="absolute top-[69px] left-[0px] flex flex-col items-start justify-start text-xl text-gray-scale-gray-900">
@@ -162,8 +158,7 @@ export const Categories: FunctionComponent = () => {
                       },
                     }}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                      navigate(`/product/${event.target.value}`);
-                      handleChange(event, 1)
+                      navigate(`/product/categories/${event.target.value}/1`);
                     }}
                   >
                     {countCategories.map((item, index) => (
