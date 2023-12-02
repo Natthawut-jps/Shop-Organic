@@ -15,8 +15,8 @@ export const Foorter = () => {
                     </div>
                     <div className="absolute h-[32.1%] w-[27.92%] top-[33.95%] right-[27.29%] bottom-[33.95%] left-[44.79%] text-base text-gray-scale-gray-500">
                         <form onSubmit={undefined}>
-                            <div className="absolute h-full w-[91.79%] top-[0%] right-[8.21%] bottom-[0%] left-[0%] rounded-27xl bg-gray-scale-white box-border flex flex-row items-start justify-start py-3.5 px-6 border-[1px] border-solid border-gray-scale-gray-100">
-                                <input onChange={undefined} type="email" className=" text-[#666666] text-[16px] focus:outline-none relative leading-[150%] inline-block w-[400px] shrink-0" placeholder="  Your email address" />
+                            <div className="absolute h-full w-[91.79%] top-[0%] right-[8.21%] bottom-[0%] left-[0%] rounded-27xl bg-gray-scale-white box-border flex flex-row items-start justify-start px-3 border-[1px] border-solid border-gray-scale-gray-100">
+                                <input onChange={undefined} type="email" className="rounded-full h-[47px] bg-transparent text-[#666666] text-[16px] focus:outline-none relative leading-[150%] inline-block w-[400px] shrink-0" placeholder="  Your email address" />
                             </div>
                             <button type="submit" className=" cursor-pointer absolute h-full w-[30.22%] top-[0%] right-[0%] bottom-[0%] left-[69.78%] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-4 px-10 box-border text-gray-scale-white">
                                 <div className="relative leading-[20px] font-semibold">

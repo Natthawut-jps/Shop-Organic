@@ -149,16 +149,16 @@ export const Header: FunctionComponent = () => {
                                 <MenuItem onClick={handleClose}><FontAwesomeIcon icon={faDrumstickBite} />Meat & Fish</MenuItem>
                             </Link>
                         </Menu>
-                        <div className=" py-[15px] pl-[40px] pr-[40px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
+                        <Link to={'/about'} className=" no-underline py-[15px] pl-[40px] pr-[40px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
                             <div className="relative leading-[150%] font-medium">
                                 About Us
                             </div>
-                        </div>
-                        <div className=" divide-y-2 divide-solid divide-white py-[15px] pl-[20px] pr-[20px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
+                        </Link>
+                        <Link to={'/contact'} className=" no-underline divide-y-2 divide-solid divide-white py-[15px] pl-[20px] pr-[20px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]">
                             <div className="relative leading-[150%] font-medium">
                                 Contact Us
                             </div>
-                        </div>
+                        </Link>
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[8px] text-gray-scale-white">
                         <img

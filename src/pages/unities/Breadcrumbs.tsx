@@ -39,6 +39,19 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                                 </div>
                             </NavLink>
                     }
+                    <NavLink to={`/about`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            {"About"}
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/contact`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            {"Contact"}
+                        </div>
+                    </NavLink>
+
                     {props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'SignIn' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'SignUp' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}

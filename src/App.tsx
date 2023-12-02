@@ -4,6 +4,8 @@ import { Categories } from "./pages/Categories"
 import { NoPage } from "./pages/unities/NoPage"
 import { ProductsDetailsDescription } from "./pages/ProductsDetailsDescription"
 import { SignInAndSignUp } from "./pages/SignInAndSignUp"
+import Contact from "./pages/Contact"
+import About from "./pages/About"
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path=":categoriesP/:productList" element={<ProductsDetailsDescription />} />
           </Route>
         </Route>
+        <Route path="/about" element={<About />}/>
+        <Route path="/contact" element={<Contact />}/>
         <Route path="*" element={<NoPage />} />
       </Routes>
     </div>
