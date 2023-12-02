@@ -3,16 +3,41 @@ import { Header } from "./unities/Header";
 import { Link, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Foorter } from "./unities/Foorter";
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import GoogleButton from 'react-google-button'
 
 export const SignInAndSignUp: FunctionComponent = () => {
   const { SignInAndSignUp } = useParams();
+  const LoginGoogle =
+    useGoogleLogin({
+      onSuccess: async tokenResponse => {
+        console.log(tokenResponse)
+        await axios({
+          method: 'get',
+          url: 'https://www.googleapis.com/oauth2/v3/userinfo',
+          headers: {
+            Authorization: `${tokenResponse.token_type + tokenResponse.access_token}`
+          }
+        }).then(async (data) => {
+          await axios({
+            method: "post",
+            url: "http://localhost/auth/google",
+            data: data.data
+          })
+        })
+      },
+      onError: err => console.log(err)
+    })
+
+
   return (
     <>
       {SignInAndSignUp === 'SignIn' &&
         <div className="relative bg-gray-scale-white w-full h-[1476px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
           <Header />
           <Breadcrumbs categoies={SignInAndSignUp} tltle={undefined} />
-          <div className="absolute top-[395px] left-[550px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px] border-[1px] border-solid border-gray-scale-gray-50">
+          <div className=" absolute top-[395px] left-[550px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px] border-[1px] border-solid border-gray-scale-gray-50">
             <div className="relative text-13xl leading-[120%] font-semibold">
               Sign In
             </div>
@@ -53,6 +78,14 @@ export const SignInAndSignUp: FunctionComponent = () => {
                 {" "}
                 &nbsp;Register
               </Link>
+            </div>
+            <div>
+              <div>
+                <GoogleButton
+                  type="light"
+                  onClick={() => LoginGoogle()}
+                />
+              </div>
             </div>
           </div>
           <Foorter />
