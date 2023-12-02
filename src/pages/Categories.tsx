@@ -123,7 +123,7 @@ export const Categories: FunctionComponent = () => {
     setSortby(event.target.value);
     setSortRating(0);
   };
-  console.log(sortRating)
+  
   return (
     <>
       {

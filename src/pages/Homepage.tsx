@@ -7,6 +7,7 @@ import Rating from "@mui/material/Rating/Rating";
 import StarIcon from '@mui/icons-material/Star';
 import { Alert, Snackbar } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
+// import { useCookies } from "react-cookie";
 
 interface datatypesProduct {
   id: number,
@@ -35,6 +36,10 @@ export const Homepage: FunctionComponent = () => {
   useEffect(() => {
     Product()
   }, []);
+  // const [cookies, setCookie] = useCookies<string>([]);
+  // const dateCookie = new Date();
+  // const expires = new Date(dateCookie.setMinutes(dateCookie.getMinutes() + 1))
+  // setCookie('_name', 'acsacas', { expires: expires, sameSite: true, secure: true})
 
   return (
 
