@@ -1,18 +1,25 @@
-import { Route, Routes } from "react-router-dom"
-import { Homepage } from "./pages/Homepage"
-import { Categories } from "./pages/Categories"
-import { NoPage } from "./pages/unities/NoPage"
-import { ProductsDetailsDescription } from "./pages/ProductsDetailsDescription"
-import { SignInAndSignUp } from "./pages/SignInAndSignUp"
-import Contact from "./pages/Contact"
-import About from "./pages/About"
+import { Route, Routes } from "react-router-dom";
+import { Homepage } from "./pages/Homepage";
+import { Categories } from "./pages/Categories";
+import { ProductsDetailsDescription } from "./pages/ProductsDetailsDescription";
+import { SignIn, SignUp } from "./pages/SignInAndSignUp";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import { Settings } from "./pages/Settings";
+import { ProtectRoute } from "./pages/unities/ProtectRoute";
+import ErrorPage from "./pages/ErrorPage";
+import OrderHistory from "./pages/OrderHistory";
+import UserDashboard from "./pages/UserDashboard";
+import OrderDetails from "./pages/OrderDetails";
+import { Address } from "./pages/Address";
 
 function App() {
   return (
-    <div>
+    <>
       <Routes>
         <Route index element={<Homepage />} />
-        <Route path="/Acount/:SignInAndSignUp" element={<SignInAndSignUp />} />
+        <Route path="/SignIn" element={<SignIn />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/product">
           <Route path="categories">
             <Route path=":categoriesParam/:pageParam" element={<Categories />} />
@@ -21,11 +28,18 @@ function App() {
             <Route path=":categoriesP/:productList" element={<ProductsDetailsDescription />} />
           </Route>
         </Route>
-        <Route path="/about" element={<About />}/>
-        <Route path="/contact" element={<Contact />}/>
-        <Route path="*" element={<NoPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route element={<ProtectRoute Allow={false} />}>
+          <Route path="/Account/Dashboard" element={<UserDashboard />} />
+          <Route path="/Account/Orders" element={<OrderHistory />} />
+          <Route path="/Account/Orders/:Detail" element={<OrderDetails />} />
+          <Route path="/Account/Address" element={<Address />} />
+          <Route path="/Account/Settings" element={<Settings />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-    </div>
+    </>
   )
 };
 

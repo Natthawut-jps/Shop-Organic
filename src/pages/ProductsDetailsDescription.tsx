@@ -1,13 +1,14 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
-import { Outlet, useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { NoPage } from "./unities/NoPage";
 import { Alert, Rating, Snackbar } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { CartContextProviders } from "./unities/HandleCart";
+import ErrorPage from "./ErrorPage";
+import axios from "axios";
 
 interface datatypes {
   product: {
@@ -23,25 +24,48 @@ interface datatypes {
     updatedAt: string,
   }
   status: string,
-}
+};
+interface datatypesProduct {
+  id: number,
+  name: string,
+  price: number,
+  categories: string,
+  rating: number,
+  imgURL: string,
+  uid: number,
+  shoppingHanding: number,
+  createdAt: string,
+  updatedAt: boolean,
+};
+
 export const ProductsDetailsDescription: FunctionComponent = () => {
-  const { cartItems, favoriteItem, addFavorite, removeCartItem, addTocart, removeFavoriteItem} = CartContextProviders();
-  const [snackbar, setSnackbar] = useState<boolean>(false);
   const { categoriesP, productList } = useParams();
+  const [productDetail, setProductDetail] = useState<datatypesProduct[]>([]);
+  const { cartItems, favoriteItem, addFavorite, removeCartItem, addTocart, removeFavoriteItem } = CartContextProviders();
+  const [snackbar, setSnackbar] = useState<boolean>(false);
   const state: datatypes = useLocation().state;
 
   useEffect(() => {
-    if (state.status) {
-      window.scroll(0, 0);
+    const Product = async () => {
+      const { PopularProduct }: { PopularProduct: datatypesProduct[] } = (await axios.get('/data/popularProduct.json')).data
+      setProductDetail(PopularProduct.filter(item => item.name.replace(/\s/g, '') === productList))
+    };
+    Product()
+    if (state?.status) {
+      window.scroll(0, 0)
     }
-  }, [])
+  }, [productList]);
+
+  if (productList !== productDetail.map(item => item.name.replace(/\s/g, ''))[0]) {
+    return <ErrorPage />
+  };
   return (
     <>
-      {productList === state.product.name ?
+      {productList === productDetail.map(item => item.name.replace(/\s/g, ''))[0] &&
         <div className="relative bg-gray-scale-white w-full h-[2595px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* header template */}
           <Header />
-          <Breadcrumbs categoies={categoriesP} tltle={productList} />
+          <Breadcrumbs categoies={categoriesP} tltle={productList} Detail={undefined} />
           <div className="absolute top-[1509px] left-[88px] w-[1320px] h-[477px] text-gray-scale-gray-700">
             <div className="absolute top-[70px] left-[0px] flex flex-row items-start justify-start gap-[24px]">
               <div className="relative rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
@@ -290,7 +314,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                 <img
                   className="absolute top-[0px] left-[92px] w-[556px] h-[556px] object-cover"
                   alt=""
-                  src={state.product.imgURL}
+                  src={productDetail.map(item => item.imgURL)[0]}
                 />
                 <div className="absolute top-[80px] left-[0px] flex flex-col items-start justify-start gap-[12px]">
                   <div className="relative w-20 h-[90px]">
@@ -338,7 +362,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="flex flex-col items-start justify-start gap-[12px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
                       <div className="relative leading-[120%] font-semibold">
-                        {state.product.name}
+                        {productDetail.map(item => item.name)[0]}
                       </div>
                       <div className="rounded bg-limegreen-100 flex flex-row items-center justify-center py-1 px-2 text-sm text-branding-success-dark">
                         <div className="relative leading-[150%]">In Stock</div>
@@ -392,7 +416,7 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                         $48.00
                       </div>
                       <div className="relative text-5xl leading-[150%] font-medium text-branding-success-dark">
-                        {`฿${state.product.price}`}
+                        {`฿${productDetail.map(item => item.price)[0]}`}
                       </div>
                     </div>
                     <div className="rounded-[30px] bg-tomato flex flex-row items-start justify-start py-[3px] px-2.5 text-sm text-branding-error">
@@ -448,8 +472,8 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
-                  {cartItems.some(check => check.pid === state.product.id) ?
-                    <div onClick={() => removeCartItem(state.product.id)} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                  {cartItems.some(check => check.pid === productDetail.map(item => item.id)[0]) ?
+                    <div onClick={() => removeCartItem(productDetail.map(item => item.id)[0])} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                       <div className="relative leading-[120%] font-semibold">
                         Remove
                       </div>
@@ -662,11 +686,8 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
           </div>
           {/* foorter template */}
           <Foorter />
-          <Outlet />
-        </div>
-        :
-        <NoPage />
 
+        </div>
       }
 
     </>

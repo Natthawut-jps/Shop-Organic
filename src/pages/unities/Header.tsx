@@ -49,9 +49,9 @@ export const Header: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">
                         <div className="flex flex-row relative left-16 items-start justify-start gap-[4px] text-left">
-                            <Link to={'/Acount/SignIn'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
+                            <Link to={'/SignIn'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
                             <div className="relative leading-[130%]">/</div>
-                            <Link to={'/Acount/SignUp'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</Link>
+                            <Link to={'/SignUp'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</Link>
                         </div>
                     </div>
                 </div>

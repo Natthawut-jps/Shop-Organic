@@ -62,18 +62,18 @@ export const Search: FunctionComponent<open> = (props) => {
                 <div className="box-border relative top-3 right-3 ">
                     <FontAwesomeIcon icon={faXmark} size="lg" className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right " onClick={() => props.Search.setOpenSearch(false)} />
                 </div>
-                <div className=" w-full relative top-0 flex flex-row items-center space-x-2 container mx-auto p-4 box-border">
+                <div className=" relative top-0 flex flex-row items-center space-x-2 container mx-auto p-4 box-border">
                     <FontAwesomeIcon icon={faSistrix} color="black" className=" opacity-30 box-border relative top-0 " />
                     <div className=" flex-1">
                         <input type="text" placeholder="Search..." className=" w-full h-10 focus:outline-none text-[#6d6b6ba2]" onChange={Valuesearch} />
                         <div className=' relative top-[-5px] border-solid border-b border-t-0 border-[#666666]/30' />
                     </div>
                 </div>
-                <div className=" grid grid-flow-row container mx-auto p-4 pl-8 box-border space-y-3 w-[500px] h-[400px]">
+                <div className=" grid grid-flow-row mx-auto p-4 pl-8 box-border space-y-0 w-[500px] h-[400px] overflow-auto">
                     {input.length >= 3 ?
                         list.map((item: datatypes) => (
                             <div key={item.id}>
-                                <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className=" flex items-center gap-10 no-underline text-black hover:text-[#06e102] hover:bg-[#666666]/10">
+                                <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className=" flex items-center gap-10 no-underline text-black hover:text-[#06e102] hover:bg-[#666666]/10">
                                     <div>
                                         <img src={item.imgURL} alt="" width={70} height={70} />
                                     </div>

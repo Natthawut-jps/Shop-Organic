@@ -129,12 +129,12 @@ export const Categories: FunctionComponent = () => {
       {
         <div className="relative bg-gray-scale-white w-full h-[2750px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
           <Header />
-          <Breadcrumbs categoies={categoriesParam} tltle={undefined} />
+          <Breadcrumbs categoies={categoriesParam} tltle={undefined} Detail={undefined} />
           <div className=" relative top-[347px] left-[60px] w-[1520px] text-sm text-gray-scale-gray-700">
             <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
               {ProductsItem.map((item: datatypesProduct) => (
                 <div key={item.id} className=" relative top-[69px] left-[0px] border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border w-[262px] h-[307px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark">
-                  <Link key={item.id} to={`/product/detail/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
+                  <Link key={item.id} to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className="hover:text-branding-success-dark text-black">
                     <div className=" relative w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
                       <img
                         className="relative w-[252px] h-[202px] object-cover"

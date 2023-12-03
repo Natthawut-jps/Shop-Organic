@@ -7,7 +7,7 @@ const About: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[4318px] overflow-hidden text-left text-lg text-gray-scale-gray-900 font-body-large-body-large-400">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} />
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} />
       <div className="absolute top-[3596px] left-[0px] flex flex-row items-center justify-around py-20 px-0 box-border container mx-auto p-4">
         <img className="relative w-[81.58px] h-8" alt="" src="/img/vector.svg" />
         <div className="relative box-border h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />

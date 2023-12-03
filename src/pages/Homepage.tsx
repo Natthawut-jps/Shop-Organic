@@ -29,7 +29,7 @@ export const Homepage: FunctionComponent = () => {
 
   // productItem
   async function Product() {
-    const { data } = await axios.get('/data/popularProduct.json')
+    const { data } =  (await axios.get('/data/popularProduct.json'))
     setPopularProduct(data.PopularProduct)
   };
 
@@ -296,7 +296,7 @@ export const Homepage: FunctionComponent = () => {
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
           {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypesProduct) => (
             <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-              <Link to={`/product/detail/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className="text-gray-100 hover:text-branding-success-dark">
+              <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: true }} className="text-gray-100 hover:text-branding-success-dark">
                 <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
                   <img
                     className="relative w-[254px] h-[230px] object-cover"
