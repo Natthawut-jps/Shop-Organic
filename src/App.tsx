@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { Homepage } from "./pages/Homepage";
-import { Categories } from "./pages/Categories";
-import { ProductsDetailsDescription } from "./pages/ProductsDetailsDescription";
+import Categories from "./pages/Categories";
+import ProductsDetailsDescription from "./pages/ProductsDetailsDescription";
 import { SignIn, SignUp } from "./pages/SignInAndSignUp";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
@@ -37,7 +37,7 @@ function App() {
           <Route path="/Account/Address" element={<Address />} />
           <Route path="/Account/Settings" element={<Settings />} />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        <Route path="*" element={ <ErrorPage /> } />
       </Routes>
     </>
   )

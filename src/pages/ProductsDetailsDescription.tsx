@@ -7,7 +7,6 @@ import { Alert, Rating, Snackbar } from "@mui/material";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { CartContextProviders } from "./unities/HandleCart";
-import ErrorPage from "./ErrorPage";
 import axios from "axios";
 
 interface datatypes {
@@ -38,7 +37,7 @@ interface datatypesProduct {
   updatedAt: boolean,
 };
 
-export const ProductsDetailsDescription: FunctionComponent = () => {
+const ProductsDetailsDescription: FunctionComponent = () => {
   const { categoriesP, productList } = useParams();
   const [productDetail, setProductDetail] = useState<datatypesProduct[]>([]);
   const { cartItems, favoriteItem, addFavorite, removeCartItem, addTocart, removeFavoriteItem } = CartContextProviders();
@@ -48,7 +47,8 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
   useEffect(() => {
     const Product = async () => {
       const { PopularProduct }: { PopularProduct: datatypesProduct[] } = (await axios.get('/data/popularProduct.json')).data
-      setProductDetail(PopularProduct.filter(item => item.name.replace(/\s/g, '') === productList))
+      setProductDetail(PopularProduct.filter(item => item.name.replace(/\s/g, '') === productList));
+
     };
     Product()
     if (state?.status) {
@@ -56,9 +56,6 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
     }
   }, [productList]);
 
-  if (productList !== productDetail.map(item => item.name.replace(/\s/g, ''))[0]) {
-    return <ErrorPage />
-  };
   return (
     <>
       {productList === productDetail.map(item => item.name.replace(/\s/g, ''))[0] &&
@@ -689,8 +686,8 @@ export const ProductsDetailsDescription: FunctionComponent = () => {
 
         </div>
       }
-
     </>
   )
 };
 
+export default ProductsDetailsDescription;

@@ -33,7 +33,7 @@ interface datatypesProduct {
   updatedAt: string,
 };
 
-export const Categories: FunctionComponent = () => {
+const Categories: FunctionComponent = () => {
   const navigate = useNavigate();
   const [sortBy, setSortby] = useState<string>('');
   const [sortRating, setSortRating] = useState<number | null>(0);
@@ -510,3 +510,5 @@ export const Categories: FunctionComponent = () => {
     </>
   );
 };
+
+export default Categories;
