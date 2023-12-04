@@ -8,7 +8,7 @@ const UserDashboard: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[1663px] overflow-hidden text-left text-base text-gray-scale-gray-900 font-caps-lock-small-caps-lock">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined}/>
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined}/>
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[536px] h-[278px] text-center text-xl">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[536px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
@@ -32,7 +32,7 @@ const UserDashboard: FunctionComponent = () => {
       <div className="absolute top-[347px] left-[950px] w-[424px] h-[278px] text-gray-scale-gray-400">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[424px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
         <div className="absolute top-[32px] left-[32px] text-sm tracking-[0.03em] leading-[100%] uppercase font-medium">
-          Billing Address
+            Current Address
         </div>
         <div className="absolute top-[64px] left-[32px] w-[264px] h-[139px] text-gray-scale-gray-900">
           <div className="absolute top-[0px] left-[0px] text-lg leading-[150%] font-medium">

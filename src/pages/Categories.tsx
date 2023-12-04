@@ -129,7 +129,7 @@ const Categories: FunctionComponent = () => {
       {
         <div className="relative bg-gray-scale-white w-full h-[2750px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
           <Header />
-          <Breadcrumbs categoies={categoriesParam} tltle={undefined} Detail={undefined} />
+          <Breadcrumbs categoies={categoriesParam} tltle={undefined} Detail={undefined} EditAndadd={undefined} />
           <div className=" relative top-[347px] left-[60px] w-[1520px] text-sm text-gray-scale-gray-700">
             <div className=" grid grid-cols-4 gap-y-2 relative ml-[370px] box-border">
               {ProductsItem.map((item: datatypesProduct) => (

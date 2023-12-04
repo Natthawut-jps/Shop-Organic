@@ -7,7 +7,7 @@ const Contact: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[1912px] overflow-hidden text-left text-base text-gray-scale-gray-900 font-body-small-body-small-400">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined}/>
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined}/>
       <div className="absolute top-[395px] left-[486px] w-[984px] h-[507px]">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] w-[984px] h-[507px]" />
         <div className="absolute cursor-pointer top-[406px] left-[50px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-4 px-10 text-gray-scale-white">

@@ -62,7 +62,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
         <div className="relative bg-gray-scale-white w-full h-[2595px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* header template */}
           <Header />
-          <Breadcrumbs categoies={categoriesP} tltle={productList} Detail={undefined} />
+          <Breadcrumbs categoies={categoriesP} tltle={productList} Detail={undefined} EditAndadd={undefined} />
           <div className="absolute top-[1509px] left-[88px] w-[1320px] h-[477px] text-gray-scale-gray-700">
             <div className="absolute top-[70px] left-[0px] flex flex-row items-start justify-start gap-[24px]">
               <div className="relative rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">

@@ -11,7 +11,7 @@ export const SignUp: FunctionComponent = () => {
     <>
       <div className="relative bg-gray-scale-white w-full h-[1637px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
         <Header />
-        <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} />
+        <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined}/>
         <div className="absolute top-[395px] left-[300px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] flex flex-col items-center justify-center pt-6 px-6 pb-8 gap-[20px] border-[1px] border-solid border-gray-scale-gray-50">
           <div className="relative text-13xl leading-[120%] font-semibold">
             Create Account
@@ -113,7 +113,7 @@ export const SignIn: FunctionComponent = () => {
     <>
       <div className="relative bg-gray-scale-white w-full h-[1476px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
         <Header />
-        <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} />
+        <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined}/>
         <div className=" absolute top-[395px] left-[550px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px] border-[1px] border-solid border-gray-scale-gray-50">
           <div className="relative text-13xl leading-[120%] font-semibold">
             Sign In

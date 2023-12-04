@@ -12,6 +12,7 @@ import OrderHistory from "./pages/OrderHistory";
 import UserDashboard from "./pages/UserDashboard";
 import OrderDetails from "./pages/OrderDetails";
 import { Address } from "./pages/Address";
+import { Edit_Add_Address } from "./pages/Edit_Add_Address";
 
 function App() {
   return (
@@ -30,11 +31,12 @@ function App() {
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route element={<ProtectRoute Allow={false} />}>
+        <Route element={<ProtectRoute Allow={true} />}>
           <Route path="/Account/Dashboard" element={<UserDashboard />} />
           <Route path="/Account/Orders" element={<OrderHistory />} />
           <Route path="/Account/Orders/:Detail" element={<OrderDetails />} />
           <Route path="/Account/Address" element={<Address />} />
+          <Route path="/Account/Address/:EditAndadd" element={<Edit_Add_Address />} />
           <Route path="/Account/Settings" element={<Settings />} />
         </Route>
         <Route path="*" element={ <ErrorPage /> } />

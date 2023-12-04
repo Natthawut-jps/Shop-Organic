@@ -8,7 +8,7 @@ export const Settings: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[2420px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined}/>
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined} />
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[984px] h-[533px]">
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[535px] border-[1px] border-solid border-gray-scale-gray-100" />
@@ -163,7 +163,7 @@ export const Settings: FunctionComponent = () => {
         </div>
         <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
           <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-            Billing Address
+              Current Address
           </div>
         </div>
       </div>

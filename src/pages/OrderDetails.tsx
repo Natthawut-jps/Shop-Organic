@@ -3,7 +3,7 @@ import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { NavAccount } from "./unities/NavAccount";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Step, StepLabel, Stepper } from "@mui/material";
 
 const OrderDetails: FunctionComponent = () => {
@@ -13,7 +13,7 @@ const OrderDetails: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[1850px] overflow-hidden text-left text-base text-gray-scale-gray-400 font-caps-lock-medium-caps-lock">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={Detail} />
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={Detail} EditAndadd={undefined} />
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[984px] h-[825px] text-sm">
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[877px] border-[1px] border-solid border-gray-scale-gray-100" />
@@ -134,52 +134,24 @@ const OrderDetails: FunctionComponent = () => {
           </div>
         </div>
         <div className="absolute top-[86px] left-[24px] w-[624px] h-[280px]">
-          <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[624px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100" />
-          <div className="absolute top-[18px] left-[0px] w-[312px] h-[242px]">
-            <div className="absolute top-[78px] left-[20px] leading-[150%] text-gray-scale-gray-600 inline-block w-[282px]">
-              4140 Parker Rd. Allentown, New Mexico 31134
+          <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[620px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
+          <div className=" absolute top-[18px] left-[0px] box-border pl-[20px] w-[640px] h-[245px] overflow-auto">
+            <div className=" relative break-words top-[78px] left-[0px] leading-[150%] text-gray-scale-gray-600 inline-block w-[590px]">
+              4140 Parker Rd. Allentown, 31134
             </div>
-            <div className="absolute top-[156px] left-[20px] flex flex-col items-start justify-start gap-[4px] text-xs">
+            <div className=" relative top-[100px] left-[0px] flex flex-col items-start justify-start gap-[4px] text-xs">
               <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
                 Email
               </div>
-              <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[282px]">
+              <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[590px]">
                 dainne.ressell@gmail.com
               </div>
             </div>
-            <div className="absolute top-[205px] left-[20px] flex flex-col items-start justify-start gap-[4px] text-xs">
+            <div className=" relative top-[120px] left-[0px] flex flex-col items-start justify-start gap-[4px] text-xs">
               <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
                 Phone
               </div>
-              <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[282px]">
-                (671) 555-0110
-              </div>
-            </div>
-            <div className="absolute top-[46px] left-[20px] text-base leading-[150%] text-gray-scale-gray-900">
-              Dainne Russell
-            </div>
-            <div className="absolute top-[0px] left-[20px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Billing Address
-            </div>
-            <div className="absolute top-[31.5px] left-[-0.5px] box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
-          </div>
-          <div className="absolute top-[18px] left-[312px] w-[312px] h-[242px]">
-            <div className="absolute top-[78px] left-[20px] leading-[150%] text-gray-scale-gray-600 inline-block w-[282px]">
-              4140 Parker Rd. Allentown, New Mexico 31134
-            </div>
-            <div className="absolute top-[156px] left-[20px] flex flex-col items-start justify-start gap-[4px] text-xs">
-              <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Email
-              </div>
-              <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[282px]">
-                dainne.ressell@gmail.com
-              </div>
-            </div>
-            <div className="absolute top-[205px] left-[20px] flex flex-col items-start justify-start gap-[4px] text-xs">
-              <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Phone
-              </div>
-              <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[282px]">
+              <div className="relative text-sm break-words leading-[150%] text-gray-scale-gray-900 inline-block w-[590px]">
                 (671) 555-0110
               </div>
             </div>
@@ -189,13 +161,12 @@ const OrderDetails: FunctionComponent = () => {
             <div className="absolute top-[0px] left-[20px] tracking-[0.03em] leading-[100%] uppercase font-medium">
               Shipping Address
             </div>
-            <div className="absolute top-[31.5px] left-[-0.5px] box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+            <Link to={'/Account/Address/Edit'} className="absolute cursor-pointer p-[2px] text-[16px] hover:text-[#06e102]/70 text-[#06e102] top-[0px] left-[530px] tracking-[0.03em] leading-[100%] font-medium">
+              Edit
+            </Link>
+            <div className="absolute top-[31.5px] left-[0px] box-border w-[620px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
           </div>
-          <img
-            className="absolute top-[0px] left-[311.5px] w-px h-[280px]"
-            alt=""
-            src="/img/line-31.svg"
-          />
+          
         </div>
         <div className="absolute top-[0px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[509px] text-gray-scale-gray-700">
           <div className="flex flex-row items-center justify-start gap-[8px]">

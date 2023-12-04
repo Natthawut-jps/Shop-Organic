@@ -8,6 +8,7 @@ interface Prop {
     tltle: string | undefined
     categoies: string | undefined
     Detail: string | undefined
+    EditAndadd: string | undefined
 }
 export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
     const { pageParam } = useParams();
@@ -93,6 +94,18 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             {"Account"}
                         </div>
                     </NavLink>
+                    <NavLink to={`/Account/Address/Edit`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
+                        : " hidden"} end >
+                        <div className="relative leading-[150%]">
+                            {"Account"}
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/Account/Address/Add`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
+                        : " hidden"} end >
+                        <div className="relative leading-[150%]">
+                            {"Account"}
+                        </div>
+                    </NavLink>
                     <NavLink to={`/Account/Settings`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
@@ -131,13 +144,6 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             {"Order History"}
                         </div>
                     </NavLink>
-                    <NavLink to={`/Account/Orders/Detail`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
-                        : " no-underline text-gray-scale-gray-400 hidden"} end >
-                        <div className="relative leading-[150%]">
-                            <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Detail"}
-                        </div>
-                    </NavLink>
                     {props.Detail === 'Detail' &&
                         <Link to={'/Account/Orders'} className="no-underline text-gray-scale-gray-400" >
                             <div className="relative leading-[150%]">
@@ -146,11 +152,48 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             </div>
                         </Link>
                     }
+                    <NavLink to={`/Account/Orders/Detail`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
+                            {"Detail"}
+                        </div>
+                    </NavLink>
                     <NavLink to={`/Account/Address`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
                             {"Address"}
+                        </div>
+                    </NavLink>
+                    {props.EditAndadd === 'Edit' &&
+                        <Link to={`/Account/Address`} className=" no-underline text-gray-scale-gray-400" >
+                            <div className="relative leading-[150%]">
+                                <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
+                                {"Address"}
+                            </div>
+                        </Link>
+                    }
+                    {props.EditAndadd === 'Add' &&
+                        <Link to={`/Account/Address`} className=" no-underline text-gray-scale-gray-400" >
+                            <div className="relative leading-[150%]">
+                                <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
+                                {"Address"}
+                            </div>
+                        </Link>
+                    }
+                    <NavLink to={`/Account/Address/Edit`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
+                            {"Edit"}
+                        </div>
+                    </NavLink>
+                    <NavLink to={`/Account/Address/Add`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
+                            {"Add"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Settings`} className={({ isActive }) => isActive ? " no-underline text-branding-success"

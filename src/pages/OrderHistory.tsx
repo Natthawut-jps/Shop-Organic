@@ -10,7 +10,7 @@ const OrderHistory: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[1699px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} />
+      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined} />
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[984px] h-[742px]">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[742px] border-[1px] border-solid border-gray-scale-gray-100" />
@@ -47,9 +47,9 @@ const OrderHistory: FunctionComponent = () => {
             />
           </div>
         </div>
-        <div className="absolute top-[110px] left-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
+        <div className=" relative top-[110px] pl-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
           {arr.map((item) => (
-            <div className="relative w-[936px] h-[45px]">
+            <div className="relative w-[956px] h-[45px] odd:bg-white even:bg-slate-50">
               <div className="absolute top-[12px] left-[0px] flex flex-row items-start justify-start">
                 <div className="relative leading-[150%]">#</div>
                 <div className="relative leading-[150%]">3933</div>
