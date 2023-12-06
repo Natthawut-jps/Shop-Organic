@@ -6,6 +6,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export const Address = () => {
     const arr = [1, 2, 3, 4]
+    console.log(arr)
     return (
         <>
             <div className="relative bg-gray-scale-white w-full h-full pb-[400px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
@@ -51,7 +52,7 @@ export const Address = () => {
                                             </button>
                                             :
                                             <div>
-                                                <button onClick={() => ''} className="absolute hover:text-black/90 active:bg-black/10 bg-transparent top-[0px] cursor-pointer p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/50 rounded-sm text-black">
+                                                <button onClick={() => arr.push(1)} className="absolute hover:text-black/90 active:bg-black/10 bg-transparent top-[0px] cursor-pointer p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/50 rounded-sm text-black">
                                                     ตั้งเป็นค่าเริ่มต้น
                                                 </button>
                                                 <div className="absolute cursor-pointer p-[2px] hover:text-red-400 text-red-600 top-[0px] left-[370px] tracking-[0.03em] leading-[100%] font-medium">

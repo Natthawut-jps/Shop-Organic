@@ -29,7 +29,7 @@ export const Homepage: FunctionComponent = () => {
 
   // productItem
   async function Product() {
-    const { data } =  (await axios.get('/data/popularProduct.json'))
+    const { data } = (await axios.get('/data/popularProduct.json'))
     setPopularProduct(data.PopularProduct)
   };
 
@@ -374,7 +374,7 @@ export const Homepage: FunctionComponent = () => {
           Latest News
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
-          {popularProduct.slice(-3).map((item: datatypesProduct) => (
+          {popularProduct.slice(0, 3).map((item: datatypesProduct) => (
             <div key={item.id} className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start">
               <div className="relative w-[424px] h-[324px]">
                 <img
@@ -426,7 +426,7 @@ export const Homepage: FunctionComponent = () => {
                     {item.name}
                   </div>
                 </div>
-                <Link to={`/product/${item.categories}/${item.name}`} state={{ product: item, status: 'toTop' }} className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success">
+                <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success">
                   <div className="relative leading-[120%] font-semibold">
                     Read More
                   </div>
