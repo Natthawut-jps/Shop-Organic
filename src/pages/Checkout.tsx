@@ -1,0 +1,146 @@
+import { FunctionComponent } from "react";
+import { Foorter } from "./unities/Foorter";
+import { Header } from "./unities/Header";
+import { Breadcrumbs } from "./unities/Breadcrumbs";
+import { Link } from "react-router-dom";
+
+const Checkout: FunctionComponent = () => {
+  return (
+    <div className="bg-[url(/img/thumb-1920-1318790.png)] from-slate-600 to-slate-100 relative  w-full h-[1600px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
+      <Header />
+      <Breadcrumbs categoies={undefined} tltle={undefined} EditAndadd={undefined} Detail={undefined} />
+      <div className=" absolute top-[320px] w-[1200px] rounded-lg left-[200px] h-[700px] bg-gray-scale-white shadow drop-shadow" />
+      <div className="absolute top-[390px] left-[850px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[24px] border-[1px] border-solid border-gray-scale-gray-100">
+        <div className="flex flex-col items-start justify-start gap-[12px]">
+          <div className="relative text-xl leading-[150%] font-medium">
+            Order Summery
+          </div>
+          <div className="flex flex-col items-start justify-start">
+            <div className="w-[376px] flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center justify-start gap-[6px]">
+                <img
+                  className="relative w-[60px] h-[60px] object-cover"
+                  alt=""
+                  src="/img/image2@2x.png"
+                />
+                <div className="relative leading-[150%]">Green Capsicum</div>
+                <div className="relative leading-[150%]">x5</div>
+              </div>
+              <div className="relative leading-[150%] font-medium">฿70.00</div>
+            </div>
+            <div className="w-[376px] flex flex-row items-center justify-between">
+              <div className="flex flex-row items-center justify-start gap-[6px]">
+                <img
+                  className="relative w-[60px] h-[60px] object-cover"
+                  alt=""
+                  src="/img/image1@2x.png"
+                />
+                <div className="relative leading-[150%]">Red Capsicum</div>
+                <div className="relative leading-[150%]">x1</div>
+              </div>
+              <div className="relative leading-[150%] font-medium">฿14.00</div>
+            </div>
+          </div>
+          <div className="flex flex-col items-start justify-start gap-[1px] text-gray-scale-gray-700">
+            <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between py-3 px-0 box-border">
+              <div className="relative leading-[150%]">Subtotal:</div>
+              <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
+                ฿84.00
+              </div>
+            </div>
+            <div className="relative box-border w-[377px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+            <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between py-3 px-0 box-border">
+              <div className="relative leading-[150%]">Shipping:</div>
+              <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
+                ฿50.00
+              </div>
+            </div>
+            <div className="relative box-border w-[377px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+            <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between pt-3 px-0 pb-0 box-border text-base">
+              <div className="relative leading-[150%]">Total:</div>
+              <div className="relative text-[18px] leading-[120%] font-semibold text-gray-scale-gray-900">
+                ฿134.00
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative w-[173px] h-[100px] text-xl">
+          <div className="absolute top-[0px] left-[0px] leading-[150%] font-medium">
+            Payment Method
+          </div>
+          <div className="absolute top-[46px] left-[0px] flex flex-col items-start justify-start gap-[10px] text-sm text-gray-scale-gray-700">
+            <div className="flex flex-row items-center justify-start gap-[6px]">
+              <div className="relative w-5 h-5">
+                <div className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-13xl bg-gray-scale-white box-border border-[1.5px] border-solid border-branding-success" />
+                <div className="absolute h-3/5 w-3/5 top-[20%] right-[20%] bottom-[20%] left-[20%] rounded-13xl bg-branding-success" />
+              </div>
+              <div className="relative leading-[150%]">Propmpay QR Code</div>
+            </div>
+          </div>
+        </div>
+        <Link to={'/shop/checkout/bill'} reloadDocument className=" cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white">
+          <div className="relative leading-[120%] font-semibold">
+            Place Order
+          </div>
+        </Link>
+      </div>
+      <div className="absolute top-[340px] left-[370px] w-[460px] flex flex-col items-start justify-start gap-[32px]">
+        <div className="relative w-[872px] h-[350px]">
+          <div className=" relative top-[50px] left-[0px] w-[450px] h-[280px]">
+            <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
+            <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
+              <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
+                4140 Parker Rd. Allentown, 31134
+              </div>
+              <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
+                <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
+                  Email
+                </div>
+                <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
+                  dainne.ressell@gmail.com
+                </div>
+              </div>
+              <div className=" relative top-[120px] pl-[20px] box-border flex flex-col items-start justify-start gap-[4px] text-xs">
+                <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
+                  Phone
+                </div>
+                <div className="relative text-sm break-words leading-[150%] text-gray-scale-gray-900 inline-block w-[420px]">
+                  (671) 555-0110
+                </div>
+              </div>
+              <div className="absolute top-[46px] pl-[20px] box-border text-base leading-[150%] text-gray-scale-gray-900 w-[450px]">
+                Dainne Russell
+              </div>
+              <Link to={''} className="absolute hover:text-[#0280e1]/70 top-[0px] cursor-pointer p-[2px] text-[#0280e1] left-[20px] tracking-[0.03em] leading-[100%] font-medium">
+                เปลี่ยนที่จัดส่ง
+              </Link>
+              <div className="absolute top-[31.5px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+            </div>
+          </div>
+          <div className="absolute top-[0px] left-[0px] text-5xl leading-[150%] font-medium">
+            Billing Information
+          </div>
+        </div>
+        <div className="relative top-[0px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+        <div className="flex flex-col items-start justify-start gap-[20px] text-5xl relative top-[0px] left-[0px]">
+          <div className="relative leading-[150%] font-medium">
+            Additional Info
+          </div>
+          <div className="flex flex-col items-start justify-start gap-[8px] text-sm">
+            <div className="relative leading-[150%]">
+              Order Notes (Optional)
+            </div>
+            <div className="relative rounded-md bg-gray-scale-white box-border w-[450px] h-[100px] text-base text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100">
+              <div className="absolute top-[0px] left-[5px] leading-[130%]">
+                <textarea placeholder="Notes about your order, e.g. special notes for delivery" className=" text-[#666666] box-border p-2 focus:outline-none resize-none w-[438px] rounded-lg h-[93px]"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Foorter />
+    </div>
+  );
+};
+
+export default Checkout;

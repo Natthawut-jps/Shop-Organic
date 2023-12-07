@@ -12,6 +12,8 @@ import UserDashboard from "./pages/UserDashboard";
 import OrderDetails from "./pages/OrderDetails";
 import { Address } from "./pages/Address";
 import { Edit_Add_Address } from "./pages/Edit_Add_Address";
+import Checkout from "./pages/Checkout";
+import Checkout_Bill from "./pages/checkout-billing";
 
 function App() {
   return (
@@ -35,8 +37,10 @@ function App() {
           <Route path="/Account/Address" element={<Address />} />
           <Route path="/Account/Address/:EditAndadd" element={<Edit_Add_Address />} />
           <Route path="/Account/Settings" element={<Settings />} />
+          <Route path="/shop/checkout" element={<Checkout />} />
+          <Route path="/shop/checkout/bill" element={<Checkout_Bill />} />
         </Route>
-        <Route path="*" element={ <ErrorPage /> } />
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>
   )

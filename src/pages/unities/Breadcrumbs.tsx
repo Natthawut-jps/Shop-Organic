@@ -100,7 +100,12 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             {"Account"}
                         </div>
                     </NavLink>
-
+                    <NavLink to={`/shop/checkout`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                        : " no-underline text-gray-scale-gray-400 hidden"} end >
+                        <div className="relative leading-[150%]">
+                            {"Checkout"}
+                        </div>
+                    </NavLink>
                     {props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'SignIn' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
                     {props.categoies === 'SignUp' && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
