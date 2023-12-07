@@ -9,6 +9,8 @@ import { Search } from "./Search";
 import { Cart } from "./Cart";
 import { Favorite } from "./Favorite";
 import { CartContextProviders } from "./HandleCart";
+import { SignUp } from "../SignUp";
+import { SignIn } from "../SignIn";
 
 export const Header: FunctionComponent = () => {
     const { cartItems, favoriteItem } = CartContextProviders();
@@ -17,6 +19,8 @@ export const Header: FunctionComponent = () => {
     const [openCart, setOpenCart] = useState<boolean>(false);
     const [openSearch, setOpenSearch] = useState<boolean>(false);
     const [openFavorite, setOpenFavorite] = useState<boolean>(false);
+    const [openSignUp, setOpenSignUp] = useState<boolean>(false);
+    const [openSignIn, setOpenSignIn] = useState<boolean>(false);
     const quantity = cartItems.map((item) => item.quantity);
     const price = cartItems.map(item => item.price * item.quantity);
     const priceSum = price.reduce((accumulator, currentValue) => {
@@ -39,6 +43,8 @@ export const Header: FunctionComponent = () => {
             <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
             <Cart Carts={{ openCart, setOpenCart }} />
             <Search Search={{ openSearch, setOpenSearch }} />
+            <SignUp SignUp={{ openSignUp, setOpenSignUp }} />
+            <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
             <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
@@ -49,9 +55,9 @@ export const Header: FunctionComponent = () => {
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[20px] text-center">
                         <div className="flex flex-row relative left-16 items-start justify-start gap-[4px] text-left">
-                            <Link to={'/SignIn'} className="relative leading-[130%] hover:text-green-400 text-black">Sign In</Link>
+                            <div onClick={() => setOpenSignIn(true)} className="relative cursor-pointer leading-[130%] hover:text-green-400 text-black">Sign In</div>
                             <div className="relative leading-[130%]">/</div>
-                            <Link to={'/SignUp'} className="relative leading-[130%] hover:text-green-400 text-black">Sign Up</Link>
+                            <div onClick={() => setOpenSignUp(true)} className="relative cursor-pointer leading-[130%] hover:text-green-400 text-black">Sign Up</div>
                         </div>
                     </div>
                 </div>

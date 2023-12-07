@@ -52,18 +52,6 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             {"Contact"}
                         </div>
                     </NavLink>
-                    <NavLink to={`/SignIn`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
-                        : " no-underline text-gray-scale-gray-400 hidden"} end >
-                        <div className="relative leading-[150%]">
-                            {"SignIn"}
-                        </div>
-                    </NavLink>
-                    <NavLink to={`/SignUp`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
-                        : " no-underline text-gray-scale-gray-400 hidden"} end >
-                        <div className="relative leading-[150%]">
-                            {"SignUp"}
-                        </div>
-                    </NavLink>
                     <NavLink to={`/Account`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">

@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import { Homepage } from "./pages/Homepage";
 import Categories from "./pages/Categories";
 import ProductsDetailsDescription from "./pages/ProductsDetailsDescription";
-import { SignIn, SignUp } from "./pages/SignInAndSignUp";
 import Contact from "./pages/Contact";
 import About from "./pages/About";
 import { Settings } from "./pages/Settings";
@@ -19,8 +18,6 @@ function App() {
     <>
       <Routes>
         <Route index element={<Homepage />} />
-        <Route path="/SignIn" element={<SignIn />} />
-        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/product">
           <Route path="categories">
             <Route path=":categoriesParam/:pageParam" element={<Categories />} />
