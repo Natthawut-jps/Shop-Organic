@@ -9,7 +9,7 @@ import { Step, StepLabel, Stepper } from "@mui/material";
 const OrderDetails: FunctionComponent = () => {
   const { Detail } = useParams();
   const stepLabel = ['Order received', 'Processing', 'On the way', 'Delivered']
-  const test = ['Processing', 'On the way', 'Delivered', 'Delivered', 'On the way',]
+  const test = ['Processing', 'On the way', 'Delivered', 'Delivered', 'Delivered', 'Delivered']
   return (
     <div className="relative bg-gray-scale-white w-full h-[1850px] overflow-hidden text-left text-base text-gray-scale-gray-400 font-caps-lock-medium-caps-lock">
       <Header />
@@ -34,24 +34,26 @@ const OrderDetails: FunctionComponent = () => {
               Subtotal
             </div>
           </div>
-          <div className=" grid grid-cols-1 gap-y-6">
+          <div className=" grid grid-cols-1 justify-items-center items-center">
             {test.map((item) => (
-              <div className=" relative top-[20px] left-[20px] w-[812px] h-[70px]">
+              <div className=" relative top-[20px] pl-[20px] box-border w-full h-[60px] odd:bg-white even:bg-slate-50">
                 <img
-                  className="absolute h-full w-[8.62%] top-[0%] right-[91.38%] bottom-[0%] left-[0%] max-w-full max-h-full object-cover"
+                  className="absolute object-cover"
                   alt=""
                   src="/img/image2@2x.png"
+                  width={70}
+                  height={50}
                 />
                 <div className="absolute w-[28.82%] top-[35.71%] left-[10.1%] leading-[150%] inline-block">
                   {item}
                 </div>
-                <div className="absolute top-[35.71%] left-[72.57%] leading-[150%]">
+                <div className="absolute top-[35.71%] left-[63.57%] leading-[150%]">
                   x5
                 </div>
-                <div className="absolute top-[calc(50%_-_10px)] left-[404px] leading-[150%]">
+                <div className="absolute top-[calc(50%_-_10px)] left-[420px] leading-[150%]">
                   $14.00
                 </div>
-                <div className="absolute top-[calc(50%_-_10px)] left-[765.5px] leading-[150%] font-medium">
+                <div className="absolute top-[calc(50%_-_10px)] left-[795.5px] leading-[150%] font-medium">
                   $70.00
                 </div>
               </div>
@@ -166,7 +168,7 @@ const OrderDetails: FunctionComponent = () => {
             </Link>
             <div className="absolute top-[31.5px] left-[0px] box-border w-[620px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
           </div>
-          
+
         </div>
         <div className="absolute top-[0px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[509px] text-gray-scale-gray-700">
           <div className="flex flex-row items-center justify-start gap-[8px]">
@@ -178,9 +180,9 @@ const OrderDetails: FunctionComponent = () => {
             <div className="relative leading-[150%]">•</div>
             <div className="relative leading-[150%]">3 Products</div>
           </div>
-          <div className="relative text-base leading-[150%] font-medium text-branding-success">
+          <Link to={'/Account/Orders'} className=" no-underline hover:text-branding-success/80 relative text-base leading-[150%] font-medium text-branding-success">
             Back to List
-          </div>
+          </Link>
         </div>
       </div>
       <Foorter />

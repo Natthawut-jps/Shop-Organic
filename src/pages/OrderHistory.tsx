@@ -1,12 +1,25 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { NavAccount } from "./unities/NavAccount";
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Link } from "react-router-dom";
+import { Pagination } from "@mui/material";
 
 const OrderHistory: FunctionComponent = () => {
-  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const [page, setPage] = useState<number>(1);
+  const [order, setOrder] = useState<number[]>([]);
+  const [pageCount, setPageCount] = useState<number>(1);
+  const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 1, 2, 3, 4, 5, 6, 7];
+
+  useEffect(() => {
+    const sortByLstest = arr.sort((a, b) => b - a);
+    const itemOffset = ((page - 1) * 10) % sortByLstest.length;
+    const endOffset = itemOffset + 10;
+    setOrder(sortByLstest.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(sortByLstest.length / 10));
+  }, [page, pageCount]);
+
   return (
     <div className="relative bg-gray-scale-white w-full h-[1699px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
       <Header />
@@ -14,41 +27,19 @@ const OrderHistory: FunctionComponent = () => {
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[984px] h-[742px]">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[742px] border-[1px] border-solid border-gray-scale-gray-100" />
-        <div className="absolute top-[674px] left-[408px] flex flex-row items-start justify-start gap-[12px] text-center">
-          <div className="rounded-481xl bg-gray-scale-gray-50 flex flex-row items-start justify-start p-2">
-            <img
-              className="relative w-5 h-5 overflow-hidden shrink-0"
-              alt=""
-              src="/img/chevron-down.svg"
-            />
-          </div>
-          <div className="flex flex-row items-start justify-start">
-            <div className="rounded-111xl bg-branding-success flex flex-col items-start justify-start p-2 text-gray-scale-white">
-              <div className="relative leading-[150%] font-medium flex items-center justify-center w-5 h-5 shrink-0">
-                1
-              </div>
+        <div className="absolute top-[644px] left-[400px] flex flex-row items-start justify-start gap-[12px] text-center">
+          <div className=" flex items-start justify-start">
+            <div className="rounded-111xl flex flex-col items-start justify-start p-2 text-gray-scale-white">
+              <Pagination variant="outlined" onChange={(event: React.ChangeEvent<unknown>, page: number) => {
+                console.log(page)
+                setPage(page);
+                { event }
+              }} count={pageCount} page={page} sx={{ '& .MuiPaginationItem-root.Mui-selected': { bgcolor: 'rgb(0 178 7/1)' } }} />
             </div>
-            <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-              <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                2
-              </div>
-            </div>
-            <div className="rounded-111xl bg-gray-scale-white flex flex-col items-start justify-start p-2">
-              <div className="relative leading-[150%] flex items-center justify-center w-5 h-5 shrink-0">
-                3
-              </div>
-            </div>
-          </div>
-          <div className="rounded-481xl bg-gray-scale-white flex flex-row items-start justify-start p-2 [transform:_rotate(180deg)] [transform-origin:0_0] border-[1px] border-solid border-gray-scale-gray-100">
-            <img
-              className="relative w-5 h-5 overflow-hidden shrink-0"
-              alt=""
-              src="/img/chevron-down1.svg"
-            />
           </div>
         </div>
         <div className=" relative top-[110px] pl-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
-          {arr.map((item) => (
+          {order.map((item) => (
             <div className="relative w-[956px] h-[45px] odd:bg-white even:bg-slate-50">
               <div className="absolute top-[12px] left-[0px] flex flex-row items-start justify-start">
                 <div className="relative leading-[150%]">#</div>
@@ -69,7 +60,6 @@ const OrderHistory: FunctionComponent = () => {
               </Link>
             </div>
           ))
-
           }
         </div>
         <div className="absolute top-[62px] left-[0px] w-[984px] h-9 text-xs text-gray-scale-gray-700">
