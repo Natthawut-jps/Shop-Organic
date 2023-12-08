@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Checkout: FunctionComponent = () => {
   return (
-    <div className="bg-[url(/img/thumb-1920-1318790.png)] from-slate-600 to-slate-100 relative  w-full h-[1600px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
+    <div className="bg-[url(/img/thumb-1920-1318790.png)] relative  w-full h-[1600px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
       <Header />
       <Breadcrumbs categoies={undefined} tltle={undefined} EditAndadd={undefined} Detail={undefined} />
       <div className=" absolute top-[320px] w-[1200px] rounded-lg left-[200px] h-[700px] bg-gray-scale-white shadow drop-shadow" />

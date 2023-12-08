@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import NotoSansThai from '.Fonts//Noto_Sans_Thai/static/NotoSansThai-Regular.ttf';
+import NotoSansThai from './Fonts//Noto_Sans_Thai/static/NotoSansThai-Regular.ttf';
 import { Document, Page, View, Text, StyleSheet, Font } from "@react-pdf/renderer";
 const Pdf: FunctionComponent = () => {
     Font.register({ family: 'NotoSansThai', src: NotoSansThai, fontWeight: 'normal', fontStyle: 'normal', })
@@ -47,3 +47,8 @@ export default Pdf;
 {/* <PDFDownloadLink document={<Pdf/>} fileName="example.pdf">
     Dowload_Pdf
 </PDFDownloadLink> */}
+
+// Viewer
+{/* <PDFViewer showToolbar={false} className=" absolute h-full w-full"  >
+    <Pdf />
+</PDFViewer> */}
