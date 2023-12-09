@@ -69,18 +69,18 @@ export const Search: FunctionComponent<open> = (props) => {
                         <div className=' relative top-[-5px] border-solid border-b border-t-0 border-[#666666]/30' />
                     </div>
                 </div>
-                <div className=" grid grid-flow-row mx-auto p-4 pl-8 box-border space-y-0 w-[500px] h-[400px] overflow-auto">
+                <div className=" grid grid-flow-row mx-auto p-4 pl-8 box-border space-y-0 w-[500px] h-[400px] overflow-auto sm:w-[320px]">
                     {input.length >= 3 ?
                         list.map((item: datatypes) => (
                             <div key={item.id}>
                                 <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className=" flex items-center gap-10 no-underline text-black hover:text-[#06e102] hover:bg-[#666666]/10">
                                     <div>
-                                        <img src={item.imgURL} alt="" width={70} height={70} />
+                                        <img src={item.imgURL} alt="" width={70} height={70} className=' sm:w-[50px] sm:h-[50px]' />
                                     </div>
-                                    <div className=' break-words'>
+                                    <div className=' break-words sm:relative sm:left-[20px]'>
                                         {item.name}
                                     </div>
-                                    <div className=' text-[#06e102] font-semibold'>
+                                    <div className=' text-[#06e102] font-semibold sm:relative left-[50px] sm:hidden'>
                                         {`฿${item.price}`}
                                     </div>
                                 </Link>
