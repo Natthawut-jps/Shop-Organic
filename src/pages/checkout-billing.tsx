@@ -1,4 +1,4 @@
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent} from "react";
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Link } from "react-router-dom";

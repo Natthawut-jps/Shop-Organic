@@ -19,10 +19,12 @@ export const Settings: FunctionComponent = () => {
   // select
   const [provincesData, setProvincesData] = useState<string>();
   const [amphureData, setAmphureData] = useState<string>();
+  const [tambonData, setTambonData] = useState<string>();
   const [zipCodeData, setZipCodeData] = useState<number>();
-  const [province, setProvince] = useState([]);
-  const [ampher, setAmpher] = useState([]);
-  const [zipCode, setZipCode] = useState([]);
+  const [province, setProvince] = useState<any[]>([]);
+  const [ampher, setAmpher] = useState<any[]>([]);
+  const [tambon, setTambon] = useState<any[]>([]);
+  const [zipCode, setZipCode] = useState<any[]>([]);
   useEffect(() => {
     const providce = async () => {
       await axios({
@@ -37,24 +39,30 @@ export const Settings: FunctionComponent = () => {
     }
     providce()
   }, []);
-  const handleProvince = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const provinces: string = e.target.value;
-    setAmpher(province.filter((item: any) => item.name_th === provinces.split('-')[0].trim())
-      .map((item: any) => item.amphure)[0]);
-    setProvincesData(provinces);
-  }
-  const handleAmphure = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const Amphures: string = e.target.value;
-    setZipCode(ampher.filter((item: any) => item.name_th === Amphures.split('-')[0].trim())
-      .map((item: any) => item.tambon)[0])
-    setAmphureData(Amphures);
-  }
-  useEffect(() => {
-    zipCode.slice(0, 1).map((item: any) => {
-      setZipCodeData(item.zip_code)
-    });
-  }, [zipCode])
 
+  useEffect(() => {
+    setAmpher(province.filter((item: any) => item.name_th === provincesData?.split('-')[0].trim())
+      .flatMap((item: any) => item.amphure));
+    setAmphureData(undefined);
+  }, [provincesData]);
+  useEffect(() => {
+    setTambon(ampher.filter((item: any) => item.name_th === amphureData?.split('-')[0].trim())
+      .flatMap((item: any) => item.tambon));
+    setTambonData(undefined);
+  }, [amphureData]);
+  useEffect(() => {
+    setZipCode(tambon.filter((item: any) => item.name_th === tambonData?.split('-')[0].trim()));
+  }, [tambonData]);
+  useEffect(() => {
+    if (tambonData === undefined) {
+      setZipCodeData(undefined);
+    } else {
+      zipCode.map((item: any) => {
+        setZipCodeData(item.zip_code)
+      });
+    }
+  }, [zipCode]);
+  // password
   const passwordCurrent = () => {
     const elCurrent: Element | null = document.querySelector('#CurrentPassword');
     if (elCurrent) {
@@ -309,9 +317,15 @@ export const Settings: FunctionComponent = () => {
           <div className="relative leading-[150%]">Country / Region</div>
           <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
             {editAddress ?
-              <div className="relative left-[5px] leading-[130%] inline-block w-[244px] shrink-0">
-                <select form="addressCurrent" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleProvince(e)} className="focus:outline-none cursor-pointer rounded-lg w-[230px] h-[45px]" required>
-                  <option selected hidden disabled value={''}>จังหวัด</option>
+              <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
+                <select form="add" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                  setProvincesData(e.target.value);
+                  const elamphure: HTMLSelectElement = document.getElementById('amphure') as HTMLSelectElement;
+                  elamphure.selectedIndex = 0;
+                  const eltambon: HTMLSelectElement = document.getElementById('tambon') as HTMLSelectElement;
+                  eltambon.selectedIndex = 0;
+                }} className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]" required>
+                  <option hidden selected disabled value={''}>จังหวัด</option>
                   {province.length > 0 && province.map((item: any, index) => (
                     <option key={index} value={`${item.name_th}-${item.name_en}`}>{`${item.name_th} - ${item.name_en}`}</option>
                   ))
@@ -319,44 +333,88 @@ export const Settings: FunctionComponent = () => {
                 </select>
               </div>
               :
-              <div className="relative left-[0px] leading-[130%] inline-block w-[244px] shrink-0">
-                <input type="text" placeholder="จังหวัด" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[240px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
+              <div className="relative left-[0px] leading-[130%] inline-block w-[202px] shrink-0">
+                <input type="text" placeholder="จังหวัด" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[200px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
               </div>
             }
           </div>
 
         </div>
-        <div className="absolute top-[272px] left-[658px] flex flex-col items-start justify-start gap-[6px]">
+        <div className="absolute top-[272px] left-[778px] flex flex-col items-start justify-start gap-[6px]">
           <div className="relative leading-[150%]">Zip Code</div>
           <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-            {zipCodeData ?
-              <div className="relative leading-[130%] inline-block w-[270px] shrink-0">
-                <select form="addressCurrent" className="focus:outline-none cursor-pointer rounded-lg w-[260px] h-[45px]" required>
-                  <option selected value={zipCodeData}>{zipCodeData}</option>
-                </select>
+            {editAddress ?
+              <div className="relative leading-[130%] inline-block w-[170px] shrink-0">
+                {zipCode.length > 0 ? zipCode.map((item: any, index: number) => (
+                  <select key={index} form="add" className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]" required>
+                    <option value={item.zip_code}>{item.zip_code}</option>
+                  </select>
+                ))
+                  :
+                  <select disabled className=" hover:cursor-not-allowed focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]">
+                    <option>{'zip codes'}</option>
+                  </select>
+                }
               </div>
               :
-              <div className="relative leading-[130%] inline-block w-[270px] shrink-0">
-                <input type="text" placeholder="zip code" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[270px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
+              <div className="relative leading-[130%] inline-block w-[172px] shrink-0">
+                <input type="text" placeholder="zip code" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[170px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
               </div>
             }
           </div>
         </div>
-        <div className="absolute top-[272px] left-[341px] flex flex-col items-start justify-start gap-[6px]">
-          <div className="relative leading-[150%]">States</div>
-          <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-            {ampher.length > 0 ?
-              <div className="relative leading-[130%] inline-block w-[244px] shrink-0">
-                <select form="addressCurrent" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleAmphure(e)} className="focus:outline-none cursor-pointer rounded-lg w-[230px] h-[45px]" required>
-                  <option selected hidden disabled value={''}>อำเภอ</option>
-                  {ampher.length > 0 && ampher.map((item: any, index: number) => (
-                    <option key={index} value={`${item.name_th}-${item.name_en}`}>{`${item.name_th} - ${item.name_en}`}</option>
-                  ))}
-                </select>
+        <div className="absolute top-[272px] left-[541px] flex flex-col items-start justify-start gap-[6px]">
+          <div className="relative leading-[150%]">Tambon</div>
+          <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
+            {editAddress ?
+              <div className="relative leading-[130%] inline-block w-[170px] shrink-0">
+                {tambon.length > 0 ?
+                  <select form="add" id="tambon" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    setTambonData(e.target.value);
+                  }} className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]" required>
+                    <option hidden selected disabled value={''}>ตำบล</option>
+                    {tambon.length > 0 && tambon.map((item: any, index: number) => (
+                      <option key={index} value={`${item.name_th}-${item.name_en}`}>{`${item.name_th} - ${item.name_en}`}</option>
+                    ))}
+                  </select>
+                  :
+                  <select disabled className=" hover:cursor-not-allowed focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]">
+                    <option hidden selected disabled>ตำบล</option>
+                  </select>
+                }
               </div>
               :
-              <div className="relative leading-[130%] inline-block w-[244px] shrink-0">
-                <input type="text" placeholder="อำเภอ" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[244px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
+              <div className="relative leading-[130%] inline-block w-[172px] shrink-0">
+                <input type="text" placeholder="ตำบล" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[170px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
+              </div>
+            }
+          </div>
+        </div>
+        <div className="absolute top-[272px] left-[280px] flex flex-col items-start justify-start gap-[6px]">
+          <div className="relative leading-[150%]">States</div>
+          <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
+            {editAddress ?
+              <div className="relative leading-[130%] inline-block w-[200px] shrink-0">
+                {ampher.length > 0 ?
+                  <select form="add" id="amphure" onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+                    setAmphureData(e.target.value);
+                    const el: HTMLSelectElement = document.getElementById('tambon') as HTMLSelectElement;
+                    el.selectedIndex = 0;
+                  }} className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]" required>
+                    <option hidden selected disabled value={''}>อำเภอ</option>
+                    {ampher.length > 0 && ampher.map((item: any, index: number) => (
+                      <option key={index} value={`${item.name_th}-${item.name_en}`}>{`${item.name_th} - ${item.name_en}`}</option>
+                    ))}
+                  </select>
+                  :
+                  <select disabled className=" hover:cursor-not-allowed focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]">
+                    <option hidden selected disabled>อำเภอ</option>
+                  </select>
+                }
+              </div>
+              :
+              <div className="relative leading-[130%] inline-block w-[202px] shrink-0">
+                <input type="text" placeholder="อำเภอ" className="focus:outline-none cursor-pointer placeholder:pl-[5px] rounded-lg w-[200px] h-[45px] disabled:cursor-not-allowed text-gray-scale-gray-600" disabled />
               </div>
             }
           </div>
