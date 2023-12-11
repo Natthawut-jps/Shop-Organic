@@ -43,50 +43,16 @@ export const Homepage: FunctionComponent = () => {
       {/* header template */}
       <Header />
       {/* Sale up to */}
-      <div className="absolute top-[218px] left-[50px] w-[1980px] h-[600px] overflow-hidden text-gray-scale-white">
-        <a href="#" className=" text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] h-[600px] bg-[url('/img/bannar-big@3x.png')] bg-cover bg-no-repeat bg-[top] text-29xl">
-          <div className="absolute top-[155px] left-[60px] flex flex-col items-start justify-start gap-[28px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[596px]">
-              <p className="m-0">{`Fresh & Healthy`}</p>
-              <p className="m-0">Organic Food</p>
-            </div>
-            <div className="flex flex-row items-start justify-start gap-[12px] text-xl">
-              <div className="relative bg-branding-success-bright w-0.5 h-[65px]" />
-              <div className="flex flex-col items-start justify-start gap-[8px]">
-                <div className="flex flex-row items-center justify-start gap-[8px]">
-                  <div className="relative leading-[150%] font-medium">
-                    Sale up to
-                  </div>
-                  <div className="rounded-8xs bg-branding-warning flex flex-row items-start justify-start py-1 px-3">
-                    <div className="relative leading-[150%] font-semibold">
-                      30% OFF
-                    </div>
-                  </div>
-                </div>
-                <div className="relative text-sm leading-[150%] opacity-[0.8]">
-                  Free shipping on all your order.
-                </div>
-              </div>
-            </div>
-            <div className="relative rounded-34xl bg-gray-scale-white w-[191px] h-[51px] text-base text-branding-success">
-              <div className="absolute top-[16px] left-[40px] leading-[120%] font-semibold">
-                Shop now
-              </div>
-              <img
-                className="absolute h-[26.57%] w-[8.64%] top-[36.72%] right-[20.55%] bottom-[36.72%] left-[70.81%] max-w-full overflow-hidden max-h-full"
-                alt=""
-                src="/img/group5.svg"
-              />
-            </div>
-          </div>
+      <div className="absolute top-[218px] sm:top-0 left-[50px] sm:left-0 w-[1980px] sm:w-full h-[600px] sm:h-[1000px] overflow-hidden text-gray-scale-white">
+        <a href="#" className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center">
         </a>
-        <a href="#" className="absolute top-[0px] left-[900px] w-[600px] h-72 text-gray-100">
+        <a href="#" className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100">
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""
             src="/img/bg@2x.png"
           />
-          <div className="absolute top-[32px] left-[32px] flex flex-col items-start justify-start gap-[24px]">
+          <div className="absolute top-[32px] left-[32px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
             <div className="flex flex-col items-start justify-start gap-[12px]">
               <div className="flex flex-col items-start justify-start gap-[8px]">
                 <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
@@ -110,7 +76,7 @@ export const Homepage: FunctionComponent = () => {
             </div>
           </div>
         </a>
-        <a href="#" className=" text-white absolute top-[312px] left-[900px] w-[600px] h-72 text-center">
+        <a href="#" className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""

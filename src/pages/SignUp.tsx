@@ -53,7 +53,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                 maxWidth={'md'}
                 onClose={() => props.SignUp.setOpenSignUp(false)}
                 open={props.SignUp.openSignUp}
-                TransitionComponent={Transition}
+                // TransitionComponent={Transition}
             >
                 <DialogContent className="relative bg-gray-scale-white text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
                     <div className=" relative top-[0px] left-[0px] rounded-lg bg-gray-scale-white flex flex-col items-center justify-center pt-6 pb-8 gap-[20px]">

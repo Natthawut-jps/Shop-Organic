@@ -2,8 +2,9 @@ import { faApple, faSistrix } from "@fortawesome/free-brands-svg-icons"
 import { faAngleDown, faBars, faDrumstickBite, faShoppingCart } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Badge, Drawer, Menu, MenuItem } from "@mui/material";
+import { Badge, Collapse, Drawer, List, ListItemButton, Menu, MenuItem } from "@mui/material";
 import { FunctionComponent, useState } from "react";
+import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Search } from "./Search";
 import { Cart } from "./Cart";
@@ -14,6 +15,7 @@ import { SignIn } from "../SignIn";
 
 export const Header: FunctionComponent = () => {
     const [openBars, setOpenBar] = useState<boolean>(false);
+    const [openCollape, setOpenCollape] = useState<boolean>(true)
     const { cartItems, favoriteItem } = CartContextProviders();
     const [Categries, setCategries] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -46,7 +48,7 @@ export const Header: FunctionComponent = () => {
             <Search Search={{ openSearch, setOpenSearch }} />
             <SignUp SignUp={{ openSignUp, setOpenSignUp }} />
             <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
-            <div className=" absolute top-[0px] left-[-180px] bg-gray-scale-white h-[195px] flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
+            <div className=" absolute top-[0px] left-[-180px] sm:z-50 bg-gray-scale-white h-[195px] sm:h-fit flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
                 <div className="bg-gray-scale-white sm:hidden shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start sm:pl-0 py-3 px-[300px] gap-[759px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
                         <img className="relative w-4 h-[19px]" alt="" src="/img/map-pin.svg" />
@@ -110,7 +112,10 @@ export const Header: FunctionComponent = () => {
                         className=" hidden sm:block"
                         sx={{
                             '& .MuiDrawer-paper': {
-                                width: '70%'
+                                width: '70%',
+                                bgcolor: '#666666',
+                                color: 'white',
+
                             },
                         }}
                         anchor={"left"}
@@ -118,7 +123,31 @@ export const Header: FunctionComponent = () => {
                         onClose={() => setOpenBar(false)}
                     >
                         <div className=" container mx-auto p-4">
-                            Hello
+                            <List>
+                                <ListItemButton divider onClick={() => setOpenCollape(!openCollape)} className=" flex gap-[100px]">
+                                    Allcategories
+                                    {openCollape ? <ExpandLess /> : <ExpandMore />}
+                                </ListItemButton>
+                                <Collapse in={openCollape} timeout={'auto'} sx={{ mb: 2 }} unmountOnExit>
+                                    <List component={'div'} disablePadding={true}>
+                                        <ListItemButton sx={{ ml: 4 }} divider>
+                                            Vegetables
+                                        </ListItemButton>
+                                        <ListItemButton sx={{ ml: 4 }} divider>
+                                            Fresh Fruit
+                                        </ListItemButton>
+                                        <ListItemButton sx={{ ml: 4 }} divider>
+                                            Meat & Fish
+                                        </ListItemButton>
+                                    </List>
+                                </Collapse>
+                                <ListItemButton divider>
+                                    About
+                                </ListItemButton>
+                                <ListItemButton divider>
+                                    Contact
+                                </ListItemButton>
+                            </List>
                         </div>
                     </Drawer>
                     <div className="flex flex-row items-center justify-start sm:hidden">

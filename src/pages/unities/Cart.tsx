@@ -152,7 +152,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                 maxWidth={'md'}
                 onClose={() => props.Carts.setOpenCart(false)}
                 open={props.Carts.openCart}
-                TransitionComponent={Transition}
+                // TransitionComponent={Transition}
             >
                 <div>
                     <div className="box-border relative top-5 right-10">

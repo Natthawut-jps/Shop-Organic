@@ -128,7 +128,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                 maxWidth={'md'}
                 onClose={() => props.Favorite.setOpenFavorite(false)}
                 open={props.Favorite.openFavorite}
-                TransitionComponent={Transition}
+                // TransitionComponent={Transition}
             >
                 <div className=' pb-[150px] box-border'>
                     <div className="box-border relative top-5 right-10">

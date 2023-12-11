@@ -57,7 +57,7 @@ export const Search: FunctionComponent<open> = (props) => {
                 maxWidth={'md'}
                 onClose={() => props.Search.setOpenSearch(false)}
                 open={props.Search.openSearch}
-                TransitionComponent={Transition}
+                // TransitionComponent={Transition}
             >
                 <div className="box-border relative top-3 right-3 ">
                     <FontAwesomeIcon icon={faXmark} size="lg" className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right " onClick={() => props.Search.setOpenSearch(false)} />

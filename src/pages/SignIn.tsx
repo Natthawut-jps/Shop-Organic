@@ -67,7 +67,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         fullWidth={true}
         onClose={() => props.SignIn.setOpenSignIn(false)}
         open={props.SignIn.openSignIn}
-        TransitionComponent={Transition}
+        // TransitionComponent={Transition}
       >
         <DialogContent className="relative bg-gray-scale-white top-0 left-0 right-0 bottom-0 shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
           <div className=" relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
