@@ -9,7 +9,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
-import { SignUp } from "./SignUp";
+
 export const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: ReactElement<any, any>;

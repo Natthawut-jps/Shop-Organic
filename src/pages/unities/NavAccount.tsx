@@ -1,6 +1,6 @@
 import { faArrowRightToBracket, faCube, faGear, faMapLocationDot } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { FunctionComponent, useState } from "react"
+import { FunctionComponent } from "react"
 import { Link, NavLink } from "react-router-dom"
 import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
 

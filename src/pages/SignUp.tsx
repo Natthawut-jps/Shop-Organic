@@ -2,10 +2,10 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Checkbox, Dialog, DialogContent, Slide } from "@mui/material";
+import { Dialog, DialogContent, Slide } from "@mui/material";
 import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from "react";
 import { TransitionProps } from "@mui/material/transitions";
-import { SignIn } from "./SignIn";
+
 export const Transition = forwardRef(function Transition(
     props: TransitionProps & {
         children: ReactElement<any, any>;

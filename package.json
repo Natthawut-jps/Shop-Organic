@@ -21,7 +21,6 @@
     "@mui/material": "^5.14.17",
     "@mui/x-date-pickers": "^6.18.2",
     "@react-oauth/google": "^0.12.1",
-    "@react-pdf/renderer": "^3.1.14",
     "axios": "^1.6.2",
     "react": "^18.2.0",
     "react-cookie": "^6.1.1",
