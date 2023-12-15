@@ -44,7 +44,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         }).then(async (data) => {
           await axios({
             method: "post",
-            url: "http://localhost/auth/google",
+            url: "/auth/google",
             data: data.data
           })
         })

@@ -134,7 +134,7 @@ export const Cart: FunctionComponent<open> = (props) => {
     async function CartItem() {
         const { data } = await axios({
             method: 'get',
-            url: 'http://localhost:8080/cartAndFavorite/cart',
+            url: '/cartAndFavorite/cart',
         })
         setCartitems(data)
     };

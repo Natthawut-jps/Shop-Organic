@@ -111,7 +111,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
     async function FavoriteItem() {
         const { data } = await axios({
             method: 'get',
-            url: 'http://localhost:8080/cartAndFavorite/favorite',
+            url: '/cartAndFavorite/favorite',
         })
         setFavoritetItem(data)
     };

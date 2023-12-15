@@ -60,7 +60,7 @@ export const CartProvider = ({ children }: Provider) => {
     const addTocart = async (prop: datatypesProduct) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/addTocart',
+            url: '/cartAndFavorite/addTocart',
             data: {
                 id: prop.id,
                 name: prop.name,
@@ -77,7 +77,7 @@ export const CartProvider = ({ children }: Provider) => {
     const increaseCartQuantity = async (pid: number, price: number) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/increase',
+            url: '/cartAndFavorite/increase',
             data: { pid: pid, price: price }
         }).then((res) => {
             setCartitems(res.data);
@@ -86,7 +86,7 @@ export const CartProvider = ({ children }: Provider) => {
     const decreaseCartQuantity = async (pid: number, price: number) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/decrease',
+            url: '/cartAndFavorite/decrease',
             data: { pid: pid, price: price }
         }).then((res) => setCartitems(res.data))
     }
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeCartItem = async (id: number) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/remove',
+            url: '/cartAndFavorite/remove',
             data: { id: id }
         }).then((res) => setCartitems(res.data));
     }
@@ -102,7 +102,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeCartItemAll = async (check: boolean) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/removeAll',
+            url: '/cartAndFavorite/removeAll',
             data: { check: check }
         }).then((res) => setCartitems(res.data))
     }
@@ -113,7 +113,7 @@ export const CartProvider = ({ children }: Provider) => {
     const addFavorite = async (prop: datatypesProduct) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/addFavorite',
+            url: '/cartAndFavorite/addFavorite',
             data: {
                 id: prop.id,
                 name: prop.name,
@@ -131,7 +131,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeFavoriteItem = async (id: number) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/removeFavorite',
+            url: '/cartAndFavorite/removeFavorite',
             data: { id: id }
         }).then((res) => setFavoritetItem(res.data));
     }
@@ -139,7 +139,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeFavoriteItemAll = async (check: boolean) => {
         await axios({
             method: 'post',
-            url: 'http://localhost:8080/cartAndFavorite/removeAllFavorite',
+            url: '/cartAndFavorite/removeAllFavorite',
             data: { check: check }
         }).then((res) => setFavoritetItem(res.data))
     }
