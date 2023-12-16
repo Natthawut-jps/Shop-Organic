@@ -1,5 +1,5 @@
-import axios from "axios";
 import { createContext, useContext, useState } from "react";
+import instance from "./axios_instance";
 
 // context CartShopping
 interface Provider {
@@ -58,7 +58,7 @@ export const CartProvider = ({ children }: Provider) => {
     const [cartItems, setCartitems] = useState<datatypesCart[]>([]);
 
     const addTocart = async (prop: datatypesProduct) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/addTocart',
             data: {
@@ -75,7 +75,7 @@ export const CartProvider = ({ children }: Provider) => {
         })
     }
     const increaseCartQuantity = async (pid: number, price: number) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/increase',
             data: { pid: pid, price: price }
@@ -84,7 +84,7 @@ export const CartProvider = ({ children }: Provider) => {
         })
     }
     const decreaseCartQuantity = async (pid: number, price: number) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/decrease',
             data: { pid: pid, price: price }
@@ -92,7 +92,7 @@ export const CartProvider = ({ children }: Provider) => {
     }
 
     const removeCartItem = async (id: number) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/remove',
             data: { id: id }
@@ -100,7 +100,7 @@ export const CartProvider = ({ children }: Provider) => {
     }
 
     const removeCartItemAll = async (check: boolean) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/removeAll',
             data: { check: check }
@@ -111,7 +111,7 @@ export const CartProvider = ({ children }: Provider) => {
     const [favoriteItem, setFavoritetItem] = useState<datatypesCart[]>([]);
 
     const addFavorite = async (prop: datatypesProduct) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/addFavorite',
             data: {
@@ -129,7 +129,7 @@ export const CartProvider = ({ children }: Provider) => {
     }
 
     const removeFavoriteItem = async (id: number) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/removeFavorite',
             data: { id: id }
@@ -137,7 +137,7 @@ export const CartProvider = ({ children }: Provider) => {
     }
 
     const removeFavoriteItemAll = async (check: boolean) => {
-        await axios({
+        await instance({
             method: 'post',
             url: '/cartAndFavorite/removeAllFavorite',
             data: { check: check }

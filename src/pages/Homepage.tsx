@@ -26,7 +26,7 @@ export const Homepage: FunctionComponent = () => {
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
-
+   
   // productItem
   async function Product() {
     const { data } = (await axios.get('/data/popularProduct.json'))

@@ -5,6 +5,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
 import axios from 'axios';
+import instance from './axios_instance';
 
 // Favorite
 export const Transition = forwardRef(function Transition(
@@ -109,7 +110,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
     const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
     // get FavoriteItem
     async function FavoriteItem() {
-        const { data } = await axios({
+        const { data } = await instance({
             method: 'get',
             url: '/cartAndFavorite/favorite',
         })

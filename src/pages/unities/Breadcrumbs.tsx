@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FunctionComponent } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 
-
 interface Prop {
     tltle: string | undefined
     categoies: string | undefined

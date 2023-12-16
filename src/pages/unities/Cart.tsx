@@ -3,8 +3,9 @@ import { faMinus, faPlus, faTrash, faXmark } from '@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import axios from 'axios';
 import { CartContextProviders } from './HandleCart';
+import instance from './axios_instance';
+import axios from 'axios';
 
 // Cart
 export const Transition = forwardRef(function Transition(
@@ -132,7 +133,7 @@ export const Cart: FunctionComponent<open> = (props) => {
     };
     // get CartItem
     async function CartItem() {
-        const { data } = await axios({
+        const { data } = await instance({
             method: 'get',
             url: '/cartAndFavorite/cart',
         })
