@@ -1,34 +1,15 @@
-import {
-  FunctionComponent,
-  ReactElement,
-  Ref,
-  forwardRef,
-  useState,
-} from "react";
+import { FunctionComponent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import GoogleButton from "react-google-button";
-import { Dialog, DialogContent, Slide } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
+import { Dialog, DialogContent } from "@mui/material";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import instance from "./unities/axios_instance";
-
-export const Transition = forwardRef(function Transition(
-  props: TransitionProps & {
-    children: ReactElement<any, any>;
-  },
-  ref: Ref<unknown>
-) {
-  return (
-    <>
-      <Slide direction="down" ref={ref} {...props} />
-    </>
-  );
-});
+import { Cookies } from "react-cookie";
 
 interface openSignIn {
   SignIn: {
@@ -36,7 +17,13 @@ interface openSignIn {
     setOpenSignIn: (e: boolean) => void;
   };
 }
+interface data {
+  username?: string,
+  password?: string
+};
+
 export const SignIn: FunctionComponent<openSignIn> = (props) => {
+  const [uinfo, setUinfo] = useState<data>();
   const [passEye, setPassEye] = useState<boolean>(false);
   const LoginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -65,13 +52,43 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
       setPassEye(false);
     }
   };
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+  const handle_Login = async () => {
+    await instance({
+      method: "post",
+      url: "/register",
+      data: uinfo,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      responseType: "json",
+    }).then((res: AxiosResponse) => {
+      if (res.status === 200) {
+        const date = new Date();
+        cookies.set("_ut", res.data._ut, {
+          expires: new Date(date.setMinutes(date.getMinutes() + 5)),
+          secure: true,
+          sameSite: "strict",
+        });
+        cookies.set("_ur", res.data._ur, {
+          expires: new Date(date.setDate(date.getDate() + 15)),
+          secure: true,
+          sameSite: "strict",
+        });
+        return navigate("/", { state: " login successfully" });
+      } else {
+        return navigate("/login", { state: " login successfully" });
+      }
+    });
+  };
+
   return (
     <>
       <Dialog
         fullWidth={true}
         onClose={() => props.SignIn.setOpenSignIn(false)}
         open={props.SignIn.openSignIn}
-        // TransitionComponent={Transition}
       >
         <DialogContent className="relative bg-gray-scale-white top-0 left-0 right-0 bottom-0 shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
           <div className=" relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
@@ -91,6 +108,9 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
                     <input
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setUinfo({...uinfo, username: e.target.value })
+                      }
                       form="passwordEyeForm"
                       type="email"
                       placeholder="Email"
@@ -102,6 +122,9 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
                     <input
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                        setUinfo({...uinfo, password: e.target.value })
+                      }
                       form="passwordEyeForm"
                       type="password"
                       id="passwordSignIn"
@@ -149,6 +172,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             </div>
             <form id="passwordEyeForm">
               <button
+                onClick={handle_Login}
                 type="submit"
                 className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >

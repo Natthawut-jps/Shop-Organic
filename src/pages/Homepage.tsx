@@ -7,7 +7,6 @@ import Rating from "@mui/material/Rating/Rating";
 import StarIcon from '@mui/icons-material/Star';
 import { Alert, Snackbar } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
-// import { useCookies } from "react-cookie";
 
 interface datatypesProduct {
   id: number,
@@ -26,13 +25,11 @@ export const Homepage: FunctionComponent = () => {
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
-   
   // productItem
   async function Product() {
     const { data } = (await axios.get('/data/popularProduct.json'))
     setPopularProduct(data.PopularProduct)
   };
-
   useEffect(() => {
     Product()
   }, []);

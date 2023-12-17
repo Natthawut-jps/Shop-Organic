@@ -2,22 +2,9 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Dialog, DialogContent, Slide } from "@mui/material";
-import { FunctionComponent, ReactElement, Ref, forwardRef, useState } from "react";
-import { TransitionProps } from "@mui/material/transitions";
+import { Dialog, DialogContent } from "@mui/material";
+import { FunctionComponent, useState } from "react";
 
-export const Transition = forwardRef(function Transition(
-    props: TransitionProps & {
-        children: ReactElement<any, any>;
-    },
-    ref: Ref<unknown>,
-) {
-    return (
-        <>
-            <Slide direction="down" ref={ref} {...props} />
-        </>
-    )
-});
 interface openSignUp {
     SignUp: {
         openSignUp: boolean,
@@ -53,7 +40,6 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                 maxWidth={'md'}
                 onClose={() => props.SignUp.setOpenSignUp(false)}
                 open={props.SignUp.openSignUp}
-                // TransitionComponent={Transition}
             >
                 <DialogContent className="relative bg-gray-scale-white text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
                     <div className=" relative top-[0px] left-[0px] rounded-lg bg-gray-scale-white flex flex-col items-center justify-center pt-6 pb-8 gap-[20px]">
