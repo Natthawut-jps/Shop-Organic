@@ -78,7 +78,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         });
         return navigate("/", { state: " login successfully" });
       } else {
-        return navigate("/login", { state: " login successfully" });
+        return navigate("/login");
       }
     });
   };
@@ -94,7 +94,10 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
           <div className=" relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
             <div className=" absolute box-border top-0 right-0">
               <FontAwesomeIcon
-                onClick={() => props.SignIn.setOpenSignIn(false)}
+                onClick={() => {
+                  props.SignIn.setOpenSignIn(false);
+                  setUinfo({username: undefined, password: undefined});
+                }}
                 icon={faXmark}
                 size="lg"
                 className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right "
