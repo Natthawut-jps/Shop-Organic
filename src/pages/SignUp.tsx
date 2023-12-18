@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Dialog, DialogContent } from "@mui/material";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import instance from "./unities/axios_instance";
 import { useNavigate } from "react-router-dom";
 import { AxiosResponse } from "axios";
@@ -15,20 +15,21 @@ interface openSignUp {
   };
 }
 interface uinfo {
-  first_name?: string;
-  last_name?: string;
-  email?: string;
+  first_name: string;
+  last_name: string;
+  email: string;
   password: string;
-  accept?: number;
+  accept: number;
+}
+interface error {
+  email: string;
+  password: string;
 }
 export const SignUp: FunctionComponent<openSignUp> = (props) => {
-  const [uinfo, setUinfo] = useState<uinfo>({
-    password: "",
-  });
-  const [err, setError] = useState<{ password: string; email: string }>({
-    password: "",
-    email: "",
-  });
+  const [uinfo, setUinfo] = useState<uinfo>({} as uinfo);
+  const [err, setError] = useState<{ password: string; email: string }>(
+    {} as error
+  );
   const [confirm_pass, setConfirm_pass] = useState<string>();
   const [passEyeSignUp, setPassEyeSignUp] = useState<boolean>(false);
   const [passEyeConfirmSignUp, setPassEyeConfirmSignUp] =
@@ -53,19 +54,30 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
       setPassEyeConfirmSignUp(false);
     }
   };
-  const navigate = useNavigate();
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (!uinfo.email?.match(/[A-za-z0-9]+@gmail.com/i)) {
-      return setError({ password: "", email: "email incorrect @gmail.com" });
+    setError(handleValidateForm(uinfo));
+    if (Object.keys(handleValidateForm(uinfo)).length === 0) {
+      handlfinish();
     }
-    if (uinfo.password.length < 8) {
-      return setError({ password: "incorrect password 8 character", email: "" });
-    } else {
-      if (uinfo.password !== confirm_pass) {
-        return setError({ password: "incorrect password not math", email: "" });
+  };
+  const handleValidateForm = (data: uinfo) => {
+    const errors = {} as error;
+    if (!data.email.match(/[0-9A-Za-z]+@gmail.com\b/i)) {
+      errors.email = "incorrect email platern math";
+    }
+    if (data.password !== confirm_pass || data.password.length < 8) {
+      if (data.password.replace("/s/g", "").trim().toLowerCase().length < 8) {
+        errors.password = "password incorrect 8 character";
+      }
+      if (data.password !== confirm_pass) {
+        errors.password = "password incorrect math";
       }
     }
+    return errors;
+  };
+  const navigate = useNavigate();
+  const handlfinish = () => {
     try {
       instance({
         method: "post",
@@ -76,15 +88,15 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
           "Content-Type": "application/json",
         },
       }).then((res) => {
-        if( res.status === 200 ) {
-            navigate('/login', { state: 'register successfully' });
-        };
+        if (res.status === 200) {
+          navigate("/login", { state: "register successfully" });
+        }
       });
     } catch (error) {
       console.log(error);
     }
   };
-console.log(uinfo.accept)
+
   return (
     <>
       <Dialog
@@ -97,10 +109,16 @@ console.log(uinfo.accept)
             <div className=" absolute box-border top-0 right-0">
               <FontAwesomeIcon
                 onClick={() => {
-                    props.SignUp.setOpenSignUp(false);
-                    setError({ password: '', email: ''});
-                    setUinfo({ password: '', first_name: undefined, last_name: undefined, email: undefined, accept: undefined })
-                    setConfirm_pass('')
+                  props.SignUp.setOpenSignUp(false);
+                  setError({ password: "", email: "" });
+                  setUinfo({
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    password: "",
+                    accept: 0,
+                  });
+                  setConfirm_pass("");
                 }}
                 icon={faXmark}
                 size="lg"
@@ -155,9 +173,7 @@ console.log(uinfo.accept)
                       required
                     />
                     <span className=" text-branding-error text-[11px] relative pl-6">
-                      {uinfo.email?.match(/[A-za-z0-9]+@gmail.com/g)
-                        ? false
-                        : err.email}
+                      {err.email && err.email}
                     </span>
                   </div>
                 </div>
@@ -165,7 +181,10 @@ console.log(uinfo.accept)
                   <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({ ...uinfo, password: e.target.value })
+                        setUinfo({
+                          ...uinfo,
+                          password: e.target.value.replace(/\s/g, "").trim(),
+                        })
                       }
                       form="createAccount"
                       type="password"
@@ -175,10 +194,7 @@ console.log(uinfo.accept)
                       required
                     />
                     <span className=" text-branding-error text-[10px] relative pl-6 ">
-                      {uinfo.password === confirm_pass &&
-                      uinfo.password.length >= 8
-                        ? false
-                        : err.password}
+                      {err.password && err.password}
                     </span>
                   </div>
                   {passEyeSignUp ? (

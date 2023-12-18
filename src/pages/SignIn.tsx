@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios, { AxiosResponse } from "axios";
@@ -18,12 +18,14 @@ interface openSignIn {
   };
 }
 interface data {
-  username?: string,
-  password?: string
-};
+  username: string;
+  password: string;
+}
 
 export const SignIn: FunctionComponent<openSignIn> = (props) => {
-  const [uinfo, setUinfo] = useState<data>();
+  const [uinfo, setUinfo] = useState<data>({} as data);
+  const [err, setErr] = useState<data>({} as data);
+  const [incorrect, setIncorrect] = useState<boolean>(false);
   const [passEye, setPassEye] = useState<boolean>(false);
   const LoginGoogle = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -52,9 +54,26 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
       setPassEye(false);
     }
   };
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    setErr(handleValidateForm(uinfo));
+    if (Object.keys(handleValidateForm(uinfo)).length === 0) {
+      handlefinish();
+    }
+  };
+  const handleValidateForm = (data: data) => {
+    const errors = {} as data;
+    if (!data.username.match(/[0-9A-Za-z]+@gmail.com\b/i)) {
+      errors.username = "incorrect email platern math";
+    }
+    if (data.password.replace(/\s/g, "").trim().toLowerCase().length < 8) {
+      errors.password = "incorrect password 8 character";
+    }
+    return errors;
+  };
   const navigate = useNavigate();
   const cookies = new Cookies();
-  const handle_Login = async () => {
+  const handlefinish = async () => {
     await instance({
       method: "post",
       url: "/register",
@@ -78,11 +97,11 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         });
         return navigate("/", { state: " login successfully" });
       } else {
-        return navigate("/login");
+        return setIncorrect(true);
       }
     });
   };
-
+  
   return (
     <>
       <Dialog
@@ -96,23 +115,34 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
               <FontAwesomeIcon
                 onClick={() => {
                   props.SignIn.setOpenSignIn(false);
-                  setUinfo({username: undefined, password: undefined});
+                  setErr({} as data);
+                  setUinfo({} as data);
                 }}
                 icon={faXmark}
                 size="lg"
                 className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right "
               />
             </div>
-            <div className="relative text-13xl leading-[120%] font-semibold">
+            <div className="relative text-13xl leading-[120%] font-semibold top-[-10px]">
+              {incorrect && (
+                <span className="text-[12px] text-branding-error">
+                  username and password incorrect
+                </span>
+              )}
               Sign In
             </div>
             <div className="flex flex-col items-center justify-center gap-[16px] text-base text-gray-scale-gray-400">
-              <div className="flex flex-col items-start justify-start gap-[12px]">
+              <div className="flex flex-col items-start justify-start gap-[25px]">
                 <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
+                    {err.username && (
+                      <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
+                        {err.username}
+                      </span>
+                    )}
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({...uinfo, username: e.target.value })
+                        setUinfo({ ...uinfo, username: e.target.value })
                       }
                       form="passwordEyeForm"
                       type="email"
@@ -124,9 +154,14 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 </div>
                 <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
+                    {err.password && (
+                      <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
+                        {err.password}
+                      </span>
+                    )}
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({...uinfo, password: e.target.value })
+                        setUinfo({ ...uinfo, password: e.target.value.replace(/\s/g, '').trim() })
                       }
                       form="passwordEyeForm"
                       type="password"
@@ -173,9 +208,8 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 </Link>
               </div>
             </div>
-            <form id="passwordEyeForm">
+            <form id="passwordEyeForm" onSubmit={handleSubmit}>
               <button
-                onClick={handle_Login}
                 type="submit"
                 className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >
