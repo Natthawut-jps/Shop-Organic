@@ -47,7 +47,7 @@ export const NavAccount: FunctionComponent = () => {
                         Settings
                     </div>
                 </NavLink>
-                <Link to={'/SignIn'} onClick={() => ''} className=" text-red-600 no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px]">
+                <Link to={'/'} onClick={() => ''} className=" text-red-600 no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px]">
                     <FontAwesomeIcon icon={faArrowRightToBracket} />
                     <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
                         Log-out

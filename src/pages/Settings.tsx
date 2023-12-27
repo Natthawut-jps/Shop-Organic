@@ -1,9 +1,4 @@
-import {
-  FunctionComponent,
-  useState,
-  useEffect,
-  HTMLInputTypeAttribute,
-} from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
@@ -11,6 +6,8 @@ import { NavAccount } from "./unities/NavAccount";
 import axios from "axios";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import instance_auth from "./unities/instance_auth";
+import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 
 export const Settings: FunctionComponent = () => {
@@ -122,6 +119,160 @@ export const Settings: FunctionComponent = () => {
     }
   };
 
+  // User info
+  interface uinfo_ {
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: number;
+    imgURL?: File | string;
+  }
+  const navigate = useNavigate();
+  const [uinfo, setUinfo] = useState<uinfo_>({} as uinfo_);
+
+  const handlerSubmitUinfo = async (event: React.FormEvent) => {
+    event.preventDefault();
+    console.log(uinfo.imgURL);
+    await instance_auth({
+      method: "post",
+      url: "/updateInfo",
+      data: uinfo,
+      responseType: "json",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        location.reload();
+      }
+    });
+  };
+
+  //current address
+  interface addressType {
+    first_name: string;
+    last_name: string;
+    company: string;
+    street: string;
+    county: string;
+    tambon: string;
+    amphure: string;
+    zipCode: number;
+    email: string;
+    phone: number;
+  }
+  const [address, setAddress] = useState<addressType>({} as addressType);
+  const handlerSubmit_currentAddress = async (event: React.FormEvent) => {
+    event.preventDefault();
+    await instance_auth({
+      method: "post",
+      url: "/UpdatecurrentAddress",
+      data: {
+        first_name: address.first_name,
+        last_name: address.last_name,
+        company: address.company,
+        street: address.street,
+        phone: address.phone,
+        county: provincesData,
+        amphure: amphureData,
+        tambon: tambonData,
+        zipCode: zipCodeData,
+        email: address.email,
+      },
+      responseType: "json",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        location.reload();
+      }
+    });
+  };
+  interface change_password {
+    current_pass: string;
+    new_pass: string;
+    confirm_pass: string;
+  }
+  interface validate_pass {
+    pass: string;
+  }
+  const [changePassword, setChangePassword] = useState<change_password>(
+    {} as change_password
+  );
+  const [inccorect_pass, setInccorect_pass] = useState<string>("");
+  const [errss, setErrs] = useState<validate_pass>({} as validate_pass);
+  const handlerSubmitChangePassword = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setErrs(handerValidate_pass(changePassword));
+    if (Object.keys(handerValidate_pass(changePassword))) {
+      await instance_auth({
+        method: "post",
+        url: "/changePassword",
+        data: changePassword,
+        responseType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          location.reload();
+        } else {
+          setInccorect_pass(res.data);
+        }
+      });
+    }
+  };
+  const handerValidate_pass = (data: change_password) => {
+    const errors = {} as validate_pass;
+    if (data.new_pass !== data.confirm_pass || data.new_pass.length < 8) {
+      if (data.new_pass.replace("/s/g", "").trim().toLowerCase().length < 8) {
+        errors.pass = "password incorrect 8 character";
+      }
+      if (data.new_pass !== data.confirm_pass) {
+        errors.pass = "password incorrect math";
+      }
+    }
+    return errors;
+  };
+  useEffect(() => {
+    const data = async () => {
+      await instance_auth({
+        method: "get",
+        url: "/userInfo",
+        responseType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setUinfo(res.data);
+        } else {
+          navigate("/error");
+        }
+      });
+    };
+    data();
+  }, []);
+  useEffect(() => {
+    const data = async () => {
+      await instance_auth({
+        method: "get",
+        url: "/currentAddress",
+        responseType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          setAddress(res.data);
+        } else {
+          navigate("/error");
+        }
+      });
+    };
+    data();
+  }, []);
   return (
     <div className="relative bg-gray-scale-white w-full h-[2420px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
       <Header />
@@ -136,10 +287,9 @@ export const Settings: FunctionComponent = () => {
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[535px] border-[1px] border-solid border-gray-scale-gray-100" />
         {editAccount ? (
           <div>
-            <form id="account">
+            <form id="account" onSubmit={handlerSubmitUinfo}>
               <button
                 type="submit"
-                onClick={() => ""}
                 className="absolute cursor-pointer top-[464px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
@@ -171,6 +321,10 @@ export const Settings: FunctionComponent = () => {
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
+                    value={uinfo.first_name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setUinfo({ ...uinfo, first_name: e.target.value });
+                    }}
                     form="account"
                     type="text"
                     placeholder="First name"
@@ -181,6 +335,7 @@ export const Settings: FunctionComponent = () => {
               ) : (
                 <div className="absolute top-[0px] left-[0px] leading-[130%]">
                   <input
+                    value={uinfo.first_name}
                     type="text"
                     placeholder="First name"
                     className="disabled:cursor-not-allowed text-[15px] placeholder:pl-[5px] focus:outline-none rounded-lg w-[505px] h-[45px] text-gray-scale-gray-600"
@@ -196,6 +351,10 @@ export const Settings: FunctionComponent = () => {
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
+                    value={uinfo.last_name}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setUinfo({ ...uinfo, last_name: e.target.value });
+                    }}
                     form="account"
                     type="text"
                     placeholder="Last Name"
@@ -206,6 +365,7 @@ export const Settings: FunctionComponent = () => {
               ) : (
                 <div className="absolute top-[0px] left-[0px] leading-[130%]">
                   <input
+                    value={uinfo.last_name}
                     type="text"
                     placeholder="Last Name"
                     className="disabled:cursor-not-allowed text-[15px] placeholder:pl-[5px] focus:outline-none rounded-lg w-[505px] h-[45px] text-gray-scale-gray-600"
@@ -221,6 +381,10 @@ export const Settings: FunctionComponent = () => {
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
+                    value={uinfo.email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setUinfo({ ...uinfo, email: e.target.value });
+                    }}
                     form="account"
                     type="email"
                     placeholder="email"
@@ -231,6 +395,7 @@ export const Settings: FunctionComponent = () => {
               ) : (
                 <div className="absolute top-[0px] left-[0px] leading-[130%]">
                   <input
+                    value={uinfo.email}
                     type="email"
                     placeholder="email"
                     className="disabled:cursor-not-allowed text-[15px] placeholder:pl-[5px] focus:outline-none rounded-lg w-[505px] h-[45px] text-gray-scale-gray-600"
@@ -246,6 +411,13 @@ export const Settings: FunctionComponent = () => {
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
+                    value={uinfo.phone_number}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setUinfo({
+                        ...uinfo,
+                        phone_number: parseInt(e.target.value),
+                      });
+                    }}
                     form="account"
                     type="tel"
                     pattern="[0-9{10}]"
@@ -257,6 +429,7 @@ export const Settings: FunctionComponent = () => {
               ) : (
                 <div className="absolute top-[0px] left-[0px] leading-[130%]">
                   <input
+                    value={uinfo.phone_number}
                     type="tel"
                     pattern="[0-9{10}]"
                     placeholder="Phone Number"
@@ -287,33 +460,39 @@ export const Settings: FunctionComponent = () => {
                   >
                     Chose Image
                     <input
-                      // onChange={async(e: React.ChangeEvent<HTMLInputElement>) => {
-                      //   const file: File | null = e.target.files && e.target.files[0];
-                      //   const resizeFile = (file: File) =>
-                      //     new Promise((resolve) => {
-                      //       Resizer.imageFileResizer(
-                      //         file,
-                      //         500,
-                      //         500,
-                      //         "JPEG",
-                      //         100,
-                      //         0,
-                      //         (uri) => {
-                      //           resolve(uri);
-                      //         },
-                      //         "blob"
-                      //       );
-                      //     });
-                      //     const resize: Blob | unknown = await resizeFile(file as File);
-                      //     const file_Resize = new File([ resize as Blob], file?.name as string);
-                      //     const img = new Image();
-                      //     img.src = URL.createObjectURL(file_Resize);
-                      //     img.onload = () => {
-                      //       console.log(img.naturalWidth)
-                      //       console.log(img.naturalHeight)
-                      //       console.log(file_Resize)
-                      //     }
-                      // }}
+                      onChange={async (
+                        e: React.ChangeEvent<HTMLInputElement>
+                      ) => {
+                        const file: File | null =
+                          e.target.files && e.target.files[0];
+                        const resizeFile = (file: File) =>
+                          new Promise((resolve) => {
+                            Resizer.imageFileResizer(
+                              file,
+                              400,
+                              400,
+                              "png",
+                              100,
+                              0,
+                              (uri: unknown) => {
+                                resolve(uri);
+                              },
+                              "blob"
+                            );
+                          });
+                        const resize: Blob | unknown = await resizeFile(
+                          file as File
+                        );
+                        const file_Resize = new File(
+                          [resize as Blob],
+                          file?.name as string
+                        );
+                        const img = new Image();
+                        img.src = URL.createObjectURL(file_Resize);
+                        img.onload = () => {
+                          setUinfo({ ...uinfo, imgURL: file_Resize });
+                        };
+                      }}
                       type="file"
                       id="files"
                       className="w-full top-[40px] file:hidden py-1.5 rounded-24xl file:cursor-pointer absolute cursor-pointer bg-transparent file:text-transparent file:bg-transparent file:border-none"
@@ -334,7 +513,11 @@ export const Settings: FunctionComponent = () => {
           <img
             className="absolute top-[0px] left-[0px] rounded-[50%] w-56 h-56 object-cover"
             alt=""
-            src="/img/profile.jpg"
+            src={
+              uinfo.imgURL
+                ? URL.createObjectURL(new Blob([uinfo.imgURL]))
+                : "/img/profile.jpg"
+            }
           />
         </div>
       </div>
@@ -342,7 +525,7 @@ export const Settings: FunctionComponent = () => {
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[535px] border-[1px] border-solid border-gray-scale-gray-100" />
         {editAddress ? (
           <div>
-            <form id="addressCurrent">
+            <form id="addressCurrent" onSubmit={handlerSubmit_currentAddress}>
               <button
                 type="submit"
                 onClick={() => ""}
@@ -376,6 +559,10 @@ export const Settings: FunctionComponent = () => {
             {editAddress ? (
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <input
+                  value={address.first_name}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAddress({ ...address, first_name: e.target.value });
+                  }}
                   form="addressCurrent"
                   type="text"
                   placeholder="First name"
@@ -386,6 +573,7 @@ export const Settings: FunctionComponent = () => {
             ) : (
               <div className="absolute top-[0px] left-[0px] leading-[130%]">
                 <input
+                  value={address.first_name}
                   type="text"
                   placeholder="First name"
                   className="focus:outline-none disabled:cursor-not-allowed w-[295px] placeholder:pl-[5px] text-[15px] h-[45px] rounded-lg text-gray-scale-gray-600"
@@ -401,6 +589,10 @@ export const Settings: FunctionComponent = () => {
             {editAddress ? (
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <input
+                  value={address.last_name}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAddress({ ...address, last_name: e.target.value });
+                  }}
                   form="addressCurrent"
                   type="text"
                   placeholder="Last name"
@@ -411,6 +603,7 @@ export const Settings: FunctionComponent = () => {
             ) : (
               <div className="absolute top-[0px] left-[0px] leading-[130%]">
                 <input
+                  value={address.last_name}
                   type="text"
                   placeholder="Last name"
                   className="focus:outline-none disabled:cursor-not-allowed w-[295px] placeholder:pl-[5px] text-[15px] h-[45px] rounded-lg text-gray-scale-gray-600"
@@ -426,6 +619,10 @@ export const Settings: FunctionComponent = () => {
             {editAddress ? (
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <input
+                  value={address.phone}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAddress({ ...address, phone: parseInt(e.target.value) });
+                  }}
                   form="addressCurrent"
                   type="tel"
                   pattern="[0-9]{10}"
@@ -437,6 +634,7 @@ export const Settings: FunctionComponent = () => {
             ) : (
               <div className="absolute top-[0px] left-[0px] leading-[130%]">
                 <input
+                  value={address.phone}
                   type="tel"
                   pattern="[0-9]{10}"
                   placeholder="Phone"
@@ -456,6 +654,10 @@ export const Settings: FunctionComponent = () => {
             {editAddress ? (
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <input
+                  value={address.company}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAddress({ ...address, company: e.target.value });
+                  }}
                   type="text"
                   placeholder="Company (optional)"
                   className="focus:outline-none w-[290px] text-[15px] h-[45px] rounded-lg text-gray-scale-gray-600"
@@ -464,6 +666,7 @@ export const Settings: FunctionComponent = () => {
             ) : (
               <div className="absolute top-[0px] left-[0px] leading-[130%]">
                 <input
+                  value={address.company}
                   type="text"
                   placeholder="Company (optional)"
                   className="focus:outline-none disabled:cursor-not-allowed w-[295px] placeholder:pl-[5px] text-[15px] h-[45px] rounded-lg text-gray-scale-gray-600"
@@ -479,6 +682,10 @@ export const Settings: FunctionComponent = () => {
             {editAddress ? (
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <input
+                  value={address.email}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setAddress({ ...address, email: e.target.value });
+                  }}
                   form="addressCurrent"
                   type="email"
                   pattern="[0-9]{10}"
@@ -490,6 +697,7 @@ export const Settings: FunctionComponent = () => {
             ) : (
               <div className="absolute top-[0px] left-[0px] leading-[130%]">
                 <input
+                  value={address.email}
                   type="email"
                   pattern="[0-9]{10}"
                   placeholder="Email"
@@ -718,10 +926,10 @@ export const Settings: FunctionComponent = () => {
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[351px] border-[1px] border-solid border-gray-scale-gray-100" />
         {editPassword ? (
           <div>
-            <form id="password">
+            <form id="password" onSubmit={handlerSubmitChangePassword}>
               <button
                 type="submit"
-                className="absolute top-[280px] text-[16px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
+                className="absolute cursor-pointer top-[280px] text-[16px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
                   Change Password
@@ -751,6 +959,13 @@ export const Settings: FunctionComponent = () => {
             {editPassword ? (
               <div className="relative left-[5px] leading-[130%] inline-block w-[884px] shrink-0">
                 <input
+                  value={changePassword.current_pass}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setChangePassword({
+                      ...changePassword,
+                      current_pass: e.target.value,
+                    });
+                  }}
                   type="password"
                   id="CurrentPassword"
                   placeholder="Password"
@@ -795,11 +1010,23 @@ export const Settings: FunctionComponent = () => {
             {editPassword ? (
               <div className="relative left-[5px] leading-[130%] inline-block w-[408px] shrink-0">
                 <input
+                  value={changePassword.new_pass}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setChangePassword({
+                      ...changePassword,
+                      new_pass: e.target.value,
+                    });
+                  }}
                   type="password"
                   id="NewPassword"
                   placeholder="New Password"
                   className="text-[15px] text-gray-scale-gray-400 focus:outline-none w-[350px] h-[45px] bg-transparent rounded-lg"
                 />
+                {errss && (
+                  <span className=" absolute top-[-25px] right-[20px] text-[13px] text-branding-error">
+                    {errss.pass}
+                  </span>
+                )}
               </div>
             ) : (
               <div className="relative left-[0px] leading-[130%] inline-block w-[408px] shrink-0">
@@ -839,11 +1066,23 @@ export const Settings: FunctionComponent = () => {
             {editPassword ? (
               <div className="relative left-[5px] leading-[130%] inline-block w-[408px] shrink-0">
                 <input
+                  value={changePassword.confirm_pass}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setChangePassword({
+                      ...changePassword,
+                      confirm_pass: e.target.value,
+                    });
+                  }}
                   type="password"
                   id="ConfirmPassword"
                   placeholder="Confirm Password"
                   className="text-[15px] text-gray-scale-gray-400 focus:outline-none w-[350px] h-[45px] bg-transparent rounded-lg"
                 />
+                {errss && (
+                  <span className=" absolute top-[-25px] right-[70px] text-[13px] text-branding-error">
+                    {errss.pass}
+                  </span>
+                )}
               </div>
             ) : (
               <div className="relative left-[0px] leading-[130%] inline-block w-[408px] shrink-0">
@@ -858,16 +1097,16 @@ export const Settings: FunctionComponent = () => {
             )}
             {editPassword && (
               <div className=" absolute top-[40px]">
-                {newPass ? (
+                {confirmPass ? (
                   <Visibility
-                    onClick={passwordNew}
+                    onClick={passwordConfirm}
                     fontSize="small"
                     sx={{ color: "black" }}
                     className="absolute left-[370px] p-[2px] cursor-pointer"
                   />
                 ) : (
                   <VisibilityOff
-                    onClick={passwordNew}
+                    onClick={passwordConfirm}
                     fontSize="small"
                     sx={{ color: "black" }}
                     className="absolute left-[370px] p-[2px] cursor-pointer"
@@ -879,7 +1118,10 @@ export const Settings: FunctionComponent = () => {
         </div>
         <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
           <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-            Change Password
+            Change Password{" "}
+            <span className=" text-branding-error text-[16px] relative left-10">
+              {inccorect_pass && inccorect_pass}
+            </span>
           </div>
         </div>
       </div>
