@@ -14,7 +14,7 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
 
     return (
         <>
-            <div className="absolute top-[186px] left-[-225px] w-[1920px] h-[120px] bg-[url('/img/Breadcrumbs.svg')] bg-cover bg-no-repeat bg-[top] text-base text-gray-scale-gray-500">
+            <div className="absolute z-10 top-[186px] left-[-225px] w-[1920px] h-[120px] bg-[url('/img/Breadcrumbs.svg')] bg-cover bg-no-repeat bg-[top] text-base text-gray-scale-gray-500">
                 <div className="absolute top-[calc(50%_-_12px)] left-[350px] flex flex-row items-center justify-start gap-[12px]">
                     <NavLink to={'/'} className={({ isActive }) => isActive ? "" : ""} end >
                         <img

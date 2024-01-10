@@ -5,7 +5,6 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Dialog, DialogContent } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import instance from "./unities/axios_instance";
-import { useNavigate } from "react-router-dom";
 
 interface openSignUp {
   SignUp: {
@@ -75,7 +74,6 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
     }
     return errors;
   };
-  const navigate = useNavigate();
   const handlfinish = async() => {
     try {
       await instance({
@@ -88,7 +86,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          navigate("/", { state: "register successfully" });
+          return location.href = '/';
         }
       });
     } catch (error) {
