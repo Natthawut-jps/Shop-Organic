@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { Cookies } from "react-cookie";
 import { Homepage } from "./pages/Homepage";
 import Categories from "./pages/Categories";
 import ProductsDetailsDescription from "./pages/ProductsDetailsDescription";
@@ -16,6 +17,7 @@ import Checkout from "./pages/Checkout";
 import Checkout_Bill from "./pages/checkout-billing";
 
 function App() {
+  const cookie = new Cookies;
   return (
     <>
       <Routes>
@@ -30,7 +32,7 @@ function App() {
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route element={<ProtectRoute Allow={true} />}>
+        <Route element={<ProtectRoute Allow={cookie.get('_ut') ? true : false} />}>
           <Route path="/Account/Dashboard" element={<UserDashboard />} />
           <Route path="/Account/Orders" element={<OrderHistory />} />
           <Route path="/Account/Orders/:Detail" element={<OrderDetails />} />

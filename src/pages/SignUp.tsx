@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Dialog, DialogContent } from "@mui/material";
-import React, { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useState } from "react";
 import instance from "./unities/axios_instance";
 import { useNavigate } from "react-router-dom";
-import { AxiosResponse } from "axios";
 
 interface openSignUp {
   SignUp: {
@@ -77,11 +76,11 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
     return errors;
   };
   const navigate = useNavigate();
-  const handlfinish = () => {
+  const handlfinish = async() => {
     try {
-      instance({
+      await instance({
         method: "post",
-        url: "/register",
+        url: "/register/usr",
         data: uinfo,
         responseType: "json",
         headers: {
@@ -89,7 +88,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          navigate("/login", { state: "register successfully" });
+          navigate("/", { state: "register successfully" });
         }
       });
     } catch (error) {

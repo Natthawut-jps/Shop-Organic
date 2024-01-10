@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios, { AxiosResponse } from "axios";
 import GoogleButton from "react-google-button";
@@ -18,7 +18,7 @@ interface openSignIn {
   };
 }
 interface data {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -63,45 +63,46 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
   };
   const handleValidateForm = (data: data) => {
     const errors = {} as data;
-    if (!data.username.match(/[0-9A-Za-z]+@gmail.com\b/i)) {
-      errors.username = "incorrect email platern math";
+    if (!data.email.match(/[0-9A-Za-z]+@gmail.com\b/i)) {
+      errors.email = "incorrect email platern math";
     }
     if (data.password.replace(/\s/g, "").trim().toLowerCase().length < 8) {
       errors.password = "incorrect password 8 character";
     }
     return errors;
   };
-  const navigate = useNavigate();
   const cookies = new Cookies();
   const handlefinish = async () => {
-    await instance({
-      method: "post",
-      url: "/register",
-      data: uinfo,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      responseType: "json",
-    }).then((res: AxiosResponse) => {
-      if (res.status === 200) {
-        const date = new Date();
-        cookies.set("_ut", res.data._ut, {
-          expires: new Date(date.setMinutes(date.getMinutes() + 5)),
-          secure: true,
-          sameSite: "strict",
-        });
-        cookies.set("_ur", res.data._ur, {
-          expires: new Date(date.setDate(date.getDate() + 15)),
-          secure: true,
-          sameSite: "strict",
-        });
-        return navigate("/", { state: " login successfully" });
-      } else {
-        return setIncorrect(true);
-      }
-    });
+    try {
+      await instance({
+        method: "post",
+        url: "/login/auth/username",
+        data: uinfo,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        responseType: "json",
+      }).then((res: AxiosResponse) => {
+        if (res.status === 200) {
+          const date = new Date();
+          cookies.set("_ut", res.data._ut, {
+            expires: new Date(date.setMinutes(date.getMinutes() + 5)),
+            secure: true,
+            sameSite: "strict",
+          });
+          cookies.set("_ur", res.data._ur, {
+            expires: new Date(date.setDate(date.getDate() + 15)),
+            secure: true,
+            sameSite: "strict",
+          });
+          return location.href = '/';
+        }
+      });
+    } catch(err) {
+      setIncorrect(true)
+    }
   };
-  
+
   return (
     <>
       <Dialog
@@ -125,7 +126,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             </div>
             <div className="relative text-13xl leading-[120%] font-semibold top-[-10px]">
               {incorrect && (
-                <span className="text-[12px] text-branding-error">
+                <span className=" absolute top-[35px] left-[-150px] text-[12px] text-branding-error w-[300px]">
                   username and password incorrect
                 </span>
               )}
@@ -135,14 +136,14 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
               <div className="flex flex-col items-start justify-start gap-[25px]">
                 <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
                   <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
-                    {err.username && (
+                    {err.email && (
                       <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
-                        {err.username}
+                        {err.email}
                       </span>
                     )}
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({ ...uinfo, username: e.target.value })
+                        setUinfo({ ...uinfo, email: e.target.value })
                       }
                       form="passwordEyeForm"
                       type="email"

@@ -2,13 +2,40 @@ import { FunctionComponent } from "react";
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import instance_auth from "./unities/instance_auth";
+import { AxiosResponse } from "axios";
 
 const Checkout: FunctionComponent = () => {
+  const navigate = useNavigate();
+  const handlerPlacement = () => {
+    try {
+      instance_auth({
+        method: "post",
+        url: "",
+        data: {},
+        responseType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res: AxiosResponse) => {
+        if (res.status === 200) {
+          navigate("/shop/checkout/bill", { state: res.data });
+        }
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="bg-[url(/img/thumb-1920-1318790.png)] relative  w-full h-[1600px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} EditAndadd={undefined} Detail={undefined} />
+      <Breadcrumbs
+        categoies={undefined}
+        tltle={undefined}
+        EditAndadd={undefined}
+        Detail={undefined}
+      />
       <div className=" absolute top-[320px] w-[1200px] rounded-lg left-[200px] h-[700px] bg-gray-scale-white shadow drop-shadow" />
       <div className="absolute top-[390px] left-[850px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[24px] border-[1px] border-solid border-gray-scale-gray-100">
         <div className="flex flex-col items-start justify-start gap-[12px]">
@@ -78,11 +105,14 @@ const Checkout: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <Link to={'/shop/checkout/bill'} reloadDocument className=" cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white">
+        <div
+          onClick={handlerPlacement}
+          className=" cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white"
+        >
           <div className="relative leading-[120%] font-semibold">
             Place Order
           </div>
-        </Link>
+        </div>
       </div>
       <div className="absolute top-[340px] left-[370px] w-[460px] flex flex-col items-start justify-start gap-[32px]">
         <div className="relative w-[872px] h-[350px]">
@@ -111,7 +141,10 @@ const Checkout: FunctionComponent = () => {
               <div className="absolute top-[46px] pl-[20px] box-border text-base leading-[150%] text-gray-scale-gray-900 w-[450px]">
                 Dainne Russell
               </div>
-              <Link to={''} className="absolute hover:text-[#0280e1]/70 top-[0px] cursor-pointer p-[2px] text-[#0280e1] left-[20px] tracking-[0.03em] leading-[100%] font-medium">
+              <Link
+                to={""}
+                className="absolute hover:text-[#0280e1]/70 top-[0px] cursor-pointer p-[2px] text-[#0280e1] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
+              >
                 เปลี่ยนที่จัดส่ง
               </Link>
               <div className="absolute top-[31.5px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
@@ -132,7 +165,10 @@ const Checkout: FunctionComponent = () => {
             </div>
             <div className="relative rounded-md bg-gray-scale-white box-border w-[450px] h-[100px] text-base text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100">
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
-                <textarea placeholder="Notes about your order, e.g. special notes for delivery" className=" text-[#666666] box-border p-2 focus:outline-none resize-none w-[438px] rounded-lg h-[93px]"></textarea>
+                <textarea
+                  placeholder="Notes about your order, e.g. special notes for delivery"
+                  className=" text-[#666666] box-border p-2 focus:outline-none resize-none w-[438px] rounded-lg h-[93px]"
+                ></textarea>
               </div>
             </div>
           </div>
