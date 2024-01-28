@@ -18,7 +18,7 @@ const OrderDetails: FunctionComponent = () => {
       <div className="absolute top-[347px] left-[400px] w-[984px] h-[825px] text-sm">
         <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[877px] border-[1px] border-solid border-gray-scale-gray-100" />
         {/* product-Order */}
-        <div className=" relative top-[515px] left-[0px] w-[984px] h-[350px] text-gray-scale-gray-900 overflow-auto">
+        <div className="scroll-order relative top-[515px] left-[0px] w-[984px] h-[350px] text-gray-scale-gray-900 overflow-auto">
           <div className=" relative top-[0px] left-[0px] w-[965px] h-9 text-xs text-gray-scale-gray-700">
             <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[965px] h-9" />
             <div className="absolute top-[12px] left-[20px] tracking-[0.03em] leading-[100%] uppercase font-medium">

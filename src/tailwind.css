@@ -11,3 +11,15 @@ body {
 ::after {
   border-width: 0;
 }
+@layer utilities{
+  .scroll-order::-webkit-scrollbar {
+      width: 7px;
+  }
+  .scroll-order::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  .scroll-order::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+}
