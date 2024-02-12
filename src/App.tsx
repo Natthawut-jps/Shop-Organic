@@ -15,7 +15,7 @@ import { Address } from "./pages/Address";
 import { Edit_Add_Address } from "./pages/Edit_Add_Address";
 import Checkout from "./pages/Checkout";
 import Checkout_Bill from "./pages/checkout-billing";
-
+// function main
 function App() {
   const cookie = new Cookies;
   return (
