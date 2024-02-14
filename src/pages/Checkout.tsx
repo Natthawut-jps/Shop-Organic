@@ -12,7 +12,7 @@ const Checkout: FunctionComponent = () => {
     try {
       instance_auth({
         method: "post",
-        url: "",
+        url: "/auth/CartAndFavorite/cart",
         data: {},
         responseType: "json",
         headers: {

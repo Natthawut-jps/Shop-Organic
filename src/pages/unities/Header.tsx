@@ -65,6 +65,13 @@ export const Header: FunctionComponent = () => {
     setCategries(false);
     setAnchorEl(null);
   };
+  const handleLogout = () => {
+    cookie.remove("_ut", { path: '/'});
+    cookie.remove("_ur", { path: '/' });
+    setCategries(false);
+    setAnchorEl(null);
+    location.href = "/";
+  };
   const openAccounting = Boolean(anchorElAccounting);
   const handleClickAccounting = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElAccounting(event.currentTarget);
@@ -105,7 +112,7 @@ export const Header: FunctionComponent = () => {
             </div>
           )}
           <div className="flex flex-row items-center justify-between gap-[20px] text-center">
-            {cookie.get("_ut") ? (
+            {cookie.get("_ur") ? (
               <div className=" relative flex justify-center items-center gap-5 left-[120px]">
                 <div className="text-[16px] hover:bg-black/10 hover:cursor-pointer absolute right-[130px] p-4 box-border font-bold">
                   Dashboad
@@ -143,34 +150,46 @@ export const Header: FunctionComponent = () => {
                     },
                   }}
                 >
-                  <MenuItem onClick={handleClose}>
-                    <div className=" flex justify-center items-center gap-4">
-                      <ViewQuiltIcon fontSize="large" />
-                      <span>Dashboad</span>
-                    </div>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <div className=" flex justify-center items-center gap-4">
-                      <FontAwesomeIcon icon={faCube} size="xl" />
-                      <span>Order</span>
-                    </div>
-                  </MenuItem>
-                  <MenuItem onClick={handleClose}>
-                    <div className=" flex justify-center items-center gap-4">
-                      <FontAwesomeIcon icon={faMapLocationDot} size="xl" />{" "}
-                      <span> Address</span>
-                    </div>
-                  </MenuItem>
+                  <Link
+                    to={"/Account/Dashboard"}
+                    className=" no-underline text-black"
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <div className=" flex justify-center items-center gap-4">
+                        <ViewQuiltIcon fontSize="large" />
+                        <span>Dashboad</span>
+                      </div>
+                    </MenuItem>
+                  </Link>
+                  <Link
+                    to={"/Account/Orders"}
+                    className=" no-underline text-black"
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <div className=" flex justify-center items-center gap-4">
+                        <FontAwesomeIcon icon={faCube} size="2xl" />
+                        <span>Order</span>
+                      </div>
+                    </MenuItem>
+                  </Link>
+                  <Link to={"/Account/Address"} className=" no-underline text-black">
+                    <MenuItem onClick={handleClose}>
+                      <div className=" flex justify-center items-center gap-4">
+                        <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
+                        <span> Address</span>
+                      </div>
+                    </MenuItem>
+                  </Link>
                   <Divider />
                   <MenuItem onClick={handleClose}>
                     <ListItemIcon>
-                      <Settings fontSize="small" />
+                      <Settings fontSize="medium" />
                     </ListItemIcon>
                     Settings
                   </MenuItem>
-                  <MenuItem onClick={handleClose}>
+                  <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
-                      <Logout fontSize="small" color="error" />
+                      <Logout fontSize="medium" color="error" />
                     </ListItemIcon>
                     <span className=" text-branding-error opacity-90">
                       Logout

@@ -37,8 +37,36 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             tokenResponse.token_type + tokenResponse.access_token
           }`,
         },
-      }).then((res) => {
-        console.log(res);
+      }).then(async (res) => {
+        if(res.status === 200) {
+          await instance({
+            method: 'post',
+            url: '/register/google',
+            data: {email: res.data.email, password: res.data.sub, first_name: res.data.given_name,
+               last_name: res.data.family_name, imgURL: res.data.picture, accept: 1},
+            headers: {
+              "Content-Type": "application/json"
+            },
+            responseType: 'json'
+          }).then((res) => {
+            if (res.status === 200) {
+              const date = new Date();
+              cookies.set("_ut", res.data._ut, {
+                expires: new Date(date.setMinutes(date.getMinutes() + 5)),
+                path: '/',
+                secure: true,
+                sameSite: "strict",
+              });
+              cookies.set("_ur", res.data._ur, {
+                expires: new Date(date.setDate(date.getDate() + 15)),
+                path: '/',
+                secure: true,
+                sameSite: "strict",
+              });
+              return location.href = '/';
+            }
+          })
+        }
       });
     },
     onError: (err) => console.log(err),

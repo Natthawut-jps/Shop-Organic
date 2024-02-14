@@ -32,7 +32,7 @@ function App() {
         </Route>
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route element={<ProtectRoute Allow={cookie.get('_ut') ? true : false} />}>
+        <Route element={<ProtectRoute Allow={cookie.get('_ur') ? true : false} />}>
           <Route path="/Account/Dashboard" element={<UserDashboard />} />
           <Route path="/Account/Orders" element={<OrderHistory />} />
           <Route path="/Account/Orders/:Detail" element={<OrderDetails />} />
