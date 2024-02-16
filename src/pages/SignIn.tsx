@@ -41,7 +41,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         if(res.status === 200) {
           await instance({
             method: 'post',
-            url: '/register/google',
+            url: '/public/register/google',
             data: {email: res.data.email, password: res.data.sub, first_name: res.data.given_name,
                last_name: res.data.family_name, imgURL: res.data.picture, accept: 1},
             headers: {
@@ -104,7 +104,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
     try {
       await instance({
         method: "post",
-        url: "/login/auth/username",
+        url: "/public/login/auth/username",
         data: uinfo,
         headers: {
           "Content-Type": "application/json",

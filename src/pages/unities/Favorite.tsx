@@ -6,6 +6,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
 import axios from 'axios';
 import instance from './axios_instance';
+import instance_auth from './instance_auth';
 
 // Favorite
 export const Transition = forwardRef(function Transition(
@@ -110,9 +111,9 @@ export const Favorite: FunctionComponent<open> = (props) => {
     const [confirmOpen, setConfirmOpen] = useState<{ open: boolean, id?: number }>({ open: false });
     // get FavoriteItem
     async function FavoriteItem() {
-        const { data } = await instance({
+        const { data } = await instance_auth({
             method: 'get',
-            url: '/cartAndFavorite/favorite',
+            url: '/CartAndFavorite/favorite',
         })
         setFavoritetItem(data)
     };

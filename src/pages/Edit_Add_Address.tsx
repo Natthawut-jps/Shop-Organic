@@ -2,19 +2,17 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Header } from "./unities/Header";
 import { NavAccount } from "./unities/NavAccount";
-import { FunctionComponent, useEffect, useState } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import instance_auth from "./unities/instance_auth";
 interface addressType {
   first_name: string;
   last_name: string;
-  company: string;
   street: string;
   county: string;
   tambon: string;
   amphure: string;
   zipCode: number;
-  email: string;
   phone: number;
 }
 export const Edit_Add_Address: FunctionComponent = () => {
@@ -86,18 +84,16 @@ export const Edit_Add_Address: FunctionComponent = () => {
     event.preventDefault();
     await instance_auth({
       method: "post",
-      url: "/increaseaddress",
+      url: "/address/add",
       data: {
         first_name: uinfo.first_name,
         last_name: uinfo.last_name,
-        company: uinfo.company,
         street: uinfo.street,
         phone: uinfo.phone,
         county: provincesData,
         amphure: amphureData,
         tambon: tambonData,
         zipCode: zipCodeData,
-        email: uinfo.email,
       },
       responseType: "json",
       headers: {
@@ -105,7 +101,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
       },
     }).then((res) => {
       if (res.status === 200) {
-        navigate("/Account/Address");
+        location.href = '/Account/Address'
       }
     });
   };
@@ -113,18 +109,16 @@ export const Edit_Add_Address: FunctionComponent = () => {
     event.preventDefault();
     await instance_auth({
       method: "post",
-      url: "/updateaddress",
+      url: "/address/update",
       data: {
         first_name: uinfoUp.first_name,
         last_name: uinfoUp.last_name,
-        company: uinfoUp.company,
         street: uinfoUp.street,
         phone: uinfoUp.phone,
         county: provincesData,
         amphure: amphureData,
         tambon: tambonData,
         zipCode: zipCodeData,
-        email: uinfoUp.email,
       },
       responseType: "json",
       headers: {
@@ -136,6 +130,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
       }
     });
   };
+
   return (
     <>
       {EditAndadd === "Edit" ? (
@@ -148,12 +143,12 @@ export const Edit_Add_Address: FunctionComponent = () => {
             EditAndadd={EditAndadd}
           />
           <NavAccount />
-          <div className=" relative top-[347px] left-[400px] w-[984px] h-[533px]">
-            <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[535px] border-[1px] border-solid border-gray-scale-gray-100" />
+          <div className=" relative top-[347px] left-[400px] w-[984px] h-[500px]">
+            <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[500px] border-[1px] border-solid border-gray-scale-gray-100" />
             <form id="add" onSubmit={handlerSubmitUpdate}>
               <button
                 type="submit"
-                className="absolute text-[16px] cursor-pointer top-[464px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
+                className="absolute text-[16px] cursor-pointer top-[400px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
                   Save Add
@@ -194,52 +189,21 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[364px] left-[500px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Phone</div>
-              <div className="relative rounded-md bg-gray-scale-white box-border w-[460px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute top-[0px] left-[5px] leading-[130%]">
-                  <input
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, phone: parseInt(e.target.value) })
-                    }
-                    form="add"
-                    type="tel"
-                    pattern="[0-9]{10}"
-                    placeholder="Phone"
-                    className="text-[15px] w-[447px] rounded-lg h-[45px] bg-transparent focus:outline-none"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
             <div className="absolute top-[88px] left-[660px] flex flex-col items-start justify-start gap-[6px]">
               <div className="relative leading-[150%]">
-                <span>{`Company Name `}</span>
-                <span className="text-gray-scale-gray-500">(optional)</span>
+                <span>{`Phone`}</span>
               </div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, last_name: e.target.value })
+                      setUinfoUp({ ...uinfoUp, phone: parseInt(e.target.value) })
                     }
-                    type="text"
-                    placeholder="Company (optional)"
-                    className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[364px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Email</div>
-              <div className="relative rounded-md bg-gray-scale-white box-border w-[460px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute top-[0px] left-[5px] leading-[130%]">
-                  <input
+                    type="tel"
                     form="add"
-                    type="email"
-                    placeholder="Email"
-                    className="text-[15px] w-[447px] rounded-lg h-[45px] bg-transparent focus:outline-none"
-                    required
+                    pattern="[0-9]{10}"
+                    placeholder="000-000-0000"
+                    className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                   />
                 </div>
               </div>
@@ -416,12 +380,12 @@ export const Edit_Add_Address: FunctionComponent = () => {
             EditAndadd={EditAndadd}
           />
           <NavAccount />
-          <div className=" relative top-[347px] left-[400px] w-[984px] h-[533px]">
-            <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[535px] border-[1px] border-solid border-gray-scale-gray-100" />
+          <div className=" relative top-[347px] left-[400px] w-[984px] h-[500px]">
+            <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[500px] border-[1px] border-solid border-gray-scale-gray-100" />
             <form id="add" onSubmit={handlerSubmit}>
               <button
                 type="submit"
-                className="absolute text-[16px] cursor-pointer top-[464px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
+                className="absolute text-[16px] cursor-pointer top-[400px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
                   Save Add
@@ -462,51 +426,21 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 </div>
               </div>
             </div>
-            <div className="absolute top-[364px] left-[500px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Phone</div>
-              <div className="relative rounded-md bg-gray-scale-white box-border w-[460px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute top-[0px] left-[5px] leading-[130%]">
-                  <input
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfo({ ...uinfo, phone: parseInt(e.target.value) })
-                    }
-                    form="add"
-                    type="tel"
-                    pattern="[0-9]{10}"
-                    placeholder="Phone"
-                    className="text-[15px] w-[447px] rounded-lg h-[45px] bg-transparent focus:outline-none"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
             <div className="absolute top-[88px] left-[660px] flex flex-col items-start justify-start gap-[6px]">
               <div className="relative leading-[150%]">
-                <span>{`Company Name `}</span>
-                <span className="text-gray-scale-gray-500">(optional)</span>
+                <span>{`Phone`}</span>
               </div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfo({ ...uinfo, company: e.target.value })
+                      setUinfo({ ...uinfo, phone: parseInt(e.target.value)  })
                     }
-                    type="text"
-                    placeholder="Company (optional)"
-                    className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="absolute top-[364px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Email</div>
-              <div className="relative rounded-md bg-gray-scale-white box-border w-[460px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="absolute top-[0px] left-[5px] leading-[130%]">
-                  <input
+                    type="tel"
                     form="add"
-                    type="email"
-                    placeholder="Email"
-                    className="text-[15px] w-[447px] rounded-lg h-[45px] bg-transparent focus:outline-none"
+                    placeholder="000-000-0000"
+                    pattern="[0-9]{10}"
+                    className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
                 </div>

@@ -11,21 +11,26 @@ interface userInfoType {
   first_name: string;
   last_name: string;
   imgURL: string;
+  accept: number;
+  createdAt: string;
+  email: string;
 }
 const UserDashboard: FunctionComponent = () => {
-  const [userInfo, setUserInfo] = useState<userInfoType[]>([]);
+  const [userInfo, setUserInfo] = useState<userInfoType>();
   const arr = [1, 2, 3, 4, 5, 6];
   const userData = async () => {
     try {
       await instance_auth({
         method: "get",
-        url: "/userInfo",
+        url: "/user/userInfo",
         headers: {
           "Content-Type": "application/json",
         },
         responseType: "json",
       }).then((res) => {
-        console.log(res)
+        if(res.status === 200) {
+          setUserInfo(res.data);
+        }
       });
     } catch (error) {
       console.log(error);
@@ -47,9 +52,9 @@ const UserDashboard: FunctionComponent = () => {
       <NavAccount />
       <div className="absolute top-[347px] left-[400px] w-[536px] h-[278px] text-center text-xl">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[536px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
-        <div className="absolute top-[160px] left-[195px] rounded-lg flex flex-col items-center justify-start gap-[2px]">
+        <div className="absolute top-[160px] left-[0px] w-full rounded-lg flex flex-col items-center justify-center gap-[2px]">
           <div className="relative leading-[150%] font-medium">
-            Dianne Russell
+            {`${userInfo?.first_name} ${userInfo?.last_name}`}
           </div>
           <div className="relative text-sm leading-[150%] text-gray-scale-gray-500 mix-blend-normal">
             Customer
@@ -58,7 +63,7 @@ const UserDashboard: FunctionComponent = () => {
         <img
           className="absolute top-[32px] left-[208px] rounded-[50%] w-[120px] h-[120px] object-cover"
           alt=""
-          src="/img/profile.jpg"
+          src={`${userInfo?.imgURL}`}
         />
         <Link
           to={"/Account/Settings"}
@@ -121,7 +126,10 @@ const UserDashboard: FunctionComponent = () => {
         </Link>
         <div className="absolute top-[110px] left-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
           {arr.map((item, index) => (
-            <div key={index} className="relative w-[936px] h-[45px] odd:bg-white even:bg-slate-50">
+            <div
+              key={index}
+              className="relative w-[936px] h-[45px] odd:bg-white even:bg-slate-50"
+            >
               <div className="absolute top-[12px] left-[0px] flex flex-row items-start justify-start">
                 <div className="relative leading-[150%]">#</div>
                 <div className="relative leading-[150%]">738</div>

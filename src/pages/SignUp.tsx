@@ -78,7 +78,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
     try {
       await instance({
         method: "post",
-        url: "/register/usr",
+        url: "/public/register/usr",
         data: uinfo,
         responseType: "json",
         headers: {

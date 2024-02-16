@@ -6,6 +6,7 @@ import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
 import instance from './axios_instance';
 import axios from 'axios';
+import instance_auth from './instance_auth';
 
 // Cart
 export const Transition = forwardRef(function Transition(
@@ -133,9 +134,9 @@ export const Cart: FunctionComponent<open> = (props) => {
     };
     // get CartItem
     async function CartItem() {
-        const { data } = await instance({
+        const { data } = await instance_auth({
             method: 'get',
-            url: '/cartAndFavorite/cart',
+            url: '/CartAndFavorite/cart',
         })
         setCartitems(data)
     };

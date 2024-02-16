@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import instance from "./axios_instance";
 import instance_auth from "./instance_auth";
 
 // context CartShopping

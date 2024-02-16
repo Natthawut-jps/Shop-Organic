@@ -14,11 +14,12 @@ interface addressType {
   street: string;
   county: string;
   tambon: string;
-  amphure: string;
+  states: string;
   zipCode: number;
   email: string;
   phone: number;
   status: number;
+  createdAt: string;
 };
 export const Address = () => {
   const [address, setAddress] = useState<addressType[]>([]);
@@ -28,7 +29,7 @@ export const Address = () => {
       try {
         await instance_auth({
           method: "get",
-          url: "/address",
+          url: "/address/all",
           responseType: "json",
           headers: {
             "Content-Type": "application/json",
@@ -36,8 +37,6 @@ export const Address = () => {
         }).then((res) => {
           if (res.status === 200) {
             setAddress(res.data);
-          } else {
-            setAddress([]);
           }
         });
       } catch (err) {
@@ -45,7 +44,7 @@ export const Address = () => {
       }
     };
     address();
-  }, [dafults]);
+  }, []);
 
   const setDeflut = async (id: number, status: number) => {
     await instance_auth({
@@ -87,22 +86,14 @@ export const Address = () => {
                   <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
                   <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
                     <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
-                      {`${item.street}, ${item.county}, ${item.amphure},
+                      {`${item.street}, ${item.county}, ${item.states},
                        ${item.tambon}, ${item.zipCode}`}
                     </div>
                     <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
                       <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
-                        Email
+                        Phnoe
                       </div>
                       <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
-                        {item.email}
-                      </div>
-                    </div>
-                    <div className=" relative top-[120px] pl-[20px] box-border flex flex-col items-start justify-start gap-[4px] text-xs">
-                      <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                        Phone
-                      </div>
-                      <div className="relative text-sm break-words leading-[150%] text-gray-scale-gray-900 inline-block w-[420px]">
                         {item.phone}
                       </div>
                     </div>
