@@ -39,16 +39,23 @@ interface addressType {
 const Checkout: FunctionComponent = () => {
   const navigate = useNavigate();
   const [itemCart, setCart] = useState<datatypesCart[]>([]);
+  const [addressItem, setAddress] = useState<addressType[]>([]);
   const price = itemCart.map((item) => item.price);
   const priceSum = price.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
   }, 0);
-  const handlerPlacement = () => {
+  const handlerPlacement = async () => {
+    const quantity = itemCart.map((item) => item.quantity);
+    const quantitySum = quantity.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue;
+    }, 0);
+    const address_id = addressItem.find((item) => item.id);
+    const amount_total = (priceSum + 50).toFixed(2);
     try {
-      instance_auth({
+      await instance_auth({
         method: "post",
-        url: "/auth/CartAndFavorite/cart",
-        data: {},
+        url: "/order/add",
+        data: { amount_total: amount_total, address_id:  address_id?.id, quantity: quantitySum },
         responseType: "json",
         headers: {
           "Content-Type": "application/json",
@@ -66,14 +73,13 @@ const Checkout: FunctionComponent = () => {
   async function CartGet() {
     await instance_auth({
       method: "get",
-      url: "/CartAndFavorite/cart",
+      url: "/cart-favorite/cart",
     }).then((res) => {
       if (res.status === 200) {
         setCart(res.data);
       }
     });
   }
-  const [addressItem, setAddress] = useState<addressType[]>([]);
   const address = async () => {
     try {
     await instance_auth({
@@ -175,7 +181,7 @@ console.log(addressItem)
         </div>
         <div
           onClick={handlerPlacement}
-          className=" cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white"
+          className="cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white"
         >
           <div className="relative leading-[120%] font-semibold">
             Place Order

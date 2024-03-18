@@ -60,7 +60,7 @@ export const CartProvider = ({ children }: Provider) => {
     const addTocart = async (prop: datatypesProduct) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/addTocart',
+            url: '/cart-favorite/addTocart',
             data: {
                 id: prop.id,
                 name: prop.name,
@@ -77,7 +77,7 @@ export const CartProvider = ({ children }: Provider) => {
     const increaseCartQuantity = async (pid: number, price: number) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/increase',
+            url: '/cart-favorite/increase',
             data: { pid: pid, price: price }
         }).then((res) => {
             setCartitems(res.data);
@@ -86,7 +86,7 @@ export const CartProvider = ({ children }: Provider) => {
     const decreaseCartQuantity = async (pid: number, price: number) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/decrease',
+            url: '/cart-favorite/decrease',
             data: { pid: pid, price: price }
         }).then((res) => setCartitems(res.data))
     }
@@ -94,7 +94,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeCartItem = async (id: number) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/remove',
+            url: '/cart-favorite/remove',
             data: { id: id }
         }).then((res) => setCartitems(res.data));
     }
@@ -102,7 +102,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeCartItemAll = async (check: boolean) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/removeAll',
+            url: '/cart-favorite/removeAll',
             data: { check: check }
         }).then((res) => setCartitems(res.data))
     }
@@ -113,7 +113,7 @@ export const CartProvider = ({ children }: Provider) => {
     const addFavorite = async (prop: datatypesProduct) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/addFavorite',
+            url: '/cart-favorite/addFavorite',
             data: {
                 id: prop.id,
                 name: prop.name,
@@ -131,7 +131,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeFavoriteItem = async (id: number) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/removeFavorite',
+            url: '/cart-favorite/removeFavorite',
             data: { id: id }
         }).then((res) => setFavoritetItem(res.data));
     }
@@ -139,7 +139,7 @@ export const CartProvider = ({ children }: Provider) => {
     const removeFavoriteItemAll = async (check: boolean) => {
         await instance_auth({
             method: 'post',
-            url: '/cartAndFavorite/removeAllFavorite',
+            url: '/cart-favorite/removeAllFavorite',
             data: { check: check }
         }).then((res) => setFavoritetItem(res.data))
     }

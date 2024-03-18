@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
-import instance from './axios_instance';
 import axios from 'axios';
 import instance_auth from './instance_auth';
 import { Link } from 'react-router-dom';
@@ -137,7 +136,7 @@ export const Cart: FunctionComponent<open> = (props) => {
     async function CartItem() {
         const { data } = await instance_auth({
             method: 'get',
-            url: '/CartAndFavorite/cart',
+            url: '/cart-favorite/cart',
         })
         setCartitems(data)
     };
@@ -221,7 +220,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                             <div className=" relative w-full pb-[320px] box-border top-[60px] bg-[#f7f7f7]">
                                 <div>
                                     <div className="top-[98px] left-[384px] font-normal absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {popularProduct.slice(-1).map(item => item.shoppingHanding)[0]  + '฿'}
+                                        {popularProduct.slice(-1).map(item => item.shoppingHanding)[0] + '฿'}
                                     </div>
                                     <div className="top-[139px] left-[386px] font-bold absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
                                         {(priceSum + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]).toFixed(2) + '฿'}

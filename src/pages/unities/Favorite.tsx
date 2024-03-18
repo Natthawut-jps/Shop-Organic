@@ -113,7 +113,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
     async function FavoriteItem() {
         const { data } = await instance_auth({
             method: 'get',
-            url: '/CartAndFavorite/favorite',
+            url: '/cart-favorite/favorite',
         })
         setFavoritetItem(data)
     };
