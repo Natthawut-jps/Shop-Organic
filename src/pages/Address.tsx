@@ -20,10 +20,9 @@ interface addressType {
   phone: number;
   status: number;
   createdAt: string;
-};
+}
 export const Address = () => {
   const [address, setAddress] = useState<addressType[]>([]);
-  const [dafults, setDefult] = useState<boolean>(false);
   useEffect(() => {
     const address = async () => {
       try {
@@ -46,10 +45,10 @@ export const Address = () => {
     address();
   }, []);
 
-  const setDeflut = async (id: number, status: number) => {
+  const Deflut = async (id: number, status: number) => {
     await instance_auth({
       method: "post",
-      url: "/setdefultaddress",
+      url: "/address/setdefultaddress",
       data: { id: id, status: status },
       responseType: "json",
       headers: {
@@ -57,9 +56,21 @@ export const Address = () => {
       },
     }).then((res) => {
       if (res.status === 200) {
-        setDefult(true);
-      } else {
-        setDefult(false);
+        location.reload();
+      }
+    });
+  };
+  const Delete = async (id: number) => {
+    await instance_auth({
+      method: "post",
+      url: "/address/deleted",
+      data: { id: id },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        location.reload();
       }
     });
   };
@@ -78,58 +89,63 @@ export const Address = () => {
           <div className=" relative top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] pb-[150px] h-fit border-[1px] border-solid border-gray-scale-gray-100">
             {/* Address */}
             <div className=" relative grid grid-cols-2 grid-flow-row gap-y-5 w-[950px]">
-              {address.map((item, index) => (
-                <div
-                  key={index}
-                  className=" relative top-[86px] left-[24px] w-[450px] h-[280px]"
-                >
-                  <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
-                  <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
-                    <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
-                      {`${item.street}, ${item.county}, ${item.states},
+              {address
+                .sort((a, b) => b.status - a.status)
+                .map((item, index) => (
+                  <div
+                    key={index}
+                    className=" relative top-[86px] left-[24px] w-[450px] h-[280px]"
+                  >
+                    <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
+                    <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
+                      <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
+                        {`${item.street}, ${item.county}, ${item.states},
                        ${item.tambon}, ${item.zipCode}`}
-                    </div>
-                    <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
-                      <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
-                        Phnoe
                       </div>
-                      <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
-                        {item.phone}
+                      <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
+                        <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
+                          Phnoe
+                        </div>
+                        <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
+                          {item.phone}
+                        </div>
                       </div>
-                    </div>
-                    <div className="absolute top-[46px] pl-[20px] box-border text-base leading-[150%] text-gray-scale-gray-900 w-[450px]">
-                      {`${item.first_name} ${item.last_name}`}
-                    </div>
-                    <Link
-                      to={"/Account/Address/Edit"}
-                      className="absolute hover:text-[#06e102]/70 top-[0px] cursor-pointer p-[2px] text-[#06e102] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
-                    >
-                      Edit
-                    </Link>
-                    {item.status === 1 ? (
-                      <button
-                        className="absolute bg-transparent top-[0px] p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/30 rounded-sm text-[#666666] cursor-not-allowed"
-                        disabled
+                      <div className="absolute top-[46px] pl-[20px] box-border text-base leading-[150%] text-gray-scale-gray-900 w-[450px]">
+                        {`${item.first_name} ${item.last_name}`}
+                      </div>
+                      <Link
+                        to={"/Account/Address/Edit"}
+                        className="absolute hover:text-[#06e102]/70 top-[0px] cursor-pointer p-[2px] text-[#06e102] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
                       >
-                        ตั้งเป็นค่าเริ่มต้น
-                      </button>
-                    ) : (
-                      <div>
+                        Edit
+                      </Link>
+                      {item.status === 1 ? (
                         <button
-                          onClick={() => setDeflut(item.id, 1)}
-                          className="absolute hover:text-black/90 active:bg-black/10 bg-transparent top-[0px] cursor-pointer p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/50 rounded-sm text-black"
+                          className="absolute bg-transparent top-[0px] p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/30 rounded-sm text-[#666666] cursor-not-allowed"
+                          disabled
                         >
                           ตั้งเป็นค่าเริ่มต้น
                         </button>
-                        <div className="absolute cursor-pointer p-[2px] hover:text-red-400 text-red-600 top-[0px] left-[370px] tracking-[0.03em] leading-[100%] font-medium">
-                          Delete
+                      ) : (
+                        <div>
+                          <button
+                            onClick={() => Deflut(item.id, 1)}
+                            className="absolute hover:text-black/90 active:bg-black/10 bg-transparent top-[0px] cursor-pointer p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/50 rounded-sm text-black"
+                          >
+                            ตั้งเป็นค่าเริ่มต้น
+                          </button>
+                          <div
+                            onClick={() => Delete(item.id)}
+                            className="absolute cursor-pointer p-[2px] hover:text-red-400 text-red-600 top-[0px] left-[370px] tracking-[0.03em] leading-[100%] font-medium"
+                          >
+                            Delete
+                          </div>
                         </div>
-                      </div>
-                    )}
-                    <div className="absolute top-[31.5px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+                      )}
+                      <div className="absolute top-[31.5px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
               <Link
                 to={"/Account/Address/Add"}
                 className=" relative top-[86px] left-[24px] w-[450px] h-[200px] bg-[#06e102]/20 hover:bg-[#06e102]/30"

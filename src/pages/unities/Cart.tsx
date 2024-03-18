@@ -7,6 +7,7 @@ import { CartContextProviders } from './HandleCart';
 import instance from './axios_instance';
 import axios from 'axios';
 import instance_auth from './instance_auth';
+import { Link } from 'react-router-dom';
 
 // Cart
 export const Transition = forwardRef(function Transition(
@@ -220,10 +221,10 @@ export const Cart: FunctionComponent<open> = (props) => {
                             <div className=" relative w-full pb-[320px] box-border top-[60px] bg-[#f7f7f7]">
                                 <div>
                                     <div className="top-[98px] left-[384px] font-normal absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {'฿' + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]}
+                                        {popularProduct.slice(-1).map(item => item.shoppingHanding)[0]  + '฿'}
                                     </div>
                                     <div className="top-[139px] left-[386px] font-bold absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {'฿' + (priceSum + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]).toFixed(2)}
+                                        {(priceSum + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]).toFixed(2) + '฿'}
                                     </div>
                                     <div className="absolute top-[142px] left-[123px] [font-family:'Noto_Serif_Thai',Helvetica] font-bold text-[#666666] text-[12px] tracking-[0] leading-[normal]">
                                         ราคาสุทธิ
@@ -237,13 +238,13 @@ export const Cart: FunctionComponent<open> = (props) => {
                                         (ค่าจัดส่งด่วน - DHL Express)
                                     </p>
                                 </div>
-                                <div className=" cursor-pointer absolute w-[130px] h-[43px] top-[210px] left-[350px]">
+                                <Link to={'/shop/checkout'} className="cursor-pointer absolute w-[130px] h-[43px] top-[210px] left-[350px]">
                                     <div className="relative w-[128px] h-[43px] bg-[#06e10133] rounded-[4px] border border-solid border-[#06e102]">
                                         <div className="w-[43px] h-[29px] top-[10px] left-[41px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#06e102] text-[16px] absolute tracking-[0] leading-[normal]">
                                             สั่งซื้อ
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                                 <div onClick={() => props.Carts.setOpenCart(false)} className=" cursor-pointer top-[229px] left-[128px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-black text-[14px] absolute tracking-[0] leading-[normal]">
                                     ช้อปปิ้งต่อ
                                 </div>
