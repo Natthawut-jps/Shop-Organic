@@ -5,6 +5,7 @@ import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Link, useNavigate } from "react-router-dom";
 import instance_auth from "./unities/instance_auth";
 import { AxiosResponse } from "axios";
+import { CartContextProviders } from "./unities/HandleCart";
 
 interface datatypesCart {
   id: number;
@@ -36,16 +37,29 @@ interface addressType {
   status: number;
   createdAt: string;
 }
+interface orderDetail_Type {
+  id: number;
+  name: string;
+  price: number;
+  categories: string;
+  quantity: number;
+  imgURL: string;
+  p_id: number;
+  user_id: number;
+  order_id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 const Checkout: FunctionComponent = () => {
   const navigate = useNavigate();
-  const [itemCart, setCart] = useState<datatypesCart[]>([]);
+  const { cartItems } = CartContextProviders();
   const [addressItem, setAddress] = useState<addressType[]>([]);
-  const price = itemCart.map((item) => item.price);
+  const price = cartItems.map((item) => item.price);
   const priceSum = price.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
   }, 0);
   const handlerPlacement = async () => {
-    const quantity = itemCart.map((item) => item.quantity);
+    const quantity = cartItems.map((item) => item.quantity);
     const quantitySum = quantity.reduce((accumulator, currentValue) => {
       return accumulator + currentValue;
     }, 0);
@@ -55,36 +69,49 @@ const Checkout: FunctionComponent = () => {
       await instance_auth({
         method: "post",
         url: "/order/add",
-        data: { amount_total: amount_total, address_id:  address_id?.id, quantity: quantitySum },
+        data: {
+          amount_total: amount_total,
+          address_id: address_id?.id,
+          quantity: quantitySum,
+        },
         responseType: "json",
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((res: AxiosResponse) => {
+      }).then(async (res) => {
         if (res.status === 200) {
-          const date = new Date();
-          const time = new Date(date.setMinutes(date.getMinutes() + 5));
-          navigate("/shop/checkout/bill", { state: {order_id: res.data, time_old: time}});
+          try {
+            await instance_auth({
+              method: "post",
+              url: "/order/details",
+              data: { order_id: parseInt(res.data) },
+              responseType: "json",
+              headers: {
+                "Content-Type": "application/json",
+              }
+            }).then((res) => {
+              if (res.status === 200) {
+                console.log(res.data);
+                const date = new Date();
+                const time = new Date(date.setMinutes(date.getMinutes() + 5));
+                navigate("/shop/checkout/bill", {
+                  state: { order_list: res.data, time_old: time },
+                });
+              }
+            });
+          } catch (error) {
+            console.log(error);
+          }
         }
       });
     } catch (err) {
       console.log(err);
     }
   };
-  //get cart
-  async function CartGet() {
-    await instance_auth({
-      method: "get",
-      url: "/cart-favorite/cart",
-    }).then((res) => {
-      if (res.status === 200) {
-        setCart(res.data);
-      }
-    });
-  }
+
   const address = async () => {
     try {
-    await instance_auth({
+      await instance_auth({
         method: "get",
         url: "/address/all",
         responseType: "json",
@@ -93,7 +120,9 @@ const Checkout: FunctionComponent = () => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          setAddress( () => res.data.filter((item: addressType) => item.status === 1));
+          setAddress(() =>
+            res.data.filter((item: addressType) => item.status === 1)
+          );
         }
       });
     } catch (err) {
@@ -102,12 +131,11 @@ const Checkout: FunctionComponent = () => {
   };
 
   useEffect(() => {
-    CartGet();
     address();
   }, []);
-console.log(addressItem)
+
   return (
-    <div className="bg-[url(/img/thumb-1920-1318790.png)] relative  w-full h-[1600px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
+    <div className="bg-[url(/img/thumb-1920-1318790.png)] relative  w-full h-[1800px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-xxl-body-xxl-500">
       <Header />
       <Breadcrumbs
         categoies={undefined}
@@ -115,14 +143,14 @@ console.log(addressItem)
         EditAndadd={undefined}
         Detail={undefined}
       />
-      <div className=" absolute top-[320px] w-[1200px] rounded-lg left-[200px] h-[700px] bg-gray-scale-white shadow drop-shadow" />
+      <div className=" absolute top-[320px] w-[1200px] rounded-lg left-[200px] h-[900px] bg-gray-scale-white shadow drop-shadow" />
       <div className="absolute top-[390px] left-[850px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[24px] border-[1px] border-solid border-gray-scale-gray-100">
         <div className="flex flex-col items-start justify-start gap-[12px]">
           <div className="relative text-xl leading-[150%] font-medium">
             Order Summery
           </div>
-          <div className="flex flex-col items-start justify-start">
-            {itemCart.map((item, index) => (
+          <div className="scroll-checkout flex flex-col items-start justify-start w-[400px] h-[300px] overflow-auto hover:scroll-m-48">
+            {cartItems.map((item, index) => (
               <div
                 key={index}
                 className="w-[376px] flex flex-row items-center justify-between"
@@ -190,10 +218,13 @@ console.log(addressItem)
           </div>
         </div>
       </div>
-      <div className="absolute top-[340px] left-[370px] w-[460px] flex flex-col items-start justify-start gap-[32px]">
-        <div className="relative w-[872px] h-[350px]">
+      <div className="absolute top-[440px] left-[370px] w-[460px] flex flex-col items-start justify-start gap-[32px]">
+        <div className="relative w-[472px] h-[350px]">
           {addressItem.map((item, index) => (
-            <div key={index} className=" relative top-[50px] left-[0px] w-[450px] h-[280px]">
+            <div
+              key={index}
+              className=" relative top-[50px] left-[0px] w-[450px] h-[280px]"
+            >
               <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
               <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
                 <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
@@ -241,7 +272,7 @@ console.log(addressItem)
             <div className="relative leading-[150%]">
               Order Notes (Optional)
             </div>
-            <div className="relative rounded-md bg-gray-scale-white box-border w-[450px] h-[100px] text-base text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100">
+            <div className="relative rounded-md bg-gray-scale-white box-border w-[450px] h-[180px] text-base text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100">
               <div className="absolute top-[0px] left-[5px] leading-[130%]">
                 <textarea
                   placeholder="Notes about your order, e.g. special notes for delivery"

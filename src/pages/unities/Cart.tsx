@@ -220,10 +220,10 @@ export const Cart: FunctionComponent<open> = (props) => {
                             <div className=" relative w-full pb-[320px] box-border top-[60px] bg-[#f7f7f7]">
                                 <div>
                                     <div className="top-[98px] left-[384px] font-normal absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {popularProduct.slice(-1).map(item => item.shoppingHanding)[0] + '฿'}
+                                        {'50฿'}
                                     </div>
                                     <div className="top-[139px] left-[386px] font-bold absolute [font-family:'Noto_Serif_Thai',Helvetica] text-[#666666] text-[12px] tracking-[0] leading-[normal]">
-                                        {(priceSum + popularProduct.slice(-1).map(item => item.shoppingHanding)[0]).toFixed(2) + '฿'}
+                                        {(priceSum + 50).toFixed(2) + '฿'}
                                     </div>
                                     <div className="absolute top-[142px] left-[123px] [font-family:'Noto_Serif_Thai',Helvetica] font-bold text-[#666666] text-[12px] tracking-[0] leading-[normal]">
                                         ราคาสุทธิ

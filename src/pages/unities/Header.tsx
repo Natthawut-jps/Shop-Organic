@@ -50,7 +50,7 @@ export const Header: FunctionComponent = () => {
   const [openSignUp, setOpenSignUp] = useState<boolean>(false);
   const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const quantity = cartItems.map((item) => item.quantity);
-  const price = cartItems.map((item) => item.price * item.quantity);
+  const price = cartItems.map((item) => item.price);
   const priceSum = price.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
   }, 0);
@@ -66,8 +66,8 @@ export const Header: FunctionComponent = () => {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    cookie.remove("_ut", { path: '/'});
-    cookie.remove("_ur", { path: '/' });
+    cookie.remove("_ut", { path: "/" });
+    cookie.remove("_ur", { path: "/" });
     setCategries(false);
     setAnchorEl(null);
     location.href = "/";
@@ -172,7 +172,10 @@ export const Header: FunctionComponent = () => {
                       </div>
                     </MenuItem>
                   </Link>
-                  <Link to={"/Account/Address"} className=" no-underline text-black">
+                  <Link
+                    to={"/Account/Address"}
+                    className=" no-underline text-black"
+                  >
                     <MenuItem onClick={handleClose}>
                       <div className=" flex justify-center items-center gap-4">
                         <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
@@ -275,9 +278,15 @@ export const Header: FunctionComponent = () => {
               </div>
               <div className="text-green-700 flex flex-col items-start justify-start gap-[7px] text-left text-2xs sm:hidden ">
                 <div className="relative leading-[120%]">Shopping cart:</div>
-                <div className="relative text-sm leading-[100%] font-medium ">
-                  {priceSum.toFixed(2) + "฿"}
-                </div>
+                {priceSum ? (
+                  <div className="relative text-sm leading-[100%] font-medium ">
+                    {(priceSum + 50).toFixed(2) + "฿"}
+                  </div>
+                ) : (
+                  <div className="relative text-sm leading-[100%] font-medium ">
+                    {priceSum.toFixed(2) + "฿"}
+                  </div>
+                )}
               </div>
             </div>
           </div>

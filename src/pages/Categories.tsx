@@ -233,7 +233,7 @@ const Categories: FunctionComponent = () => {
                     }}
                   >
                     {countCategories.map((item, index) => (
-                      <div>
+                      <div key={index}>
                         <FormControlLabel key={index} value={item[0]} control={<Radio />} label={item[0]} />
                         {`(${item[1]})`}
                       </div>
