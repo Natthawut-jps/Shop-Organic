@@ -62,7 +62,9 @@ const Checkout: FunctionComponent = () => {
         },
       }).then((res: AxiosResponse) => {
         if (res.status === 200) {
-          navigate("/shop/checkout/bill", { state: res.data });
+          const date = new Date();
+          const time = new Date(date.setMinutes(date.getMinutes() + 5));
+          navigate("/shop/checkout/bill", { state: {order_id: res.data, time_old: time}});
         }
       });
     } catch (err) {
