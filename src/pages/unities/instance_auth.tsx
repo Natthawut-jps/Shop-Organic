@@ -12,7 +12,6 @@ try {
       const _ut = cookies.get("_ut");
       if (_ut) {
         configs.headers.Authorization = `Bearer ${_ut}`;
-        configs.headers["Content-Type"] = "application/json";
       }
       return configs;
     },
@@ -38,7 +37,6 @@ try {
               data: { massage: "Authorize" },
               headers: {
                 Authorization: `Bearer ${_ur}`,
-                "Content-Type": "application/json",
               },
             }).then((res:any) => {
               if (res.status === 200) {

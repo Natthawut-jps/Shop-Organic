@@ -184,12 +184,17 @@ export const Header: FunctionComponent = () => {
                     </MenuItem>
                   </Link>
                   <Divider />
-                  <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
-                      <Settings fontSize="medium" />
-                    </ListItemIcon>
-                    Settings
-                  </MenuItem>
+                  <Link
+                    to={"/Account/Settings"}
+                    className=" no-underline text-black/70"
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <ListItemIcon>
+                        <Settings fontSize="medium" />
+                      </ListItemIcon>
+                      Settings
+                    </MenuItem>
+                  </Link>
                   <MenuItem onClick={handleLogout}>
                     <ListItemIcon>
                       <Logout fontSize="medium" color="error" />

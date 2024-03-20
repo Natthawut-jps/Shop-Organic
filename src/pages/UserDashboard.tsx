@@ -71,7 +71,7 @@ const UserDashboard: FunctionComponent = () => {
     try {
       await instance_auth({
         method: "get",
-        url: "/user/userInfo",
+        url: "/user/user_info",
         headers: {
           "Content-Type": "application/json",
         },
@@ -86,7 +86,6 @@ const UserDashboard: FunctionComponent = () => {
     }
   };
   const [order, setOrder] = useState<order_Type[]>([]);
-  const [addressActive, setAddress_Active] = useState<addressType>();
   const order_get = async () => {
     try {
       await instance_auth({
@@ -126,9 +125,9 @@ const UserDashboard: FunctionComponent = () => {
         EditAndadd={undefined}
       />
       <NavAccount />
-      <div className="absolute top-[347px] left-[400px] w-[536px] h-[278px] text-center text-xl">
-        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[536px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
-        <div className="absolute top-[160px] left-[0px] w-full rounded-lg flex flex-col items-center justify-center gap-[2px]">
+      <div className="absolute top-[347px] left-[400px] w-[984px] h-[278px] text-center text-xl">
+        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
+        <div className="absolute top-[160px] left-[0px] w-[984px] rounded-lg flex flex-col items-center justify-center gap-[2px]">
           <div className="relative leading-[150%] font-medium">
             {`${userInfo?.first_name} ${userInfo?.last_name}`}
           </div>
@@ -136,44 +135,21 @@ const UserDashboard: FunctionComponent = () => {
             Customer
           </div>
         </div>
-        <img
-          className="absolute top-[32px] left-[208px] rounded-[50%] w-[120px] h-[120px] object-cover"
-          alt=""
-          src={`${userInfo?.imgURL}`}
-        />
-        <Link
-          to={"/Account/Settings"}
-          className="absolute no-underline top-[222px] left-[226px] text-base leading-[150%] font-medium text-branding-success"
-        >
-          Edit Profile
-        </Link>
-      </div>
-      <div className="absolute top-[347px] left-[950px] w-[424px] h-[278px] text-gray-scale-gray-400">
-        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[424px] h-[278px] border-[1px] border-solid border-gray-scale-gray-100" />
-        <div className="absolute top-[32px] left-[32px] text-sm tracking-[0.03em] leading-[100%] uppercase font-medium">
-          Current Address
+        <div className="flex flex-col justify-center items-center w-[984px] ">
+          <img
+            className=" relative top-[32px] left-[0] rounded-[50%] w-[120px] h-[120px] object-cover"
+            alt=""
+            src={`${import.meta.env.VITE_BASE_API}/img/${userInfo?.imgURL}`}
+          />
+          <Link
+            to={"/Account/Settings"}
+            className="relative z-50 no-underline hover:cursor-pointer top-[100px] left-[0px] text-base leading-[150%] font-medium text-branding-success"
+          >
+            Edit Profile
+          </Link>
         </div>
-        <div className="absolute top-[64px] left-[32px] w-[264px] h-[139px] text-gray-scale-gray-900">
-          <div className="absolute top-[0px] left-[0px] text-lg leading-[150%] font-medium">
-            Dainne Russell
-          </div>
-          <div className="absolute top-[35px] left-[0px] text-sm leading-[150%] text-gray-scale-gray-600 inline-block w-[264px]">
-            4140 Parker Rd. Allentown, New Mexico 31134
-          </div>
-          <div className="absolute top-[85px] left-[0px] leading-[150%]">
-            dainne.ressell@gmail.com
-          </div>
-          <div className="absolute top-[115px] left-[0px] leading-[150%]">
-            (671) 555-0110
-          </div>
-        </div>
-        <Link
-          to={"/Account/Address"}
-          className="absolute no-underline top-[222px] left-[32px] leading-[150%] font-medium text-branding-success"
-        >
-          Edit Address
-        </Link>
       </div>
+
       <div className="absolute top-[649px] left-[400px] w-[984px] h-[404px] text-xs text-gray-scale-gray-700">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[404px] border-[1px] border-solid border-gray-scale-gray-100" />
         <div className="absolute top-[62px] left-[0px] w-[984px] h-9">
