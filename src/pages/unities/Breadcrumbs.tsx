@@ -10,7 +10,7 @@ interface Prop {
     EditAndadd: string | undefined
 }
 export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
-    const { pageParam } = useParams();
+    const { pageParam, order_id } = useParams();
 
     return (
         <>
@@ -69,7 +69,7 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             {"Account"}
                         </div>
                     </NavLink>
-                    <NavLink to={`/Account/Orders/Detail`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
+                    <NavLink to={`/Account/Orders/Detail/${order_id}`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
                             {"Account"}
@@ -144,7 +144,7 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                             </div>
                         </Link>
                     }
-                    <NavLink to={`/Account/Orders/Detail`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
+                    <NavLink to={`/Account/Orders/Detail/${order_id}`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />

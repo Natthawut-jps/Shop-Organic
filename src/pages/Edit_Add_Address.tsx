@@ -13,7 +13,7 @@ interface addressType {
   tambon: string;
   amphure: string;
   zipCode: number;
-  phone: number;
+  phone: string;
 }
 export const Edit_Add_Address: FunctionComponent = () => {
   const [uinfo, setUinfo] = useState<addressType>({} as addressType);
@@ -78,7 +78,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
       });
     }
   }, [zipCode]);
-
+  
   const navigate = useNavigate();
   const handlerSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -101,7 +101,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
       },
     }).then((res) => {
       if (res.status === 200) {
-        location.href = '/Account/Address'
+        location.href = "/Account/Address";
       }
     });
   };
@@ -197,7 +197,10 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, phone: parseInt(e.target.value) })
+                      setUinfoUp({
+                        ...uinfoUp,
+                        phone: e.target.value,
+                      })
                     }
                     type="tel"
                     form="add"
@@ -434,11 +437,11 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfo({ ...uinfo, phone: parseInt(e.target.value)  })
+                      setUinfo({ ...uinfo, phone: e.target.value })
                     }
                     type="tel"
                     form="add"
-                    placeholder="000-000-0000"
+                    placeholder="0000000000"
                     pattern="[0-9]{10}"
                     className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required

@@ -33,23 +33,11 @@ interface addressType {
   states: string;
   zipCode: number;
   email: string;
-  phone: number;
+  phone: string;
   status: number;
   createdAt: string;
 }
-interface orderDetail_Type {
-  id: number;
-  name: string;
-  price: number;
-  categories: string;
-  quantity: number;
-  imgURL: string;
-  p_id: number;
-  user_id: number;
-  order_id: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
+
 const Checkout: FunctionComponent = () => {
   const navigate = useNavigate();
   const { cartItems } = CartContextProviders();
@@ -80,28 +68,12 @@ const Checkout: FunctionComponent = () => {
         },
       }).then(async (res) => {
         if (res.status === 200) {
-          try {
-            await instance_auth({
-              method: "post",
-              url: "/order/details",
-              data: { order_id: parseInt(res.data) },
-              responseType: "json",
-              headers: {
-                "Content-Type": "application/json",
-              }
-            }).then((res) => {
-              if (res.status === 200) {
-                console.log(res.data);
-                const date = new Date();
-                const time = new Date(date.setMinutes(date.getMinutes() + 5));
-                navigate("/shop/checkout/bill", {
-                  state: { order_list: res.data, time_old: time },
-                });
-              }
-            });
-          } catch (error) {
-            console.log(error);
-          }
+          console.log(res.data);
+          const date = new Date();
+          const time = new Date(date.setMinutes(date.getMinutes() + 5));
+          navigate("/shop/checkout/bill", {
+            state: { order_list: res.data, time_old: time },
+          });
         }
       });
     } catch (err) {

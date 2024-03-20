@@ -17,7 +17,7 @@ interface addressType {
   states: string;
   zipCode: number;
   email: string;
-  phone: number;
+  phone: string;
   status: number;
   createdAt: string;
 }

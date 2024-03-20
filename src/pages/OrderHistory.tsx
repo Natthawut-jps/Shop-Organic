@@ -38,7 +38,7 @@ const OrderHistory: FunctionComponent = () => {
     "November",
     "December",
   ];
-
+  const status_step = ['Order received', 'Processing', 'On the way', 'Delivered'];
   const orders_get = async () => {
     try {
       await instance_auth({
@@ -62,8 +62,12 @@ const OrderHistory: FunctionComponent = () => {
     orders_get();
   }, []);
   // paginate
+
   useEffect(() => {
-    const sortByLstest = data.sort((a, b) => b.id - a.id);
+    const sortByLstest = data.sort(
+      (a: order_Type, b: order_Type) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
     const itemOffset = ((page - 1) * 10) % sortByLstest.length;
     const endOffset = itemOffset + 10;
     setOrder(sortByLstest.slice(itemOffset, endOffset));
@@ -115,7 +119,7 @@ const OrderHistory: FunctionComponent = () => {
                 <div className="relative leading-[150%]">{item.id}</div>
               </div>
               <div className="absolute top-[12px] left-[176px] leading-[150%]">
-                {`${new Date(item.createdAt).getDate()}, ${
+                {`${new Date(item.createdAt).getDate()} ${
                   months[new Date(item.createdAt).getMonth()]
                 }, ${new Date(item.createdAt).getFullYear()}`}
               </div>
@@ -124,10 +128,11 @@ const OrderHistory: FunctionComponent = () => {
                 <span> ({item.quantity} Products)</span>
               </div>
               <div className="absolute top-[12px] left-[668px] leading-[150%]">
-                Processing
+                {status_step[item.status]}
               </div>
               <Link
-                to={"/Account/Orders/Detail"}
+                state={item}
+                to={`/Account/Orders/Detail/${item.id}`}
                 className=" no-underline absolute top-[12px] left-[850px] leading-[150%] font-medium text-branding-success"
               >
                 View Details

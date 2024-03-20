@@ -35,7 +35,7 @@ function App() {
         <Route element={<ProtectRoute Allow={cookie.get('_ur') ? true : false} />}>
           <Route path="/Account/Dashboard" element={<UserDashboard />} />
           <Route path="/Account/Orders" element={<OrderHistory />} />
-          <Route path="/Account/Orders/:Detail" element={<OrderDetails />} />
+          <Route path="/Account/Orders/:Detail/:order_id" element={<OrderDetails />} />
           <Route path="/Account/Address" element={<Address />} />
           <Route path="/Account/Address/:EditAndadd" element={<Edit_Add_Address />} />
           <Route path="/Account/Settings" element={<Settings />} />

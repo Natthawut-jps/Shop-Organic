@@ -15,9 +15,58 @@ interface userInfoType {
   createdAt: string;
   email: string;
 }
+
+interface addressType {
+  id: number;
+  first_name: string;
+  last_name: string;
+  company: string;
+  street: string;
+  county: string;
+  tambon: string;
+  states: string;
+  zipCode: number;
+  email: string;
+  phone: string;
+  status: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+interface order_Type {
+  id: number;
+  referent: string;
+  payment_menthod: string;
+  amount_total: number;
+  status: number;
+  quantity: number;
+  user_id: string;
+  address_id: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
 const UserDashboard: FunctionComponent = () => {
   const [userInfo, setUserInfo] = useState<userInfoType>();
   const arr = [1, 2, 3, 4, 5, 6];
+  const status_step = [
+    "Order received",
+    "Processing",
+    "On the way",
+    "Delivered",
+  ];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
   const userData = async () => {
     try {
       await instance_auth({
@@ -28,8 +77,34 @@ const UserDashboard: FunctionComponent = () => {
         },
         responseType: "json",
       }).then((res) => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           setUserInfo(res.data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const [order, setOrder] = useState<order_Type[]>([]);
+  const [addressActive, setAddress_Active] = useState<addressType>();
+  const order_get = async () => {
+    try {
+      await instance_auth({
+        method: "get",
+        url: "/order/get_order",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          setOrder(
+            res.data.sort(
+              (a: order_Type, b: order_Type) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+          );
         }
       });
     } catch (error) {
@@ -38,6 +113,7 @@ const UserDashboard: FunctionComponent = () => {
   };
   useEffect(() => {
     userData();
+    order_get();
   }, []);
 
   return (
@@ -125,27 +201,30 @@ const UserDashboard: FunctionComponent = () => {
           View All
         </Link>
         <div className="absolute top-[110px] left-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
-          {arr.map((item, index) => (
+          {order.map((item, index) => (
             <div
               key={index}
               className="relative w-[936px] h-[45px] odd:bg-white even:bg-slate-50"
             >
               <div className="absolute top-[12px] left-[0px] flex flex-row items-start justify-start">
                 <div className="relative leading-[150%]">#</div>
-                <div className="relative leading-[150%]">738</div>
+                <div className="relative leading-[150%]">{item.id}</div>
               </div>
               <div className="absolute top-[12px] left-[176px] leading-[150%]">
-                8 Sep, 2020
+                {`${new Date(item.createdAt).getDate()} ${
+                  months[new Date(item.createdAt).getMonth()]
+                }, ${new Date(item.createdAt).getFullYear()}`}
               </div>
               <div className="absolute top-[12px] left-[400px] leading-[150%]">
-                <span className="font-medium">$135.00</span>
-                <span> (5 Products)</span>
+                <span className="font-medium">฿{item.amount_total}</span>
+                <span> ({item.quantity} Products)</span>
               </div>
               <div className="absolute top-[12px] left-[668px] leading-[150%]">
-                Processing
+                {status_step[item.status]}
               </div>
               <Link
-                to={"/Account/Orders/Detail"}
+                state={item}
+                to={`/Account/Orders/Detail/${item.id}`}
                 className="absolute no-underline top-[12px] left-[850px] leading-[150%] font-medium text-branding-success"
               >
                 View Details
