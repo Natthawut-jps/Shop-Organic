@@ -10,6 +10,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import instance from "./unities/axios_instance";
 import { Cookies } from "react-cookie";
+const cookies = new Cookies();
 
 interface openSignIn {
   SignIn: {
@@ -99,7 +100,6 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
     }
     return errors;
   };
-  const cookies = new Cookies();
   const handlefinish = async () => {
     try {
       await instance({

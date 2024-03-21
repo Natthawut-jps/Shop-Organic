@@ -8,6 +8,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import instance_auth from "./unities/instance_auth";
 import Resizer from "react-image-file-resizer";
 import { AxiosResponse } from "axios";
+import { Cookies } from "react-cookie";
+const cookies = new Cookies();
 
 export const Settings: FunctionComponent = () => {
   // main
@@ -64,7 +66,7 @@ export const Settings: FunctionComponent = () => {
     first_name: string;
     last_name: string;
     email: string;
-    imgURL: File | string;
+    imgURL: string;
     createdAt: Date;
     updatedAt: Date;
   }
@@ -77,7 +79,6 @@ export const Settings: FunctionComponent = () => {
         responseType: "json",
       }).then((res: AxiosResponse) => {
         if (res.status === 200) {
-          console.log(res.data);
           setUserinfo(res.data);
         }
       });
@@ -85,13 +86,17 @@ export const Settings: FunctionComponent = () => {
       console.log(error);
     }
   };
-
+  interface file_Type {
+    file: File
+  }
+  const [file_profile, setFile_profile] = useState<file_Type>({} as file_Type);
   const handlerSubmitUinfo = async (event: React.FormEvent) => {
     const formdata = new FormData();
     formdata.append("first_name", userinfo.first_name);
     formdata.append("last_name", userinfo.last_name);
     formdata.append("email", userinfo.email);
-    formdata.append("profile", userinfo.imgURL);
+    formdata.append("imgURL", userinfo.imgURL);
+    formdata.append("profile", file_profile.file);
 
     event.preventDefault();
     await instance_auth({
@@ -103,7 +108,23 @@ export const Settings: FunctionComponent = () => {
         "Content-Type": "multipart/form-data",
       },
     }).then((res) => {
+      console.log(res.status);
       if (res.status === 200) {
+        const date = new Date();
+        cookies.set("_ut", res.data._ut, {
+          expires: new Date(date.setMinutes(date.getMinutes() + 5)),
+          path: "/",
+          secure: true,
+          sameSite: "strict",
+        });
+        cookies.set("_ur", res.data._ur, {
+          expires: new Date(date.setDate(date.getDate() + 15)),
+          path: "/",
+          secure: true,
+          sameSite: "strict",
+        });
+        location.reload();
+      } else if (res.status === 201) {
         location.reload();
       }
     });
@@ -340,7 +361,7 @@ export const Settings: FunctionComponent = () => {
                           file?.name as string,
                           { type: "image/png" }
                         );
-                        setUserinfo({ ...userinfo, imgURL: file_Resize });
+                        setFile_profile({...file_profile, file: file_Resize });
                       }}
                       type="file"
                       id="profile"
@@ -360,11 +381,11 @@ export const Settings: FunctionComponent = () => {
               )}
             </div>
           </div>
-          {typeof userinfo.imgURL !== "string" ? (
+          {file_profile.file ? (
             <img
               className="absolute top-[0px] left-[0px] rounded-[50%] w-56 h-56 object-cover"
               alt=""
-              src={URL.createObjectURL(new Blob([userinfo.imgURL]))}
+              src={URL.createObjectURL(new Blob([file_profile.file]))}
             />
           ) : (
             <img
