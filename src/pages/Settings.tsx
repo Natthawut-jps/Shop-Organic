@@ -87,7 +87,7 @@ export const Settings: FunctionComponent = () => {
     }
   };
   interface file_Type {
-    file: File
+    file: File;
   }
   const [file_profile, setFile_profile] = useState<file_Type>({} as file_Type);
   const handlerSubmitUinfo = async (event: React.FormEvent) => {
@@ -150,22 +150,27 @@ export const Settings: FunctionComponent = () => {
   const handlerSubmitChangePassword = async (event: React.FormEvent) => {
     event.preventDefault();
     setErrs(handerValidate_pass(changePassword));
-    if (Object.keys(handerValidate_pass(changePassword))) {
-      await instance_auth({
-        method: "post",
-        url: "/changePassword",
-        data: changePassword,
-        responseType: "json",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          location.reload();
-        } else {
-          setInccorect_pass(res.data);
-        }
-      });
+    if (Object.keys(handerValidate_pass(changePassword)).length === 0) {
+      if (changePassword.confirm_pass === changePassword.new_pass) {
+        await instance_auth({
+          method: "post",
+          url: "/user/change_password",
+          data: {
+            new_password: changePassword.new_pass,
+            password_old: changePassword.current_pass,
+          },
+          responseType: "json",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then((res) => {
+          if (res.status === 200) {
+            location.reload();
+          } else {
+            setInccorect_pass(res.data);
+          }
+        });
+      }
     }
   };
   const handerValidate_pass = (data: change_password) => {
@@ -361,7 +366,7 @@ export const Settings: FunctionComponent = () => {
                           file?.name as string,
                           { type: "image/png" }
                         );
-                        setFile_profile({...file_profile, file: file_Resize });
+                        setFile_profile({ ...file_profile, file: file_Resize });
                       }}
                       type="file"
                       id="profile"
