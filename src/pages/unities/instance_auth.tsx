@@ -26,7 +26,7 @@ try {
     },
     async (error) => {
       const originRequest = error.config;
-      if (error.response.status === 401 && !originRequest._retry) {
+      if (error.response && (error.response.status === 401 || error.response.status === 403) && !originRequest._retry) {
         originRequest._retry = true;
         const _ur = cookies.get("_ur");
         if (_ur) {
