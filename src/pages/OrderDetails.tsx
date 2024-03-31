@@ -65,7 +65,13 @@ const OrderDetails: FunctionComponent = () => {
     "December",
   ];
   const { Detail, order_id } = useParams();
-  const stepLabel = ["Processing", "Order received", "On the way", "Shiped"];
+  const stepLabel = [
+    "กำลังดำเนินการ",
+    "รับออเดอร์เรียบร้อย",
+    "กำลังเตรียมพัสดุ",
+    "บริษัทขนส่งเข้ารับพัสดุ",
+  ];
+
   const [orderActive, setOrder_Active] = useState<orderDetail_Type[]>([]);
   const [addressActive, setAddress_Active] = useState<addressType>();
   const [orderView, setOrderView] = useState<order_Type>();
@@ -189,30 +195,38 @@ const OrderDetails: FunctionComponent = () => {
           </div>
         </div>
         <div className="absolute top-[406px] left-[60px] w-[844px] h-[69px] text-center text-branding-success-dark">
-          <Stepper
-            activeStep={
-              orderView ? (orderView.status === 9 ? 0 : orderView.status) : 0
-            }
-            alternativeLabel
-            sx={{
-              "& .MuiStepIcon-root.Mui-completed": { color: "green" },
-              "& .MuiStepIcon-root.Mui-active": { color: "green" },
-              "& .Mui-active": {
-                "& .MuiStepConnector-line": { borderColor: "green" },
-              },
-              "& .Mui-completed": {
-                "& .MuiStepConnector-line": { borderColor: "green" },
-              },
-            }}
-          >
-            {stepLabel.map((label, index) => (
-              <Step key={index}>
-                <div>
-                  <StepLabel>{label}</StepLabel>
-                </div>
-              </Step>
-            ))}
-          </Stepper>
+          {orderView?.status === 9 ? (
+            <div className=" text-branding-error">
+              <h2>"ยกเลิกสินค้าแล้ว"</h2>
+            </div>
+          ) : orderView?.status === 5 ? (
+            <div className=" text-blue-500">
+              <h2>"พัสดุตีกลับแล้ว"</h2>
+            </div>
+          ) : (
+            <Stepper
+              activeStep={orderView ? orderView.status : 0}
+              alternativeLabel
+              sx={{
+                "& .MuiStepIcon-root.Mui-completed": { color: "green" },
+                "& .MuiStepIcon-root.Mui-active": { color: "green" },
+                "& .Mui-active": {
+                  "& .MuiStepConnector-line": { borderColor: "green" },
+                },
+                "& .Mui-completed": {
+                  "& .MuiStepConnector-line": { borderColor: "green" },
+                },
+              }}
+            >
+              {stepLabel.map((label, index) => (
+                <Step key={index}>
+                  <div>
+                    <StepLabel>{label}</StepLabel>
+                  </div>
+                </Step>
+              ))}
+            </Stepper>
+          )}
         </div>
         <div className="absolute top-[86px] left-[672px] rounded-md flex flex-col items-start justify-start text-xs border-[1px] border-solid border-gray-scale-gray-100">
           <div className="flex flex-row items-start justify-start py-[18px] px-5 gap-[20px]">

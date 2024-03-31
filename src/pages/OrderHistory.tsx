@@ -38,7 +38,13 @@ const OrderHistory: FunctionComponent = () => {
     "November",
     "December",
   ];
-  const status = ["Processing", "Order received", "On the way", "Delivered"];
+  const status = [
+    "กำลังดำเนินการ",
+    "รับออเดอร์เรียบร้อย",
+    "กำลังเตรียมพัสดุ",
+    "บริษัทขนส่งเข้ารับพัสดุ",
+    "พัสดุตีกลับ",
+  ];
   const orders_get = async () => {
     try {
       await instance_auth({
@@ -108,7 +114,7 @@ const OrderHistory: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <div className=" relative top-[110px] pl-[24px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
+        <div className=" relative top-[110px] pl-[24px] gap-[20px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
           {order.map((item, index) => (
             <div
               key={index}
@@ -118,16 +124,16 @@ const OrderHistory: FunctionComponent = () => {
                 <div className="relative leading-[150%]">#</div>
                 <div className="relative leading-[150%]">{item.id}</div>
               </div>
-              <div className="absolute top-[12px] left-[130px] leading-[150%]">
+              <div className="absolute top-[12px] left-[110px] leading-[150%]">
                 {`${new Date(item.createdAt).getDate()} ${
                   months[new Date(item.createdAt).getMonth()]
                 }, ${new Date(item.createdAt).getFullYear()}`}
               </div>
-              <div className="absolute top-[12px] left-[330px] leading-[150%]">
+              <div className="absolute top-[12px] left-[310px] leading-[150%]">
                 <span className="font-medium">฿{item.amount_total}</span>
                 <span> ({item.quantity} Products)</span>
               </div>
-              <div className="absolute top-[12px] left-[690px] leading-[150%]">
+              <div className="absolute top-[12px] left-[660px] leading-[150%]">
                 {item.status === 1 ? (
                   <div className="rounded-lg bg-orange-100 flex flex-col items-center justify-center py-1 px-2.5">
                     <div className="relative tracking-[0.01em] leading-[20px] text-orange-500">
@@ -152,15 +158,21 @@ const OrderHistory: FunctionComponent = () => {
                       {status[item.status - 1]}
                     </div>
                   </div>
+                ) : item.status === 5 ? (
+                  <div className="rounded-lg bg-blue-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] font-semibold text-blue-500">
+                      {status[item.status - 1]}
+                    </div>
+                  </div>
                 ) : (
                   <div className="rounded-lg bg-red-100 flex flex-col items-center justify-center py-1 px-2.5">
                     <div className="relative tracking-[0.01em] leading-[20px] font-semibold text-red-500">
-                      Cancelled
+                      ยกเลิกสินค้า
                     </div>
                   </div>
                 )}
               </div>
-              <div className="absolute top-[12px] left-[530px] leading-[150%]">
+              <div className="absolute top-[12px] left-[510px] leading-[150%]">
                 {item.status === 9
                   ? "ยกเลิกสินค้าแล้ว"
                   : item.tracking_id
@@ -182,16 +194,16 @@ const OrderHistory: FunctionComponent = () => {
           <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Order ID
           </div>
-          <div className="absolute top-[12px] left-[150px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[130px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Date
           </div>
-          <div className="absolute top-[12px] left-[350px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[330px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Total
           </div>
-          <div className="absolute top-[12px] left-[550px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[530px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Tracking ID
           </div>
-          <div className="absolute top-[12px] left-[720px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[700px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Status
           </div>
         </div>
