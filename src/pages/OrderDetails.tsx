@@ -3,7 +3,7 @@ import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { NavAccount } from "./unities/NavAccount";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Step, StepLabel, Stepper } from "@mui/material";
 import instance_auth from "./unities/instance_auth";
 
@@ -64,23 +64,22 @@ const OrderDetails: FunctionComponent = () => {
     "November",
     "December",
   ];
-  const { Detail } = useParams();
-  const state: order_Type = useLocation().state;
-  const stepLabel = ["Order received", "Processing", "On the way", "Delivered"];
+  const { Detail, order_id } = useParams();
+  const stepLabel = ["Processing", "Order received", "On the way", "Shiped"];
   const [orderActive, setOrder_Active] = useState<orderDetail_Type[]>([]);
   const [addressActive, setAddress_Active] = useState<addressType>();
+  const [orderView, setOrderView] = useState<order_Type>();
 
   const orders_Active = async () => {
     try {
       await instance_auth({
-        method: "post",
+        method: "get",
         url: "/order/active_order",
         responseType: "json",
-        data: { order_id: state.id },
+        params: { order_id: order_id },
       }).then((res) => {
         if (res.status === 200) {
           if (res.status === 200) {
-            console.log(res.data);
             setOrder_Active(res.data);
           }
         }
@@ -98,8 +97,26 @@ const OrderDetails: FunctionComponent = () => {
       }).then((res) => {
         if (res.status === 200) {
           if (res.status === 200) {
-            console.log(res.data);
             setAddress_Active(res.data);
+          }
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const order_view = async () => {
+    try {
+      await instance_auth({
+        method: "get",
+        url: "/order/order_view_active",
+        responseType: "json",
+        params: { order_id: order_id },
+      }).then((res) => {
+        if (res.status === 200) {
+          if (res.status === 200) {
+            setOrderView(res.data);
           }
         }
       });
@@ -110,6 +127,7 @@ const OrderDetails: FunctionComponent = () => {
   useEffect(() => {
     orders_Active();
     address_Active();
+    order_view();
   }, []);
 
   return (
@@ -172,7 +190,9 @@ const OrderDetails: FunctionComponent = () => {
         </div>
         <div className="absolute top-[406px] left-[60px] w-[844px] h-[69px] text-center text-branding-success-dark">
           <Stepper
-            activeStep={state.status}
+            activeStep={
+              orderView ? (orderView.status === 9 ? 0 : orderView.status) : 0
+            }
             alternativeLabel
             sx={{
               "& .MuiStepIcon-root.Mui-completed": { color: "green" },
@@ -201,7 +221,7 @@ const OrderDetails: FunctionComponent = () => {
                 Order ID:
               </div>
               <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-20">
-                #{state.id}
+                #{orderView?.id}
               </div>
             </div>
             <img className="relative w-px h-10" alt="" src="/img/line-20.svg" />
@@ -210,7 +230,7 @@ const OrderDetails: FunctionComponent = () => {
                 Payment Method:
               </div>
               <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-32">
-                {state.payment_menthod}
+                {orderView?.payment_menthod}
               </div>
             </div>
           </div>
@@ -219,7 +239,7 @@ const OrderDetails: FunctionComponent = () => {
             <div className="w-[248px] flex flex-row items-center justify-between pt-0 px-0 pb-3 box-border">
               <div className="relative leading-[150%]">Subtotal:</div>
               <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
-                ฿{state.amount_total - 50}
+                ฿{orderView ? orderView.amount_total - 50 : 0}
               </div>
             </div>
             <div className="relative box-border w-[249px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
@@ -233,7 +253,7 @@ const OrderDetails: FunctionComponent = () => {
             <div className="w-[248px] flex flex-row items-center justify-between pt-3 px-0 pb-0 box-border text-lg text-gray-scale-gray-900">
               <div className="relative leading-[150%]">Total</div>
               <div className="relative leading-[150%] font-semibold text-branding-success-dark">
-                ฿{state.amount_total}
+                ฿{orderView?.amount_total}
               </div>
             </div>
           </div>
@@ -269,13 +289,17 @@ const OrderDetails: FunctionComponent = () => {
             </div>
             <div className="relative leading-[150%]">•</div>
             <div className="relative leading-[150%]">
-              {`${new Date(state.createdAt).getDate()}, ${
-                months[new Date(state.createdAt).getMonth()]
-              }, ${new Date(state.createdAt).getFullYear()}`}
+              {`${new Date(orderView ? orderView.createdAt : "").getDate()}, ${
+                months[
+                  new Date(orderView ? orderView.createdAt : "").getMonth()
+                ]
+              }, ${new Date(
+                orderView ? orderView.createdAt : ""
+              ).getFullYear()}`}
             </div>
             <div className="relative leading-[150%]">•</div>
             <div className="relative leading-[150%]">
-              {state.quantity} Products
+              {orderView?.quantity} Products
             </div>
           </div>
           <Link

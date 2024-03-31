@@ -44,6 +44,7 @@ const Categories: FunctionComponent = () => {
   const [sortBy, setSortby] = useState<string | null>(null);
   const [sortRating, setSortRating] = useState<number | null>(null);
   const [sortPrice, setSortPrice] = useState<number>(0);
+  const [valueSlider, setValueSlider] = useState<number>(0);
   const { categoriesParam, pageParam } = useParams<{
     categoriesParam: string;
     pageParam: string;
@@ -198,6 +199,7 @@ const Categories: FunctionComponent = () => {
     setSortby(event.target.value);
     setSortRating(0);
     setSortPrice(0);
+    setValueSlider(0);
   };
 
   return (
@@ -239,6 +241,7 @@ const Categories: FunctionComponent = () => {
                         setSortby("");
                         setSortRating(0);
                         setSortPrice(0);
+                        setValueSlider(0);
                         navigate(`/product/categories/${event.target.value}/1`);
                       }}
                     >
@@ -267,21 +270,29 @@ const Categories: FunctionComponent = () => {
                         event;
                       }
                     }}
+                    onChange={(event, value) => {
+                      setValueSlider(value as number);
+                      {
+                        event;
+                      }
+                    }}
+                    value={valueSlider}
+                    step={1}
                     sx={{ width: 250 }}
-                    max={1000}
-                    valueLabelDisplay="auto"
-                    value={sortPrice}
+                    max={300}
+                    valueLabelDisplay="on"
                     marks={[
                       { value: 0, label: "0" },
-                      { value: 500, label: "500" },
-                      { value: 1000, label: "1,000" },
+                      { value: 50, label: "50" },
+                      { value: 150, label: "150" },
+                      { value: 250, label: "250" },
                     ]}
-                  ></Slider>
+                  />
                   <div className="relative text-sm leading-[150%] text-gray-scale-gray-700">
                     <span>Price:</span>
                     <span className="font-medium text-gray-scale-gray-900">
                       {" "}
-                      0 — 5,000
+                      0 — 300
                     </span>
                   </div>
                 </div>
@@ -311,6 +322,7 @@ const Categories: FunctionComponent = () => {
                           setSortRating(newValue);
                           setSortby("");
                           setSortPrice(0);
+                          setValueSlider(0);
                           {
                             event;
                           }

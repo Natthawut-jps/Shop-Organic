@@ -10,7 +10,7 @@ import instance_auth from "./unities/instance_auth";
 interface order_Type {
   id: number;
   referent: string;
-  payment_menthod: string;
+  tracking_id: string;
   amount_total: number;
   status: number;
   quantity: number;
@@ -38,7 +38,7 @@ const OrderHistory: FunctionComponent = () => {
     "November",
     "December",
   ];
-  const status_step = ['Order received', 'Processing', 'On the way', 'Delivered'];
+  const status = ["Processing", "Order received", "On the way", "Delivered"];
   const orders_get = async () => {
     try {
       await instance_auth({
@@ -118,17 +118,54 @@ const OrderHistory: FunctionComponent = () => {
                 <div className="relative leading-[150%]">#</div>
                 <div className="relative leading-[150%]">{item.id}</div>
               </div>
-              <div className="absolute top-[12px] left-[176px] leading-[150%]">
+              <div className="absolute top-[12px] left-[130px] leading-[150%]">
                 {`${new Date(item.createdAt).getDate()} ${
                   months[new Date(item.createdAt).getMonth()]
                 }, ${new Date(item.createdAt).getFullYear()}`}
               </div>
-              <div className="absolute top-[12px] left-[400px] leading-[150%]">
+              <div className="absolute top-[12px] left-[330px] leading-[150%]">
                 <span className="font-medium">฿{item.amount_total}</span>
                 <span> ({item.quantity} Products)</span>
               </div>
-              <div className="absolute top-[12px] left-[668px] leading-[150%]">
-                {status_step[item.status]}
+              <div className="absolute top-[12px] left-[690px] leading-[150%]">
+                {item.status === 1 ? (
+                  <div className="rounded-lg bg-orange-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] text-orange-500">
+                      {status[item.status - 1]}
+                    </div>
+                  </div>
+                ) : item.status === 2 ? (
+                  <div className="rounded-lg bg-green-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] text-green-500">
+                      {status[item.status - 1]}
+                    </div>
+                  </div>
+                ) : item.status === 3 ? (
+                  <div className="rounded-lg bg-yellow-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] font-semibold text-yellow-500">
+                      {status[item.status - 1]}
+                    </div>
+                  </div>
+                ) : item.status === 4 ? (
+                  <div className="rounded-lg bg-cyan-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] font-semibold text-cyan-500">
+                      {status[item.status - 1]}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="rounded-lg bg-red-100 flex flex-col items-center justify-center py-1 px-2.5">
+                    <div className="relative tracking-[0.01em] leading-[20px] font-semibold text-red-500">
+                      Cancelled
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="absolute top-[12px] left-[530px] leading-[150%]">
+                {item.status === 9
+                  ? "ยกเลิกสินค้าแล้ว"
+                  : item.tracking_id
+                  ? item.tracking_id
+                  : "กำลังดำเนินการ"}
               </div>
               <Link
                 state={item}
@@ -145,13 +182,16 @@ const OrderHistory: FunctionComponent = () => {
           <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Order ID
           </div>
-          <div className="absolute top-[12px] left-[200px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[150px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Date
           </div>
-          <div className="absolute top-[12px] left-[424px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[350px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Total
           </div>
-          <div className="absolute top-[12px] left-[692px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+          <div className="absolute top-[12px] left-[550px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            Tracking ID
+          </div>
+          <div className="absolute top-[12px] left-[720px] tracking-[0.03em] leading-[100%] uppercase font-medium">
             Status
           </div>
         </div>
