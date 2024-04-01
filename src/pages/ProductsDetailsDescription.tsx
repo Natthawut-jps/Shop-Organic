@@ -4,65 +4,94 @@ import { Foorter } from "./unities/Foorter";
 import { useLocation, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Alert, Rating, Snackbar } from "@mui/material";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import { CartContextProviders } from "./unities/HandleCart";
 import axios from "axios";
+import instance from "./unities/axios_instance";
 
 interface datatypes {
   product: {
-    id: number,
-    name: string,
-    price: number,
-    categories: string,
-    rating: number,
-    imgURL: string,
-    uid: number,
-    shoppingHanding: number,
-    createdAt: string,
-    updatedAt: string,
-  }
-  status: string,
-};
+    id: number;
+    name: string;
+    price: number;
+    categories: string;
+    rating: number;
+    imgURL: string;
+    uid: number;
+    shoppingHanding: number;
+    createdAt: string;
+    updatedAt: string;
+  };
+  status: string;
+}
 interface datatypesProduct {
-  id: number,
-  name: string,
-  price: number,
-  categories: string,
-  rating: number,
-  imgURL: string,
-  uid: number,
-  shoppingHanding: number,
-  createdAt: string,
-  updatedAt: boolean,
-};
+  id: number;
+  name: string;
+  price: number;
+  categories: string;
+  rating: number;
+  imgURL: string;
+  uid: number;
+  shoppingHanding: number;
+  createdAt: string;
+  updatedAt: boolean;
+}
 
 const ProductsDetailsDescription: FunctionComponent = () => {
   const { categoriesP, productList } = useParams();
   const [productDetail, setProductDetail] = useState<datatypesProduct[]>([]);
-  const { cartItems, favoriteItem, addFavorite, removeCartItem, addTocart, removeFavoriteItem } = CartContextProviders();
+  const {
+    cartItems,
+    favoriteItem,
+    addFavorite,
+    removeCartItem,
+    addTocart,
+    removeFavoriteItem,
+  } = CartContextProviders();
   const [snackbar, setSnackbar] = useState<boolean>(false);
   const state: datatypes = useLocation().state;
 
+  const Product = async () => {
+    try {
+      await instance({
+        method: "get",
+        url: "/public/products/get_product",
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          setProductDetail(
+            res.data.filter(
+              (item: datatypesProduct) =>
+                item.name.replace(/\s/g, "") === productList
+            )
+          );
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const Product = async () => {
-      const { PopularProduct }: { PopularProduct: datatypesProduct[] } = (await axios.get('/data/popularProduct.json')).data
-      setProductDetail(PopularProduct.filter(item => item.name.replace(/\s/g, '') === productList));
-
-    };
-    Product()
+    Product();
     if (state?.status) {
-      window.scroll(0, 0)
+      window.scroll(0, 0);
     }
   }, [productList]);
 
   return (
     <>
-      {productList === productDetail.map(item => item.name.replace(/\s/g, ''))[0] &&
+      {productList ===
+        productDetail.map((item) => item.name.replace(/\s/g, ""))[0] && (
         <div className="relative bg-gray-scale-white w-full h-[2595px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* header template */}
           <Header />
-          <Breadcrumbs categoies={categoriesP} tltle={productList} Detail={undefined} EditAndadd={undefined} />
+          <Breadcrumbs
+            categoies={categoriesP}
+            tltle={productList}
+            Detail={undefined}
+            EditAndadd={undefined}
+          />
           <div className="absolute top-[1509px] left-[88px] w-[1320px] h-[477px] text-gray-scale-gray-700">
             <div className="absolute top-[70px] left-[0px] flex flex-row items-start justify-start gap-[24px]">
               <div className="relative rounded-lg bg-gray-scale-white box-border w-[312px] h-[407px] border-[1px] border-solid border-gray-scale-gray-100">
@@ -311,7 +340,13 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                 <img
                   className="absolute top-[0px] left-[92px] w-[556px] h-[556px] object-cover"
                   alt=""
-                  src={productDetail.map(item => item.imgURL)[0]}
+                  src={
+                    productDetail.map((item) =>
+                      item.imgURL
+                        ? `${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`
+                        : ""
+                    )[0]
+                  }
                 />
                 <div className="absolute top-[80px] left-[0px] flex flex-col items-start justify-start gap-[12px]">
                   <div className="relative w-20 h-[90px]">
@@ -359,7 +394,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="flex flex-col items-start justify-start gap-[12px]">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
                       <div className="relative leading-[120%] font-semibold">
-                        {productDetail.map(item => item.name)[0]}
+                        {productDetail.map((item) => item.name)[0]}
                       </div>
                       <div className="rounded bg-limegreen-100 flex flex-row items-center justify-center py-1 px-2 text-sm text-branding-success-dark">
                         <div className="relative leading-[150%]">In Stock</div>
@@ -413,7 +448,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                         $48.00
                       </div>
                       <div className="relative text-5xl leading-[150%] font-medium text-branding-success-dark">
-                        {`฿${productDetail.map(item => item.price)[0]}`}
+                        {`฿${productDetail.map((item) => item.price)[0]}`}
                       </div>
                     </div>
                     <div className="rounded-[30px] bg-tomato flex flex-row items-start justify-start py-[3px] px-2.5 text-sm text-branding-error">
@@ -469,8 +504,16 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                   <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
-                  {cartItems.some(check => check.pid === productDetail.map(item => item.id)[0]) ?
-                    <div onClick={() => removeCartItem(productDetail.map(item => item.id)[0])} className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                  {cartItems.some(
+                    (check) =>
+                      check.pid === productDetail.map((item) => item.id)[0]
+                  ) ? (
+                    <div
+                      onClick={() =>
+                        removeCartItem(productDetail.map((item) => item.id)[0])
+                      }
+                      className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white"
+                    >
                       <div className="relative leading-[120%] font-semibold">
                         Remove
                       </div>
@@ -479,21 +522,26 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                         alt=""
                         src="/img/rectangle.svg"
                       />
-                      <Snackbar open={snackbar}
-                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                      <Snackbar
+                        open={snackbar}
+                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
                         autoHideDuration={1000}
-                        sx={{ width: '100%' }}
+                        sx={{ width: "100%" }}
                         onClose={() => setSnackbar(false)}
                       >
-                        <Alert severity="success">Add to Cart successfully</Alert>
+                        <Alert severity="success">
+                          Add to Cart successfully
+                        </Alert>
                       </Snackbar>
                     </div>
-                    :
-                    <div onClick={() => {
-                      addTocart(state.product);
-                      setSnackbar(true);
-                    }}
-                      className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                  ) : (
+                    <div
+                      onClick={() => {
+                        addTocart(state.product);
+                        setSnackbar(true);
+                      }}
+                      className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white"
+                    >
                       <div className="relative leading-[120%] font-semibold">
                         Add to Cart
                       </div>
@@ -503,25 +551,33 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                         src="/img/rectangle.svg"
                       />
                     </div>
-                  }
+                  )}
                   <div className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
                     <Rating
                       name="hover-feedback"
                       precision={1}
-                      value={favoriteItem.some((item) => item.pid === state.product.id) ? 1 : 0}
+                      value={
+                        favoriteItem.some(
+                          (item) => item.pid === state.product.id
+                        )
+                          ? 1
+                          : 0
+                      }
                       onChange={() => {
                         addFavorite(state.product);
-                        favoriteItem.some((item) => item.pid === state.product.id) && removeFavoriteItem(state.product.id)
+                        favoriteItem.some(
+                          (item) => item.pid === state.product.id
+                        ) && removeFavoriteItem(state.product.id);
                       }}
                       max={1}
                       icon={<FavoriteIcon fontSize="inherit" />}
                       emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
                       sx={{
-                        '& .MuiRating-iconFilled': {
-                          color: '#ff6d75',
+                        "& .MuiRating-iconFilled": {
+                          color: "#ff6d75",
                         },
-                        '& .MuiRating-iconHover': {
-                          color: '#ff3d47',
+                        "& .MuiRating-iconHover": {
+                          color: "#ff3d47",
                         },
                       }}
                     />
@@ -555,16 +611,17 @@ const ProductsDetailsDescription: FunctionComponent = () => {
               <div className="absolute top-[88px] left-[300px] flex flex-col items-start justify-start gap-[20px]">
                 <div className="relative leading-[150%] inline-block w-[648px]">
                   <p className="m-0">
-                    Sed commodo aliquam dui ac porta. Fusce ipsum felis, imperdiet
-                    at posuere ac, viverra at mauris. Maecenas tincidunt ligula a
-                    sem vestibulum pharetra. Maecenas auctor tortor lacus, nec
-                    laoreet nisi porttitor vel. Etiam tincidunt metus vel dui
-                    interdum sollicitudin. Mauris sem ante, vestibulum nec orci
-                    vitae, aliquam mollis lacus. Sed et condimentum arcu, id
-                    molestie tellus. Nulla facilisi. Nam scelerisque vitae justo a
-                    convallis. Morbi urna ipsum, placerat quis commodo quis, egestas
-                    elementum leo. Donec convallis mollis enim. Aliquam id mi quam.
-                    Phasellus nec fringilla elit.
+                    Sed commodo aliquam dui ac porta. Fusce ipsum felis,
+                    imperdiet at posuere ac, viverra at mauris. Maecenas
+                    tincidunt ligula a sem vestibulum pharetra. Maecenas auctor
+                    tortor lacus, nec laoreet nisi porttitor vel. Etiam
+                    tincidunt metus vel dui interdum sollicitudin. Mauris sem
+                    ante, vestibulum nec orci vitae, aliquam mollis lacus. Sed
+                    et condimentum arcu, id molestie tellus. Nulla facilisi. Nam
+                    scelerisque vitae justo a convallis. Morbi urna ipsum,
+                    placerat quis commodo quis, egestas elementum leo. Donec
+                    convallis mollis enim. Aliquam id mi quam. Phasellus nec
+                    fringilla elit.
                   </p>
                   <p className="m-0">&nbsp;</p>
                   <p className="m-0">{`Nulla mauris tellus, feugiat quis pharetra sed, gravida ac dui. Sed iaculis, metus faucibus elementum tincidunt, turpis mi viverra velit, pellentesque tristique neque mi eget nulla. Proin luctus elementum neque et pharetra. `}</p>
@@ -683,11 +740,10 @@ const ProductsDetailsDescription: FunctionComponent = () => {
           </div>
           {/* foorter template */}
           <Foorter />
-
         </div>
-      }
+      )}
     </>
-  )
+  );
 };
 
 export default ProductsDetailsDescription;

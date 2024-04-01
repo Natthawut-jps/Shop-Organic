@@ -68,7 +68,6 @@ const Checkout: FunctionComponent = () => {
         },
       }).then(async (res) => {
         if (res.status === 200) {
-          console.log(res.data);
           const date = new Date();
           const time = new Date(date.setMinutes(date.getMinutes() + 5));
           navigate("/shop/checkout/bill", {

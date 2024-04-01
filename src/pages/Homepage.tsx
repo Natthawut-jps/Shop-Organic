@@ -2,48 +2,87 @@ import { FunctionComponent, useEffect, useState } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Rating from "@mui/material/Rating/Rating";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 import { Alert, Snackbar } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
+import instance from "./unities/axios_instance";
 
 interface datatypesProduct {
-  id: number,
-  name: string,
-  price: number,
-  categories: string,
-  rating: number,
-  imgURL: string,
-  uid: number,
-  shoppingHanding: number,
-  createdAt: string,
-  updatedAt: string,
-};
+  id: number;
+  name: string;
+  price: number;
+  categories: string;
+  rating: number;
+  imgURL: string;
+  uid: number;
+  shoppingHanding: number;
+  createdAt: string;
+  updatedAt: string;
+}
 
 export const Homepage: FunctionComponent = () => {
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
   // productItem
-  async function Product() {
-    const { data } = (await axios.get('/data/popularProduct.json'))
-    setPopularProduct(data.PopularProduct)
+  const Product = async () => {
+    try {
+      await instance({
+        method: "get",
+        url: "/public/products/get_product",
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          setPopularProduct(res.data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  interface category_Type {
+    id: number;
+    category_name: string;
+    description: string;
+    quantity: number;
+    imgURL: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  const [categories, setCategories] = useState<category_Type[]>([]);
+  const get_categories = async () => {
+    await instance({
+      method: "get",
+      url: "/public/categories/get_category",
+      responseType: "json",
+    }).then((res) => {
+      if (res.status === 200) {
+        setCategories(res.data);
+      }
+    });
+  };
+
   useEffect(() => {
-    Product()
+    Product();
+    get_categories();
   }, []);
 
   return (
-
     <div className="relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
       {/* header template */}
       <Header />
       {/* Sale up to */}
       <div className="absolute top-[218px] sm:top-0 left-[50px] sm:left-0 w-[1980px] sm:w-full h-[600px] sm:h-[1000px] overflow-hidden text-gray-scale-white">
-        <a href="#" className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center">
-        </a>
-        <a href="#" className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100">
+        <a
+          href="#"
+          className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center"
+        ></a>
+        <a
+          href="#"
+          className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100"
+        >
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""
@@ -73,7 +112,10 @@ export const Homepage: FunctionComponent = () => {
             </div>
           </div>
         </a>
-        <a href="#" className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
+        <a
+          href="#"
+          className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center"
+        >
           <img
             className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
             alt=""
@@ -210,36 +252,25 @@ export const Homepage: FunctionComponent = () => {
         </div>
       </div>
       {/* Categories */}
-      <div className="absolute top-[1028px] left-[130px] w-[1320px] h-[320px] text-center text-lg">
-        <Link to={'/product/categories/FreshFruit/1'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[-1px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/img/image-11@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Fresh Fruit
-          </div>
-        </Link>
-        <Link to={'/product/categories/vegetables/1'} state={{ status: true }} className="absolute top-[69px] left-[223px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/img/image-13@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">
-            Fresh Vegetables
-          </div>
-        </Link>
-        <Link to={'/product/categories/Meat&Fish/1'} state={{ status: true }} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black absolute top-[69px] left-[447px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center pt-4 px-0 pb-6 gap-[16px] border-[1px] border-solid border-gray-scale-gray-100">
-          <img
-            className="relative w-[190px] h-[130px] object-cover"
-            alt=""
-            src="/img/image-15@2x.png"
-          />
-          <div className="relative leading-[150%] font-medium inline-block w-[200px]">{`Meat & Fish`}</div>
-        </Link>
-        <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
+      <div className=" relative top-[1028px] gap-[10px] flex flex-row justify-start items-start  left-[130px] w-[1320px] h-[320px] text-center text-lg">
+        {categories.map((item, index) => (
+          <Link
+            key={index}
+            to={`/product/categories/${item.category_name}/1`}
+            state={{ status: true }}
+            className=" relative top-[69px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black"
+          >
+            <img
+              className="relative w-[190px] h-[130px] object-cover"
+              alt=""
+              src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
+            />
+            <div className="relative leading-[150%] font-medium inline-block w-[200px]">
+              {item.category_name}
+            </div>
+          </Link>
+        ))}
+        <div className="absolute top-[0px] left-[130px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
           <div className="relative leading-[120%] font-semibold">
             Categories
           </div>
@@ -253,78 +284,92 @@ export const Homepage: FunctionComponent = () => {
           </div>
         </div>
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
-          {popularProduct && popularProduct.sort((a, b) => a.rating - b.rating).slice(0, 20).map((item: datatypesProduct) => (
-            <div key={item.id} className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100">
-              <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: true }} className="text-gray-100 hover:text-branding-success-dark">
-                <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
-                  <img
-                    className="relative w-[254px] h-[230px] object-cover"
-                    alt=""
-                    src={item.imgURL}
-                  />
-                </div>
-                <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
-                  <div className="flex flex-col items-start justify-start">
-                    <div className="relative leading-[150%] inline-block w-60">
-                      {item.name}
-                    </div>
-                    <div className="flex flex-row items-start justify-start gap-[2px] text-base">
-                      <div className="relative leading-[150%] font-medium">
-                        {`฿${item.price}`}
-                      </div>
-                      <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400">
-                        $20.99
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex flex-row items-start justify-start">
-                    <Rating
-                      name="read-only"
-                      sx={{
-                        fontSize: '13px'
-                      }}
-                      precision={0.1}
-                      value={item.rating}
-                      emptyIcon={<StarIcon fontSize="inherit" />}
-                      readOnly />
-                  </div>
-                </div>
-              </Link>
-              {cartItems.some(check => check.pid === item.id) ?
-                <div onClick={() => removeCartItem(item.id)}>
-                  <img
-                    className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src='/img/add-to-cart2.svg'
-                  />
-                </div>
-                :
-                <div onClick={() => {
-                  addTocart(item);
-                  setSnackbar(true);
-                }}>
-                  <img
-                    className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
-                    alt=""
-                    src='/img/add-to-cart.svg'
-                  />
-                  <Snackbar open={snackbar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    autoHideDuration={1000}
-                    sx={{ width: '100%' }}
-                    onClose={() => setSnackbar(false)}
+          {popularProduct &&
+            popularProduct
+              .sort((a, b) => a.rating - b.rating)
+              .slice(0, 20)
+              .map((item: datatypesProduct) => (
+                <div
+                  key={item.id}
+                  className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100"
+                >
+                  <Link
+                    to={`/product/detail/${item.categories}/${item.name.replace(
+                      /\s/g,
+                      ""
+                    )}`}
+                    state={{ product: item, status: true }}
+                    className="text-gray-100 hover:text-branding-success-dark"
                   >
-                    <Alert severity="success">Add to Cart successfully</Alert>
-                  </Snackbar>
+                    <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
+                      <img
+                        className="relative w-[254px] h-[230px] object-cover"
+                        alt=""
+                        src={`${import.meta.env.VITE_BASE_API}/img/${
+                          item.imgURL
+                        }`}
+                      />
+                    </div>
+                    <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
+                      <div className="flex flex-col items-start justify-start">
+                        <div className="relative leading-[150%] inline-block w-60">
+                          {item.name}
+                        </div>
+                        <div className="flex flex-row items-start justify-start gap-[2px] text-base">
+                          <div className="relative leading-[150%] font-medium">
+                            {`฿${item.price}`}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-row items-start justify-start">
+                        <Rating
+                          name="read-only"
+                          sx={{
+                            fontSize: "13px",
+                          }}
+                          precision={0.1}
+                          value={item.rating}
+                          emptyIcon={<StarIcon fontSize="inherit" />}
+                          readOnly
+                        />
+                      </div>
+                    </div>
+                  </Link>
+                  {cartItems.some((check) => check.pid === item.id) ? (
+                    <div onClick={() => removeCartItem(item.id)}>
+                      <img
+                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
+                        alt=""
+                        src="/img/add-to-cart2.svg"
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => {
+                        addTocart(item);
+                        setSnackbar(true);
+                      }}
+                    >
+                      <img
+                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
+                        alt=""
+                        src="/img/add-to-cart.svg"
+                      />
+                      <Snackbar
+                        open={snackbar}
+                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+                        autoHideDuration={1000}
+                        sx={{ width: "100%" }}
+                        onClose={() => setSnackbar(false)}
+                      >
+                        <Alert severity="success">
+                          Add to Cart successfully
+                        </Alert>
+                      </Snackbar>
+                    </div>
+                  )}
                 </div>
-              }
-              <div className="absolute top-[16px] left-[16px] rounded bg-branding-error flex flex-row items-center justify-center py-[3px] px-2 gap-[4px] text-gray-scale-white">
-                <div className="relative leading-[150%]">Sale</div>
-                <div className="relative leading-[150%] font-medium">50%</div>
-              </div>
-            </div>
-          ))
-          }
+              ))}
         </div>
       </div>
       {/* latest New */}
@@ -334,7 +379,10 @@ export const Homepage: FunctionComponent = () => {
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
           {popularProduct.slice(0, 3).map((item: datatypesProduct) => (
-            <div key={item.id} className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start">
+            <div
+              key={item.id}
+              className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start"
+            >
               <div className="relative w-[424px] h-[324px]">
                 <img
                   className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
@@ -385,7 +433,14 @@ export const Homepage: FunctionComponent = () => {
                     {item.name}
                   </div>
                 </div>
-                <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success">
+                <Link
+                  to={`/product/detail/${item.categories}/${item.name.replace(
+                    /\s/g,
+                    ""
+                  )}`}
+                  state={{ product: item, status: "toTop" }}
+                  className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success"
+                >
                   <div className="relative leading-[120%] font-semibold">
                     Read More
                   </div>
@@ -397,16 +452,22 @@ export const Homepage: FunctionComponent = () => {
                 </Link>
               </div>
             </div>
-
-          ))
-          }
+          ))}
         </div>
       </div>
       {/* Header Follow us on Instagram */}
       <div className="absolute top-[3500px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
-        <img className="relative w-[81.58px] h-8" alt="" src="/img/vector.svg" />
+        <img
+          className="relative w-[81.58px] h-8"
+          alt=""
+          src="/img/vector.svg"
+        />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
-        <img className="relative w-[66.94px] h-8" alt="" src="/img/mango1.svg" />
+        <img
+          className="relative w-[66.94px] h-8"
+          alt=""
+          src="/img/mango1.svg"
+        />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
           className="relative w-[82.64px] h-8 overflow-hidden shrink-0"
@@ -462,7 +523,10 @@ export const Homepage: FunctionComponent = () => {
             src="/img/-instagram-post4@2x.png"
           />
         </a>
-        <a href="#" className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all">
+        <a
+          href="#"
+          className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all"
+        >
           <img
             className="absolute top-[0px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover"
             alt=""
@@ -477,9 +541,6 @@ export const Homepage: FunctionComponent = () => {
       </div>
       {/* foorter template */}
       <Foorter />
-    </div >
+    </div>
   );
 };
-
-
-

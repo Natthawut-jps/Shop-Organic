@@ -1,9 +1,8 @@
-import { faApple, faSistrix } from "@fortawesome/free-brands-svg-icons";
+import { faSistrix } from "@fortawesome/free-brands-svg-icons";
 import {
   faAngleDown,
   faBars,
   faCube,
-  faDrumstickBite,
   faShoppingCart,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +21,7 @@ import {
   MenuItem,
   Tooltip,
 } from "@mui/material";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { ExpandLess, ExpandMore, Logout, Settings } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { Search } from "./Search";
@@ -34,6 +33,7 @@ import { SignIn } from "../SignIn";
 import { Cookies } from "react-cookie";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons/faMapLocationDot";
+import instance from "./axios_instance";
 
 export const Header: FunctionComponent = () => {
   const cookie = new Cookies();
@@ -79,6 +79,30 @@ export const Header: FunctionComponent = () => {
   const handleCloseAccounting = () => {
     setAnchorElAccounting(null);
   };
+  interface category_Type {
+    id: number;
+    category_name: string;
+    description: string;
+    quantity: number;
+    imgURL: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  const [categories, setCategories] = useState<category_Type[]>([]);
+  const get_categories = async () => {
+    await instance({
+      method: "get",
+      url: "/public/categories/get_category",
+      responseType: "json",
+    }).then((res) => {
+      if (res.status === 200) {
+        setCategories(res.data);
+      }
+    });
+  };
+  useEffect(() => {
+    get_categories();
+  }, []);
   return (
     <>
       <Favorite Favorite={{ openFavorite, setOpenFavorite }} />
@@ -333,15 +357,11 @@ export const Header: FunctionComponent = () => {
                   unmountOnExit
                 >
                   <List component={"div"} disablePadding={true}>
-                    <ListItemButton sx={{ ml: 4 }} divider>
-                      Vegetables
-                    </ListItemButton>
-                    <ListItemButton sx={{ ml: 4 }} divider>
-                      Fresh Fruit
-                    </ListItemButton>
-                    <ListItemButton sx={{ ml: 4 }} divider>
-                      Meat & Fish
-                    </ListItemButton>
+                    {categories.map((item, index) => (
+                      <ListItemButton key={index} sx={{ ml: 4 }} divider>
+                        {item.category_name}
+                      </ListItemButton>
+                    ))}
                   </List>
                 </Collapse>
                 <ListItemButton divider>About</ListItemButton>
@@ -396,39 +416,26 @@ export const Header: FunctionComponent = () => {
                 minHeight: null,
               }}
             >
-              <Link
-                to={"/product/categories/vegetables/1"}
-                className=" no-underline text-black"
-              >
-                <MenuItem onClick={handleClose}>
-                  {" "}
-                  <img
-                    src="/img/vegetables-pumpkin-svgrepo-com.svg"
-                    width={25}
-                    height={25}
-                    alt=""
-                  />
-                  Vegetables
-                </MenuItem>
-              </Link>
-              <Link
-                to={"/product/categories/FreshFruit/1"}
-                className=" no-underline text-black"
-              >
-                <MenuItem onClick={handleClose}>
-                  <FontAwesomeIcon icon={faApple} />
-                  Fresh Fruit
-                </MenuItem>
-              </Link>
-              <Link
-                to={"/product/categories/Meat&Fish/1"}
-                className=" no-underline text-black"
-              >
-                <MenuItem onClick={handleClose}>
-                  <FontAwesomeIcon icon={faDrumstickBite} />
-                  Meat & Fish
-                </MenuItem>
-              </Link>
+              {categories.map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/product/categories/${item.category_name}/1`}
+                  className=" no-underline text-black"
+                >
+                  <MenuItem onClick={handleClose}>
+                    {" "}
+                    <img
+                      src={`${import.meta.env.VITE_BASE_API}/img/${
+                        item.imgURL
+                      }`}
+                      width={25}
+                      height={25}
+                      alt=""
+                    />
+                    {item.category_name}
+                  </MenuItem>
+                </Link>
+              ))}
             </Menu>
             <Link
               to={"/about"}

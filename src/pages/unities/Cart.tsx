@@ -27,6 +27,7 @@ import { CartContextProviders } from "./HandleCart";
 import axios from "axios";
 import instance_auth from "./instance_auth";
 import { Link } from "react-router-dom";
+import instance from "./axios_instance";
 
 // Cart
 export const Transition = forwardRef(function Transition(
@@ -168,7 +169,7 @@ interface datatypesProduct {
   updatedAt: string;
 }
 export const Cart: FunctionComponent<open> = (props) => {
-  const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
+  const [Product, setrProduct] = useState<datatypesProduct[]>([]);
   const {
     increaseCartQuantity,
     decreaseCartQuantity,
@@ -185,10 +186,22 @@ export const Cart: FunctionComponent<open> = (props) => {
     return accumulator + currentValue;
   }, 0);
   // productItem
-  async function Product() {
-    const { data } = await axios.get("/data/popularProduct.json");
-    setPopularProduct(data.PopularProduct);
-  }
+  const get_Product = async () => {
+    try {
+      await instance({
+        method: "get",
+        url: "/public/products/get_product",
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          setrProduct(res.data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
   // get CartItem
   async function CartItem() {
     const { data } = await instance_auth({
@@ -227,7 +240,7 @@ export const Cart: FunctionComponent<open> = (props) => {
   };
   useEffect(() => {
     CartItem();
-    Product();
+    get_Product();
   }, []);
   return (
     <>
@@ -300,7 +313,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                           onClick={() =>
                             increaseCartQuantity(
                               item.pid,
-                              popularProduct.find(
+                              Product.find(
                                 (price) => price.id === item.pid
                               )?.price!
                             )
@@ -319,7 +332,7 @@ export const Cart: FunctionComponent<open> = (props) => {
                           onClick={() =>
                             decreaseCartQuantity(
                               item.pid,
-                              popularProduct.find(
+                              Product.find(
                                 (price) => price.id === item.pid
                               )?.price!
                             )

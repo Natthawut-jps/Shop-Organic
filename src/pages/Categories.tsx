@@ -9,7 +9,6 @@ import {
 import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import axios from "axios";
 import Rating from "@mui/material/Rating";
 import StarIcon from "@mui/icons-material/Star";
 import InputLabel from "@mui/material/InputLabel";
@@ -24,6 +23,7 @@ import Alert from "@mui/material/Alert";
 import Select from "@mui/material/Select";
 import { Pagination, SelectChangeEvent } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
+import instance from "./unities/axios_instance";
 
 interface datatypesProduct {
   id: number;
@@ -61,127 +61,134 @@ const Categories: FunctionComponent = () => {
   const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   // product
+
   useEffect(() => {
     const fetchs = async () => {
-      await axios.get("/data/popularProduct.json").then((res) => {
-        const product: datatypesProduct[] = res.data.PopularProduct.filter(
-          (item: datatypesProduct) => item.categories === categoriesParam
-        );
-        if (parseInt(pageParam!) <= Math.ceil(product.length / 20)) {
-          if (sortBy === "sortmin") {
-            const sortByMin = product.sort((a, b) =>
-              a.name.localeCompare(b.name)
-            );
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByMin.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByMin.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByMin.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          } else if (sortBy === "Latest") {
-            const sortByLstest = product.sort((a, b) => b.id - a.id);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByLstest.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByLstest.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByLstest.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          }
-          if (sortRating === 1) {
-            const sortByRaing1 = product.filter((item) => item.rating === 1);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByRaing1.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByRaing1.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByRaing1.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          } else if (sortRating === 2) {
-            const sortByRaing2 = product.filter((item) => item.rating === 2);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByRaing2.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByRaing2.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByRaing2.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          } else if (sortRating === 3) {
-            const sortByRaing3 = product.filter((item) => item.rating === 3);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByRaing3.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByRaing3.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByRaing3.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          } else if (sortRating === 4) {
-            const sortByRaing4 = product.filter((item) => item.rating === 4);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByRaing4.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByRaing4.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByRaing4.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          } else if (sortRating === 5) {
-            const sortByRaing5 = product.filter((item) => item.rating === 5);
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sortByRaing5.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sortByRaing5.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sortByRaing5.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          }
-          if (sortPrice > 0) {
-            const sort_Price = product.filter(
-              (item) => item.price <= sortPrice
-            );
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % sort_Price.length;
-            const endOffset = itemOffset + 20;
-            setProduct(sort_Price.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(sort_Price.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
-          }
-          if (!sortBy && !sortRating && !sortPrice) {
-            const itemOffset =
-              ((parseInt(pageParam!) - 1) * 20) % product.length;
-            const endOffset = itemOffset + 20;
-            setProduct(product.slice(itemOffset, endOffset));
-            setPageCount(Math.ceil(product.length / 20));
-            setAmoutcategories(
-              res.data.PopularProduct.map(
-                (item: datatypesProduct) => item.categories
-              )
-            );
+      await instance({
+        method: "get",
+        url: "/public/products/get_product",
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          const product: datatypesProduct[] = res.data.filter(
+            (item: datatypesProduct) => item.categories === categoriesParam
+          );
+          if (parseInt(pageParam!) <= Math.ceil(product.length / 20)) {
+            if (sortBy === "sortmin") {
+              const sortByMin = product.sort((a, b) =>
+                a.name.localeCompare(b.name)
+              );
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByMin.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByMin.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByMin.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            } else if (sortBy === "Latest") {
+              const sortByLstest = product.sort((a, b) => b.id - a.id);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByLstest.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByLstest.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByLstest.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            }
+            if (sortRating === 1) {
+              const sortByRaing1 = product.filter((item) => item.rating === 1);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByRaing1.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByRaing1.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByRaing1.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            } else if (sortRating === 2) {
+              const sortByRaing2 = product.filter((item) => item.rating === 2);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByRaing2.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByRaing2.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByRaing2.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            } else if (sortRating === 3) {
+              const sortByRaing3 = product.filter((item) => item.rating === 3);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByRaing3.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByRaing3.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByRaing3.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            } else if (sortRating === 4) {
+              const sortByRaing4 = product.filter((item) => item.rating === 4);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByRaing4.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByRaing4.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByRaing4.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            } else if (sortRating === 5) {
+              const sortByRaing5 = product.filter((item) => item.rating === 5);
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sortByRaing5.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sortByRaing5.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sortByRaing5.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            }
+            if (sortPrice > 0) {
+              const sort_Price = product.filter(
+                (item) => item.price <= sortPrice
+              );
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % sort_Price.length;
+              const endOffset = itemOffset + 20;
+              setProduct(sort_Price.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(sort_Price.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            }
+            if (!sortBy && !sortRating && !sortPrice) {
+              const itemOffset =
+                ((parseInt(pageParam!) - 1) * 20) % product.length;
+              const endOffset = itemOffset + 20;
+              setProduct(product.slice(itemOffset, endOffset));
+              setPageCount(Math.ceil(product.length / 20));
+              setAmoutcategories(
+                res.data.map(
+                  (item: datatypesProduct) => item.categories
+                )
+              );
+            }
           }
         } else {
           navigate("/error");
@@ -528,7 +535,9 @@ const Categories: FunctionComponent = () => {
                             <img
                               className="relative w-[252px] h-[202px] object-cover"
                               alt=""
-                              src={item.imgURL}
+                              src={`${import.meta.env.VITE_BASE_API}/img/${
+                                item.imgURL
+                              }`}
                             />
                           </div>
                           <div className="absolute h-[0%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
@@ -539,9 +548,6 @@ const Categories: FunctionComponent = () => {
                               <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
                                 <div className="relative leading-[150%] font-medium">
                                   {`฿${item.price}`}
-                                </div>
-                                <div className="relative [text-decoration:line-through] leading-[150%] text-gray-scale-gray-400 hidden">
-                                  $20.99
                                 </div>
                               </div>
                             </div>
