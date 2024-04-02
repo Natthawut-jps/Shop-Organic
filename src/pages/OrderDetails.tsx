@@ -43,7 +43,7 @@ interface orderDetail_Type {
   categories: string;
   quantity: number;
   imgURL: string;
-  p_id: number;
+  product_id: number;
   user_id: number;
   order_id: number;
   createdAt: Date;
