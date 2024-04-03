@@ -31,10 +31,7 @@ interface datatypesProduct {
     categories: string,
     rating: number,
     imgURL: string,
-    uid: number,
-    shoppingHanding: number,
-    createdAt: string,
-    updatedAt: string,
+
 };
 interface datatypesCart {
     id: number,
@@ -45,10 +42,7 @@ interface datatypesCart {
     rating: number,
     imgURL: string,
     pid: number,
-    uid: number,
-    shoppingHanding: number,
-    createdAt: string,
-    updatedAt: string,
+
 };
 export const CartContext = createContext<dataTypesContext>({} as dataTypesContext)
 export const CartContextProviders = () => {
@@ -68,7 +62,6 @@ export const CartProvider = ({ children }: Provider) => {
                 categories: prop.categories,
                 rating: prop.rating,
                 imgURL: prop.imgURL,
-                uid: prop.uid,
             }
         }).then((res) => {
             setCartitems(res.data);
@@ -121,7 +114,6 @@ export const CartProvider = ({ children }: Provider) => {
                 categories: prop.categories,
                 rating: prop.rating,
                 imgURL: prop.imgURL,
-                uid: prop.uid,
             }
         }).then((res) => {
             setFavoritetItem(res.data);

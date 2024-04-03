@@ -7,11 +7,14 @@ import StarIcon from "@mui/icons-material/Star";
 import { Alert, Snackbar } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
 import instance from "./unities/axios_instance";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoneyBills } from "@fortawesome/free-solid-svg-icons";
 
 interface datatypesProduct {
   id: number;
   name: string;
   price: number;
+  description: string;
   categories: string;
   rating: number;
   imgURL: string;
@@ -25,6 +28,20 @@ export const Homepage: FunctionComponent = () => {
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   // productItem
   const Product = async () => {
     try {
@@ -378,7 +395,7 @@ export const Homepage: FunctionComponent = () => {
           Latest News
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
-          {popularProduct.slice(0, 3).map((item: datatypesProduct) => (
+          {popularProduct.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3).map((item: datatypesProduct) => (
             <div
               key={item.id}
               className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start"
@@ -387,14 +404,14 @@ export const Homepage: FunctionComponent = () => {
                 <img
                   className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
                   alt=""
-                  src={item.imgURL}
+                  src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
                 />
                 <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-scale-white w-[58px] h-[58px]">
                   <div className="absolute top-[6px] left-[19px] leading-[150%] font-medium">
-                    18
+                    {new Date(item.createdAt).getDate()}
                   </div>
-                  <div className="absolute top-[36px] left-[15px] text-xs tracking-[0.03em] leading-[100%] uppercase font-medium text-gray-scale-gray-500">
-                    Nov
+                  <div className="absolute top-[36px] left-[15px] text-xs tracking-[0.03em] leading-[100%] font-medium text-gray-scale-gray-500">
+                    {months[new Date(item.createdAt).getMonth()]}
                   </div>
                 </div>
               </div>
@@ -402,31 +419,18 @@ export const Homepage: FunctionComponent = () => {
                 <div className="flex flex-col items-start justify-start gap-[8px]">
                   <div className="flex flex-row items-start justify-start gap-[16px]">
                     <div className="flex flex-row items-center justify-start gap-[4px]">
-                      <img
-                        className="relative w-5 h-5 overflow-hidden shrink-0"
-                        alt=""
-                        src="/img/tag-1.svg"
-                      />
-                      <div className="relative leading-[150%]">Food</div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-[4px] text-gray-scale-gray-500">
-                      <img
-                        className="relative w-5 h-5 overflow-hidden shrink-0"
-                        alt=""
-                        src="/img/user-3-1.svg"
-                      />
-                      <div className="relative leading-[150%]">
-                        <span>By</span>
-                        <span className="text-gray-scale-gray-700"> Admin</span>
+                      <div className="relative leading-[150%] text-gray-scale-gray-500">
+                        {item.description}
                       </div>
                     </div>
-                    <div className="flex flex-row items-center justify-start gap-[4px] text-gray-scale-gray-600">
-                      <img
-                        className="relative w-[18px] h-[18px] overflow-hidden shrink-0"
-                        alt=""
-                        src="/img/chatcentered-1.svg"
-                      />
-                      <div className="relative leading-[150%]">65 Comments</div>
+                    <div className="flex flex-row items-center justify-start gap-[4px] text-gray-scale-gray-500">
+                      <FontAwesomeIcon icon={faMoneyBills}/>
+                      <div className="relative leading-[150%]">
+                        <span>฿</span>
+                        <span className="text-gray-scale-gray-700">
+                          {item.price}
+                        </span>
+                      </div>
                     </div>
                   </div>
                   <div className=" text-black/70 relative text-lg leading-[150%] font-medium inline-block w-[376px]">

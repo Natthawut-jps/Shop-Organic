@@ -24,7 +24,6 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { CartContextProviders } from "./HandleCart";
-import axios from "axios";
 import instance_auth from "./instance_auth";
 import { Link } from "react-router-dom";
 import instance from "./axios_instance";

@@ -25,18 +25,18 @@ const OrderHistory: FunctionComponent = () => {
   const [data, setData] = useState<order_Type[]>([]);
   const [pageCount, setPageCount] = useState<number>(1);
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
     "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   const status = [
     "กำลังดำเนินการ",

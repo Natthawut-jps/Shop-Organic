@@ -33,7 +33,6 @@ interface datatypesProduct {
   rating: number;
   imgURL: string;
   pid: number;
-  uid: number;
   shoppingHanding: number;
   createdAt: string;
   updatedAt: string;
@@ -51,19 +50,34 @@ const Categories: FunctionComponent = () => {
   }>();
   const state: { status: boolean } = useLocation().state;
   const [snackbar, setSnackbar] = useState<boolean>(false);
-  const [amoutcategories, setAmoutcategories] = useState<string[]>([]);
-  const allCategories = [...new Set(amoutcategories)];
-  const countCategories = allCategories.map((item) => [
-    item,
-    amoutcategories.filter((el) => el === item).length,
-  ]);
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
   // product
-
+  interface category_Type {
+    id: number;
+    category_name: string;
+    description: string;
+    quantity: number;
+    imgURL: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  const [category_item, setCategory] = useState<category_Type[]>([]);
+  const category = async () => {
+    await instance({
+      method: "get",
+      url: "/public/categories/get_category",
+      responseType: "json",
+    }).then((res) => {
+      if (res.status === 200) {
+        setCategory(res.data);
+      }
+    });
+  };
   useEffect(() => {
     const fetchs = async () => {
+      category();
       await instance({
         method: "get",
         url: "/public/products/get_product",
@@ -83,11 +97,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByMin.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByMin.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             } else if (sortBy === "Latest") {
               const sortByLstest = product.sort((a, b) => b.id - a.id);
               const itemOffset =
@@ -95,11 +104,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByLstest.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByLstest.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             }
             if (sortRating === 1) {
               const sortByRaing1 = product.filter((item) => item.rating === 1);
@@ -108,11 +112,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByRaing1.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByRaing1.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             } else if (sortRating === 2) {
               const sortByRaing2 = product.filter((item) => item.rating === 2);
               const itemOffset =
@@ -120,11 +119,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByRaing2.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByRaing2.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             } else if (sortRating === 3) {
               const sortByRaing3 = product.filter((item) => item.rating === 3);
               const itemOffset =
@@ -132,11 +126,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByRaing3.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByRaing3.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             } else if (sortRating === 4) {
               const sortByRaing4 = product.filter((item) => item.rating === 4);
               const itemOffset =
@@ -144,11 +133,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByRaing4.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByRaing4.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             } else if (sortRating === 5) {
               const sortByRaing5 = product.filter((item) => item.rating === 5);
               const itemOffset =
@@ -156,11 +140,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sortByRaing5.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sortByRaing5.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             }
             if (sortPrice > 0) {
               const sort_Price = product.filter(
@@ -171,11 +150,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(sort_Price.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(sort_Price.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             }
             if (!sortBy && !sortRating && !sortPrice) {
               const itemOffset =
@@ -183,11 +157,6 @@ const Categories: FunctionComponent = () => {
               const endOffset = itemOffset + 20;
               setProduct(product.slice(itemOffset, endOffset));
               setPageCount(Math.ceil(product.length / 20));
-              setAmoutcategories(
-                res.data.map(
-                  (item: datatypesProduct) => item.categories
-                )
-              );
             }
           }
         } else {
@@ -252,15 +221,15 @@ const Categories: FunctionComponent = () => {
                         navigate(`/product/categories/${event.target.value}/1`);
                       }}
                     >
-                      {countCategories.map((item, index) => (
+                      {category_item.map((item, index) => (
                         <div key={index}>
                           <FormControlLabel
                             key={index}
-                            value={item[0]}
+                            value={item.category_name}
                             control={<Radio />}
-                            label={item[0]}
+                            label={item.category_name}
                           />
-                          {`(${item[1]})`}
+                          {`(${item.quantity})`}
                         </div>
                       ))}
                     </RadioGroup>
@@ -666,9 +635,11 @@ const Categories: FunctionComponent = () => {
               <div className="absolute top-[11px] left-[1320px] text-base text-gray-scale-gray-900">
                 <span>
                   <span className="leading-[120%] font-semibold">
-                    {countCategories
-                      .find((item) => item[0] === categoriesParam)
-                      ?.map((item, index) => index === 1 && item)}
+                    {
+                      ProductsItem.filter(
+                        (item) => item.categories === categoriesParam
+                      ).length
+                    }
                   </span>
                 </span>
                 <span className="leading-[150%] text-gray-scale-gray-600">

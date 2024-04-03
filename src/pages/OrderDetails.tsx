@@ -43,7 +43,7 @@ interface orderDetail_Type {
   categories: string;
   quantity: number;
   imgURL: string;
-  product_id: number;
+  pid: number;
   user_id: number;
   order_id: number;
   createdAt: Date;
@@ -51,18 +51,18 @@ interface orderDetail_Type {
 }
 const OrderDetails: FunctionComponent = () => {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
     "May",
     "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
   const { Detail, order_id } = useParams();
   const stepLabel = [
