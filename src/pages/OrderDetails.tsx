@@ -130,6 +130,29 @@ const OrderDetails: FunctionComponent = () => {
       console.log(error);
     }
   };
+
+  const cancled_order = async () => {
+    try {
+      await instance_auth({
+        method: "post",
+        url: "/order/cancled",
+        responseType: "json",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          id_order: orderView?.id,
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          location.href = "/Account/Orders";
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     orders_Active();
     address_Active();
@@ -316,12 +339,14 @@ const OrderDetails: FunctionComponent = () => {
               {orderView?.quantity} Products
             </div>
           </div>
-          <Link
-            to={"/Account/Orders"}
-            className=" no-underline hover:text-branding-success/80 relative text-base leading-[150%] font-medium text-branding-success"
-          >
-            Back to List
-          </Link>
+          {orderView && orderView.status === 9 ? null : (
+            <div
+              onClick={cancled_order}
+              className=" cursor-pointer no-underline hover:text-branding-error/80 relative text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
+            >
+              Cancle
+            </div>
+          )}
         </div>
       </div>
       <Foorter />
