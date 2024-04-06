@@ -24,6 +24,8 @@ import Select from "@mui/material/Select";
 import { Pagination, SelectChangeEvent } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
 import instance from "./unities/axios_instance";
+import { Cookies } from "react-cookie";
+import { SignIn } from "./SignIn";
 
 interface datatypesProduct {
   id: number;
@@ -39,6 +41,8 @@ interface datatypesProduct {
 }
 
 const Categories: FunctionComponent = () => {
+  const cookie = new Cookies();
+  const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const navigate = useNavigate();
   const [sortBy, setSortby] = useState<string | null>(null);
   const [sortRating, setSortRating] = useState<number | null>(null);
@@ -182,6 +186,7 @@ const Categories: FunctionComponent = () => {
     <>
       {
         <div className="relative bg-gray-scale-white w-full h-[2750px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
+          <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
           <Header />
           <Breadcrumbs
             categoies={categoriesParam}
@@ -545,8 +550,13 @@ const Categories: FunctionComponent = () => {
                         ) : (
                           <div
                             onClick={() => {
-                              addTocart(item);
-                              setSnackbar(true);
+                              cookie.get("_ur") ? addTocart(item) : null;
+                              cookie.get("_ur")
+                                ? setSnackbar(true)
+                                : setSnackbar(false),
+                                cookie.get("_ur")
+                                  ? setOpenSignIn(false)
+                                  : setOpenSignIn(true);
                             }}
                           >
                             <img
@@ -554,20 +564,6 @@ const Categories: FunctionComponent = () => {
                               alt=""
                               src="/img/add-to-cart.svg"
                             />
-                            <Snackbar
-                              open={snackbar}
-                              anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "center",
-                              }}
-                              autoHideDuration={1000}
-                              sx={{ width: "100%" }}
-                              onClose={() => setSnackbar(false)}
-                            >
-                              <Alert severity="success">
-                                Add to Cart successfully
-                              </Alert>
-                            </Snackbar>
                           </div>
                         )}
                       </div>

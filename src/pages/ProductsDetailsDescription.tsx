@@ -9,6 +9,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { CartContextProviders } from "./unities/HandleCart";
 import instance from "./unities/axios_instance";
 import StarIcon from "@mui/icons-material/Star";
+import { SignIn } from "./SignIn";
+import { Cookies } from "react-cookie";
 
 interface datatypes {
   product: {
@@ -41,6 +43,8 @@ interface datatypesProduct {
 }
 
 const ProductsDetailsDescription: FunctionComponent = () => {
+  const cookie = new Cookies();
+  const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const status_product = ["Out of Stock", "Low Stock", "InStock"];
   const { categoriesP, productList } = useParams();
   const [productDetail, setProductDetail] = useState<datatypesProduct>();
@@ -93,6 +97,8 @@ const ProductsDetailsDescription: FunctionComponent = () => {
     <>
       {productList === productDetail?.name && (
         <div className="relative bg-gray-scale-white w-full h-[2495px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
+          {/* SigIn User */}
+          <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
           {/* header template */}
           <Header />
           <Breadcrumbs
@@ -164,8 +170,13 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                     ) : (
                       <div
                         onClick={() => {
-                          addTocart(item);
-                          setSnackbar(true);
+                          cookie.get("_ur") ? addTocart(item) : null;
+                          cookie.get("_ur")
+                            ? setSnackbar(true)
+                            : setSnackbar(false),
+                            cookie.get("_ur")
+                              ? setOpenSignIn(false)
+                              : setOpenSignIn(true);
                         }}
                       >
                         <img
@@ -173,20 +184,6 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                           alt=""
                           src="/img/add-to-cart.svg"
                         />
-                        <Snackbar
-                          open={snackbar}
-                          anchorOrigin={{
-                            vertical: "top",
-                            horizontal: "center",
-                          }}
-                          autoHideDuration={1000}
-                          sx={{ width: "100%" }}
-                          onClose={() => setSnackbar(false)}
-                        >
-                          <Alert severity="success">
-                            Add to Cart successfully
-                          </Alert>
-                        </Snackbar>
                       </div>
                     )}
                   </div>
@@ -370,8 +367,14 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                   ) : (
                     <div
                       onClick={() => {
-                        addTocart(state.product);
                         setSnackbar(true);
+                        cookie.get("_ur") ? addTocart(state.product) : null;
+                        cookie.get("_ur")
+                          ? setSnackbar(true)
+                          : setSnackbar(false),
+                          cookie.get("_ur")
+                            ? setOpenSignIn(false)
+                            : setOpenSignIn(true);
                       }}
                       className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white"
                     >
@@ -385,36 +388,48 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                       />
                     </div>
                   )}
-                  <div className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
-                    <Rating
-                      name="hover-feedback"
-                      precision={1}
-                      value={
-                        favoriteItem.some(
-                          (item) => item.pid === state.product.id
-                        )
-                          ? 1
-                          : 0
-                      }
-                      onChange={() => {
-                        addFavorite(state.product);
-                        favoriteItem.some(
-                          (item) => item.pid === state.product.id
-                        ) && removeFavoriteItem(state.product.id);
-                      }}
-                      max={1}
-                      icon={<FavoriteIcon fontSize="inherit" />}
-                      emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
-                      sx={{
-                        "& .MuiRating-iconFilled": {
-                          color: "#ff6d75",
-                        },
-                        "& .MuiRating-iconHover": {
-                          color: "#ff3d47",
-                        },
-                      }}
-                    />
-                  </div>
+                  {cookie.get("_ur") ? (
+                    <div className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-4">
+                      <Rating
+                        name="hover-feedback"
+                        precision={1}
+                        value={
+                          favoriteItem.some(
+                            (item) => item.pid === state.product.id
+                          )
+                            ? 1
+                            : 0
+                        }
+                        onChange={() => {
+                          addFavorite(state.product);
+                          favoriteItem.some(
+                            (item) => item.pid === state.product.id
+                          ) && removeFavoriteItem(state.product.id);
+                        }}
+                        max={1}
+                        icon={<FavoriteIcon fontSize="inherit" />}
+                        emptyIcon={<FavoriteBorderIcon fontSize="inherit" />}
+                        sx={{
+                          "& .MuiRating-iconFilled": {
+                            color: "#ff6d75",
+                          },
+                          "& .MuiRating-iconHover": {
+                            color: "#ff3d47",
+                          },
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => setOpenSignIn(true)}
+                      className="rounded-24xl bg-limegreen-200 flex flex-row items-start justify-start p-3 cursor-pointer"
+                    >
+                      <FavoriteBorderIcon
+                        fontSize="medium"
+                        className=" text-black/30"
+                      />
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col items-start justify-start gap-[12px]">
                   <div className="flex flex-row items-start justify-start gap-[6px]">

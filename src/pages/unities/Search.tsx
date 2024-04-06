@@ -1,97 +1,159 @@
-import { faSistrix } from '@fortawesome/free-brands-svg-icons';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Dialog, Slide } from '@mui/material'
-import { TransitionProps } from '@mui/material/transitions';
-import axios from 'axios';
-import { FunctionComponent, ReactElement, Ref, forwardRef, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { faSistrix } from "@fortawesome/free-brands-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Dialog, Slide, TextField } from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
+import {
+  FunctionComponent,
+  ReactElement,
+  Ref,
+  forwardRef,
+  useEffect,
+  useState,
+} from "react";
+import { Link } from "react-router-dom";
+import instance from "./axios_instance";
 
 export const Transition = forwardRef(function Transition(
-    props: TransitionProps & {
-        children: ReactElement<any, any>;
-    },
-    ref: Ref<unknown>,
+  props: TransitionProps & {
+    children: ReactElement<any, any>;
+  },
+  ref: Ref<unknown>
 ) {
-    return (
-        <>
-            <Slide direction="down" ref={ref} {...props} />
-        </>
-    )
+  return (
+    <>
+      <Slide direction="down" ref={ref} {...props} />
+    </>
+  );
 });
 interface open {
-    Search: {
-        openSearch: boolean,
-        setOpenSearch: (e: boolean) => void,
-    }
-};
-interface datatypes {
-    id: number,
-    name: string,
-    price: number,
-    categories: string,
-    rating: number,
-    imgURL: string,
-};
-export const Search: FunctionComponent<open> = (props) => {
-    const [input, setInput] = useState<string>('');
-    const [search, setDataSearch] = useState<datatypes[]>([]);
-    const [list, setList] = useState<datatypes[]>([]);
-    const Valuesearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value: string = e.target.value.toLowerCase();
-        setList(() => search.filter((item: datatypes) => {
-            return item.name.toLowerCase().indexOf(value) !== -1 && value.trim().length >= 3
-        }));
-        setInput(value)
-    };
-    const data = async () => {
-        const { PopularProduct } = await (await axios.get('/data/popularProduct.json')).data
-        setDataSearch(PopularProduct)
-    };
-    useEffect(() => {
-        data()
-    }, []);
-    return (
-        <>
-            <Dialog
-                maxWidth={'md'}
-                onClose={() => props.Search.setOpenSearch(false)}
-                open={props.Search.openSearch}
-                // TransitionComponent={Transition}
-            >
-                <div className="box-border relative top-3 right-3 ">
-                    <FontAwesomeIcon icon={faXmark} size="lg" className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right " onClick={() => props.Search.setOpenSearch(false)} />
-                </div>
-                <div className=" relative top-0 flex flex-row items-center space-x-2 container mx-auto p-4 box-border">
-                    <FontAwesomeIcon icon={faSistrix} color="black" className=" opacity-30 box-border relative top-0 " />
-                    <div className=" flex-1">
-                        <input type="text" placeholder="Search..." className=" w-full h-10 focus:outline-none text-[#6d6b6ba2]" onChange={Valuesearch} />
-                        <div className=' relative top-[-5px] border-solid border-b border-t-0 border-[#666666]/30' />
-                    </div>
-                </div>
-                <div className=" grid grid-flow-row mx-auto p-4 pl-8 box-border space-y-0 w-[500px] h-[400px] overflow-auto sm:w-[320px]">
-                    {input.length >= 3 ?
-                        list.map((item: datatypes) => (
-                            <div key={item.id}>
-                                <Link to={`/product/detail/${item.categories}/${item.name.replace(/\s/g, '')}`} state={{ product: item, status: 'toTop' }} className=" flex items-center gap-10 no-underline text-black hover:text-[#06e102] hover:bg-[#666666]/10">
-                                    <div>
-                                        <img src={item.imgURL} alt="" width={70} height={70} className=' sm:w-[50px] sm:h-[50px]' />
-                                    </div>
-                                    <div className=' break-words sm:relative sm:left-[20px]'>
-                                        {item.name}
-                                    </div>
-                                    <div className=' text-[#06e102] font-semibold sm:relative left-[50px] sm:hidden'>
-                                        {`฿${item.price}`}
-                                    </div>
-                                </Link>
-                            </div>
-                        )) :
-                        <div className="text-[#6d6b6ba2]/30 w-full flex justify-center pt-8 box-border">
-                            การุณาใส่อย่างน้อย 3 ตัวอักษร
-                        </div>
-                    }
-                </div>
-            </Dialog>
-        </>
-    )
+  Search: {
+    openSearch: boolean;
+    setOpenSearch: (e: boolean) => void;
+  };
 }
+interface datatypesProduct {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+  categories: string;
+  rating: number;
+  imgURL: string;
+  uid: number;
+  shoppingHanding: number;
+  createdAt: string;
+  updatedAt: string;
+}
+export const Search: FunctionComponent<open> = (props) => {
+  const [input, setInput] = useState<string>("");
+  const [search, setDataSearch] = useState<datatypesProduct[]>([]);
+  const [list, setList] = useState<datatypesProduct[]>([]);
+  const Valuesearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value: string = e.target.value.toLowerCase();
+    setList(() =>
+      search.filter((item: datatypesProduct) => {
+        return (
+          item.name.toLowerCase().search(value) !== -1 &&
+          value.trim().length >= 1
+        );
+      })
+    );
+    setInput(value);
+  };
+  // productItem
+  const Product = async () => {
+    try {
+      await instance({
+        method: "get",
+        url: "/public/products/get_product",
+        responseType: "json",
+      }).then((res) => {
+        if (res.status === 200) {
+          setDataSearch(res.data);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    Product();
+  }, []);
+  return (
+    <>
+      <Dialog
+        maxWidth={false}
+        fullWidth
+        onClose={() => props.Search.setOpenSearch(false)}
+        open={props.Search.openSearch}
+        // TransitionComponent={Transition}
+      >
+        <div className="box-border relative top-3 right-3 ">
+          <FontAwesomeIcon
+            icon={faXmark}
+            size="lg"
+            className="cursor-pointer p-[9px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right"
+            onClick={() => {
+              setInput("");
+              setList([]);
+              props.Search.setOpenSearch(false);
+            }}
+          />
+        </div>
+        <div className=" relative top-0 flex flex-row items-center space-x-2 container mx-auto p-4 box-border">
+          <div className=" flex-1 flex flex-row items-center justify-start">
+            <FontAwesomeIcon
+              size="lg"
+              icon={faSistrix}
+              color="black"
+              className=" opacity-30 box-border relative top-0 mr-1 mt-5 "
+            />
+            <TextField
+              id="standard-basic"
+              label="Search..."
+              variant="standard"
+              className=" w-full h-10 focus:outline-none text-[#6d6b6ba2] box-border relative left-2"
+              type="text"
+              onChange={Valuesearch}
+            />
+          </div>
+        </div>
+        <div className="flex flex-col mx-auto p-4 box-border justify-start space-y-0 w-full overflow-auto sm:w-[320px]">
+          {input.length >= 1
+            ? list.map((item: datatypesProduct) => (
+                <div key={item.id}>
+                  <Link
+                    to={`/product/detail/${item.categories}/${item.name.replace(
+                      /\s/g,
+                      ""
+                    )}`}
+                    state={{ product: item, status: "toTop" }}
+                    className=" flex-1 flex justify-start items-center gap-[50px] no-underline text-black cursor-pointer w-full hover:bg-black/10"
+                  >
+                    <div>
+                      <img
+                        src={`${import.meta.env.VITE_BASE_API}/img/${
+                          item.imgURL
+                        }`}
+                        alt=""
+                        width={70}
+                        height={70}
+                        className=" sm:w-[50px] sm:h-[50px]"
+                      />
+                    </div>
+                    <div className="sm:relative sm:left-[20px]">
+                      {item.name}
+                    </div>
+                    <div className=" text-[#06e102] font-semibold sm:relative left-[50px] sm:hidden">
+                      {`฿${item.price}`}
+                    </div>
+                  </Link>
+                </div>
+              ))
+            : null}
+        </div>
+      </Dialog>
+    </>
+  );
+};

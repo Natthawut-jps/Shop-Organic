@@ -9,6 +9,8 @@ import { CartContextProviders } from "./unities/HandleCart";
 import instance from "./unities/axios_instance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoneyBills } from "@fortawesome/free-solid-svg-icons";
+import { Cookies } from "react-cookie";
+import { SignIn } from "./SignIn";
 
 interface datatypesProduct {
   id: number;
@@ -25,6 +27,8 @@ interface datatypesProduct {
 }
 
 export const Homepage: FunctionComponent = () => {
+  const cookie = new Cookies();
+  const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
   const [snackbar, setSnackbar] = useState<boolean>(false);
@@ -88,6 +92,8 @@ export const Homepage: FunctionComponent = () => {
 
   return (
     <div className="relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
+      {/* SigIn User */}
+      <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
       {/* header template */}
       <Header />
       {/* Sale up to */}
@@ -363,8 +369,13 @@ export const Homepage: FunctionComponent = () => {
                   ) : (
                     <div
                       onClick={() => {
-                        addTocart(item);
-                        setSnackbar(true);
+                        cookie.get("_ur") ? addTocart(item) : null;
+                        cookie.get("_ur")
+                          ? setSnackbar(true)
+                          : setSnackbar(false),
+                          cookie.get("_ur")
+                            ? setOpenSignIn(false)
+                            : setOpenSignIn(true);
                       }}
                     >
                       <img
@@ -372,17 +383,6 @@ export const Homepage: FunctionComponent = () => {
                         alt=""
                         src="/img/add-to-cart.svg"
                       />
-                      <Snackbar
-                        open={snackbar}
-                        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                        autoHideDuration={1000}
-                        sx={{ width: "100%" }}
-                        onClose={() => setSnackbar(false)}
-                      >
-                        <Alert severity="success">
-                          Add to Cart successfully
-                        </Alert>
-                      </Snackbar>
                     </div>
                   )}
                 </div>
@@ -395,68 +395,75 @@ export const Homepage: FunctionComponent = () => {
           Latest News
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
-          {popularProduct.sort((a,b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 3).map((item: datatypesProduct) => (
-            <div
-              key={item.id}
-              className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start"
-            >
-              <div className="relative w-[424px] h-[324px]">
-                <img
-                  className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
-                  alt=""
-                  src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
-                />
-                <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-scale-white w-[58px] h-[58px]">
-                  <div className="absolute top-[6px] left-[19px] leading-[150%] font-medium">
-                    {new Date(item.createdAt).getDate()}
-                  </div>
-                  <div className="absolute top-[36px] left-[15px] text-xs tracking-[0.03em] leading-[100%] font-medium text-gray-scale-gray-500">
-                    {months[new Date(item.createdAt).getMonth()]}
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-t-none rounded-b-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[20px] text-left text-sm text-gray-scale-gray-700">
-                <div className="flex flex-col items-start justify-start gap-[8px]">
-                  <div className="flex flex-row items-start justify-start gap-[16px]">
-                    <div className="flex flex-row items-center justify-start gap-[4px]">
-                      <div className="relative leading-[150%] text-gray-scale-gray-500">
-                        {item.description}
-                      </div>
-                    </div>
-                    <div className="flex flex-row items-center justify-start gap-[4px] text-gray-scale-gray-500">
-                      <FontAwesomeIcon icon={faMoneyBills}/>
-                      <div className="relative leading-[150%]">
-                        <span>฿</span>
-                        <span className="text-gray-scale-gray-700">
-                          {item.price}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className=" text-black/70 relative text-lg leading-[150%] font-medium inline-block w-[376px]">
-                    {item.name}
-                  </div>
-                </div>
-                <Link
-                  to={`/product/detail/${item.categories}/${item.name.replace(
-                    /\s/g,
-                    ""
-                  )}`}
-                  state={{ product: item, status: "toTop" }}
-                  className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success"
-                >
-                  <div className="relative leading-[120%] font-semibold">
-                    Read More
-                  </div>
+          {popularProduct
+            .sort(
+              (a, b) =>
+                new Date(b.createdAt).getTime() -
+                new Date(a.createdAt).getTime()
+            )
+            .slice(0, 3)
+            .map((item: datatypesProduct) => (
+              <div
+                key={item.id}
+                className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start"
+              >
+                <div className="relative w-[424px] h-[324px]">
                   <img
-                    className="relative w-[16.5px] h-[13.55px]"
+                    className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
                     alt=""
-                    src="/img/arrow.svg"
+                    src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
                   />
-                </Link>
+                  <div className="absolute bottom-[24px] left-[24px] rounded bg-gray-scale-white w-[58px] h-[58px]">
+                    <div className="absolute top-[6px] left-[19px] leading-[150%] font-medium">
+                      {new Date(item.createdAt).getDate()}
+                    </div>
+                    <div className="absolute top-[36px] left-[15px] text-xs tracking-[0.03em] leading-[100%] font-medium text-gray-scale-gray-500">
+                      {months[new Date(item.createdAt).getMonth()]}
+                    </div>
+                  </div>
+                </div>
+                <div className="rounded-t-none rounded-b-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[20px] text-left text-sm text-gray-scale-gray-700">
+                  <div className="flex flex-col items-start justify-start gap-[8px]">
+                    <div className="flex flex-row items-start justify-start gap-[16px]">
+                      <div className="flex flex-row items-center justify-start gap-[4px]">
+                        <div className="relative leading-[150%] text-gray-scale-gray-500">
+                          {item.description}
+                        </div>
+                      </div>
+                      <div className="flex flex-row items-center justify-start gap-[4px] text-gray-scale-gray-500">
+                        <FontAwesomeIcon icon={faMoneyBills} />
+                        <div className="relative leading-[150%]">
+                          <span>฿</span>
+                          <span className="text-gray-scale-gray-700">
+                            {item.price}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className=" text-black/70 relative text-lg leading-[150%] font-medium inline-block w-[376px]">
+                      {item.name}
+                    </div>
+                  </div>
+                  <Link
+                    to={`/product/detail/${item.categories}/${item.name.replace(
+                      /\s/g,
+                      ""
+                    )}`}
+                    state={{ product: item, status: "toTop" }}
+                    className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success"
+                  >
+                    <div className="relative leading-[120%] font-semibold">
+                      Read More
+                    </div>
+                    <img
+                      className="relative w-[16.5px] h-[13.55px]"
+                      alt=""
+                      src="/img/arrow.svg"
+                    />
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
       {/* Header Follow us on Instagram */}

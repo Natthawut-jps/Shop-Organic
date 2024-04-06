@@ -138,12 +138,18 @@ export const Header: FunctionComponent = () => {
           <div className="flex flex-row items-center justify-between gap-[20px] text-center">
             {cookie.get("_ur") ? (
               <div className=" relative flex justify-center items-center gap-5 left-[120px]">
-                <div className="text-[16px] hover:bg-black/10 hover:cursor-pointer absolute right-[130px] p-4 box-border font-bold">
+                <Link
+                  to={"/Account/Dashboard"}
+                  className="text-[16px] hover:bg-black/10 hover:cursor-pointer absolute text-gray-600 no-underline right-[130px] p-4 box-border font-bold"
+                >
                   Dashboad
-                </div>
-                <div className="text-[16px] hover:bg-black/10 hover:cursor-pointer absolute right-[50px] p-4 box-border font-bold">
-                  Profile
-                </div>
+                </Link>
+                <Link
+                  to={"/Account/Settings"}
+                  className="text-[16px] hover:bg-black/10 text-gray-600 no-underline hover:cursor-pointer absolute right-[50px] p-4 box-border font-bold"
+                >
+                  Setting
+                </Link>
                 <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClickAccounting}

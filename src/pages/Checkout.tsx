@@ -6,6 +6,14 @@ import { Link, useNavigate } from "react-router-dom";
 import instance_auth from "./unities/instance_auth";
 import { AxiosResponse } from "axios";
 import { CartContextProviders } from "./unities/HandleCart";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@mui/material";
 
 interface datatypesCart {
   id: number;
@@ -39,6 +47,16 @@ interface addressType {
 }
 
 const Checkout: FunctionComponent = () => {
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const navigate = useNavigate();
   const { cartItems } = CartContextProviders();
   const [addressItem, setAddress] = useState<addressType[]>([]);
@@ -47,36 +65,40 @@ const Checkout: FunctionComponent = () => {
     return accumulator + currentValue;
   }, 0);
   const handlerPlacement = async () => {
-    const quantity = cartItems.map((item) => item.quantity);
-    const quantitySum = quantity.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue;
-    }, 0);
-    const address_id = addressItem.find((item) => item.id);
-    const amount_total = (priceSum + 50).toFixed(2);
-    try {
-      await instance_auth({
-        method: "post",
-        url: "/order/add",
-        data: {
-          amount_total: amount_total,
-          address_id: address_id?.id,
-          quantity: quantitySum,
-        },
-        responseType: "json",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then(async (res) => {
-        if (res.status === 200) {
-          const date = new Date();
-          const time = new Date(date.setMinutes(date.getMinutes() + 5));
-          navigate("/shop/checkout/bill", {
-            state: { order_list: res.data, time_old: time },
-          });
-        }
-      });
-    } catch (err) {
-      console.log(err);
+    if (addressItem.length > 0) {
+      const quantity = cartItems.map((item) => item.quantity);
+      const quantitySum = quantity.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue;
+      }, 0);
+      const address_id = addressItem.find((item) => item.id);
+      const amount_total = (priceSum + 50).toFixed(2);
+      try {
+        await instance_auth({
+          method: "post",
+          url: "/order/add",
+          data: {
+            amount_total: amount_total,
+            address_id: address_id?.id,
+            quantity: quantitySum,
+          },
+          responseType: "json",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }).then(async (res) => {
+          if (res.status === 200) {
+            const date = new Date();
+            const time = new Date(date.setMinutes(date.getMinutes() + 5));
+            navigate("/shop/checkout/bill", {
+              state: { order_list: res.data, time_old: time },
+            });
+          }
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      return handleClickOpen();
     }
   };
 
@@ -180,6 +202,24 @@ const Checkout: FunctionComponent = () => {
             </div>
           </div>
         </div>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"ไม่มีที่อยู่ในการจัดส่ง"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              เพิ่มที่อยู่แล้วลองใหม่อีกครั้ง
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>ตกลง</Button>
+          </DialogActions>
+        </Dialog>
         <div
           onClick={handlerPlacement}
           className="cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white"
