@@ -88,9 +88,9 @@ const Find_user: FunctionComponent = () => {
           </div>
           <div
             onClick={handlerSubmit_send}
-            className=" text-green-500 bg-green-50 relative left-[120px] w-fit p-2 rounded-md top-[20px] cursor-pointer"
+            className=" text-green-500 bg-green-50 relative justify-end w-fit p-2 rounded-md top-[20px] cursor-pointer"
           >
-            ส่งรหัส
+            รีเซตรหัสผ่าน
           </div>
         </div>
       ) : send ? (

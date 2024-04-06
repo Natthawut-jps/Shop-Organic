@@ -230,7 +230,8 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                   </div>
                 </div>
                 <Link
-                  to={""}
+                  to={"/reset-password"}
+                  reloadDocument
                   className=" right-7 no-underline text-black relative leading-[150%]"
                 >
                   Forget Password
