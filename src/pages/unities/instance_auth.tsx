@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 const instance_auth = axios.create({
   // baseURL: "http://localhost:8080/auth",
-  baseURL: "https://9j2wn3-8080.csb.app",
+  baseURL: "https://9j2wn3-8080.csb.app/auth",
   timeout: 1000,
 });
 
