@@ -2,8 +2,8 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 const instance_auth = axios.create({
-  // baseURL: "http://localhost:8080/auth",
-  baseURL: "https://y7ly4z-8080.csb.app/auth",
+  baseURL: "http://localhost:8080/auth",
+  // baseURL: "https://y7ly4z-8080.csb.app/auth",
   timeout: 1000,
 });
 
@@ -36,11 +36,11 @@ try {
         const _ur = cookies.get("_ur");
         if (_ur) {
           try {
-            const url_sandbox = "https://y7ly4z-8080.csb.app/refresh/r_auth";
-            // const url_dev = 'http://localhost:8080/refresh/r_auth'
+            // const url_sandbox = "https://y7ly4z-8080.csb.app/refresh/r_auth";
+            const url_dev = 'http://localhost:8080/refresh/r_auth'
             await axios({
               method: "post",
-              url: url_sandbox,
+              url: url_dev,
               data: { massage: "Authorize" },
               headers: {
                 Authorization: `Bearer ${_ur}`,
