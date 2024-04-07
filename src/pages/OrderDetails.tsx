@@ -3,8 +3,18 @@ import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { NavAccount } from "./unities/NavAccount";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
-import { Link, useParams } from "react-router-dom";
-import { Step, StepLabel, Stepper } from "@mui/material";
+import { useParams } from "react-router-dom";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Step,
+  StepLabel,
+  Stepper,
+} from "@mui/material";
 import instance_auth from "./unities/instance_auth";
 
 interface order_Type {
@@ -75,6 +85,15 @@ const OrderDetails: FunctionComponent = () => {
   const [orderActive, setOrder_Active] = useState<orderDetail_Type[]>([]);
   const [addressActive, setAddress_Active] = useState<addressType>();
   const [orderView, setOrderView] = useState<order_Type>();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const orders_Active = async () => {
     try {
@@ -319,7 +338,7 @@ const OrderDetails: FunctionComponent = () => {
             <div className="absolute top-[31.5px] left-[0px] box-border w-[620px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
           </div>
         </div>
-        <div className="absolute top-[0px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[420px] text-gray-scale-gray-700">
+        <div className="absolute top-[0px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[420px] text-gray-scale-gray-700 w-[935px]">
           <div className="flex flex-row items-center justify-start gap-[8px]">
             <div className="relative text-xl leading-[150%] font-medium text-gray-scale-gray-900">
               Order Details
@@ -339,10 +358,29 @@ const OrderDetails: FunctionComponent = () => {
               {orderView?.quantity} Products
             </div>
           </div>
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title" className=" text-red-500">
+              {"คุณต้องการยกเลิกรายการสินค้านี้หรือไม่"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                ยกเลิกแล้วจะไม่สามารถกู้คืนได้
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>ยกเลิก</Button>
+              <Button onClick={cancled_order}>ตกลง</Button>
+            </DialogActions>
+          </Dialog>
           {orderView && orderView.status === 9 ? null : (
             <div
-              onClick={cancled_order}
-              className=" cursor-pointer no-underline hover:text-branding-error/80 relative text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
+              onClick={handleClickOpen}
+              className=" cursor-pointer no-underline hover:text-branding-error/80 left-[85px] relative text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
             >
               Cancle
             </div>
