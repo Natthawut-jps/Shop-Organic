@@ -2,7 +2,8 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 const instance_auth = axios.create({
-  baseURL: "http://localhost:8080/auth",
+  // baseURL: "http://localhost:8080/auth",
+  baseURL: "https://9j2wn3-8080.csb.app",
   timeout: 1000,
 });
 
@@ -26,30 +27,36 @@ try {
     },
     async (error) => {
       const originRequest = error.config;
-      if (error.response && (error.response.status === 401 || error.response.status === 403) && !originRequest._retry) {
+      if (
+        error.response &&
+        (error.response.status === 401 || error.response.status === 403) &&
+        !originRequest._retry
+      ) {
         originRequest._retry = true;
         const _ur = cookies.get("_ur");
         if (_ur) {
           try {
+            const url_sandbox = "https://9j2wn3-8080.csb.app/refresh/r_auth";
+            // const url_dev = 'http://localhost:8080/refresh/r_auth'
             await axios({
               method: "post",
-              url: "http://localhost:8080/refresh/r_auth",
+              url: url_sandbox,
               data: { massage: "Authorize" },
               headers: {
                 Authorization: `Bearer ${_ur}`,
               },
-            }).then((res:any) => {
+            }).then((res: any) => {
               if (res.status === 200) {
                 const date = new Date();
                 cookies.set("_ut", res.data._ut, {
                   expires: new Date(date.setMinutes(date.getMinutes() + 6)),
-                  path: '/',
+                  path: "/",
                   secure: true,
                   sameSite: "strict",
                 });
                 cookies.set("_ur", res.data._ur, {
                   expires: new Date(date.setDate(date.getDate() + 15)),
-                  path: '/',
+                  path: "/",
                   secure: true,
                   sameSite: "strict",
                 });
