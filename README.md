@@ -1,8 +1,4 @@
-# https://7jqtlt-5173.csb.app > preview "Client"
-# https://xqqc63-5174.csb.app/admin/login > preview "Admin"
-
-  ##  username: admin
-  ##  password: 0000
+## https://7jqtlt-5173.csb.app > preview "Client"
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
