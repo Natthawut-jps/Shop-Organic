@@ -1,4 +1,5 @@
-# React + TypeScript + Vite
+# https://5y85qf-5174.csb.app/admin/login  > preview "Client"
+# https://mmkpm6-5173.csb.app > preview "Admin"
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
