@@ -4,7 +4,6 @@ import { Header } from "./unities/Header";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Link, useNavigate } from "react-router-dom";
 import instance_auth from "./unities/instance_auth";
-import { AxiosResponse } from "axios";
 import { CartContextProviders } from "./unities/HandleCart";
 import {
   Button,
@@ -14,21 +13,6 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-
-interface datatypesCart {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  categories: string;
-  rating: number;
-  imgURL: string;
-  pid: number;
-  uid: number;
-  shoppingHanding: number;
-  createdAt: string;
-  updatedAt: string;
-}
 
 interface addressType {
   id: number;

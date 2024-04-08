@@ -1,4 +1,4 @@
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { Cookies } from "react-cookie";
 import { Homepage } from "./pages/Homepage";
 import Categories from "./pages/Categories";

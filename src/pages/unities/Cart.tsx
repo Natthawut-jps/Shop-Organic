@@ -209,34 +209,7 @@ export const Cart: FunctionComponent<open> = (props) => {
     });
     setCartitems(data);
   }
-  interface addressType {
-    id: number;
-    first_name: string;
-    last_name: string;
-    company: string;
-    street: string;
-    county: string;
-    tambon: string;
-    states: string;
-    zipCode: number;
-    email: string;
-    phone: string;
-    status: number;
-    createdAt: string;
-  }
-  const [item_address, setAddress] = useState<addressType[]>([]);
-  const address = async () => {
-    await instance_auth({
-      method: "get",
-      url: "/address/all",
-      responseType: "json",
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log(res.data);
-        setAddress(res.data);
-      }
-    });
-  };
+
   useEffect(() => {
     CartItem();
     get_Product();
@@ -386,7 +359,6 @@ export const Cart: FunctionComponent<open> = (props) => {
                   </p>
                 </div>
                 <Link
-                  onClick={address}
                   to={"/shop/checkout"}
                   className="cursor-pointer absolute w-[130px] h-[43px] top-[210px] left-[350px]"
                 >

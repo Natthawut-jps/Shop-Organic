@@ -15,11 +15,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Slider from "@mui/material/Slider";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import Snackbar from "@mui/material/Snackbar";
 import FormControl from "@mui/material/FormControl";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import Alert from "@mui/material/Alert";
 import Select from "@mui/material/Select";
 import { Pagination, SelectChangeEvent } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
@@ -53,7 +51,6 @@ const Categories: FunctionComponent = () => {
     pageParam: string;
   }>();
   const state: { status: boolean } = useLocation().state;
-  const [snackbar, setSnackbar] = useState<boolean>(false);
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [ProductsItem, setProduct] = useState<datatypesProduct[]>([]);
   const [pageCount, setPageCount] = useState<number>(0);
@@ -551,9 +548,6 @@ const Categories: FunctionComponent = () => {
                           <div
                             onClick={() => {
                               cookie.get("_ur") ? addTocart(item) : null;
-                              cookie.get("_ur")
-                                ? setSnackbar(true)
-                                : setSnackbar(false),
                                 cookie.get("_ur")
                                   ? setOpenSignIn(false)
                                   : setOpenSignIn(true);

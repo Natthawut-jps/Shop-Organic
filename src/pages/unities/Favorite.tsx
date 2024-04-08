@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Slide } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
 import { CartContextProviders } from './HandleCart';
-import axios from 'axios';
-import instance from './axios_instance';
 import instance_auth from './instance_auth';
 
 // Favorite
@@ -189,10 +187,6 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                                 categories: item.categories,
                                                 rating: item.rating,
                                                 imgURL: item.imgURL,
-                                                uid: item.uid,
-                                                shoppingHanding: item.shoppingHanding,
-                                                createdAt: item.createdAt,
-                                                updatedAt: item.updatedAt,
                                             })
                                         }} className=" cursor-pointer rounded-xl bg-branding-success w-[200px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                                             <div className="relative leading-[120%] font-semibold">

@@ -4,7 +4,6 @@ import { Foorter } from "./unities/Foorter";
 import { Link } from "react-router-dom";
 import Rating from "@mui/material/Rating/Rating";
 import StarIcon from "@mui/icons-material/Star";
-import { Alert, Snackbar } from "@mui/material";
 import { CartContextProviders } from "./unities/HandleCart";
 import instance from "./unities/axios_instance";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -31,7 +30,7 @@ export const Homepage: FunctionComponent = () => {
   const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
-  const [snackbar, setSnackbar] = useState<boolean>(false);
+
   const months = [
     "Jan",
     "Feb",
@@ -370,9 +369,6 @@ export const Homepage: FunctionComponent = () => {
                     <div
                       onClick={() => {
                         cookie.get("_ur") ? addTocart(item) : null;
-                        cookie.get("_ur")
-                          ? setSnackbar(true)
-                          : setSnackbar(false),
                           cookie.get("_ur")
                             ? setOpenSignIn(false)
                             : setOpenSignIn(true);

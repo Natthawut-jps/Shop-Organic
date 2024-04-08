@@ -16,22 +16,6 @@ interface userInfoType {
   email: string;
 }
 
-interface addressType {
-  id: number;
-  first_name: string;
-  last_name: string;
-  company: string;
-  street: string;
-  county: string;
-  tambon: string;
-  states: string;
-  zipCode: number;
-  email: string;
-  phone: string;
-  status: number;
-  createdAt: Date;
-  updatedAt: Date;
-}
 interface order_Type {
   id: number;
   referent: string;
@@ -46,7 +30,7 @@ interface order_Type {
 }
 const UserDashboard: FunctionComponent = () => {
   const [userInfo, setUserInfo] = useState<userInfoType>();
-  const arr = [1, 2, 3, 4, 5, 6];
+  
   const status_step = [
     "Order received",
     "Processing",
