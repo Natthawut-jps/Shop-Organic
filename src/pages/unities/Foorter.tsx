@@ -46,26 +46,23 @@ export const Foorter = () => {
         </div>
         <div className=" bg-gray-100 flex flex-col items-start justify-center pt-[60px] px-[300px] pb-0 gap-[60px] text-base text-gray-scale-white">
           <div className="relative w-[1248px] h-[168px]">
-            <div className="absolute h-[98.81%] w-[26.92%] top-[1.19%] right-[73.08%] bottom-[0%] left-[0%] flex flex-col items-start justify-start gap-[16px] text-sm">
+            <div className="absolute h-[98.81%] w-[30.92%] top-[1.19%] right-[73.08%] bottom-[0%] left-[0%] flex flex-col items-start justify-start gap-[16px] text-sm">
               <a
                 href="#"
                 className=" text-white no-underline flex flex-row items-center justify-start gap-[8px] text-13xl"
               >
                 <img
-                  className="relative w-8 h-8 overflow-hidden shrink-0"
+                  className="relative w-[200px] overflow-hidden shrink-0"
                   alt=""
-                  src="/img/plant-1.svg"
+                  src="/img/Logo.png"
                 />
-                <div className="relative tracking-[-0.03em] leading-[38px] font-medium">
-                  Ecobazar
-                </div>
               </a>
               <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[336px]">
                 Morbi cursus porttitor enim lobortis molestie. Duis gravida
                 turpis dui, eget bibendum magna congue nec.
               </div>
               <div className="flex flex-row items-center justify-start gap-[16px]">
-                <div className=" shadow-[0px_1.5px_0px_#20b526] flex flex-row items-center justify-center py-1.5 px-0">
+                <div className="shadow-[0px_1.5px_0px_#20b526] flex flex-row items-center justify-center py-1.5 px-0">
                   <div className="relative leading-[150%] font-medium">
                     (+66) 061-505-9483
                   </div>
@@ -75,7 +72,7 @@ export const Foorter = () => {
                 </div>
                 <div className=" shadow-[0px_1.5px_0px_#20b526] flex flex-row items-center justify-center py-1.5 px-0">
                   <div className="relative leading-[150%] font-medium">
-                    Proxy@gmail.com
+                    Natthawut.jps@gmail.com
                   </div>
                 </div>
               </div>
@@ -141,7 +138,7 @@ export const Foorter = () => {
           </div>
           <div className=" shadow-[0px_-1px_0px_#333] w-[1320px] flex flex-row items-center justify-between py-6 px-0 box-border text-sm text-gray-scale-gray-500">
             <div className="relative leading-[150%]">
-              Ecobazar eCommerce © 2021. All Rights Reserved
+              Shop-Organic eCommerce © 2021. All Rights Reserved
             </div>
             <div className="flex flex-row items-start justify-start gap-[8px] text-2xs text-gray-scale-white">
               <img
