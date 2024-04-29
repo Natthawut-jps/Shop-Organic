@@ -23,7 +23,7 @@ const Contact: FunctionComponent = () => {
         <div className="absolute top-[284px] left-[50px] rounded-md bg-gray-scale-white box-border w-[884px] h-[98px] text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100 hover:border-branding-success">
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <textarea
-              placeholder="Subjects"
+              placeholder="Decriptions"
               className="w-[862px] text-[14px]  focus:outline-none h-[90px] resize-none bg-transparent p-2 box-border text-[#666666]"
             />
           </div>
@@ -32,7 +32,7 @@ const Contact: FunctionComponent = () => {
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
               type="text"
-              placeholder="Hello"
+              placeholder="Subject"
               className=" bg-transparent w-[862px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
             />
           </div>
@@ -41,7 +41,7 @@ const Contact: FunctionComponent = () => {
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
               type="text"
-              placeholder="zakirsoft@gmail.com"
+              placeholder="example@gmail.com"
               className=" bg-transparent w-[415px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
             />
           </div>
@@ -50,7 +50,7 @@ const Contact: FunctionComponent = () => {
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
               type="text"
-              placeholder="Template Cookie"
+              placeholder="name"
               className=" bg-transparent w-[415px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
             />
           </div>

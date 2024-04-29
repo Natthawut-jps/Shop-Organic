@@ -332,7 +332,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. `}</div>
+                  <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[568px]">{`สินค้าคุณภาพ คัดสรรอย่างดี ถึงมืออย่างปลอดภัย`}</div>
                 </div>
                 <div className="bg-gray-scale-white shadow-[0px_-1px_0px_#e5e5e5,_0px_1px_0px_#e5e5e5] flex flex-row items-center justify-center py-[18px] px-0 gap-[12px] text-center text-base border-[1px] border-solid border-gray-scale-white">
                   {cartItems.some(
