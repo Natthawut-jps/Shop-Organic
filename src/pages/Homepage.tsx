@@ -97,71 +97,21 @@ export const Homepage: FunctionComponent = () => {
       <Header />
       {/* Sale up to */}
       <div className="absolute top-[218px] sm:top-0 left-[50px] sm:left-0 w-[1980px] sm:w-full h-[600px] sm:h-[1000px] overflow-hidden text-gray-scale-white">
-        <a
-          href="#"
-          className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center"
-        ></a>
+        <div className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center"></div>
         <a
           href="#"
           className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100"
         >
-          <img
-            className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
-            alt=""
-            src="/img/bg@2x.png"
-          />
-          <div className="absolute top-[32px] left-[32px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
-            <div className="flex flex-col items-start justify-start gap-[12px]">
-              <div className="flex flex-col items-start justify-start gap-[8px]">
-                <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                  Summer Sale
-                </div>
-                <div className="relative text-13xl leading-[120%] font-semibold">
-                  75% OFF
-                </div>
-              </div>
-              <div className="relative leading-[150%] text-gray-scale-gray-600">{`Only Fruit & Vegetable`}</div>
-            </div>
-            <div className="rounded-24xl flex flex-row items-center justify-center gap-[12px] text-base text-branding-success">
-              <div className="relative leading-[120%] font-semibold">
-                Shop Now
-              </div>
-              <img
-                className="relative w-[16.5px] h-[13.55px]"
-                alt=""
-                src="/img/group6.svg"
-              />
-            </div>
+          <div className="absolute top-[0px] left-[0px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
+            <img src="/img/banner_2.png" alt="" />
           </div>
         </a>
         <a
           href="#"
           className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center"
         >
-          <img
-            className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-3xs max-w-full overflow-hidden max-h-full object-cover"
-            alt=""
-            src="/img/bg1@2x.png"
-          />
-          <div className="absolute top-[67px] left-[40px] flex flex-col items-center justify-start gap-[32px]">
-            <div className="flex flex-col items-center justify-center gap-[12px]">
-              <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Best Deal
-              </div>
-              <div className="relative text-13xl leading-[120%] font-semibold inline-block w-[343px]">
-                Special Products Deal of the Month
-              </div>
-            </div>
-            <div className="rounded-24xl flex flex-row items-center justify-center gap-[12px] text-base text-branding-success">
-              <div className="relative leading-[120%] font-semibold">
-                Shop Now
-              </div>
-              <img
-                className="relative w-[16.5px] h-[13.55px]"
-                alt=""
-                src="/img/group7.svg"
-              />
-            </div>
+          <div className="absolute top-[0px] left-[0px] flex flex-col items-center justify-start gap-[32px]">
+           <img src="/img/banner_3.png" alt="" />
           </div>
         </a>
       </div>
@@ -369,9 +319,9 @@ export const Homepage: FunctionComponent = () => {
                     <div
                       onClick={() => {
                         cookie.get("_ur") ? addTocart(item) : null;
-                          cookie.get("_ur")
-                            ? setOpenSignIn(false)
-                            : setOpenSignIn(true);
+                        cookie.get("_ur")
+                          ? setOpenSignIn(false)
+                          : setOpenSignIn(true);
                       }}
                     >
                       <img
