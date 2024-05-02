@@ -114,6 +114,7 @@ export const Address = () => {
                         {`${item.first_name} ${item.last_name}`}
                       </div>
                       <Link
+                        state={item}
                         to={"/Account/Address/Edit"}
                         className="absolute hover:text-[#06e102]/70 top-[0px] cursor-pointer p-[2px] text-[#06e102] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
                       >

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
 import { Header } from "./unities/Header";
 import { NavAccount } from "./unities/NavAccount";
@@ -9,13 +9,25 @@ interface addressType {
   first_name: string;
   last_name: string;
   street: string;
-  county: string;
-  tambon: string;
-  amphure: string;
-  zipCode: number;
   phone: string;
 }
+interface Active_addressType {
+  id: number;
+  first_name: string;
+  last_name: string;
+  company: string;
+  street: string;
+  county: string;
+  tambon: string;
+  states: string;
+  zipCode: number;
+  email: string;
+  phone: string;
+  status: number;
+  createdAt: string;
+}
 export const Edit_Add_Address: FunctionComponent = () => {
+  const active_address: Active_addressType = useLocation().state;
   const [uinfo, setUinfo] = useState<addressType>({} as addressType);
   const [uinfoUp, setUinfoUp] = useState<addressType>({} as addressType);
   const { EditAndadd } = useParams();
@@ -78,7 +90,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
       });
     }
   }, [zipCode]);
-  
+
   const navigate = useNavigate();
   const handlerSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -111,14 +123,19 @@ export const Edit_Add_Address: FunctionComponent = () => {
       method: "post",
       url: "/address/update",
       data: {
-        first_name: uinfoUp.first_name,
-        last_name: uinfoUp.last_name,
-        street: uinfoUp.street,
-        phone: uinfoUp.phone,
-        county: provincesData,
-        amphure: amphureData,
-        tambon: tambonData,
-        zipCode: zipCodeData,
+        id: active_address.id,
+        first_name: uinfoUp.first_name
+          ? uinfoUp.first_name
+          : active_address.first_name,
+        last_name: uinfoUp.last_name
+          ? uinfoUp.last_name
+          : active_address.last_name,
+        street: uinfoUp.street ? uinfoUp.street : active_address.street,
+        phone: uinfoUp.phone ? uinfoUp.phone : active_address.phone,
+        county: provincesData ? provincesData : active_address.county,
+        amphure: amphureData ? amphureData : active_address.states,
+        tambon: tambonData ? tambonData : active_address.tambon,
+        zipCode: zipCodeData ? zipCodeData : active_address.zipCode,
       },
       responseType: "json",
       headers: {
@@ -161,7 +178,17 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, first_name: e.target.value })
+                      setUinfoUp({
+                        ...uinfoUp,
+                        first_name: e.target.value
+                          ? e.target.value
+                          : active_address.first_name,
+                      })
+                    }
+                    value={
+                      uinfoUp.first_name
+                        ? uinfoUp.first_name
+                        : active_address.first_name
                     }
                     form="add"
                     type="text"
@@ -178,7 +205,17 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, last_name: e.target.value })
+                      setUinfoUp({
+                        ...uinfoUp,
+                        last_name: e.target.value
+                          ? e.target.value
+                          : active_address.last_name,
+                      })
+                    }
+                    value={
+                      uinfoUp.last_name
+                        ? uinfoUp.last_name
+                        : active_address.last_name
                     }
                     form="add"
                     type="text"
@@ -199,9 +236,12 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setUinfoUp({
                         ...uinfoUp,
-                        phone: e.target.value,
+                        phone: e.target.value
+                          ? e.target.value
+                          : active_address.phone,
                       })
                     }
+                    value={uinfoUp.phone ? uinfoUp.phone : active_address.phone}
                     type="tel"
                     form="add"
                     pattern="[0-9]{10}"
@@ -227,16 +267,15 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       eltambon.selectedIndex = 0;
                     }}
                     className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]"
-                    required
                   >
-                    <option hidden selected disabled value={""}>
-                      จังหวัด
+                    <option hidden disabled selected defaultValue={active_address.county}>
+                      {active_address.county}
                     </option>
-                    {province.length > 0 &&
+                    {active_address.county &&
                       province.map((item: any, index) => (
                         <option
                           key={index}
-                          value={`${item.name_th}-${item.name_en}`}
+                          value={`${item.name_th}`}
                         >{`${item.name_th} - ${item.name_en}`}</option>
                       ))}
                   </select>
@@ -247,17 +286,20 @@ export const Edit_Add_Address: FunctionComponent = () => {
               <div className="relative leading-[150%]">Zip Code</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
-                  {zipCode.length > 0 ? (
-                    zipCode.map((item: any, index: number) => (
-                      <select
-                        key={index}
-                        form="add"
-                        className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
-                        required
-                      >
-                        <option value={item.zip_code}>{item.zip_code}</option>
-                      </select>
-                    ))
+                  {active_address.zipCode ? (
+                    <select
+                      form="add"
+                      className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
+                    >
+                      <option defaultValue={active_address.zipCode} selected hidden>
+                        {active_address.zipCode}
+                      </option>
+                      {zipCode.map((item: any, index: number) => (
+                        <option key={index} value={item.zip_code}>
+                          {item.zip_code}
+                        </option>
+                      ))}
+                    </select>
                   ) : (
                     <select
                       disabled
@@ -273,7 +315,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               <div className="relative leading-[150%]">Tambon</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
-                  {tambon.length > 0 ? (
+                  {active_address.tambon ? (
                     <select
                       form="add"
                       id="tambon"
@@ -281,16 +323,15 @@ export const Edit_Add_Address: FunctionComponent = () => {
                         setTambonData(e.target.value);
                       }}
                       className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
-                      required
                     >
-                      <option hidden selected disabled value={""}>
-                        ตำบล
+                      <option hidden disabled selected defaultValue={active_address.tambon}>
+                        {active_address.tambon}
                       </option>
                       {tambon.length > 0 &&
                         tambon.map((item: any, index: number) => (
                           <option
                             key={index}
-                            value={`${item.name_th}-${item.name_en}`}
+                            value={`${item.name_th}`}
                           >{`${item.name_th} - ${item.name_en}`}</option>
                         ))}
                     </select>
@@ -311,28 +352,31 @@ export const Edit_Add_Address: FunctionComponent = () => {
               <div className="relative leading-[150%]">States</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
-                  {ampher.length > 0 ? (
+                  {active_address.states ? (
                     <select
                       form="add"
                       id="amphure"
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                        setAmphureData(e.target.value);
+                        setAmphureData(
+                          e.target.value
+                            ? e.target.value
+                            : active_address.states
+                        );
                         const el: HTMLSelectElement = document.getElementById(
                           "tambon"
                         ) as HTMLSelectElement;
                         el.selectedIndex = 0;
                       }}
                       className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]"
-                      required
                     >
-                      <option hidden selected disabled value={""}>
-                        อำเภอ
+                      <option hidden disabled selected defaultValue={active_address.states}>
+                        {active_address.states}
                       </option>
                       {ampher.length > 0 &&
                         ampher.map((item: any, index: number) => (
                           <option
                             key={index}
-                            value={`${item.name_th}-${item.name_en}`}
+                            value={`${item.name_th}`}
                           >{`${item.name_th} - ${item.name_en}`}</option>
                         ))}
                     </select>
@@ -355,7 +399,15 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setUinfoUp({ ...uinfoUp, street: e.target.value })
+                      setUinfoUp({
+                        ...uinfoUp,
+                        street: e.target.value
+                          ? e.target.value
+                          : active_address.street,
+                      })
+                    }
+                    value={
+                      uinfoUp.street ? uinfoUp.street : active_address.street
                     }
                     form="add"
                     type="text"
@@ -474,7 +526,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       province.map((item: any, index) => (
                         <option
                           key={index}
-                          value={`${item.name_th}-${item.name_en}`}
+                          value={`${item.name_th}`}
                         >{`${item.name_th} - ${item.name_en}`}</option>
                       ))}
                   </select>
@@ -528,7 +580,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                         tambon.map((item: any, index: number) => (
                           <option
                             key={index}
-                            value={`${item.name_th}-${item.name_en}`}
+                            value={`${item.name_th}`}
                           >{`${item.name_th} - ${item.name_en}`}</option>
                         ))}
                     </select>
@@ -570,7 +622,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                         ampher.map((item: any, index: number) => (
                           <option
                             key={index}
-                            value={`${item.name_th}-${item.name_en}`}
+                            value={`${item.name_th}`}
                           >{`${item.name_th} - ${item.name_en}`}</option>
                         ))}
                     </select>
