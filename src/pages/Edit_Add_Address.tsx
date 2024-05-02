@@ -49,6 +49,23 @@ export const Edit_Add_Address: FunctionComponent = () => {
         },
       }).then((res) => {
         setProvince(res.data);
+        if (active_address) {
+          const amphures = res.data
+            .filter((item: any) => item.name_th === active_address.county)
+            .flatMap((item: any) => item.amphure);
+          const tambons = amphures
+            .filter((item: any) => item.name_th === active_address.states)
+            .flatMap((item: any) => item.tambon);
+          const zipCodes = tambons.filter(
+            (item: any) => item.name_th === active_address.tambon
+          );
+
+          if (amphures && tambons && zipCodes) {
+            setAmpher(amphures);
+            setTambon(tambons);
+            setZipCode(zipCodes);
+          }
+        }
       });
     };
     providce();
@@ -57,9 +74,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
   useEffect(() => {
     setAmpher(
       province
-        .filter(
-          (item: any) => item.name_th === provincesData?.split("-")[0].trim()
-        )
+        .filter((item: any) => item.name_th === provincesData)
         .flatMap((item: any) => item.amphure)
     );
     setAmphureData(undefined);
@@ -67,19 +82,13 @@ export const Edit_Add_Address: FunctionComponent = () => {
   useEffect(() => {
     setTambon(
       ampher
-        .filter(
-          (item: any) => item.name_th === amphureData?.split("-")[0].trim()
-        )
+        .filter((item: any) => item.name_th === amphureData)
         .flatMap((item: any) => item.tambon)
     );
     setTambonData(undefined);
   }, [amphureData]);
   useEffect(() => {
-    setZipCode(
-      tambon.filter(
-        (item: any) => item.name_th === tambonData?.split("-")[0].trim()
-      )
-    );
+    setZipCode(tambon.filter((item: any) => item.name_th === tambonData));
   }, [tambonData]);
   useEffect(() => {
     if (tambonData === undefined) {
@@ -147,6 +156,10 @@ export const Edit_Add_Address: FunctionComponent = () => {
       }
     });
   };
+  console.log(provincesData);
+  console.log(amphureData);
+  console.log(tambonData);
+  console.log(zipCodeData);
 
   return (
     <>
@@ -268,15 +281,20 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }}
                     className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]"
                   >
-                    <option hidden disabled selected defaultValue={active_address.county}>
+                    <option
+                      hidden
+                      disabled
+                      selected
+                      defaultValue={active_address.county}
+                    >
                       {active_address.county}
                     </option>
-                    {active_address.county &&
+                    {province.length > 0 &&
                       province.map((item: any, index) => (
                         <option
                           key={index}
                           value={`${item.name_th}`}
-                        >{`${item.name_th} - ${item.name_en}`}</option>
+                        >{`${item.name_th}`}</option>
                       ))}
                   </select>
                 </div>
@@ -291,7 +309,11 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       form="add"
                       className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
                     >
-                      <option defaultValue={active_address.zipCode} selected hidden>
+                      <option
+                        defaultValue={active_address.zipCode}
+                        selected
+                        hidden
+                      >
                         {active_address.zipCode}
                       </option>
                       {zipCode.map((item: any, index: number) => (
@@ -324,15 +346,20 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       }}
                       className="focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
                     >
-                      <option hidden disabled selected defaultValue={active_address.tambon}>
+                      <option
+                        hidden
+                        disabled
+                        selected
+                        defaultValue={active_address.tambon}
+                      >
                         {active_address.tambon}
                       </option>
-                      {tambon.length > 0 &&
+                      {active_address.tambon &&
                         tambon.map((item: any, index: number) => (
                           <option
                             key={index}
                             value={`${item.name_th}`}
-                          >{`${item.name_th} - ${item.name_en}`}</option>
+                          >{`${item.name_th}`}</option>
                         ))}
                     </select>
                   ) : (
@@ -357,11 +384,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       form="add"
                       id="amphure"
                       onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-                        setAmphureData(
-                          e.target.value
-                            ? e.target.value
-                            : active_address.states
-                        );
+                        setAmphureData(e.target.value);
                         const el: HTMLSelectElement = document.getElementById(
                           "tambon"
                         ) as HTMLSelectElement;
@@ -369,15 +392,20 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       }}
                       className="focus:outline-none cursor-pointer rounded-lg w-[180px] h-[45px]"
                     >
-                      <option hidden disabled selected defaultValue={active_address.states}>
+                      <option
+                        hidden
+                        disabled
+                        selected
+                        defaultValue={active_address.states}
+                      >
                         {active_address.states}
                       </option>
-                      {ampher.length > 0 &&
+                      {active_address.states &&
                         ampher.map((item: any, index: number) => (
                           <option
                             key={index}
                             value={`${item.name_th}`}
-                          >{`${item.name_th} - ${item.name_en}`}</option>
+                          >{`${item.name_th}`}</option>
                         ))}
                     </select>
                   ) : (
@@ -527,7 +555,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                         <option
                           key={index}
                           value={`${item.name_th}`}
-                        >{`${item.name_th} - ${item.name_en}`}</option>
+                        >{`${item.name_th}`}</option>
                       ))}
                   </select>
                 </div>
@@ -581,7 +609,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                           <option
                             key={index}
                             value={`${item.name_th}`}
-                          >{`${item.name_th} - ${item.name_en}`}</option>
+                          >{`${item.name_th}`}</option>
                         ))}
                     </select>
                   ) : (
@@ -623,7 +651,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                           <option
                             key={index}
                             value={`${item.name_th}`}
-                          >{`${item.name_th} - ${item.name_en}`}</option>
+                          >{`${item.name_th}`}</option>
                         ))}
                     </select>
                   ) : (
