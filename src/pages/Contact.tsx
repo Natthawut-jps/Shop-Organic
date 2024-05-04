@@ -1,9 +1,33 @@
-import { FunctionComponent } from "react";
+import { FormEvent, FunctionComponent, useState } from "react";
 import { Header } from "./unities/Header";
 import { Foorter } from "./unities/Foorter";
 import { Breadcrumbs } from "./unities/Breadcrumbs";
+import instance from "./unities/axios_instance";
 
+interface contact_Type {
+  name: string;
+  email: string;
+  subject: string;
+  description: string;
+}
 const Contact: FunctionComponent = () => {
+  const [data, setData] = useState<contact_Type>({} as contact_Type);
+  const submitHandler = async (event: FormEvent) => {
+    event.preventDefault();
+    instance({
+      method: "post",
+      url: "/public/contact/add",
+      data: data,
+      responseType: "json",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        location.reload();
+      }
+    });
+  };
   return (
     <div className="relative bg-gray-scale-white w-full h-[1912px] overflow-hidden text-left text-base text-gray-scale-gray-900 font-body-small-body-small-400">
       <Header />
@@ -15,14 +39,25 @@ const Contact: FunctionComponent = () => {
       />
       <div className="absolute top-[395px] left-[486px] w-[984px] h-[507px]">
         <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] w-[984px] h-[507px]" />
-        <div className="absolute cursor-pointer top-[406px] left-[50px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-4 px-10 text-gray-scale-white">
-          <div className="relative leading-[120%] font-semibold">
-            Send Message
-          </div>
-        </div>
+        <form onSubmit={submitHandler} id="contact_form">
+          <button
+            type="submit"
+            className="absolute cursor-pointer top-[406px] left-[50px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-4 px-10 text-gray-scale-white"
+          >
+            <div className="relative leading-[120%] font-semibold">
+              Send Message
+            </div>
+          </button>
+        </form>
         <div className="absolute top-[284px] left-[50px] rounded-md bg-gray-scale-white box-border w-[884px] h-[98px] text-gray-scale-gray-400 border-[1px] border-solid border-gray-scale-gray-100 hover:border-branding-success">
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <textarea
+              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                setData({ ...data, description: e.target.value })
+              }
+              required
+              name="description"
+              form="contact_form"
               placeholder="Decriptions"
               className="w-[862px] text-[14px]  focus:outline-none h-[90px] resize-none bg-transparent p-2 box-border text-[#666666]"
             />
@@ -31,16 +66,32 @@ const Contact: FunctionComponent = () => {
         <div className="absolute top-[219px] left-[50px] rounded-md bg-gray-scale-white box-border w-[884px] h-[49px] border-[1px] border-solid hover:border-branding-success border-gray-scale-gray-100">
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, subject: e.target.value })
+              }
+              required
               type="text"
+              name="subject"
+              form="contact_form"
               placeholder="Subject"
               className=" bg-transparent w-[862px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
             />
           </div>
         </div>
         <div className="absolute top-[154px] left-[500px] rounded-md bg-gray-scale-white box-border w-[434px] h-[49px] text-gray-scale-gray-600 border-[1px] border-solid hover:border-branding-success  border-gray-scale-gray-100">
+          <span className=" absolute top-[-25px] text-[12px]">
+            * format required @gmail.com
+          </span>
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
-              type="text"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, email: e.target.value })
+              }
+              required
+              type="email"
+              form="contact_form"
+              pattern=".+@gmail\.com"
+              name="email"
               placeholder="example@gmail.com"
               className=" bg-transparent w-[415px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
             />
@@ -49,9 +100,15 @@ const Contact: FunctionComponent = () => {
         <div className="absolute top-[154px] left-[50px] rounded-md bg-gray-scale-white box-border w-[434px] h-[49px] text-gray-scale-gray-600 border-[1px] border-solid hover:border-branding-success border-gray-scale-gray-100">
           <div className="absolute top-[0px] left-[15px] leading-[130%]">
             <input
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setData({ ...data, name: e.target.value })
+              }
               type="text"
+              form="contact_form"
+              name="name"
               placeholder="name"
               className=" bg-transparent w-[415px] h-[45px] text-[16px] focus:outline-none text-[#666666]"
+              required
             />
           </div>
         </div>
