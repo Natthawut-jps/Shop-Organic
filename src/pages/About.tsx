@@ -7,11 +7,24 @@ const About: FunctionComponent = () => {
   return (
     <div className="relative bg-gray-scale-white w-full h-[4318px] overflow-hidden text-left text-lg text-gray-scale-gray-900 font-body-large-body-large-400">
       <Header />
-      <Breadcrumbs categoies={undefined} tltle={undefined} Detail={undefined} EditAndadd={undefined} />
+      <Breadcrumbs
+        categoies={undefined}
+        tltle={undefined}
+        Detail={undefined}
+        EditAndadd={undefined}
+      />
       <div className="absolute top-[3596px] left-[0px] flex flex-row items-center justify-around py-20 px-0 box-border container mx-auto p-4">
-        <img className="relative w-[81.58px] h-8" alt="" src="/img/vector.svg" />
+        <img
+          className="relative w-[81.58px] h-8"
+          alt=""
+          src="/img/vector.svg"
+        />
         <div className="relative box-border h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
-        <img className="relative w-[66.94px] h-8" alt="" src="/img/mango1.svg" />
+        <img
+          className="relative w-[66.94px] h-8"
+          alt=""
+          src="/img/mango1.svg"
+        />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
           className="relative w-[82.64px] h-8 overflow-hidden shrink-0"
@@ -29,18 +42,6 @@ const About: FunctionComponent = () => {
         <div className="w-full flex flex-row items-center justify-between py-0 px-[300px] box-border">
           <div className="relative leading-[120%] font-semibold">
             Client Testimonail
-          </div>
-          <div className="flex flex-row items-start justify-start gap-[12px]">
-            <img
-              className="relative w-[45px] h-[45px]"
-              alt=""
-              src="/img/aoorw.svg"
-            />
-            <img
-              className="relative w-[45px] h-[45px]"
-              alt=""
-              src="/img/aoorw1.svg"
-            />
           </div>
         </div>
         <div className="flex flex-row items-start justify-start gap-[24px] text-left text-sm text-gray-scale-gray-700">
@@ -60,14 +61,14 @@ const About: FunctionComponent = () => {
                 <img
                   className="relative rounded-[50%] w-14 h-14 object-cover"
                   alt=""
-                  src="/img/image@2x.png"
+                  src="/img/image3@2x.png"
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
-                    Robert Fox
+                    ผักกาดหอม
                   </div>
                   <div className="relative text-sm leading-[150%] text-gray-scale-gray-400">
-                    Customer
+                    พืชผัก
                   </div>
                 </div>
               </div>
@@ -120,10 +121,10 @@ const About: FunctionComponent = () => {
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
-                    Dianne Russell
+                    มะเขือม่วง
                   </div>
                   <div className="relative text-sm leading-[150%] text-gray-scale-gray-400">
-                    Customer
+                    พืชผัก
                   </div>
                 </div>
               </div>
@@ -176,10 +177,10 @@ const About: FunctionComponent = () => {
                 />
                 <div className="flex flex-col items-start justify-start">
                   <div className="relative leading-[150%] font-medium">
-                    Eleanor Pena
+                    พริกหยวก
                   </div>
                   <div className="relative text-sm leading-[150%] text-gray-scale-gray-400">
-                    Customer
+                    พืชผัก
                   </div>
                 </div>
               </div>
@@ -290,7 +291,6 @@ const About: FunctionComponent = () => {
             />
           </div>
         </div>
-
       </div>
       <div className="absolute top-[1732px] left-[100px] w-[1476px] h-[616px] overflow-hidden text-base text-gray-scale-gray-600">
         <div className="absolute top-[80px] left-[0px] w-[552px] h-[431px]">

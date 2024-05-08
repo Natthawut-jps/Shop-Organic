@@ -96,7 +96,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
   return (
     <>
       {productList === productDetail?.name && (
-        <div className="relative bg-gray-scale-white w-full h-[2495px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
+        <div className="relative bg-gray-scale-white w-full h-[2395px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* SigIn User */}
           <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
           {/* header template */}
@@ -107,7 +107,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
             Detail={undefined}
             EditAndadd={undefined}
           />
-          <div className="absolute top-[1509px] left-[88px] w-[1320px] h-[477px] text-gray-scale-gray-700">
+          <div className="absolute top-[1409px] left-[88px] w-[1320px] h-[477px] text-gray-scale-gray-700">
             <div className="absolute top-[70px] left-[0px] flex flex-row items-start justify-start gap-[24px]">
               {relatedProduct
                 .filter((item) => item.id !== (productDetail?.id as number))
@@ -195,7 +195,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <div className="absolute top-[349px] left-[-220px] flex flex-col items-center justify-start">
+          <div className="absolute top-[369px] left-[-220px] flex flex-col items-center justify-start">
             <div className="relative w-[1320px] h-[558px] overflow-hidden shrink-0">
               <div className="absolute top-[2px] left-[0px] w-[648px] h-[556px]">
                 <img
@@ -457,43 +457,14 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                   </div>
                 </div>
               </div>
-              <img
-                className="absolute top-[88px] left-[1084px] w-[536px] h-[300px] overflow-hidden"
-                alt=""
-                src="/img/video.svg"
-              />
-              <div className="absolute top-[408px] left-[1083px] rounded-md bg-gray-scale-white box-border w-[537px] flex flex-row items-center justify-between py-6 px-5 text-gray-scale-gray-900 border-[1px] border-solid border-gray-scale-gray-100">
-                <div className="flex flex-row items-center justify-center gap-[12px]">
-                  <img
-                    className="relative w-8 h-8 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/pricetag-1.svg"
-                  />
-                  <div className="flex flex-col items-start justify-center gap-[6px]">
-                    <div className="relative leading-[150%] font-medium">
-                      64% Discount
-                    </div>
-                    <div className="relative text-smi leading-[150%] text-gray-scale-gray-500 inline-block w-[198px]">
-                      Save your 64% money with us
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-row items-center justify-center gap-[12px]">
-                  <img
-                    className="relative w-8 h-8 overflow-hidden shrink-0"
-                    alt=""
-                    src="/img/leaf-1.svg"
-                  />
-                  <div className="flex flex-col items-start justify-center gap-[6px]">
-                    <div className="relative leading-[150%] font-medium">
-                      100% Organic
-                    </div>
-                    <div className="relative text-smi leading-[150%] text-gray-scale-gray-500 inline-block w-[189px]">
-                      100% Organic Vegetables
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <iframe
+                src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fradioloei%2Fvideos%2F181886907429675%2F&show_text=false&width=560&t=0"
+                width="560"
+                height="314"
+                className="absolute top-[88px] left-[1084px] overflow-hidden"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowFullScreen={true}
+              ></iframe>
             </div>
           </div>
           {/* foorter template */}
