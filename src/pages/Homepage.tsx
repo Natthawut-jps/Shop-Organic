@@ -338,7 +338,7 @@ export const Homepage: FunctionComponent = () => {
       {/* latest New */}
       <div className="absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
         <div className="absolute top-[0px] left-[563px] text-13xl leading-[120%] font-semibold">
-          Latest News
+          Latest New
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
           {popularProduct

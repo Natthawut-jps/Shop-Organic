@@ -113,11 +113,11 @@ const Contact: FunctionComponent = () => {
           </div>
         </div>
         <div className="absolute top-[88px] left-[50px] text-sm leading-[150%] text-gray-scale-gray-500 inline-block w-[486px]">
-          Do you fancy saying hi to me or you want to get started with your
-          project and you need my help? Feel free to contact me.
+          สามารถสอบถามข้อมูล แจ้งปัญหาเข้าได้ตลอด 24 ชั่วโมง
+          ทางทีมงานจะรีบติดต่อกับไปโดยเร็วที่สุด
         </div>
         <div className="absolute top-[44px] left-[50px] text-5xl leading-[150%] font-semibold">
-          Just Say Hello!
+          ติดต่อเรา
         </div>
       </div>
       <div className="absolute top-[395px] left-[140px] rounded-lg bg-gray-scale-white shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] flex flex-col items-start justify-start py-0 px-5 text-center text-gray-scale-gray-800">
