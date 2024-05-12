@@ -1,16 +1,52 @@
+import { useEffect, useState } from "react";
+import { SignIn } from "../SignIn";
+import { Cookies } from "react-cookie";
+import instance from "./axios_instance";
+import { Link } from "react-router-dom";
+
 export const Foorter = () => {
+  const [openSignIn, setOpenSignIn] = useState<boolean>(false);
+  const cookie = new Cookies();
+  interface category_Type {
+    id: number;
+    category_name: string;
+    description: string;
+    quantity: number;
+    imgURL: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+  const [categories, setCategories] = useState<category_Type[]>([]);
+  const get_categories = async () => {
+    await instance({
+      method: "get",
+      url: "/public/categories/get_category",
+      responseType: "json",
+    }).then((res) => {
+      if (res.status === 200) {
+        setCategories(res.data);
+      }
+    });
+  };
+
+  useEffect(() => {
+    get_categories();
+  }, []);
+
   return (
     <>
       <div className="absolute bottom-0 left-[-150px] flex flex-col items-start justify-start text-5xl">
+        {/* SigIn User */}
+        <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
         <div className="relative w-[1920px] h-[162px]">
           <div className="absolute h-full w-full top-[100%] right-[0%] bottom-[-100%] left-[0%] bg-gray-100" />
           <div className="absolute h-[50.62%] w-[23.33%] top-[24.69%] right-[61.04%] bottom-[24.69%] left-[15.63%] flex flex-col items-start justify-start gap-[4px]">
             <div className="relative leading-[150%] font-semibold">
-              Subcribe our Newsletter
+              ติดตามเราเพื่อรับข่าวสารใหม่ ๆ
             </div>
             <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[448px]">
-              Pellentesque eu nibh eget mauris congue mattis mattis nec tellus.
-              Phasellus imperdiet elit eu magna.
+              เราอัปเดตสินค้าใหม่เรื่อย ๆ เพื่อไม่ให้พลาดกิจกรรมหรือข่าวสารใหม่
+              ๆ จากเราติดตามเราเลยตอนนี้
             </div>
           </div>
           <div className="absolute h-[24.69%] w-[9.58%] top-[37.65%] right-[15.63%] bottom-[37.65%] left-[74.79%] flex flex-row items-start justify-start gap-[8px]">
@@ -58,8 +94,8 @@ export const Foorter = () => {
                 />
               </a>
               <div className="relative leading-[150%] text-gray-scale-gray-500 inline-block w-[336px]">
-                Morbi cursus porttitor enim lobortis molestie. Duis gravida
-                turpis dui, eget bibendum magna congue nec.
+                สินค้าการเกษตรจังหวัดเลย
+                ส่งเสริมการขายสินค้าการเกษตรเป็นช่องทางการขายให้กับเกษตกร
               </div>
               <div className="flex flex-row items-center justify-start gap-[16px]">
                 <div className="shadow-[0px_1.5px_0px_#20b526] flex flex-row items-center justify-center py-1.5 px-0">
@@ -78,61 +114,106 @@ export const Foorter = () => {
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[7.61%] top-[0%] right-[56.49%] bottom-[2.38%] left-[35.9%] flex flex-col items-start justify-start gap-[20px]">
-              <a
-                href="#"
-                className=" text-white no-underline relative leading-[150%] font-medium"
-              >
+              <div className=" text-white no-underline relative leading-[150%] font-medium">
                 My Account
-              </a>
+              </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
-                <div className="relative leading-[150%]">My Account</div>
-                <div className="relative leading-[150%]">Order History</div>
-                <div className="relative leading-[150%] text-gray-scale-white">
-                  Shoping Cart
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => {
+                    cookie.get("_ur")
+                      ? (location.href = "/Account/Dashboard")
+                      : setOpenSignIn(true);
+                  }}
+                >
+                  Dashboad
                 </div>
-                <div className="relative leading-[150%]">Wishlist</div>
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => {
+                    cookie.get("_ur")
+                      ? (location.href = "/Account/Orders")
+                      : setOpenSignIn(true);
+                  }}
+                >
+                  Order History
+                </div>
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => {
+                    cookie.get("_ur")
+                      ? (location.href = "/Account/Address")
+                      : setOpenSignIn(true);
+                  }}
+                >
+                  Address
+                </div>
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => {
+                    cookie.get("_ur")
+                      ? (location.href = "/Account/Settings")
+                      : setOpenSignIn(true);
+                  }}
+                >
+                  Setting
+                </div>
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[10.42%] top-[0%] right-[35.74%] bottom-[2.38%] left-[53.85%] flex flex-col items-start justify-start gap-[20px]">
-              <a
-                href="#"
-                className=" text-white no-underline relative leading-[150%] font-medium"
-              >
+              <div className=" text-white no-underline relative leading-[150%] font-medium">
                 Helps
-              </a>
+              </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
-                <div className="relative leading-[150%]">Contact</div>
-                <div className="relative leading-[150%]">Faqs</div>
-                <div className="relative leading-[150%]">{`Terms & Condition`}</div>
-                <div className="relative leading-[150%]">Privacy Policy</div>
+                <a
+                  href="/contact"
+                  className="relative leading-[150%] text-gray-scale-gray-400 no-underline"
+                >
+                  Contact Us
+                </a>
+                <a
+                  href="/about"
+                  className="relative leading-[150%] text-gray-scale-gray-400 no-underline"
+                >
+                  About Us
+                </a>
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[6.57%] top-[0%] right-[21.55%] bottom-[2.38%] left-[71.88%] flex flex-col items-start justify-start gap-[20px]">
-              <a
-                href="#"
-                className="text-white no-underline relative leading-[150%] font-medium"
-              >
-                Proxy
-              </a>
+              <div className="text-white no-underline relative leading-[150%] font-medium">
+                Product
+              </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
-                <div className="relative leading-[150%]">About</div>
-                <div className="relative leading-[150%]">Shop</div>
-                <div className="relative leading-[150%]">Product</div>
-                <div className="relative leading-[150%]">Track Order</div>
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => window.scroll(0, 1350)}
+                >
+                  Popular
+                </div>
+                <div
+                  className="relative leading-[150%] cursor-pointer"
+                  onClick={() => window.scroll(0, 2850)}
+                >
+                  Latest New
+                </div>
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[10.26%] top-[0%] right-[0%] bottom-[2.38%] left-[89.74%] flex flex-col items-start justify-start gap-[20px]">
-              <a
-                href="#"
-                className=" text-white no-underline relative leading-[150%] font-medium"
-              >
-                Categories
-              </a>
+              <div className=" text-white no-underline relative leading-[150%] font-medium">
+                Categories New
+              </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
-                <div className="relative leading-[150%]">{`Fruit & Vegetables`}</div>
-                <div className="relative leading-[150%]">{`Meat & Fish`}</div>
-                <div className="relative leading-[150%]">{`Bread & Bakery`}</div>
-                <div className="relative leading-[150%]">{`Beauty & Health`}</div>
+                {categories.slice(-4).map((item, index) => (
+                  <Link
+                    reloadDocument
+                    key={index}
+                    to={`/product/categories/${item.category_name}/1`}
+                    state={{ status: true }}
+                    className=" leading-[150%] text-gray-scale-gray-400 no-underline"
+                  >
+                    {item.category_name}
+                  </Link>
+                ))}
               </div>
             </div>
           </div>

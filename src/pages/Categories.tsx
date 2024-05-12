@@ -319,12 +319,6 @@ const Categories: FunctionComponent = () => {
                     />
                   </span>
                 </div>
-                <div className="relative box-border w-[313px] mt-10" />
-                <div className="rounded-[10px] flex flex-col items-center justify-start pt-10 px-0 pb-[300px] gap-[12px] bg-[url('/img/bannar@3x.png')] bg-cover bg-no-repeat bg-[top] text-center text-13xl text-darkorange">
-                  <div className="flex flex-col items-center justify-center pt-5 px-0 pb-0 gap-[2px]">
-                    <div className="relative inline-block w-[312px]"></div>
-                  </div>
-                </div>
               </div>
               <div className=" relative grid-cols-4 gap-2 col-span-3 box-border justify-start items-start">
                 <div className=" flex flex-wrap gap-4 justify-start">

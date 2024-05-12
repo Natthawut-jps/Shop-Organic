@@ -98,40 +98,19 @@ export const Homepage: FunctionComponent = () => {
       {/* Sale up to */}
       <div className="absolute top-[218px] sm:top-0 left-[50px] sm:left-0 w-[1980px] sm:w-full h-[600px] sm:h-[1000px] overflow-hidden text-gray-scale-white">
         <div className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center"></div>
-        <a
-          href="#"
-          className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100"
-        >
+        <div className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100">
           <div className="absolute top-[0px] left-[0px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
             <img src="/img/banner_2.png" alt="" />
           </div>
-        </a>
-        <a
-          href="#"
-          className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center"
-        >
+        </div>
+        <div className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
           <div className="absolute top-[0px] left-[0px] flex flex-col items-center justify-start gap-[32px]">
-           <img src="/img/banner_3.png" alt="" />
+            <img src="/img/banner_3.png" alt="" />
           </div>
-        </a>
+        </div>
       </div>
       {/* Free Shipping */}
       <div className="absolute top-[840px] left-[50px] rounded-lg bg-gray-scale-white shadow-[0px_8px_40px_rgba(0,_38,_3,_0.08)] w-[1500px] flex flex-row items-center justify-between p-10 box-border text-base">
-        <div className="flex flex-row items-center justify-center gap-[16px]">
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0"
-            alt=""
-            src="/img/deliverytruck-1.svg"
-          />
-          <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              Free Shipping
-            </div>
-            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              Free shipping on all your order
-            </div>
-          </div>
-        </div>
         <div className="flex flex-row items-center justify-center gap-[16px]">
           <img
             className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
@@ -154,11 +133,11 @@ export const Homepage: FunctionComponent = () => {
             src="/img/headphones-1.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              Customer Support 24/7
+            <div className="relative leading-[120%] font-semibold inline-block w-[350px]">
+              การสนับสนุนที่ยอดเยี่ยมตลอด 24 ชั่วโมงทุกวัน
             </div>
             <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              Instant access to Support
+              เข้าถึงการติดต่อได้ทันที
             </div>
           </div>
         </div>
@@ -185,10 +164,10 @@ export const Homepage: FunctionComponent = () => {
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              100% Secure Payment
+              จ่ายเงินชัวร์ 100%
             </div>
-            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              We ensure your money is save
+            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[350px]">
+              เรามั่นใจว่าสามารถชำระเงินได้อย่างปลอดภัย
             </div>
           </div>
         </div>
@@ -215,10 +194,10 @@ export const Homepage: FunctionComponent = () => {
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
             <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              Money-Back Guarantee
+              รับประกันคืนเงิน
             </div>
             <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              30 Days Money-Back Guarantee
+              รับประกันคืนเงินภายใน 30 วัน
             </div>
           </div>
         </div>
@@ -242,14 +221,14 @@ export const Homepage: FunctionComponent = () => {
             </div>
           </Link>
         ))}
-        <div className="absolute top-[0px] left-[130px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
+        <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
           <div className="relative leading-[120%] font-semibold">
             Categories
           </div>
         </div>
       </div>
       {/* Popular Product */}
-      <div className="absolute top-[1400px] left-[130px] w-[1320px] h-[714px] text-gray-scale-gray-700">
+      <div className="absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
         <div className="absolute top-[-10px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-100">
           <div className="relative leading-[120%] font-semibold">
             Popular Product
@@ -445,45 +424,42 @@ export const Homepage: FunctionComponent = () => {
         <div className="absolute top-[0px] left-[471px] leading-[120%] font-semibold">
           Follow us on Instagram
         </div>
-        <a href="#">
+        <div>
           <img
             className="absolute top-[70px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
             src="/img/-instagram-post@2x.png"
           />
-        </a>
-        <a href="#">
+        </div>
+        <div>
           <img
             className="absolute top-[70px] left-[448px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
             src="/img/-instagram-post1@2x.png"
           />
-        </a>
-        <a href="#">
+        </div>
+        <div>
           <img
             className="absolute top-[70px] left-[672px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
             src="/img/-instagram-post2@2x.png"
           />
-        </a>
-        <a href="#">
+        </div>
+        <div>
           <img
             className="absolute top-[70px] left-[896px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
             src="/img/-instagram-post3@2x.png"
           />
-        </a>
-        <a href="#">
+        </div>
+        <div>
           <img
             className="absolute top-[70px] left-[1120px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
             alt=""
             src="/img/-instagram-post4@2x.png"
           />
-        </a>
-        <a
-          href="#"
-          className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all"
-        >
+        </div>
+        <div className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all">
           <img
             className="absolute top-[0px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover"
             alt=""
@@ -494,7 +470,7 @@ export const Homepage: FunctionComponent = () => {
             alt=""
             src="/img/icons.svg"
           />
-        </a>
+        </div>
       </div>
       {/* foorter template */}
       <Foorter />
