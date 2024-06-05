@@ -24,7 +24,7 @@ const Contact: FunctionComponent = () => {
       },
     }).then((res) => {
       if (res.status === 200) {
-        location.href = "/contact";
+        location.reload();
       }
     });
   };
