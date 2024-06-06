@@ -2,8 +2,8 @@ import axios from "axios";
 import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 const instance_auth = axios.create({
-  // baseURL: "http://localhost:8080/auth",
-  baseURL: "https://api-shoporganic-ecommerce.onrender.com/auth",
+  baseURL: "http://localhost:8080/auth",
+  // baseURL: "https://api-shoporganic-ecommerce.onrender.com/auth",
   timeout: 1000,
 });
 
@@ -36,11 +36,11 @@ try {
         const _ur = cookies.get("_ur");
         if (_ur) {
           try {
-            const url_deploy = "https://api-shoporganic-ecommerce.onrender.com/refresh/r_auth";
-            // const url_dev = 'http://localhost:8080/refresh/r_auth'
+            // const url_deploy = "https://api-shoporganic-ecommerce.onrender.com/refresh/r_auth";
+            const url_dev = 'http://localhost:8080/refresh/r_auth'
             await axios({
               method: "post",
-              url: url_deploy,
+              url: url_dev,
               data: { massage: "Authorize" },
               headers: {
                 Authorization: `Bearer ${_ur}`,
