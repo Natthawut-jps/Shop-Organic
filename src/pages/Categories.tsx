@@ -88,7 +88,7 @@ const Categories: FunctionComponent = () => {
           const product: datatypesProduct[] = res.data.filter(
             (item: datatypesProduct) => item.categories === categoriesParam
           );
-          if (parseInt(pageParam!) <= Math.ceil(product.length / 20)) {
+          if (product) {
             if (sortBy === "sortmin") {
               const sortByMin = product.sort((a, b) =>
                 a.name.localeCompare(b.name)

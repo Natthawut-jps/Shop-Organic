@@ -71,7 +71,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
           setProductDetail(
             res.data.filter(
               (item: datatypesProduct) =>
-                item.name.replace(/\s/g, "") === productList
+                item.name.replace(/\s/g, "") === productList?.replace(/\s/g, "")
             )[0]
           );
           setRelatedProduct(
@@ -92,10 +92,11 @@ const ProductsDetailsDescription: FunctionComponent = () => {
       window.scroll(0, 0);
     }
   }, [productList]);
-  console.log(relatedProduct);
+
   return (
     <>
-      {productList === productDetail?.name && (
+      {productList?.replace(/\s/g, "") ===
+        productDetail?.name.replace(/\s/g, "") && (
         <div className="relative bg-gray-scale-white w-full h-[2395px] overflow-hidden text-left text-sm text-gray-scale-gray-900 font-body-medium-body-medium-600">
           {/* SigIn User */}
           <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
@@ -111,7 +112,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
             <div className="absolute top-[70px] left-[0px] flex flex-row items-start justify-start gap-[24px]">
               {relatedProduct
                 .filter((item) => item.id !== (productDetail?.id as number))
-                .slice(0, 4)
+                .slice(0, 5)
                 .map((item, index) => (
                   <div
                     key={index}

@@ -3,7 +3,6 @@ import { Cookies } from "react-cookie";
 const cookies = new Cookies();
 const instance_auth = axios.create({
   baseURL: "http://localhost:8080/auth",
-  // baseURL: "https://api-shoporganic-ecommerce.onrender.com/auth",
   timeout: 1000,
 });
 
