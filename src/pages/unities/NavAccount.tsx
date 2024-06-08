@@ -33,7 +33,7 @@ export const NavAccount: FunctionComponent = () => {
         >
           <ViewQuiltIcon />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            Dashboard
+            หน้าหลัก
           </div>
         </NavLink>
         <NavLink
@@ -46,7 +46,7 @@ export const NavAccount: FunctionComponent = () => {
         >
           <FontAwesomeIcon icon={faCube} />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            Order History
+            คำสั่งซื้อ
           </div>
         </NavLink>
         <NavLink
@@ -59,7 +59,7 @@ export const NavAccount: FunctionComponent = () => {
         >
           <FontAwesomeIcon icon={faMapLocationDot} />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            Address
+            ที่อยู่
           </div>
         </NavLink>
         <NavLink
@@ -72,7 +72,7 @@ export const NavAccount: FunctionComponent = () => {
         >
           <FontAwesomeIcon icon={faGear} />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            Settings
+            ตั้งค่า
           </div>
         </NavLink>
         <div
@@ -81,7 +81,7 @@ export const NavAccount: FunctionComponent = () => {
         >
           <FontAwesomeIcon icon={faArrowRightToBracket} />
           <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            Log-out
+            ออกจากระบบ
           </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ import { Cookies } from "react-cookie";
 import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
 import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons/faMapLocationDot";
 import instance from "./axios_instance";
+import instance_auth from "./instance_auth";
 
 export const Header: FunctionComponent = () => {
   const cookie = new Cookies();
@@ -100,8 +101,27 @@ export const Header: FunctionComponent = () => {
       }
     });
   };
+  interface user_Type {
+    id: number;
+    first_name: string;
+    last_name: string;
+    imgURL: string;
+  }
+  const [userInfo, setUser] = useState<user_Type>({} as user_Type);
+  const user = async () => {
+    await instance_auth({
+      method: "get",
+      url: "/user/user_info",
+      responseType: "json",
+    }).then((res) => {
+      if (res.status === 200) {
+        setUser(res.data);
+      }
+    });
+  };
   useEffect(() => {
     get_categories();
+    user();
   }, []);
   return (
     <>
@@ -111,9 +131,9 @@ export const Header: FunctionComponent = () => {
       <SignUp SignUp={{ openSignUp, setOpenSignUp }} />
       <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
       <div className=" absolute z-50 top-[0px] left-[-180px] sm:z-50 bg-gray-scale-white h-[190px] sm:h-fit flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
-        <div className="bg-gray-scale-white sm:hidden shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start sm:pl-0 py-3 px-[300px] gap-[759px]">
-          {cookie.get("_ut") ? (
-            <div className=" relative flex flex-row items-center justify-start right-[100px] gap-[8px]">
+        <div className="bg-gray-scale-white sm:hidden shadow-[0px_1px_0px_#e5e5e5] grid grid-cols-2 w-full sm:pl-0 gap-[5px] p-1">
+          {cookie.get("_ur") ? (
+            <div className=" relative flex flex-row items-center justify-start left-[300px] gap-[8px]">
               <img
                 className="relative w-4 h-[19px]"
                 alt=""
@@ -124,7 +144,7 @@ export const Header: FunctionComponent = () => {
               </div>
             </div>
           ) : (
-            <div className="relative flex flex-row items-center justify-start gap-[8px] right-[70px]">
+            <div className="relative flex flex-row items-center justify-start gap-[8px] left-[300px] h-[50px]">
               <img
                 className="relative w-4 h-[19px]"
                 alt=""
@@ -137,32 +157,28 @@ export const Header: FunctionComponent = () => {
           )}
           <div className="flex flex-row items-center justify-between gap-[20px] text-center">
             {cookie.get("_ur") ? (
-              <div className=" relative flex justify-center items-center gap-5 left-[120px]">
+              <div className=" relative flex flex-row w-[700px] justify-end items-center gap-3 left-[0px]">
                 <Link
                   to={"/Account/Dashboard"}
-                  className="text-[16px] hover:bg-black/10 hover:cursor-pointer absolute text-gray-600 no-underline right-[130px] p-4 box-border font-bold"
+                  className="text-[16px] hover:bg-black/10 hover:cursor-pointer text-gray-600 no-underline right-[0px] box-border font-bold"
                 >
-                  Dashboad
-                </Link>
-                <Link
-                  to={"/Account/Settings"}
-                  className="text-[16px] hover:bg-black/10 text-gray-600 no-underline hover:cursor-pointer absolute right-[50px] p-4 box-border font-bold"
-                >
-                  Setting
+                  {`${userInfo.first_name} ${userInfo.last_name}`}
                 </Link>
                 <Tooltip title="Account settings">
                   <IconButton
                     onClick={handleClickAccounting}
                     size="small"
-                    sx={{ ml: 2 }}
                     aria-controls={openAccounting ? "account-menu" : undefined}
                     aria-haspopup="true"
                     aria-expanded={openAccounting ? "true" : undefined}
                   >
-                    <Avatar
-                      sx={{ width: 32, height: 32, backgroundColor: "green" }}
-                    >
-                      M
+                    <Avatar>
+                      <img
+                        src={`${import.meta.env.VITE_BASE_API}/img/${
+                          userInfo.imgURL
+                        }`}
+                        width={50}
+                      />
                     </Avatar>
                   </IconButton>
                 </Tooltip>
@@ -187,7 +203,7 @@ export const Header: FunctionComponent = () => {
                     <MenuItem onClick={handleClose}>
                       <div className=" flex justify-center items-center gap-4">
                         <ViewQuiltIcon fontSize="large" />
-                        <span>Dashboad</span>
+                        <span>หน้าหลัก</span>
                       </div>
                     </MenuItem>
                   </Link>
@@ -198,7 +214,7 @@ export const Header: FunctionComponent = () => {
                     <MenuItem onClick={handleClose}>
                       <div className=" flex justify-center items-center gap-4">
                         <FontAwesomeIcon icon={faCube} size="2xl" />
-                        <span>Order</span>
+                        <span>คำสั่งซื้อ</span>
                       </div>
                     </MenuItem>
                   </Link>
@@ -209,7 +225,7 @@ export const Header: FunctionComponent = () => {
                     <MenuItem onClick={handleClose}>
                       <div className=" flex justify-center items-center gap-4">
                         <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
-                        <span> Address</span>
+                        <span>ที่อยู่</span>
                       </div>
                     </MenuItem>
                   </Link>
@@ -222,7 +238,7 @@ export const Header: FunctionComponent = () => {
                       <ListItemIcon>
                         <Settings fontSize="medium" />
                       </ListItemIcon>
-                      Settings
+                      ตั้งค่า
                     </MenuItem>
                   </Link>
                   <MenuItem onClick={handleLogout}>
@@ -230,25 +246,25 @@ export const Header: FunctionComponent = () => {
                       <Logout fontSize="medium" color="error" />
                     </ListItemIcon>
                     <span className=" text-branding-error opacity-90">
-                      Logout
+                      ออกจากระบบ
                     </span>
                   </MenuItem>
                 </Menu>
               </div>
             ) : (
-              <div className="flex flex-row relative left-16 items-start justify-start gap-[4px] text-left">
+              <div className="flex flex-row relative left-16 items-start justify-end w-[600px] gap-[4px] text-left">
                 <div
                   onClick={() => setOpenSignIn(true)}
-                  className="relative cursor-pointer leading-[130%] hover:text-green-400 text-black"
+                  className="relative cursor-pointer leading-[130%] hover:text-black/80 hover:underline text-black text-[14px]"
                 >
-                  Sign In
+                  เข้าสู่ระบบ
                 </div>
                 <div className="relative leading-[130%]">/</div>
                 <div
                   onClick={() => setOpenSignUp(true)}
-                  className="relative cursor-pointer leading-[130%] hover:text-green-400 text-black"
+                  className="relative cursor-pointer leading-[130%] hover:text-black/80 hover:underline text-black text-[14px]"
                 >
-                  Sign Up
+                  สมัครสมาชิก
                 </div>
               </div>
             )}
@@ -282,7 +298,7 @@ export const Header: FunctionComponent = () => {
                 className=" relative w-5 h-5 overflow-hidden shrink-0 opacity-50"
               />
               <div className="relative leading-[21px] inline-block w-[400px] shrink-0">
-                Search . . . . .
+                ค้นหา . . . . .
               </div>
             </div>
           </div>
@@ -382,7 +398,7 @@ export const Header: FunctionComponent = () => {
             >
               <FontAwesomeIcon icon={faBars} />
               <div className="relative leading-[150%] font-medium">
-                All Categories
+                หมวดหมู่
               </div>
               <FontAwesomeIcon
                 icon={faAngleDown}
@@ -448,7 +464,7 @@ export const Header: FunctionComponent = () => {
               className=" no-underline py-[15px] pl-[40px] pr-[40px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]"
             >
               <div className="relative leading-[150%] font-medium">
-                About Us
+                เกี่ยวกับเรา
               </div>
             </Link>
             <Link
@@ -456,7 +472,7 @@ export const Header: FunctionComponent = () => {
               className=" no-underline divide-y-2 divide-solid divide-white py-[15px] pl-[20px] pr-[20px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]"
             >
               <div className="relative leading-[150%] font-medium">
-                Contact Us
+                ติดต่อเรา
               </div>
             </Link>
           </div>

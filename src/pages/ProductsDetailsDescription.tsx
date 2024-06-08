@@ -45,7 +45,7 @@ interface datatypesProduct {
 const ProductsDetailsDescription: FunctionComponent = () => {
   const cookie = new Cookies();
   const [openSignIn, setOpenSignIn] = useState<boolean>(false);
-  const status_product = ["Out of Stock", "Low Stock", "InStock"];
+  const status_product = ["สินค้าหมด", "เหลือน้อย", "มีสินค้า"];
   const { categoriesP, productList } = useParams();
   const [productDetail, setProductDetail] = useState<datatypesProduct>();
   const [relatedProduct, setRelatedProduct] = useState<datatypesProduct[]>([]);

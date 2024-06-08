@@ -25,18 +25,18 @@ const OrderHistory: FunctionComponent = () => {
   const [data, setData] = useState<order_Type[]>([]);
   const [pageCount, setPageCount] = useState<number>(1);
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
   ];
   const status = [
     "กำลังดำเนินการ",
@@ -124,14 +124,14 @@ const OrderHistory: FunctionComponent = () => {
                 <div className="relative leading-[150%]">#</div>
                 <div className="relative leading-[150%]">{item.id}</div>
               </div>
-              <div className="absolute top-[12px] left-[110px] leading-[150%]">
+              <div className="absolute top-[12px] left-[135px] leading-[150%]">
                 {`${new Date(item.createdAt).getDate()} ${
                   months[new Date(item.createdAt).getMonth()]
-                }, ${new Date(item.createdAt).getFullYear()}`}
+                } ${new Date(item.createdAt).getFullYear() + 543}`}
               </div>
               <div className="absolute top-[12px] left-[310px] leading-[150%]">
                 <span className="font-medium">฿{item.amount_total}</span>
-                <span> ({item.quantity} Products)</span>
+                <span className=" text-[12px]"> ({item.quantity} รายการ)</span>
               </div>
               <div className="absolute top-[12px] left-[660px] leading-[150%]">
                 {item.status === 1 ? (
@@ -184,31 +184,31 @@ const OrderHistory: FunctionComponent = () => {
                 to={`/Account/Orders/Detail/${item.id}`}
                 className=" no-underline absolute top-[12px] left-[850px] leading-[150%] font-medium text-branding-success"
               >
-                View Details
+                รายละเอียด
               </Link>
             </div>
           ))}
         </div>
-        <div className="absolute top-[62px] left-[0px] w-[984px] h-9 text-xs text-gray-scale-gray-700">
+        <div className="absolute top-[62px] left-[0px] w-[984px] h-9 text-gray-scale-gray-700 text-[13px]">
           <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[984px] h-9" />
           <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            Order ID
+            หมายเลขคำสั่งซื้อ
           </div>
-          <div className="absolute top-[12px] left-[130px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            Date
+          <div className="absolute top-[12px] left-[160px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            วันที่สั่งซื้อ
           </div>
           <div className="absolute top-[12px] left-[330px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            Total
+            ทั้งหมด
           </div>
           <div className="absolute top-[12px] left-[530px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            Tracking ID
+            หมายเลขพัสดุ
           </div>
           <div className="absolute top-[12px] left-[700px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            Status
+            สถานะ
           </div>
         </div>
         <div className="absolute top-[16px] left-[24px] text-xl leading-[150%] font-medium text-gray-scale-gray-900">
-          Order History
+          ประวัติการสั่งซื้อ
         </div>
       </div>
       <Foorter />

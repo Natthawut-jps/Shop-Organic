@@ -207,7 +207,7 @@ export const Settings: FunctionComponent = () => {
                 className="absolute cursor-pointer top-[420px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
-                  Save Changes
+                  บันทึก
                 </div>
               </button>
             </form>
@@ -216,7 +216,7 @@ export const Settings: FunctionComponent = () => {
               className="absolute cursor-pointer top-[420px] left-[250px] rounded-24xl bg-branding-error flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
             >
               <div className="relative leading-[120%] font-semibold">
-                Cancle
+                ยกเลิก
               </div>
             </div>
           </div>
@@ -225,12 +225,12 @@ export const Settings: FunctionComponent = () => {
             onClick={() => setEditAccount(true)}
             className="absolute underline cursor-pointer top-[420px] left-[24px] rounded-24xl text-[18px] text-branding-success flex flex-row items-center justify-center py-1 px-1"
           >
-            <div className="relative leading-[120%] font-semibold">Edit</div>
+            <div className="relative leading-[120%] font-semibold">แก้ไข</div>
           </div>
         )}
         <div className="absolute top-[88px] left-[24px] flex flex-col items-start justify-start gap-[16px]">
           <div className="flex flex-col items-start justify-start gap-[6px]">
-            <div className="relative leading-[150%]">First name</div>
+            <div className="relative leading-[150%]">ชื่อ</div>
             <div className="relative rounded-md bg-gray-scale-white box-border w-[512px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
@@ -260,7 +260,7 @@ export const Settings: FunctionComponent = () => {
             </div>
           </div>
           <div className="flex flex-col items-start justify-start gap-[6px]">
-            <div className="relative leading-[150%]">Last Name</div>
+            <div className="relative leading-[150%]">นามสกุล</div>
             <div className="relative rounded-md bg-gray-scale-white box-border w-[512px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
               {editAccount ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
@@ -290,7 +290,7 @@ export const Settings: FunctionComponent = () => {
             </div>
           </div>
           <div className="flex flex-col items-start justify-start gap-[6px]">
-            <div className="relative leading-[150%]">Email</div>
+            <div className="relative leading-[150%]">อีเมลล์</div>
             <div className="relative rounded-md bg-gray-scale-white box-border w-[512px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
               {editAccount && userinfo.gmail === 0 ? (
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
@@ -322,7 +322,7 @@ export const Settings: FunctionComponent = () => {
         </div>
         <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
           <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-            Account Settings
+            ตั้งค่าบัญชี
           </div>
         </div>
         <div className="absolute top-[120px] left-[648px] w-[224px] h-[289px]">
@@ -330,14 +330,14 @@ export const Settings: FunctionComponent = () => {
             <div className="relative leading-[120%] font-semibold">
               {editAccount ? (
                 <div>
-                  <span className=" absolute text-branding-success left-[130px] top-[9px]">
-                    (optional)
+                  <span className=" absolute text-[12px] w-[120px] text-branding-success left-[130px] top-[9px]">
+                    (ไม่จำเป็นต้องเลือก)
                   </span>
                   <label
                     htmlFor="files"
                     className="cursor-pointer flex justify-center items-center text-branding-success border-[2px] border-solid border-branding-success rounded-24xl px-3 py-1.5"
                   >
-                    Chose Image
+                    เลือกรูปภาพ
                     <input
                       onChange={async (
                         e: React.ChangeEvent<HTMLInputElement>
@@ -380,9 +380,9 @@ export const Settings: FunctionComponent = () => {
               ) : (
                 <label
                   htmlFor="files"
-                  className="flex justify-center items-center cursor-not-allowed text-branding-success/70 border-[2px] border-solid border-branding-success/70 rounded-24xl px-2 py-1.5"
+                  className="flex justify-center items-center cursor-not-allowed text-branding-success/70 border-[2px] border-solid border-branding-success/70 rounded-24xl px-2 py-1.5 left-2 relative"
                 >
-                  Chose Image{" "}
+                เลือกรูปภาพ
                 </label>
               )}
             </div>

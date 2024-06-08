@@ -223,7 +223,7 @@ export const Homepage: FunctionComponent = () => {
         ))}
         <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
           <div className="relative leading-[120%] font-semibold">
-            Categories
+            หมวดหมู่
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@ export const Homepage: FunctionComponent = () => {
       <div className="absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
         <div className="absolute top-[-10px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-100">
           <div className="relative leading-[120%] font-semibold">
-            Popular Product
+            สินค้ายอดนิยม
           </div>
         </div>
         <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
@@ -317,7 +317,7 @@ export const Homepage: FunctionComponent = () => {
       {/* latest New */}
       <div className="absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
         <div className="absolute top-[0px] left-[563px] text-13xl leading-[120%] font-semibold">
-          Latest New
+          ใหม่ล่าสุด
         </div>
         <div className=" grid grid-cols-3 gap-x-5">
           {popularProduct
@@ -421,8 +421,8 @@ export const Homepage: FunctionComponent = () => {
       </div>
       {/* Follow us on Instagram */}
       <div className="absolute top-[3651px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
-        <div className="absolute top-[0px] left-[471px] leading-[120%] font-semibold">
-          Follow us on Instagram
+        <div className="absolute top-[0px] left-[560px] leading-[120%] font-semibold">
+          ติดตามเรา
         </div>
         <div>
           <img

@@ -104,7 +104,7 @@ export const Address = () => {
                       </div>
                       <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
                         <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
-                          Phnoe
+                          มือถือ
                         </div>
                         <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
                           {item.phone}
@@ -118,7 +118,7 @@ export const Address = () => {
                         to={"/Account/Address/Edit"}
                         className="absolute hover:text-[#06e102]/70 top-[0px] cursor-pointer p-[2px] text-[#06e102] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
                       >
-                        Edit
+                        แก้ไข
                       </Link>
                       {item.status === 1 ? (
                         <button
@@ -139,7 +139,7 @@ export const Address = () => {
                             onClick={() => Delete(item.id)}
                             className="absolute cursor-pointer p-[2px] hover:text-red-400 text-red-600 top-[0px] left-[370px] tracking-[0.03em] leading-[100%] font-medium"
                           >
-                            Delete
+                            ลบที่อยู่
                           </div>
                         </div>
                       )}
@@ -162,7 +162,7 @@ export const Address = () => {
           </div>
           <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
             <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-              Shipping Address
+              ที่อยู่จัดส่ง
             </div>
           </div>
         </div>
