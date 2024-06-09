@@ -111,7 +111,7 @@ export const Search: FunctionComponent<open> = (props) => {
             />
             <TextField
               id="standard-basic"
-              label="Search..."
+              label="ค้นหา..."
               variant="standard"
               className=" w-full h-10 focus:outline-none text-[#6d6b6ba2] box-border relative left-2"
               type="text"

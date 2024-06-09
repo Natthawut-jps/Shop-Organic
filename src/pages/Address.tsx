@@ -104,7 +104,7 @@ export const Address = () => {
                       </div>
                       <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
                         <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
-                          มือถือ
+                          เบอร์โทร
                         </div>
                         <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
                           {item.phone}

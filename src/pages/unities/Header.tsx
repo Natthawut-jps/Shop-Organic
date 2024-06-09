@@ -140,7 +140,7 @@ export const Header: FunctionComponent = () => {
                 src="/img/map-pin.svg"
               />
               <div className="relative leading-[130%]">
-                Store Location: Lei- 42000, District, Thailand
+                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน 42000, ประเทศไทย
               </div>
             </div>
           ) : (
@@ -328,7 +328,7 @@ export const Header: FunctionComponent = () => {
                 </Badge>
               </div>
               <div className="text-green-700 flex flex-col items-start justify-start gap-[7px] text-left text-2xs sm:hidden ">
-                <div className="relative leading-[120%]">Shopping cart:</div>
+                <div className="relative leading-[120%]">ตะกร้าสินค้า</div>
                 {priceSum ? (
                   <div className="relative text-sm leading-[100%] font-medium ">
                     {(priceSum + 50).toFixed(2) + "฿"}

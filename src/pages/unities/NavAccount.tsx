@@ -21,7 +21,7 @@ export const NavAccount: FunctionComponent = () => {
     <>
       <div className="absolute top-[347px] left-[50px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start pt-0 px-0 pb-3 text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
         <div className="flex flex-row items-start justify-start pt-6 pb-4 pr-0 pl-5 text-xl text-gray-scale-gray-900">
-          <div className="relative leading-[150%] font-medium">Navigation</div>
+          <div className="relative leading-[150%] font-medium">บัญชีของฉัน</div>
         </div>
         <NavLink
           to={"/Account/Dashboard"}

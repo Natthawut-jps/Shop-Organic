@@ -81,7 +81,7 @@ const OrderHistory: FunctionComponent = () => {
   }, [page, pageCount, data]);
 
   return (
-    <div className="relative bg-gray-scale-white w-full h-[1699px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
+    <div className="relative bg-gray-scale-white w-full h-[1770px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
       <Header />
       <Breadcrumbs
         categoies={undefined}
@@ -90,31 +90,30 @@ const OrderHistory: FunctionComponent = () => {
         EditAndadd={undefined}
       />
       <NavAccount />
-      <div className="absolute top-[347px] left-[400px] w-[984px] h-[742px]">
-        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[742px] border-[1px] border-solid border-gray-scale-gray-100" />
-        <div className="absolute top-[644px] left-[400px] flex flex-row items-start justify-start gap-[12px] text-center">
-          <div className=" flex items-start justify-start">
-            <div className="rounded-111xl flex flex-col items-start justify-start p-2 text-gray-scale-white">
-              <Pagination
-                variant="outlined"
-                onChange={(event: React.ChangeEvent<unknown>, page: number) => {
-                  setPage(page);
-                  {
-                    event;
-                  }
-                }}
-                count={pageCount}
-                page={page}
-                sx={{
-                  "& .MuiPaginationItem-root.Mui-selected": {
-                    bgcolor: "rgb(0 178 7/1)",
-                  },
-                }}
-              />
-            </div>
+      <div className="absolute top-[347px] left-[400px] w-[984px] h-[830px]">
+        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[830px] border-[1px] border-solid border-gray-scale-gray-100" />
+        <div className=" relative top-[0px] my-3 left-[24px] text-xl leading-[150%] font-medium text-gray-scale-gray-900">
+          ประวัติการสั่งซื้อ
+        </div>
+        <div className=" relative top-[0px] my-3 left-[0px] w-[984px] h-9 text-gray-scale-gray-700 text-[13px]">
+          <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[984px] h-9" />
+          <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            หมายเลขคำสั่งซื้อ
+          </div>
+          <div className="absolute top-[12px] left-[160px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            วันที่สั่งซื้อ
+          </div>
+          <div className="absolute top-[12px] left-[330px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            ทั้งหมด
+          </div>
+          <div className="absolute top-[12px] left-[530px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            หมายเลขพัสดุ
+          </div>
+          <div className="absolute top-[12px] left-[700px] tracking-[0.03em] leading-[100%] uppercase font-medium">
+            สถานะ
           </div>
         </div>
-        <div className=" relative top-[110px] pl-[24px] gap-[20px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
+        <div className=" relative top-[0px] my-3 pl-[24px] gap-[20px] flex flex-col items-start justify-start text-sm text-gray-scale-gray-800">
           {order.map((item, index) => (
             <div
               key={index}
@@ -189,26 +188,32 @@ const OrderHistory: FunctionComponent = () => {
             </div>
           ))}
         </div>
-        <div className="absolute top-[62px] left-[0px] w-[984px] h-9 text-gray-scale-gray-700 text-[13px]">
-          <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[984px] h-9" />
-          <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            หมายเลขคำสั่งซื้อ
+        <div className=" relative top-[0px] left-[0px] my-5 flex flex-row items-start justify-center gap-[12px] text-center">
+          <div className=" flex items-start justify-start">
+            <div className="rounded-111xl flex flex-col items-start justify-start p-2 text-gray-scale-white">
+              {order.length > 0 ? (
+                <Pagination
+                  variant="outlined"
+                  onChange={(
+                    event: React.ChangeEvent<unknown>,
+                    page: number
+                  ) => {
+                    setPage(page);
+                    {
+                      event;
+                    }
+                  }}
+                  count={pageCount}
+                  page={page}
+                  sx={{
+                    "& .MuiPaginationItem-root.Mui-selected": {
+                      bgcolor: "rgb(0 178 7/1)",
+                    },
+                  }}
+                />
+              ) : null}
+            </div>
           </div>
-          <div className="absolute top-[12px] left-[160px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            วันที่สั่งซื้อ
-          </div>
-          <div className="absolute top-[12px] left-[330px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            ทั้งหมด
-          </div>
-          <div className="absolute top-[12px] left-[530px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            หมายเลขพัสดุ
-          </div>
-          <div className="absolute top-[12px] left-[700px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-            สถานะ
-          </div>
-        </div>
-        <div className="absolute top-[16px] left-[24px] text-xl leading-[150%] font-medium text-gray-scale-gray-900">
-          ประวัติการสั่งซื้อ
         </div>
       </div>
       <Foorter />

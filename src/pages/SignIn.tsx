@@ -155,10 +155,10 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             <div className="relative text-13xl leading-[120%] font-semibold top-[-10px]">
               {incorrect && (
                 <span className=" absolute top-[35px] left-[-150px] text-[12px] text-branding-error w-[300px]">
-                  username and password incorrect
+                  อีเมลล์หรือรหัสผ่านไม่ถูกต้อง
                 </span>
               )}
-              Sign In
+              เข้าสู่ระบบ
             </div>
             <div className="flex flex-col items-center justify-center gap-[16px] text-base text-gray-scale-gray-400">
               <div className="flex flex-col items-start justify-start gap-[25px]">
@@ -175,7 +175,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                       }
                       form="passwordEyeForm"
                       type="email"
-                      placeholder="Email"
+                      placeholder="อีเมลล์"
                       className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[424px] rounded-lg h-[37px] shrink-0"
                       required
                     />
@@ -195,7 +195,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                       form="passwordEyeForm"
                       type="password"
                       id="passwordSignIn"
-                      placeholder="Password"
+                      placeholder="รหัสผ่าน"
                       className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[380px] h-[37px] rounded-lg shrink-0"
                       required
                     />
@@ -218,23 +218,13 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 </div>
               </div>
               <div className="w-[472px] flex flex-row items-center justify-between text-sm text-gray-scale-gray-600">
-                <div className="flex flex-row items-center justify-center relative left-4 gap-[6px]">
-                  <div className="relative w-5 h-5">
-                    <input
-                      type="checkbox"
-                      className=" absolute top-[-4px] cursor-pointer h-full w-full rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200"
-                    />
-                  </div>
-                  <div className="relative left-2 leading-[150%]">
-                    Remember me
-                  </div>
-                </div>
+                <div className="flex flex-row items-center justify-center relative left-4 gap-[6px]"/>
                 <Link
                   to={"/reset-password"}
                   reloadDocument
                   className=" right-7 no-underline text-black relative leading-[150%]"
                 >
-                  Forget Password
+                  ลืมรหัสผ่าน
                 </Link>
               </div>
             </div>
@@ -244,7 +234,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
-                  Login
+                  เข้าสู่ระบบ
                 </div>
               </button>
             </form>
@@ -253,7 +243,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             </div>
             <div>
               <div>
-                <GoogleButton type="light" onClick={() => LoginGoogle()} />
+                <GoogleButton type="light" label="เข้าสู่ระบบด้วย Google" onClick={() => LoginGoogle()} />
               </div>
             </div>
           </div>

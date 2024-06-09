@@ -123,7 +123,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
               />
             </div>
             <div className="relative text-13xl leading-[120%] font-semibold">
-              Create Account
+              สมัครสมาชิก
             </div>
             <div className="flex flex-col items-start justify-start gap-[16px] text-base text-gray-scale-gray-400">
               <div className="flex flex-col items-start justify-start gap-[20px]">
@@ -136,7 +136,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                         }
                         form="createAccount"
                         type="text"
-                        placeholder="First name"
+                        placeholder="ชื่อ"
                         className="text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[393px] h-[37px] shrink-0"
                         required
                       />
@@ -150,7 +150,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                         }
                         form="createAccount"
                         type="text"
-                        placeholder="Last name"
+                        placeholder="นามสกุล"
                         className="text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[386px] h-[37px] shrink-0"
                         required
                       />
@@ -165,7 +165,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       }
                       form="createAccount"
                       type="email"
-                      placeholder="Email"
+                      placeholder="อีเมลล์"
                       className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[824px] rounded-lg h-[37px] shrink-0"
                       required
                     />
@@ -186,7 +186,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       form="createAccount"
                       type="password"
                       id="passwordNew"
-                      placeholder="Password"
+                      placeholder="รหัสผ่าน"
                       className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
                       required
                     />
@@ -219,7 +219,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       form="createAccount"
                       type="password"
                       id="passwordConfirm"
-                      placeholder="Confirm Password"
+                      placeholder="ยืนยันรหัสผ่าน"
                       className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
                       required
                     />
@@ -241,7 +241,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                   )}
                 </div>
               </div>
-              <div className="flex flex-row items-start justify-start gap-[6px] text-sm text-gray-scale-gray-600">
+              <div className="flex flex-row items-start justify-start gap-[6px] text-sm text-gray-scale-gray-600 pb-5">
                 <div className="relative w-5 h-5">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -249,12 +249,11 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                     }
                     type="checkbox"
                     form="createAccount"
-                    // value={0}
                     className="absolute cursor-pointer h-full w-full top-[-2px] left-1 rounded-10xs bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-200"
                     required
                   />
                 </div>
-                <div className="relative text-black left-2 leading-[150%]">{`Accept all terms & Conditions`}</div>
+                <div className="relative text-black left-2 leading-[150%]">{`ยอมรับข้อกำหนดและเงื่อนไขทั้งหมด`}</div>
               </div>
             </div>
             <form id="createAccount" onSubmit={onSubmit}>
@@ -263,13 +262,10 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                 className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
-                  Create Account
+                  สมัครสมาชิก
                 </div>
               </button>
             </form>
-            <div className="flex flex-row items-start justify-start pt-1 px-0 pb-0 text-gray-scale-gray-600">
-              <div className="relative leading-[150%]">Create here account</div>
-            </div>
           </div>
         </DialogContent>
       </Dialog>

@@ -42,67 +42,67 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                     <NavLink to={`/about`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"About"}
+                            {"เกี่ยวกับเรา"}
                         </div>
                     </NavLink>
                     <NavLink to={`/contact`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Contact"}
+                            {"ติดต่อเรา"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Dashboard`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Orders`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Orders/Detail/${order_id}`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Address`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Address/Edit`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Address/Add`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Settings`} className={({ isActive }) => isActive ? " no-underline text-gray-scale-gray-400"
                         : " hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Account"}
+                            {"บัญชี"}
                         </div>
                     </NavLink>
                     <NavLink to={`/shop/checkout`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
-                            {"Checkout"}
+                            {"สั่งซื้อ"}
                         </div>
                     </NavLink>
                     {props.tltle && <FontAwesomeIcon icon={faAngleRight} className=" relative" />}
@@ -126,21 +126,21 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Dashboard"}
+                            {"หน้าหลัก"}
                         </div>
                     </NavLink>
                     <NavLink to={'/Account/Orders'} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Order History"}
+                            {"ประวัติการสั่งซื้อ"}
                         </div>
                     </NavLink>
                     {props.Detail === 'Detail' &&
                         <Link to={'/Account/Orders'} className="no-underline text-gray-scale-gray-400" >
                             <div className="relative leading-[150%]">
                                 <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                                {"Order History"}
+                                {"ประวัติการสั่งซื้อ"}
                             </div>
                         </Link>
                     }
@@ -148,21 +148,21 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Detail"}
+                            {"รายละเอียด"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Address`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Address"}
+                            {"ที่อยู่"}
                         </div>
                     </NavLink>
                     {props.EditAndadd === 'Edit' &&
                         <Link to={`/Account/Address`} className=" no-underline text-gray-scale-gray-400" >
                             <div className="relative leading-[150%]">
                                 <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                                {"Address"}
+                                {"ที่อยู่"}
                             </div>
                         </Link>
                     }
@@ -170,7 +170,7 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                         <Link to={`/Account/Address`} className=" no-underline text-gray-scale-gray-400" >
                             <div className="relative leading-[150%]">
                                 <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                                {"Address"}
+                                {"ที่อยู่"}
                             </div>
                         </Link>
                     }
@@ -178,21 +178,21 @@ export const Breadcrumbs: FunctionComponent<Prop> = (props) => {
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Edit"}
+                            {"แก้ไข"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Address/Add`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Add"}
+                            {"เพิ่ม"}
                         </div>
                     </NavLink>
                     <NavLink to={`/Account/Settings`} className={({ isActive }) => isActive ? " no-underline text-branding-success"
                         : " no-underline text-gray-scale-gray-400 hidden"} end >
                         <div className="relative leading-[150%]">
                             <FontAwesomeIcon icon={faAngleRight} className=" relative text-gray-scale-gray-400 mr-[15px]" />
-                            {"Settings"}
+                            {"ตั้งค่า"}
                         </div>
                     </NavLink>
                 </div>

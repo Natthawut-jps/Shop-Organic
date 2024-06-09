@@ -181,12 +181,12 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 className="absolute text-[16px] cursor-pointer top-[400px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
-                  Save Add
+                  บันทึก
                 </div>
               </button>
             </form>
             <div className="absolute top-[88px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">First name</div>
+              <div className="relative leading-[150%]">ชื่อ</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -205,7 +205,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="First name"
+                    placeholder="ชื่อ"
                     className=" text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -213,7 +213,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[88px] left-[342px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Last name</div>
+              <div className="relative leading-[150%]">นามสกุล</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -232,7 +232,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="Last name"
+                    placeholder="นามสกุล"
                     className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -241,7 +241,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
             </div>
             <div className="absolute top-[88px] left-[660px] flex flex-col items-start justify-start gap-[6px]">
               <div className="relative leading-[150%]">
-                <span>{`Phone`}</span>
+                <span>{`เบอร์โทร`}</span>
               </div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
@@ -258,14 +258,14 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     type="tel"
                     form="add"
                     pattern="[0-9]{10}"
-                    placeholder="000-000-0000"
+                    placeholder="เบอร์โทร"
                     className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                   />
                 </div>
               </div>
             </div>
             <div className="absolute top-[272px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Country / Region</div>
+              <div className="relative leading-[150%]">จังหวัด</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
                   <select
@@ -301,7 +301,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[272px] left-[758px] flex flex-col items-start justify-start gap-[6px] ">
-              <div className="relative leading-[150%]">Zip Code</div>
+              <div className="relative leading-[150%]">รหัสไปรษณี</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
                   {active_address.zipCode ? (
@@ -327,14 +327,14 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       disabled
                       className=" hover:cursor-not-allowed focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
                     >
-                      <option>{"zip codes"}</option>
+                      <option>{"รหัสไปรษณี"}</option>
                     </select>
                   )}
                 </div>
               </div>
             </div>
             <div className="absolute top-[272px] left-[541px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Tambon</div>
+              <div className="relative leading-[150%]">ตำบล</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
                   {active_address.tambon ? (
@@ -376,7 +376,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[272px] left-[280px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">States</div>
+              <div className="relative leading-[150%]">อำเภอ</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
                   {active_address.states ? (
@@ -422,7 +422,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[180px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Street Address</div>
+              <div className="relative leading-[150%]">ที่อยู่</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[936px] h-[49px] text-base border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -439,7 +439,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="Street Address"
+                    placeholder="ที่อยู่"
                     className="text-[15px] w-[923px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -448,7 +448,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
             </div>
             <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
               <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-                Shipping Address
+                ที่อยู่จัดส่ง
               </div>
             </div>
           </div>
@@ -471,12 +471,12 @@ export const Edit_Add_Address: FunctionComponent = () => {
                 className="absolute text-[16px] cursor-pointer top-[400px] left-[24px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
-                  Save Add
+                  บันทึก
                 </div>
               </button>
             </form>
             <div className="absolute top-[88px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">First name</div>
+              <div className="relative leading-[150%]">ชื่อ</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -485,7 +485,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="First name"
+                    placeholder="ชื่อ"
                     className=" text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -493,7 +493,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[88px] left-[342px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Last name</div>
+              <div className="relative leading-[150%]">นามสกุล</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -502,7 +502,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="Last name"
+                    placeholder="นามสกุล"
                     className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -511,7 +511,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
             </div>
             <div className="absolute top-[88px] left-[660px] flex flex-col items-start justify-start gap-[6px]">
               <div className="relative leading-[150%]">
-                <span>{`Phone`}</span>
+                <span>{`เบอร์โทร`}</span>
               </div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[302px] h-[49px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
@@ -521,7 +521,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     type="tel"
                     form="add"
-                    placeholder="0000000000"
+                    placeholder="เบอร์โทร"
                     pattern="[0-9]{10}"
                     className="text-[15px] w-[290px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
@@ -530,7 +530,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[272px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Country / Region</div>
+              <div className="relative leading-[150%]">จังหวัด</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
                   <select
@@ -562,7 +562,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[272px] left-[758px] flex flex-col items-start justify-start gap-[6px] ">
-              <div className="relative leading-[150%]">Zip Code</div>
+              <div className="relative leading-[150%]">รหัสไปรษณี</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
                   {zipCode.length > 0 ? (
@@ -581,14 +581,14 @@ export const Edit_Add_Address: FunctionComponent = () => {
                       disabled
                       className=" hover:cursor-not-allowed focus:outline-none cursor-pointer rounded-lg w-[160px] h-[45px]"
                     >
-                      <option>{"zip codes"}</option>
+                      <option>{"รหัสไปรษณี"}</option>
                     </select>
                   )}
                 </div>
               </div>
             </div>
             <div className="absolute top-[272px] left-[541px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Tambon</div>
+              <div className="relative leading-[150%]">ตำบล</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[170px] shrink-0">
                   {tambon.length > 0 ? (
@@ -626,7 +626,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[272px] left-[280px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">States</div>
+              <div className="relative leading-[150%]">อำเภอ</div>
               <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start gap-[10px] text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="relative left-[5px] leading-[130%] inline-block w-[200px] shrink-0">
                   {ampher.length > 0 ? (
@@ -668,7 +668,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
               </div>
             </div>
             <div className="absolute top-[180px] left-[24px] flex flex-col items-start justify-start gap-[6px]">
-              <div className="relative leading-[150%]">Street Address</div>
+              <div className="relative leading-[150%]">ที่อยู่</div>
               <div className="relative rounded-md bg-gray-scale-white box-border w-[936px] h-[49px] text-base border-[1px] border-solid border-gray-scale-gray-100">
                 <div className="absolute top-[0px] left-[5px] leading-[130%]">
                   <input
@@ -677,7 +677,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
                     }
                     form="add"
                     type="text"
-                    placeholder="Street Address"
+                    placeholder="ที่อยู่"
                     className="text-[15px] w-[923px] rounded-lg h-[45px] bg-transparent focus:outline-none"
                     required
                   />
@@ -686,7 +686,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
             </div>
             <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
               <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-                Shipping Address
+                ที่อยู่จัดส่ง
               </div>
             </div>
           </div>

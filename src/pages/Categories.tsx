@@ -42,7 +42,7 @@ const Categories: FunctionComponent = () => {
   const cookie = new Cookies();
   const [openSignIn, setOpenSignIn] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [sortBy, setSortby] = useState<string | null>(null);
+  const [sortBy, setSortby] = useState<string | null>("sortmin");
   const [sortRating, setSortRating] = useState<number | null>(null);
   const [sortPrice, setSortPrice] = useState<number>(0);
   const [valueSlider, setValueSlider] = useState<number>(0);
@@ -197,7 +197,7 @@ const Categories: FunctionComponent = () => {
                 <div className="flex flex-col items-start justify-start text-sm pb-10">
                   <div className="w-[312px] flex flex-row items-center justify-between pt-0 px-0 pb-5 box-border text-xl">
                     <div className="relative leading-[150%] font-medium">
-                      All Categories
+                      หมวดหมู่
                     </div>
                     <img
                       className="relative w-3.5 h-2"
@@ -267,7 +267,7 @@ const Categories: FunctionComponent = () => {
                     ]}
                   />
                   <div className="relative text-sm leading-[150%] text-gray-scale-gray-700">
-                    <span>Price:</span>
+                    <span>ราคา :</span>
                     <span className="font-medium text-gray-scale-gray-900">
                       {" "}
                       0 — 300
@@ -278,7 +278,7 @@ const Categories: FunctionComponent = () => {
                 <div className="flex flex-col items-start justify-start text-sm">
                   <div className="bg-gray-scale-white w-[312px] flex flex-row items-center justify-between py-5 px-0 box-border text-xl">
                     <div className="relative leading-[150%] font-medium">
-                      Rating
+                      รีวิว
                     </div>
                     <img
                       className="relative w-3.5 h-2"
@@ -310,7 +310,7 @@ const Categories: FunctionComponent = () => {
                     </div>
                   </div>
                   <span className="font-medium text-gray-scale-gray-900 flex gap-3">
-                    <span>Rating: </span>
+                    <span>คะแนน : </span>
                     <Rating
                       size="small"
                       value={5}
@@ -433,7 +433,7 @@ const Categories: FunctionComponent = () => {
             <div className="absolute top-[0px] left-[20px] w-[1617px] h-[45px] text-gray-scale-white">
               <div className="absolute top-[0px] left-[0px] rounded-24xl bg-branding-success flex flex-row items-center justify-center py-3.5 px-8 gap-[12px]">
                 <div className="relative leading-[120%] font-semibold">
-                  Filter
+                  ตัวกรอง
                 </div>
                 <img
                   className="relative w-[21.5px] h-[18.5px]"
@@ -442,17 +442,17 @@ const Categories: FunctionComponent = () => {
                 />
               </div>
               <div className="relative top-[2px] left-[376px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
-                <div className="relative leading-[150%]">Sort by:</div>
+                <div className="relative leading-[150%]">เรียงตาม :</div>
 
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                  <InputLabel id="demo-select-small-label">Sort by</InputLabel>
+                  <InputLabel id="demo-select-small-label">เรียงตาม</InputLabel>
                   <Select
-                    value={sortBy ? sortBy : ""}
+                    value={sortBy ? sortBy : "sortmin"}
                     onChange={handleChangeSortBy}
                     label="Sort by"
                   >
-                    <MenuItem value={"Latest"}>Latest</MenuItem>
-                    <MenuItem value={"sortmin"}>Sort a-z</MenuItem>
+                    <MenuItem value={"Latest"}>ล่าสุด</MenuItem>
+                    <MenuItem value={"sortmin"} selected>ตามตัวอัษร A-Z</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -468,7 +468,7 @@ const Categories: FunctionComponent = () => {
                 </span>
                 <span className="leading-[150%] text-gray-scale-gray-600">
                   <span>{` `}</span>
-                  <span>Results Found</span>
+                  <span>รายการ</span>
                 </span>
               </div>
             </div>

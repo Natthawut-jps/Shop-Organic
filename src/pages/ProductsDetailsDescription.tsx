@@ -192,7 +192,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
             </div>
             <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-scale-gray-900">
               <div className="relative leading-[120%] font-semibold">
-                Related Products
+                สินค้าที่เกี่ยวข้อง
               </div>
             </div>
           </div>
@@ -296,7 +296,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                 <div className="flex flex-col items-start justify-start gap-[16px]">
                   <div className="w-[648px] flex flex-row items-center justify-between">
                     <div className="flex flex-row items-center justify-start gap-[8px]">
-                      <div className="relative leading-[150%]">Brand:</div>
+                      <div className="relative leading-[150%]">แบรนด์ :</div>
                       <div className="relative w-[120px] h-14 text-smi text-dimgray font-dancing-script">
                         <img
                           className=" relative top-[12px] max-w-full"
@@ -306,7 +306,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                       </div>
                     </div>
                     <div className="flex flex-row items-center justify-start gap-[10px]">
-                      <div className="relative leading-[150%]">Share item:</div>
+                      <div className="relative leading-[150%]">แชร์ :</div>
                       <div className="flex flex-row items-start justify-start gap-[5px]">
                         <a href="https://www.facebook.com/">
                           <img
@@ -346,7 +346,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                       className=" cursor-pointer rounded-24xl bg-red-500 w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white"
                     >
                       <div className="relative leading-[120%] font-semibold">
-                        Remove
+                        ลบออกจากตะกร้า
                       </div>
                       <img
                         className="relative w-[16.3px] h-[16.3px]"
@@ -361,7 +361,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                         onClose={() => setSnackbar(false)}
                       >
                         <Alert severity="success">
-                          Add to Cart successfully
+                          เพิ่มสินค้าแล้ว
                         </Alert>
                       </Snackbar>
                     </div>
@@ -380,7 +380,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                       className=" cursor-pointer rounded-24xl bg-branding-success w-[447px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white"
                     >
                       <div className="relative leading-[120%] font-semibold">
-                        Add to Cart
+                        เพิ่มลงตะกร้า
                       </div>
                       <img
                         className="relative w-[16.3px] h-[16.3px]"
@@ -435,7 +435,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
                 <div className="flex flex-col items-start justify-start gap-[12px]">
                   <div className="flex flex-row items-start justify-start gap-[6px]">
                     <div className="relative leading-[150%] font-medium">
-                      Category:
+                      หมวดหมู่ :
                     </div>
                     <div className="relative leading-[150%] text-gray-scale-gray-500">
                       {productDetail?.categories}
@@ -454,7 +454,7 @@ const ProductsDetailsDescription: FunctionComponent = () => {
               <div className="absolute top-[0px] left-[0px] bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-start justify-start py-0 px-[689px] text-base">
                 <div className="bg-gray-scale-white shadow-[0px_-2px_0px_#20b526_inset] flex flex-row items-start justify-start p-4 text-gray-scale-gray-900">
                   <div className="relative leading-[150%] font-medium">
-                    Descriptions
+                    รายละเอียด 
                   </div>
                 </div>
               </div>

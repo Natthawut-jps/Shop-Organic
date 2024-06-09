@@ -23,23 +23,26 @@ body {
     border-radius: 20px;
   }
   .scroll-checkout::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
+    z-index: 50;
   }
   .scroll-checkout::-webkit-scrollbar-track {
     background-color: transparent;
+    z-index: 50;
   }
   .scroll-checkout::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
+    z-index: 50;
   }
   .scroll-checkBill::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
   }
   .scroll-checkBill::-webkit-scrollbar-track {
     background-color: transparent;
   }
   .scroll-checkBill::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
   }
 }

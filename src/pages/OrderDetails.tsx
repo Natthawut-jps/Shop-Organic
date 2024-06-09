@@ -61,18 +61,18 @@ interface orderDetail_Type {
 }
 const OrderDetails: FunctionComponent = () => {
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
   ];
   const { Detail, order_id } = useParams();
   const stepLabel = [
@@ -195,16 +195,16 @@ const OrderDetails: FunctionComponent = () => {
           <div className=" relative top-[0px] left-[0px] w-[965px] h-9 text-xs text-gray-scale-gray-700">
             <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[965px] h-9" />
             <div className="absolute top-[12px] left-[20px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Product
+              สินค้า
             </div>
             <div className="absolute top-[12px] left-[424px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Price
+              ราคา
             </div>
             <div className="absolute top-[12px] left-[593px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Quantity
+              จำนวน
             </div>
             <div className="absolute top-[12px] left-[784px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Subtotal
+              รวม
             </div>
           </div>
           <div className=" grid grid-cols-1 justify-items-center items-center">
@@ -274,7 +274,7 @@ const OrderDetails: FunctionComponent = () => {
           <div className="flex flex-row items-start justify-start py-[18px] px-5 gap-[20px]">
             <div className="flex flex-col items-start justify-start gap-[6px]">
               <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Order ID:
+                หมายเลขคำสั่งซื้อ
               </div>
               <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-20">
                 #{orderView?.id}
@@ -283,9 +283,9 @@ const OrderDetails: FunctionComponent = () => {
             <img className="relative w-px h-10" alt="" src="/img/line-20.svg" />
             <div className="flex flex-col items-start justify-start gap-[6px]">
               <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Payment Method:
+                วิธีชำระเงิน
               </div>
-              <div className="relative text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-32">
+              <div className="relative text-[12px] leading-[150%] text-gray-scale-gray-900 inline-block w-32">
                 {orderView?.payment_menthod}
               </div>
             </div>
@@ -293,21 +293,21 @@ const OrderDetails: FunctionComponent = () => {
           <div className="relative box-border w-[289px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
           <div className="flex flex-col items-start justify-start py-[18px] px-5 gap-[1px] text-sm text-gray-scale-gray-600">
             <div className="w-[248px] flex flex-row items-center justify-between pt-0 px-0 pb-3 box-border">
-              <div className="relative leading-[150%]">Subtotal:</div>
+              <div className="relative leading-[150%]">รวม</div>
               <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
                 ฿{orderView ? orderView.amount_total - 50 : 0}
               </div>
             </div>
             <div className="relative box-border w-[249px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
             <div className="w-[248px] flex flex-row items-center justify-between py-3 px-0 box-border">
-              <div className="relative leading-[150%]">Shipping</div>
+              <div className="relative leading-[150%]">ค่าจัดส่ง</div>
               <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
                 ฿50.00
               </div>
             </div>
             <div className="relative box-border w-[249px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
             <div className="w-[248px] flex flex-row items-center justify-between pt-3 px-0 pb-0 box-border text-lg text-gray-scale-gray-900">
-              <div className="relative leading-[150%]">Total</div>
+              <div className="relative leading-[150%]">ทั้งหมด</div>
               <div className="relative leading-[150%] font-semibold text-branding-success-dark">
                 ฿{orderView?.amount_total}
               </div>
@@ -323,7 +323,7 @@ const OrderDetails: FunctionComponent = () => {
             </div>
             <div className=" relative top-[100px] left-[0px] flex flex-col items-start justify-start gap-[4px] text-xs">
               <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium">
-                Phone
+                เบอร์โทร
               </div>
               <div className="relative text-sm break-words leading-[150%] text-gray-scale-gray-900 inline-block w-[590px]">
                 {addressActive?.phone}
@@ -333,7 +333,7 @@ const OrderDetails: FunctionComponent = () => {
               {`${addressActive?.first_name} ${addressActive?.last_name}`}
             </div>
             <div className="absolute top-[0px] left-[20px] tracking-[0.03em] leading-[100%] uppercase font-medium">
-              Shipping Address
+              ที่อยู่จัดส่ง
             </div>
             <div className="absolute top-[31.5px] left-[0px] box-border w-[620px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
           </div>
@@ -341,7 +341,7 @@ const OrderDetails: FunctionComponent = () => {
         <div className="absolute top-[0px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[420px] text-gray-scale-gray-700 w-[935px]">
           <div className="flex flex-row items-center justify-start gap-[8px]">
             <div className="relative text-xl leading-[150%] font-medium text-gray-scale-gray-900">
-              Order Details
+              รายละเอียดคำสั่งซื้อ
             </div>
             <div className="relative leading-[150%]">•</div>
             <div className="relative leading-[150%]">
@@ -349,13 +349,14 @@ const OrderDetails: FunctionComponent = () => {
                 months[
                   new Date(orderView ? orderView.createdAt : "").getMonth()
                 ]
-              }, ${new Date(
-                orderView ? orderView.createdAt : ""
-              ).getFullYear()}`}
+              }, ${
+                new Date(orderView ? orderView.createdAt : "").getFullYear() +
+                543
+              }`}
             </div>
             <div className="relative leading-[150%]">•</div>
             <div className="relative leading-[150%]">
-              {orderView?.quantity} Products
+              {orderView?.quantity} รายการ
             </div>
           </div>
           <Dialog
@@ -380,9 +381,9 @@ const OrderDetails: FunctionComponent = () => {
           {orderView && orderView.status === 9 ? null : (
             <div
               onClick={handleClickOpen}
-              className=" cursor-pointer no-underline hover:text-branding-error/80 left-[85px] relative text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
+              className=" cursor-pointer no-underline hover:text-branding-error/80 left-[0px] relative text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
             >
-              Cancle
+              ยกเลิกคำสั่งซื้อ
             </div>
           )}
         </div>

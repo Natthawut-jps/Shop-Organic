@@ -87,7 +87,7 @@ const UserDashboard: FunctionComponent = () => {
               (a: order_Type, b: order_Type) =>
                 new Date(b.createdAt).getTime() -
                 new Date(a.createdAt).getTime()
-            )
+            ).slice(0,10)
           );
         }
       });
@@ -101,7 +101,7 @@ const UserDashboard: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="relative bg-gray-scale-white w-full h-[1663px] overflow-hidden text-left text-base text-gray-scale-gray-900 font-caps-lock-small-caps-lock">
+    <div className="relative bg-gray-scale-white w-full h-[1793px] overflow-hidden text-left text-base text-gray-scale-gray-900 font-caps-lock-small-caps-lock">
       <Header />
       <Breadcrumbs
         categoies={undefined}
@@ -136,7 +136,7 @@ const UserDashboard: FunctionComponent = () => {
       </div>
 
       <div className="absolute top-[649px] left-[400px] w-[984px] h-[404px] text-xs text-gray-scale-gray-700">
-        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[404px] border-[1px] border-solid border-gray-scale-gray-100" />
+        <div className="absolute top-[0px] left-[0px] rounded-lg bg-gray-scale-white box-border w-[984px] h-[604px] border-[1px] border-solid border-gray-scale-gray-100" />
         <div className="absolute top-[62px] left-[0px] w-[984px] h-9 text-[13px]">
           <div className="absolute top-[0px] left-[0px] bg-gray-scale-gray-50 w-[984px] h-9" />
           <div className="absolute top-[12px] left-[24px] tracking-[0.03em] leading-[100%] uppercase font-medium">

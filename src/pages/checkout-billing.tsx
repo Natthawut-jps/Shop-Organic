@@ -65,9 +65,9 @@ const Checkout_Bill: FunctionComponent = () => {
         <div className="absolute top-[300px] left-[850px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start p-6 gap-[24px] border-[1px] border-solid border-gray-scale-gray-100">
           <div className="flex flex-col items-start justify-start gap-[12px]">
             <div className="relative text-xl leading-[150%] font-medium">
-              Order Summery
+              สรุปคำสั่งซื้อ
             </div>
-            <div className="scroll-checkBill overflow-auto h-[250px] w-[400px]">
+            <div className="scroll-checkBill overflow-auto h-[250px] w-[400px] space-y-2">
               {state.order_list.map((item, index) => (
                 <div
                   key={index}
@@ -96,21 +96,21 @@ const Checkout_Bill: FunctionComponent = () => {
             </div>
             <div className="flex flex-col items-start justify-start gap-[1px] text-gray-scale-gray-700">
               <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between py-3 px-0 box-border">
-                <div className="relative leading-[150%]">Subtotal:</div>
+                <div className="relative leading-[150%]">รวม:</div>
                 <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
                   ฿{priceSum}
                 </div>
               </div>
               <div className="relative box-border w-[377px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
               <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between py-3 px-0 box-border">
-                <div className="relative leading-[150%]">Shipping:</div>
+                <div className="relative leading-[150%]">ค่าจัดส่ง:</div>
                 <div className="relative leading-[150%] font-medium text-gray-scale-gray-900">
                   ฿50.00
                 </div>
               </div>
               <div className="relative box-border w-[377px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
               <div className="bg-gray-scale-white w-[376px] flex flex-row items-center justify-between pt-3 px-0 pb-0 box-border text-base">
-                <div className="relative leading-[150%]">Total:</div>
+                <div className="relative leading-[150%]">ทั้งหมด:</div>
                 <div className="relative text-[18px] leading-[120%] font-semibold text-gray-scale-gray-900">
                   ฿{(priceSum + 50).toFixed(2)}
                 </div>
@@ -119,7 +119,7 @@ const Checkout_Bill: FunctionComponent = () => {
           </div>
           <div className="relative w-[173px] h-[100px] text-xl">
             <div className="absolute top-[0px] left-[0px] leading-[150%] font-medium">
-              Payment Method
+              วิธีชำระเงิน
             </div>
             <div className="absolute top-[46px] left-[0px] flex flex-col items-start justify-start gap-[10px] text-sm text-gray-scale-gray-700">
               <div className="flex flex-row items-center justify-start gap-[6px]">
@@ -166,7 +166,6 @@ const Checkout_Bill: FunctionComponent = () => {
               <p>
                 <strong>ชื่อบัญชี:&nbsp;&nbsp;</strong>นายณัฐวุฒิ จำปาแสง
               </p>
-              <p>description: shop organic healpthy</p>
             </div>
           </div>
           <div className="absolute top-[5px] left-[0px] text-5xl leading-[150%] font-medium">

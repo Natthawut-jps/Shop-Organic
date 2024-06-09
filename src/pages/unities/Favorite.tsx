@@ -188,9 +188,9 @@ export const Favorite: FunctionComponent<open> = (props) => {
                                                 rating: item.rating,
                                                 imgURL: item.imgURL,
                                             })
-                                        }} className=" cursor-pointer rounded-xl bg-branding-success w-[200px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
+                                        }} className=" cursor-pointer rounded-xl bg-branding-success w-[250px] flex   flex-row items-center justify-center py-4 px-10 box-border gap-[16px] text-left text-gray-scale-white">
                                             <div className="relative leading-[120%] font-semibold">
-                                                Add to Cart
+                                                เพิ่มลงตะกร้า
                                             </div>
                                             <img
                                                 className="relative w-[16.3px] h-[16.3px]"

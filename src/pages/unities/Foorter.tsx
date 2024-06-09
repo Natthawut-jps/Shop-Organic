@@ -115,7 +115,7 @@ export const Foorter = () => {
             </div>
             <div className="absolute h-[97.62%] w-[7.61%] top-[0%] right-[56.49%] bottom-[2.38%] left-[35.9%] flex flex-col items-start justify-start gap-[20px]">
               <div className=" text-white no-underline relative leading-[150%] font-medium">
-                My Account
+                บัญชีของฉัน
               </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
                 <div
@@ -126,7 +126,7 @@ export const Foorter = () => {
                       : setOpenSignIn(true);
                   }}
                 >
-                  Dashboad
+                  หน้าหลัก
                 </div>
                 <div
                   className="relative leading-[150%] cursor-pointer"
@@ -136,7 +136,7 @@ export const Foorter = () => {
                       : setOpenSignIn(true);
                   }}
                 >
-                  Order History
+                  ประวัติการสั่งซื้อ
                 </div>
                 <div
                   className="relative leading-[150%] cursor-pointer"
@@ -146,7 +146,7 @@ export const Foorter = () => {
                       : setOpenSignIn(true);
                   }}
                 >
-                  Address
+                  ที่อยู่
                 </div>
                 <div
                   className="relative leading-[150%] cursor-pointer"
@@ -156,51 +156,51 @@ export const Foorter = () => {
                       : setOpenSignIn(true);
                   }}
                 >
-                  Setting
+                  ตั้งค่า
                 </div>
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[10.42%] top-[0%] right-[35.74%] bottom-[2.38%] left-[53.85%] flex flex-col items-start justify-start gap-[20px]">
               <div className=" text-white no-underline relative leading-[150%] font-medium">
-                Helps
+                ช่วยเหลือ
               </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
                 <a
                   href="/contact"
                   className="relative leading-[150%] text-gray-scale-gray-400 no-underline"
                 >
-                  Contact Us
+                  ติดต่อเรา
                 </a>
                 <a
                   href="/about"
                   className="relative leading-[150%] text-gray-scale-gray-400 no-underline"
                 >
-                  About Us
+                  เกี่ยวกับเรา
                 </a>
               </div>
             </div>
-            <div className="absolute h-[97.62%] w-[6.57%] top-[0%] right-[21.55%] bottom-[2.38%] left-[71.88%] flex flex-col items-start justify-start gap-[20px]">
+            <div className="absolute h-[97.62%] w-[10.57%] top-[0%] right-[21.55%] bottom-[2.38%] left-[71.88%] flex flex-col items-start justify-start gap-[20px]">
               <div className="text-white no-underline relative leading-[150%] font-medium">
-                Product
+                สินค้าของเรา
               </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
                 <div
                   className="relative leading-[150%] cursor-pointer"
                   onClick={() => window.scroll(0, 1350)}
                 >
-                  Popular
+                  สินค้ายอดนิยม
                 </div>
                 <div
                   className="relative leading-[150%] cursor-pointer"
                   onClick={() => window.scroll(0, 2850)}
                 >
-                  Latest New
+                  สินค้าใหม่ล่าสุด
                 </div>
               </div>
             </div>
             <div className="absolute h-[97.62%] w-[10.26%] top-[0%] right-[0%] bottom-[2.38%] left-[89.74%] flex flex-col items-start justify-start gap-[20px]">
               <div className=" text-white no-underline relative leading-[150%] font-medium">
-                Categories New
+                หมวดหมู่
               </div>
               <div className="flex flex-col items-start justify-start gap-[12px] text-sm text-gray-scale-gray-400">
                 {categories.slice(-4).map((item, index) => (
