@@ -140,7 +140,8 @@ export const Header: FunctionComponent = () => {
                 src="/img/map-pin.svg"
               />
               <div className="relative leading-[130%]">
-                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน 42000, ประเทศไทย
+                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน
+                42000, ประเทศไทย
               </div>
             </div>
           ) : (
@@ -151,7 +152,8 @@ export const Header: FunctionComponent = () => {
                 src="/img/map-pin.svg"
               />
               <div className="relative leading-[130%]">
-                Store Location: Lei- 42000, District, Thailand
+                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน
+                42000, ประเทศไทย
               </div>
             </div>
           )}

@@ -45,4 +45,14 @@ body {
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 20px;
   }
+  .scroll-description::-webkit-scrollbar {
+    width: 5px;
+  }
+  .scroll-description::-webkit-scrollbar-track {
+    background-color: transparent;;
+  }
+  .scroll-description::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+  }
 }
