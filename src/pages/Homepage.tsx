@@ -32,18 +32,18 @@ export const Homepage: FunctionComponent = () => {
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
 
   const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "ม.ค.",
+    "ก.พ.",
+    "มี.ค.",
+    "เม.ย.",
+    "พ.ค.",
+    "มิ.ย.",
+    "ก.ค.",
+    "ส.ค.",
+    "ก.ย.",
+    "ต.ค.",
+    "พ.ย.",
+    "ธ.ค.",
   ];
   // productItem
   const Product = async () => {
@@ -90,27 +90,27 @@ export const Homepage: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className="relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
+    <div className=" sm:h-[6980px] relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
       {/* SigIn User */}
       <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
       {/* header template */}
       <Header />
       {/* Sale up to */}
-      <div className="absolute top-[218px] sm:top-0 left-[50px] sm:left-0 w-[1980px] sm:w-full h-[600px] sm:h-[1000px] overflow-hidden text-gray-scale-white">
-        <div className=" sm:absolute text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[350px] sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center"></div>
-        <div className="absolute top-[0px] sm:top-[330px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] sm:w-full h-72 sm:h-[200px] text-gray-100">
-          <div className="absolute top-[0px] left-[0px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
+      <div className=" sm:w-full sm:p-0 sm:m-0 sm:top-3 absolute top-[218px] left-[50px] sm:left-0 w-[1980px] h-[600px] sm:h-fit overflow-hidden text-gray-scale-white">
+        <div className=" sm:relative sm:top-[27px] text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[300px]  sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center" />
+        <div className=" sm:relative sm:w-full absolute top-[0px] sm:top-[22px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] h-72 text-gray-100">
+          <div className=" sm:relative absolute top-[0px] left-[0px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
             <img src="/img/banner_2.png" alt="" />
           </div>
         </div>
-        <div className=" text-white absolute top-[312px] sm:top-[550px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
+        <div className=" sm:relative sm:top-[28px] text-white absolute top-[312px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
           <div className="absolute top-[0px] left-[0px] flex flex-col items-center justify-start gap-[32px]">
             <img src="/img/banner_3.png" alt="" />
           </div>
         </div>
       </div>
       {/* Free Shipping */}
-      <div className="absolute top-[840px] left-[50px] rounded-lg bg-gray-scale-white shadow-[0px_8px_40px_rgba(0,_38,_3,_0.08)] w-[1500px] flex flex-row items-center justify-between p-10 box-border text-base">
+      <div className=" sm:w-[560px] sm:top-[860px] sm:drop-shadow-sm sm:left-0 sm:grid sm:grid-rows-3 sm:items-center sm:justify-items-start sm:text-[14px] absolute top-[840px] left-[50px] rounded-lg bg-gray-scale-white shadow-[0px_8px_40px_rgba(0,_38,_3,_0.08)] w-[1500px] flex flex-row items-center justify-between p-10 box-border text-base">
         <div className="flex flex-row items-center justify-center gap-[16px]">
           <img
             className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
@@ -133,7 +133,7 @@ export const Homepage: FunctionComponent = () => {
             src="/img/headphones-1.svg"
           />
           <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[350px]">
+            <div className=" sm:w-[200px] relative leading-[120%] font-semibold inline-block w-[350px]">
               การสนับสนุนที่ยอดเยี่ยมตลอด 24 ชั่วโมงทุกวัน
             </div>
             <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
@@ -203,16 +203,16 @@ export const Homepage: FunctionComponent = () => {
         </div>
       </div>
       {/* Categories */}
-      <div className=" relative top-[1028px] gap-[10px] flex flex-row justify-start items-start  left-[130px] w-[1320px] h-[320px] text-center text-lg">
+      <div className=" sm:h-[100px] sm:top-[1150px] sm:grid sm:grid-cols-2 sm:w-fit sm:gap-2 sm:left-0 sm:mx-[40px] relative top-[1028px] gap-[10px] flex flex-row justify-start items-start left-[130px] w-[1320px] h-[320px] text-center text-lg">
         {categories.map((item, index) => (
           <Link
             key={index}
             to={`/product/categories/${item.category_name}/1`}
             state={{ status: true }}
-            className=" relative top-[69px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black"
+            className=" sm:pb-0 sm:p-2 relative top-[69px] rounded-8xs bg-gray-scale-white flex flex-col items-center justify-center border-[1px] border-solid pt-4 px-0 pb-6 gap-[16px] border-gray-scale-gray-100 hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:text-branding-success-dark hover:translate-x-1 hover:border-branding-success-dark no-underline text-black"
           >
             <img
-              className="relative w-[190px] h-[130px] object-cover"
+              className=" sm:w-[150px] sm:h-[90px] sm:text-[14px] relative w-[190px] h-[130px] object-cover"
               alt=""
               src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
             />
@@ -222,19 +222,17 @@ export const Homepage: FunctionComponent = () => {
           </Link>
         ))}
         <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
-          <div className="relative leading-[120%] font-semibold">
-            หมวดหมู่
-          </div>
+          <div className="relative leading-[120%] font-semibold">หมวดหมู่</div>
         </div>
       </div>
       {/* Popular Product */}
-      <div className="absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
+      <div className=" sm:w-[560px] sm:top-[1600px] sm:left-0 sm:mx-5 sm:box-border sm:justify-center absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
         <div className="absolute top-[-10px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-100">
           <div className="relative leading-[120%] font-semibold">
             สินค้ายอดนิยม
           </div>
         </div>
-        <div className=" grid grid-cols-5 gap-x-3 gap-y-1 box-border">
+        <div className=" sm:gap-3 sm:grid-cols-2 sm:justify-center sm:w-fit sm:relative grid grid-cols-5 gap-x-3 gap-y-1 box-border">
           {popularProduct &&
             popularProduct
               .sort((a, b) => a.rating - b.rating)
@@ -242,7 +240,7 @@ export const Homepage: FunctionComponent = () => {
               .map((item: datatypesProduct) => (
                 <div
                   key={item.id}
-                  className="hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100"
+                  className=" sm:w-[190px] sm:h-[220px] hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] hover:border-branding-success-dark relative top-[59px] left-[0px] bg-gray-scale-white box-border w-[265px] h-[328px] border-[1px] border-solid border-gray-scale-gray-100"
                 >
                   <Link
                     to={`/product/detail/${item.categories}/${item.name.replace(
@@ -252,16 +250,16 @@ export const Homepage: FunctionComponent = () => {
                     state={{ product: item, status: true }}
                     className="text-gray-100 hover:text-branding-success-dark"
                   >
-                    <div className="absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
+                    <div className=" absolute top-[0%] left-[0%] flex flex-col items-start justify-start p-[5px] box-border">
                       <img
-                        className="relative w-[254px] h-[230px] object-cover"
+                        className=" sm:w-fit sm:h-[120px] relative w-[254px] h-[230px] object-cover"
                         alt=""
                         src={`${import.meta.env.VITE_BASE_API}/img/${
                           item.imgURL
                         }`}
                       />
                     </div>
-                    <div className="absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
+                    <div className=" sm:top-[65%] absolute h-[26.52%] w-[99.62%] top-[73.32%] right-[0.38%] bottom-[0.15%] left-[0%] flex flex-col items-start justify-center p-3 box-border gap-[6px]">
                       <div className="flex flex-col items-start justify-start">
                         <div className="relative leading-[150%] inline-block w-60">
                           {item.name}
@@ -315,11 +313,11 @@ export const Homepage: FunctionComponent = () => {
         </div>
       </div>
       {/* latest New */}
-      <div className="absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
+      <div className=" sm:[560px] sm:top-[3950px] sm:left-0 sm:mx-3 absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
         <div className="absolute top-[0px] left-[563px] text-13xl leading-[120%] font-semibold">
           ใหม่ล่าสุด
         </div>
-        <div className=" grid grid-cols-3 gap-x-5">
+        <div className=" sm:grid-cols-1 sm:gap-5 grid grid-cols-3 gap-x-5">
           {popularProduct
             .sort(
               (a, b) =>
@@ -332,7 +330,7 @@ export const Homepage: FunctionComponent = () => {
                 key={item.id}
                 className="relative top-[70px] left-[0px] shadow-[0px_20px_50px_rgba(0,_0,_0,_0.08)] flex flex-col items-start justify-start"
               >
-                <div className="relative w-[424px] h-[324px]">
+                <div className=" sm:w-[406px] relative w-[424px] h-[324px]">
                   <img
                     className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
                     alt=""
@@ -378,7 +376,7 @@ export const Homepage: FunctionComponent = () => {
                     className=" hover:translate-x-3 no-underline rounded-24xl flex flex-row items-center justify-start gap-[12px] text-base text-branding-success"
                   >
                     <div className="relative leading-[120%] font-semibold">
-                      Read More
+                      อ่านเพิ่มเติม
                     </div>
                     <img
                       className="relative w-[16.5px] h-[13.55px]"
@@ -391,8 +389,8 @@ export const Homepage: FunctionComponent = () => {
             ))}
         </div>
       </div>
-      {/* Header Follow us on Instagram */}
-      <div className="absolute top-[3500px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
+      {/* Header image*/}
+      <div className="sm:top-[4200px] sm:text-[14px] absolute top-[3500px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
         <img
           className="relative w-[81.58px] h-8"
           alt=""
@@ -419,57 +417,59 @@ export const Homepage: FunctionComponent = () => {
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img className="relative w-[95.5px] h-8" alt="" src="/img/group1.svg" />
       </div>
-      {/* Follow us on Instagram */}
-      <div className="absolute top-[3651px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
+      {/* Follow Our */}
+      <div className=" sm:w-[560px] sm:h-fit sm:top-[5520px] sm:left-0 sm:mx-3 absolute top-[3651px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
         <div className="absolute top-[0px] left-[560px] leading-[120%] font-semibold">
           ติดตามเรา
         </div>
-        <div>
-          <img
-            className="absolute top-[70px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
-            alt=""
-            src="/img/-instagram-post@2x.png"
-          />
-        </div>
-        <div>
-          <img
-            className="absolute top-[70px] left-[448px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
-            alt=""
-            src="/img/-instagram-post1@2x.png"
-          />
-        </div>
-        <div>
-          <img
-            className="absolute top-[70px] left-[672px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
-            alt=""
-            src="/img/-instagram-post2@2x.png"
-          />
-        </div>
-        <div>
-          <img
-            className="absolute top-[70px] left-[896px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
-            alt=""
-            src="/img/-instagram-post3@2x.png"
-          />
-        </div>
-        <div>
-          <img
-            className="absolute top-[70px] left-[1120px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
-            alt=""
-            src="/img/-instagram-post4@2x.png"
-          />
-        </div>
-        <div className="absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all">
-          <img
-            className="absolute top-[0px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover"
-            alt=""
-            src="/img/-instagram-post5@2x.png"
-          />
-          <img
-            className="absolute top-[84px] left-[84px] w-8 h-8 overflow-hidden"
-            alt=""
-            src="/img/icons.svg"
-          />
+        <div className=" sm:grid sm:grid-cols-2 sm:gap-2 sm:w-fit">
+          <div>
+            <img
+              className="sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
+              alt=""
+              src="/img/-instagram-post@2x.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[448px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
+              alt=""
+              src="/img/-instagram-post1@2x.png"
+            />
+          </div>
+          <div>
+            <img
+              className="sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[672px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
+              alt=""
+              src="/img/-instagram-post2@2x.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[896px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
+              alt=""
+              src="/img/-instagram-post3@2x.png"
+            />
+          </div>
+          <div>
+            <img
+              className=" sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[1120px] rounded-3xs w-[200px] h-[200px] object-cover hover:transition-all hover:translate-y-[-5px]"
+              alt=""
+              src="/img/-instagram-post4@2x.png"
+            />
+          </div>
+          <div className="sm:relative sm:top-[0px] sm:left-0 absolute top-[70px] left-[224px] w-[200px] h-[200px] hover:translate-y-[-5px] hover:transition-all">
+            <img
+              className="absolute top-[0px] left-[0px] rounded-3xs w-[200px] h-[200px] object-cover"
+              alt=""
+              src="/img/-instagram-post5@2x.png"
+            />
+            <img
+              className="absolute top-[84px] left-[84px] w-8 h-8 overflow-hidden"
+              alt=""
+              src="/img/icons.svg"
+            />
+          </div>
         </div>
       </div>
       {/* foorter template */}
