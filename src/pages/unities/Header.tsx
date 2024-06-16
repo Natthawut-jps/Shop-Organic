@@ -42,7 +42,7 @@ export const Header: FunctionComponent = () => {
   const [anchorElAccounting, setAnchorElAccounting] =
     useState<null | HTMLElement>(null);
   const [openBars, setOpenBar] = useState<boolean>(false);
-  const [openCollape, setOpenCollape] = useState<boolean>(true);
+  const [openCollape, setOpenCollape] = useState<boolean>(false);
   const { cartItems, favoriteItem } = CartContextProviders();
   const [Categries, setCategries] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -255,7 +255,7 @@ export const Header: FunctionComponent = () => {
                 </Menu>
               </div>
             ) : (
-              <div className=" sm:z-50 sm:absolute sm:top-4 sm:left-[280px] sm:justify-start sm:w-[200px] sm:text-start flex flex-row relative left-16 items-start justify-end w-[600px] gap-[4px] text-left">
+              <div className=" sm:z-50 sm:absolute sm:top-4 sm:left-[250px] sm:justify-start sm:w-[200px] sm:text-start flex flex-row relative left-16 items-start justify-end w-[600px] gap-[4px] text-left">
                 <div
                   onClick={() => setOpenSignIn(true)}
                   className=" sm:text-white sm:text-[12px] relative cursor-pointer leading-[130%] hover:text-black/80 hover:underline text-black text-[14px]"
@@ -288,22 +288,22 @@ export const Header: FunctionComponent = () => {
           </div>
           <div
             onClick={() => setOpenSearch(true)}
-            className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute sm:w-[67px] top-[15px] sm:left-[60px] sm:top-[13px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100 sm:border-none"
+            className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute sm:w-[60px] top-[15px] sm:left-[60px] sm:top-[13px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100 sm:border-none"
           >
-            <div className=" sm:p-0 sm:w-[67px] sm:pl-0 w-[500px] flex flex-row items-center justify-start py-3 pr-[18px] pl-4 box-border gap-[8px]">
+            <div className=" sm:p-0 sm:w-[60px] sm:pl-0 w-[500px] flex flex-row items-center justify-start py-3 pr-[18px] pl-4 box-border gap-[8px]">
               <FontAwesomeIcon
                 icon={faSistrix}
-                className=" relative w-5 h-5 overflow-hidden shrink-0 opacity-50"
+                className=" sm:h-4 sm:w-4 relative w-5 h-5 overflow-hidden shrink-0 opacity-50"
               />
-              <div className=" sm:w-[67px] sm:text-[14px] relative leading-[21px] inline-block w-[400px] shrink-0">
-                ค้นหา . . . . .
+              <div className=" sm:w-[50px] sm:text-[13px] relative leading-[21px] inline-block w-[400px] shrink-0">
+                ค้นหา . . .
               </div>
             </div>
           </div>
-          <div className="absolute top-[15px] left-[1429px] sm:left-[185px] sm:top-[5px] flex flex-row items-center justify-start gap-[16px] text-center text-3xs text-gray-scale-white sm:gap-[25px]">
+          <div className="absolute top-[15px] left-[1429px] sm:left-[165px] sm:top-[5px] flex flex-row items-center justify-start gap-[16px] text-center text-3xs text-gray-scale-white sm:gap-[20px]">
             <div
               onClick={() => setOpenFavorite(true)}
-              className="rounded-2xl cursor-pointer sm:text-[24px] text-[2.1875rem]"
+              className="rounded-2xl cursor-pointer sm:text-[23px] text-[2.1875rem]"
             >
               <Badge badgeContent={favoriteItem.length} color="error">
                 <FavoriteIcon
@@ -317,11 +317,11 @@ export const Header: FunctionComponent = () => {
               onClick={() => setOpenCart(true)}
               className=" hover:opacity-80 cursor-pointer flex flex-row items-center justify-start gap-[20px] text-black "
             >
-              <div className="relative w-[34px] h-[34px] sm:w-[22px]">
+              <div className="relative w-[34px] h-[34px] sm:w-[20px]">
                 <Badge badgeContent={quantitySum} color="primary">
                   <FontAwesomeIcon
                     icon={faShoppingCart}
-                    className="absolute top-[-8px] left-[0px] w-[30px] h-[34px] text-green-600 sm:w-[22px] sm:text-[#ffffff]/70 sm:relative sm:top-[2px]"
+                    className="absolute top-[-8px] left-[0px] w-[30px] h-[34px] text-green-600 sm:w-[21px] sm:text-[#ffffff]/70 sm:relative sm:top-[2px]"
                   />
                 </Badge>
               </div>
@@ -351,7 +351,7 @@ export const Header: FunctionComponent = () => {
             className=" hidden sm:block"
             sx={{
               "& .MuiDrawer-paper": {
-                width: "70%",
+                width: "80%",
                 bgcolor: "#666666",
                 color: "white",
               },
