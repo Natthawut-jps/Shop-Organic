@@ -2,7 +2,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { Dialog, DialogContent } from "@mui/material";
+import { Dialog, DialogContent, useMediaQuery, useTheme } from "@mui/material";
 import React, { FunctionComponent, useState } from "react";
 import instance from "./unities/axios_instance";
 
@@ -24,6 +24,8 @@ interface error {
   password: string;
 }
 export const SignUp: FunctionComponent<openSignUp> = (props) => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [uinfo, setUinfo] = useState<uinfo>({} as uinfo);
   const [err, setError] = useState<{ password: string; email: string }>(
     {} as error
@@ -74,7 +76,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
     }
     return errors;
   };
-  const handlfinish = async() => {
+  const handlfinish = async () => {
     try {
       await instance({
         method: "post",
@@ -86,7 +88,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
         },
       }).then((res) => {
         if (res.status === 200) {
-          return location.href = '/';
+          return (location.href = "/");
         }
       });
     } catch (error) {
@@ -97,12 +99,14 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
   return (
     <>
       <Dialog
+        fullScreen={fullScreen}
         maxWidth={"md"}
+        fullWidth={true}
         onClose={() => props.SignUp.setOpenSignUp(false)}
         open={props.SignUp.openSignUp}
       >
-        <DialogContent className="relative bg-gray-scale-white text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
-          <div className=" relative top-[0px] left-[0px] rounded-lg bg-gray-scale-white flex flex-col items-center justify-center pt-6 pb-8 gap-[20px]">
+        <DialogContent className=" relative bg-gray-scale-white text-left text-sm text-gray-scale-gray-900 font-body-small-body-small-400">
+          <div className="relative top-[0px] left-[0px] rounded-lg bg-gray-scale-white flex flex-col items-center justify-center pt-6 pb-8 gap-[20px]">
             <div className=" absolute box-border top-0 right-0">
               <FontAwesomeIcon
                 onClick={() => {
@@ -125,11 +129,11 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
             <div className="relative text-13xl leading-[120%] font-semibold">
               สมัครสมาชิก
             </div>
-            <div className="flex flex-col items-start justify-start gap-[16px] text-base text-gray-scale-gray-400">
-              <div className="flex flex-col items-start justify-start gap-[20px]">
-                <div className=" flex gap-5">
-                  <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[412px] pr-[5px]">
-                    <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
+            <div className=" w-full flex flex-col items-start justify-start gap-[16px] text-base text-gray-scale-gray-400">
+              <div className=" sm:w-full flex flex-col items-start justify-start gap-[20px]">
+                <div className="sm:grid sm:grid-cols-1 sm:w-full sm:relative flex gap-5">
+                  <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[25.5em] pr-[5px]">
+                    <div className=" sm:w-full relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                       <input
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setUinfo({ ...uinfo, first_name: e.target.value })
@@ -137,13 +141,13 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                         form="createAccount"
                         type="text"
                         placeholder="ชื่อ"
-                        className="text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[393px] h-[37px] shrink-0"
+                        className="text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[24em] sm:w-[90%] h-[37px] shrink-0"
                         required
                       />
                     </div>
                   </div>
-                  <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[412px]">
-                    <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
+                  <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[412px]">
+                    <div className=" sm:w-full relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                       <input
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                           setUinfo({ ...uinfo, last_name: e.target.value })
@@ -151,13 +155,13 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                         form="createAccount"
                         type="text"
                         placeholder="นามสกุล"
-                        className="text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[386px] h-[37px] shrink-0"
+                        className=" sm:w-[90%] text-[#373636] rounded-lg relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[380px] h-[37px] shrink-0"
                         required
                       />
                     </div>
                   </div>
                 </div>
-                <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
+                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
                   <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -166,7 +170,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       form="createAccount"
                       type="email"
                       placeholder="อีเมลล์"
-                      className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[824px] rounded-lg h-[37px] shrink-0"
+                      className=" sm:w-[90%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[817px] rounded-lg h-[37px] shrink-0"
                       required
                     />
                     <span className=" text-branding-error text-[11px] relative pl-6">
@@ -174,7 +178,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                     </span>
                   </div>
                 </div>
-                <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
+                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
                   <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -187,7 +191,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       type="password"
                       id="passwordNew"
                       placeholder="รหัสผ่าน"
-                      className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
+                      className=" sm:w-[78%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
                       required
                     />
                     <span className=" text-branding-error text-[10px] relative pl-6 ">
@@ -210,7 +214,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                     />
                   )}
                 </div>
-                <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
+                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100 w-[850px]">
                   <div className="relative leading-[130%] inline-block w-full h-[40px] shrink-0">
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -220,7 +224,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
                       type="password"
                       id="passwordConfirm"
                       placeholder="ยืนยันรหัสผ่าน"
-                      className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
+                      className=" sm:w-[78%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[20px] w-[780px] rounded-lg h-[37px] shrink-0"
                       required
                     />
                   </div>
@@ -259,7 +263,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
             <form id="createAccount" onSubmit={onSubmit}>
               <button
                 type="submit"
-                className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
+                className=" sm:w-full text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
                   สมัครสมาชิก

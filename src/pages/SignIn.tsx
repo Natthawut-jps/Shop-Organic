@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios, { AxiosResponse } from "axios";
 import GoogleButton from "react-google-button";
-import { Dialog, DialogContent } from "@mui/material";
+import { Dialog, DialogContent, useMediaQuery, useTheme } from "@mui/material";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -24,6 +24,8 @@ interface data {
 }
 
 export const SignIn: FunctionComponent<openSignIn> = (props) => {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [uinfo, setUinfo] = useState<data>({} as data);
   const [err, setErr] = useState<data>({} as data);
   const [incorrect, setIncorrect] = useState<boolean>(false);
@@ -39,34 +41,40 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
           }`,
         },
       }).then(async (res) => {
-        if(res.status === 200) {
+        if (res.status === 200) {
           await instance({
-            method: 'post',
-            url: '/public/register/google',
-            data: {email: res.data.email, password: res.data.sub, first_name: res.data.given_name,
-               last_name: res.data.family_name, imgURL: res.data.picture, accept: 1},
-            headers: {
-              "Content-Type": "application/json"
+            method: "post",
+            url: "/public/register/google",
+            data: {
+              email: res.data.email,
+              password: res.data.sub,
+              first_name: res.data.given_name,
+              last_name: res.data.family_name,
+              imgURL: res.data.picture,
+              accept: 1,
             },
-            responseType: 'json'
+            headers: {
+              "Content-Type": "application/json",
+            },
+            responseType: "json",
           }).then((res) => {
             if (res.status === 200) {
               const date = new Date();
               cookies.set("_ut", res.data._ut, {
                 expires: new Date(date.setMinutes(date.getMinutes() + 5)),
-                path: '/',
+                path: "/",
                 secure: true,
                 sameSite: "strict",
               });
               cookies.set("_ur", res.data._ur, {
                 expires: new Date(date.setDate(date.getDate() + 15)),
-                path: '/',
+                path: "/",
                 secure: true,
                 sameSite: "strict",
               });
-              return location.href = '/';
+              return (location.href = "/");
             }
-          })
+          });
         }
       });
     },
@@ -123,23 +131,24 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             secure: true,
             sameSite: "strict",
           });
-          return location.href = '/';
+          return (location.href = "/");
         }
       });
-    } catch(err) {
-      setIncorrect(true)
+    } catch (err) {
+      setIncorrect(true);
     }
   };
 
   return (
     <>
       <Dialog
+        fullScreen={fullScreen}
         fullWidth={true}
         onClose={() => props.SignIn.setOpenSignIn(false)}
         open={props.SignIn.openSignIn}
       >
         <DialogContent className="relative bg-gray-scale-white top-0 left-0 right-0 bottom-0 shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
-          <div className=" relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
+          <div className=" sm:px-0 relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
             <div className=" absolute box-border top-0 right-0">
               <FontAwesomeIcon
                 onClick={() => {
@@ -160,10 +169,10 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
               )}
               เข้าสู่ระบบ
             </div>
-            <div className="flex flex-col items-center justify-center gap-[16px] text-base text-gray-scale-gray-400">
-              <div className="flex flex-col items-start justify-start gap-[25px]">
-                <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
-                  <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
+            <div className=" sm:w-full flex flex-col items-center justify-center gap-[16px] text-base text-gray-scale-gray-400">
+              <div className=" sm:w-full flex flex-col items-start justify-start gap-[25px]">
+                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
+                  <div className=" sm:w-full relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
                     {err.email && (
                       <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
                         {err.email}
@@ -176,13 +185,13 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                       form="passwordEyeForm"
                       type="email"
                       placeholder="อีเมลล์"
-                      className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[424px] rounded-lg h-[37px] shrink-0"
+                      className=" sm:w-[90%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[424px] rounded-lg h-[37px] shrink-0"
                       required
                     />
                   </div>
                 </div>
-                <div className="rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100">
-                  <div className="relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
+                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100">
+                  <div className=" sm:w-full relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
                     {err.password && (
                       <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
                         {err.password}
@@ -190,13 +199,16 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                     )}
                     <input
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({ ...uinfo, password: e.target.value.replace(/\s/g, '').trim() })
+                        setUinfo({
+                          ...uinfo,
+                          password: e.target.value.replace(/\s/g, "").trim(),
+                        })
                       }
                       form="passwordEyeForm"
                       type="password"
                       id="passwordSignIn"
                       placeholder="รหัสผ่าน"
-                      className="text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[380px] h-[37px] rounded-lg shrink-0"
+                      className=" sm:w-[85%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[380px] h-[37px] rounded-lg shrink-0"
                       required
                     />
                   </div>
@@ -205,20 +217,20 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className=" cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
+                      className=" sm:right-[10px] cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
                     />
                   ) : (
                     <VisibilityOff
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className="cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
+                      className=" sm:right-[10px] cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
                     />
                   )}
                 </div>
               </div>
-              <div className="w-[472px] flex flex-row items-center justify-between text-sm text-gray-scale-gray-600">
-                <div className="flex flex-row items-center justify-center relative left-4 gap-[6px]"/>
+              <div className=" sm:w-full w-[472px] flex flex-row items-center justify-between text-sm text-gray-scale-gray-600">
+                <div className="flex flex-row items-center justify-center relative left-4 gap-[6px]" />
                 <Link
                   to={"/reset-password"}
                   reloadDocument
@@ -231,7 +243,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             <form id="passwordEyeForm" onSubmit={handleSubmit}>
               <button
                 type="submit"
-                className="text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
+                className=" sm:w-full text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
               >
                 <div className="relative leading-[120%] font-semibold">
                   เข้าสู่ระบบ
@@ -243,7 +255,11 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
             </div>
             <div>
               <div>
-                <GoogleButton type="light" label="เข้าสู่ระบบด้วย Google" onClick={() => LoginGoogle()} />
+                <GoogleButton
+                  type="light"
+                  label="เข้าสู่ระบบด้วย Google"
+                  onClick={() => LoginGoogle()}
+                />
               </div>
             </div>
           </div>
