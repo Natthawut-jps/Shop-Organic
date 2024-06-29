@@ -200,7 +200,7 @@ export const Cart: FunctionComponent<open> = (props) => {
       console.log(error);
     }
   };
- 
+
   // get CartItem
   async function CartItem() {
     const { data } = await instance_auth({
@@ -265,7 +265,9 @@ export const Cart: FunctionComponent<open> = (props) => {
                     <img
                       className=" relative  w-[100px] h-[100px] top-0 left-0"
                       alt="Image"
-                      src="/img/product-image@2x.png"
+                      src={`${import.meta.env.VITE_BASE_API}/img/${
+                        item.imgURL
+                      }`}
                     />
                   </div>
                   <div className=" flex justify-center items-center w-[170px]">
@@ -285,9 +287,8 @@ export const Cart: FunctionComponent<open> = (props) => {
                           onClick={() =>
                             increaseCartQuantity(
                               item.pid,
-                              Product.find(
-                                (price) => price.id === item.pid
-                              )?.price!
+                              Product.find((price) => price.id === item.pid)
+                                ?.price!
                             )
                           }
                           className=" hover:bg-[#666666]/20 rounded-s-sm cursor-pointer w-[28px] h-[32px] top-[0px] left-[0px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] absolute tracking-[0] leading-[normal]"
@@ -304,9 +305,8 @@ export const Cart: FunctionComponent<open> = (props) => {
                           onClick={() =>
                             decreaseCartQuantity(
                               item.pid,
-                              Product.find(
-                                (price) => price.id === item.pid
-                              )?.price!
+                              Product.find((price) => price.id === item.pid)
+                                ?.price!
                             )
                           }
                           className="hover:bg-[#666666]/20 cursor-pointer rounded-s-sm w-[29px] h-[32px] top-[0px] left-[52px] [font-family:'Noto_Serif_Thai',Helvetica] font-normal text-[#333435] text-[12px] whitespace-nowrap absolute tracking-[0] leading-[normal]"

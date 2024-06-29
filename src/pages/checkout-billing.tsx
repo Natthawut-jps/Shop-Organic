@@ -131,15 +131,6 @@ const Checkout_Bill: FunctionComponent = () => {
               </div>
             </div>
           </div>
-          <Link
-            to={"/"}
-            reloadDocument
-            className=" cursor-pointer no-underline rounded-24xl bg-branding-success w-[376px] flex flex-row items-center justify-center py-4 px-10 box-border text-base text-gray-scale-white"
-          >
-            <div className="relative leading-[120%] font-semibold">
-              ชำระเงิน
-            </div>
-          </Link>
         </div>
       ) : null}
       <div className="absolute top-[280px] left-[370px] w-[460px] flex flex-col items-start justify-start gap-[32px]">
