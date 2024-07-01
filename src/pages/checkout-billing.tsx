@@ -3,12 +3,16 @@ import { Foorter } from "./unities/Foorter";
 import { Header } from "./unities/Header";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
+  Alert,
   Box,
+  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Rating,
+  Snackbar,
+  Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
@@ -50,8 +54,145 @@ interface timeout_Type {
   minutes: number;
   second: number;
 }
+
+interface reviewType {
+  id: number;
+  review: number;
+}
+export const Review = () => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [review, setReview] = useState<reviewType[]>([]);
+  const product: state_Type = useLocation().state;
+  const labels: { [index: string]: string } = {
+    1: "แย่",
+    2: "พอใช้",
+    3: "ปานกลาง",
+    4: "ดี",
+    5: "ยอดเยี่อม",
+  };
+
+  return (
+    <>
+      <Snackbar
+        open={open}
+        onClose={() => (location.href = "/")}
+        autoHideDuration={2000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert severity="success" variant="filled" sx={{ width: "100%" }}>
+          รีวิวสินค้าเรียบร้อยแล้ว
+        </Alert>
+      </Snackbar>
+      <Dialog open={true} fullWidth>
+        <IconButton
+          onClick={() => (location.href = "/")}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <DialogTitle>รีวิวสินค้า</DialogTitle>
+        <DialogContent>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+              gap: 3,
+              width: "80%",
+            }}
+          >
+            {product.order_list.map((item: productType, index) => (
+              <Box
+                key={index}
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "start",
+                  gap: 1,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                  }}
+                >
+                  <img
+                    width={50}
+                    src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
+                    alt=""
+                  />
+                  <Typography>{item.name}</Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "start",
+                    gap: 1,
+                  }}
+                >
+                  <Rating
+                    name="hover-feedback"
+                    value={review.find((value) => value.id === item.id)?.review}
+                    precision={1}
+                    onChange={(event, newReview) => {
+                      setReview([
+                        ...review.filter((previous) => previous.id !== item.id),
+                        { id: item.id, review: newReview as number },
+                      ]);
+                      {
+                        event;
+                      }
+                    }}
+                    emptyIcon={
+                      <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                    }
+                  />
+                  {review.find((h) => h.id === item.id) && (
+                    <Box sx={{ ml: 2 }}>
+                      {
+                        labels[
+                          review.find(
+                            (hoverReview) => hoverReview.id === item.id
+                          )?.review as number
+                        ]
+                      }
+                    </Box>
+                  )}
+                </Box>
+              </Box>
+            ))}
+          </Box>
+        </DialogContent>
+        <DialogActions
+          sx={{
+            position: "absolute",
+            right: 8,
+            bottom: 8,
+            zIndex: 50,
+          }}
+        >
+          <Button
+            variant="contained"
+            onClick={() => {
+              setTimeout(() => setOpen(true), 100);
+            }}
+          >
+            ตกลง
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
+};
 const Checkout_Bill: FunctionComponent = () => {
-  const [bill, setBill] = useState<boolean>(false);
+  // check status billing
+  const [bill, setBill] = useState<boolean>(true);
   const [time_out, setTime_out] = useState<timeout_Type>({
     minutes: 0,
     second: 0,
@@ -62,18 +203,6 @@ const Checkout_Bill: FunctionComponent = () => {
   const priceSum = price.reduce((accumulator, currentValue) => {
     return accumulator + currentValue;
   }, 0);
-  const labels: { [index: string]: string } = {
-    1: "Useless",
-    2: "Poor",
-    3: "Ok",
-    4: "Good",
-    5: "Excellent",
-  };
-  function getLabelText(value: number) {
-    return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-  }
-  const [value, setValue] = useState<number | null>(0);
-  const [hover, setHover] = useState(-1);
 
   useEffect(() => {
     if (state) {
@@ -88,12 +217,10 @@ const Checkout_Bill: FunctionComponent = () => {
           setTime_out({ minutes: minutes, second: seconds });
         }, 1000);
       } else {
-        // navigate("/404");
-        false;
+        navigate("/404");
       }
     } else {
-      // navigate("/404");
-      false;
+      navigate("/404");
     }
   });
 
@@ -213,58 +340,7 @@ const Checkout_Bill: FunctionComponent = () => {
           </div>
         </div>
       ) : (
-        <div className="absolute top-[250px] w-[1200px] rounded-lg left-[200px] h-[800px] bg-gray-scale-white shadow drop-shadow mx-auto p-4">
-          <h1 className=" flex justify-center">รีวิว</h1>
-          {state.order_list ? (
-            <div>
-              {state.order_list.map((item: productType, index) => (
-                <div key={index} className=" flex flex-row gap-10">
-                  <div>
-                    <img
-                      className=" w-[50px] h-[50px]"
-                      src={`${import.meta.env.VITE_BASE_API}/img/${
-                        item.imgURL
-                      }`}
-                      alt=""
-                    />
-                  </div>
-                  <div>{item.name}</div>
-                  <Box
-                    sx={{
-                      width: 200,
-                      display: "flex",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Rating
-                      name="hover-feedback"
-                      value={value}
-                      precision={0.5}
-                      getLabelText={getLabelText}
-                      onChange={(event, newValue) => {
-                        setValue(newValue);
-                      }}
-                      onChangeActive={(event, newHover) => {
-                        setHover(newHover);
-                      }}
-                      emptyIcon={
-                        <StarIcon
-                          style={{ opacity: 0.55 }}
-                          fontSize="inherit"
-                        />
-                      }
-                    />
-                    {value !== null && (
-                      <Box sx={{ ml: 2 }}>
-                        {labels[hover !== -1 ? hover : value]}
-                      </Box>
-                    )}
-                  </Box>
-                </div>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <Review />
       )}
       <Foorter />
     </div>
