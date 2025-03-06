@@ -30,7 +30,7 @@ export const Homepage: FunctionComponent = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const cookie = new Cookies();
   const [openSignIn, setOpenSignIn] = useState<boolean>(false);
-  const { addTocart, removeCartItem, cartItems } = CartContextProviders();
+  // const { addTocart, removeCartItem, cartItems } = CartContextProviders();
   const [popularProduct, setPopularProduct] = useState<datatypesProduct[]>([]);
 
   const months = [
@@ -106,120 +106,118 @@ export const Homepage: FunctionComponent = () => {
   }, []);
 
   return (
-    <div className=" sm:h-[6980px] relative bg-gray-scale-white w-full h-[4524px] overflow-hidden text-left text-sm text-gray-100 font-body-tiny-body-tiny-400">
-      {/* SigIn User */}
-      <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
-      {/* header template */}
+    <>
       <Header />
-      {/* Sale up to */}
-      <div className=" sm:w-full sm:p-0 sm:m-0 sm:top-3 absolute top-[218px] left-[50px] sm:left-0 w-[1980px] h-[600px] sm:h-fit overflow-hidden text-gray-scale-white">
-        <div className=" sm:relative sm:top-[27px] text-white absolute top-[0px] left-[0px] rounded-3xs w-[872px] sm:w-full h-[600px] sm:h-[300px]  sm:z-0 bg-[url('/img/bannar-big@3x.png')] bg-cover sm:bg-contain bg-no-repeat bg-[top] text-29xl sm:bg-center" />
-        <div className=" sm:relative sm:w-full absolute top-[0px] sm:top-[22px] left-[900px] sm:shadow sm:drop-shadow sm:left-0 w-[600px] h-72 text-gray-100">
-          <div className=" sm:relative absolute top-[0px] left-[0px] sm:left-0 flex flex-col items-start justify-start gap-[24px]">
-            <img src="/img/banner_2.png" alt="" />
+      <div className="container mx-auto p-4 box-border grid grid-flow-row bg-gray-scale-white text-gray-100 font-body-tiny-body-tiny-400">
+        {/* SigIn User */}
+        <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
+        {/* header template */}
+        {/* Sale up to */}
+        <div className="container mb-auto pb-4 box-border grid grid-cols-1 md:grid-rows-1 md:grid-cols-5 gap-0 md:gap-3">
+          <div className="md:col-span-3 col-span-5">
+            <img
+              alt=""
+              src="/img/bannar-big@3x.png"
+              className="object-cover max-w-full "
+            />
           </div>
-        </div>
-        <div className=" sm:relative sm:top-[28px] text-white absolute top-[312px] left-[900px] sm:left-[0px] w-[600px] sm:shadow sm:drop-shadow sm:w-full h-72 sm:h-[250px] text-center">
-          <div className="absolute top-[0px] left-[0px] flex flex-col items-center justify-start gap-[32px]">
-            <img src="/img/banner_3.png" alt="" />
-          </div>
-        </div>
-      </div>
-      {/* Free Shipping */}
-      <div className=" sm:w-[560px] sm:top-[860px] sm:drop-shadow-sm sm:left-0 sm:grid sm:grid-rows-3 sm:items-center sm:justify-items-start sm:text-[14px] absolute top-[840px] left-[50px] rounded-lg bg-gray-scale-white shadow-[0px_8px_40px_rgba(0,_38,_3,_0.08)] w-[1500px] flex flex-row items-center justify-between p-10 box-border text-base">
-        <div className="flex flex-row items-center justify-center gap-[16px]">
-          <img
-            className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0"
-            alt=""
-            src="/img/headphones-1.svg"
-          />
-          <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className=" sm:w-[200px] relative leading-[120%] font-semibold inline-block w-[350px]">
-              การสนับสนุนที่ยอดเยี่ยมตลอด 24 ชั่วโมงทุกวัน
+          <div className="text-gray-100 grid grid-cols-2 col-span-5 gap-2 md:grid-cols-1 md:col-span-2 md:grid-rows-2 md:gap-2 justify-items-center">
+            <div className="">
+              <img
+                src="/img/banner_2.png"
+                alt=""
+                className=" object-cover max-w-full md:max-h-full"
+              />
             </div>
-            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              เข้าถึงการติดต่อได้ทันที
+            <div>
+              <img
+                src="/img/banner_3.png"
+                alt=""
+                className="object-cover max-w-full md:max-h-full"
+              />
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center gap-[16px]">
-          <img
-            className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-11 h-11 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0"
-            alt=""
-            src="/img/shoppingbag.svg"
-          />
-          <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              จ่ายเงินชัวร์ 100%
+        {/* Free Shipping */}
+        <div className="container mx-auto py-2 box-border flex flex-wrap justify-stretch gap-2 md:gap-0">
+          <div className="flex flex-row items-center justify-center gap-[16px]">
+            <img
+              className="relative w-10 h-10"
+              alt=""
+              src="/img/headphones-1.svg"
+            />
+            <div className="flex flex-col items-start justify-center gap-[8px]">
+              <div className=" relative leading-[120%] font-semibold inline-block">
+                การสนับสนุนที่ยอดเยี่ยมตลอด 24 ชั่วโมงทุกวัน
+              </div>
+              <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block">
+                เข้าถึงการติดต่อได้ทันที
+              </div>
             </div>
-            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[350px]">
-              เรามั่นใจว่าสามารถชำระเงินได้อย่างปลอดภัย
+          </div>
+          <div className="flex flex-row items-center justify-center gap-[16px]">
+            <img
+              className="relative w-12 h-12  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-11 h-11  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-10 h-10  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-10 h-10  shrink-0"
+              alt=""
+              src="/img/shoppingbag.svg"
+            />
+            <div className="flex flex-col items-start justify-center gap-[8px]">
+              <div className="relative leading-[120%] font-semibold inline-block">
+                จ่ายเงินชัวร์ 100%
+              </div>
+              <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block">
+                เรามั่นใจว่าสามารถชำระเงินได้อย่างปลอดภัย
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-row items-center justify-center gap-[16px]">
+            <img
+              className="relative w-12 h-12  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-11 h-11  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-10 h-10  shrink-0 hidden"
+              alt=""
+              src="/img/shipping.svg"
+            />
+            <img
+              className="relative w-10 h-10  shrink-0"
+              alt=""
+              src="/img/package.svg"
+            />
+            <div className="flex flex-col items-start justify-center gap-[8px]">
+              <div className="relative leading-[120%] font-semibold inline-block">
+                รับประกันคืนเงิน
+              </div>
+              <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block">
+                รับประกันคืนเงินภายใน 30 วัน
+              </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-row items-center justify-center gap-[16px]">
-          <img
-            className="relative w-12 h-12 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-11 h-11 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0 hidden"
-            alt=""
-            src="/img/shipping.svg"
-          />
-          <img
-            className="relative w-10 h-10 overflow-hidden shrink-0"
-            alt=""
-            src="/img/package.svg"
-          />
-          <div className="flex flex-col items-start justify-center gap-[8px]">
-            <div className="relative leading-[120%] font-semibold inline-block w-[250px]">
-              รับประกันคืนเงิน
-            </div>
-            <div className="relative text-sm leading-[150%] text-gray-scale-gray-400 inline-block w-[250px]">
-              รับประกันคืนเงินภายใน 30 วัน
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* Categories */}
-      <div className=" sm:h-[100px] sm:top-[1150px] sm:grid sm:grid-cols-2 sm:w-fit sm:gap-2 sm:left-0 sm:mx-[40px] relative top-[1028px] gap-[10px] flex flex-row justify-start items-start left-[130px] w-[1320px] h-[320px] text-center text-lg">
+        {/* Categories */}
+        {/* <div className=" sm:h-[100px] sm:top-[1150px] sm:grid sm:grid-cols-2 sm:w-fit sm:gap-2 sm:left-0 sm:mx-[40px] relative top-[1028px] gap-[10px] flex flex-row justify-start items-start left-[130px] w-[1320px] h-[320px] text-center text-lg">
         {loading ? (
           <div className=" relative top-[130px] text-green-600 left-[50%]">
             <CircularProgress color="inherit" />
@@ -246,9 +244,9 @@ export const Homepage: FunctionComponent = () => {
         <div className="absolute top-[0px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-left text-13xl">
           <div className="relative leading-[120%] font-semibold">หมวดหมู่</div>
         </div>
-      </div>
-      {/* Popular Product */}
-      <div className=" sm:w-[560px] sm:top-[1600px] sm:left-0 sm:mx-5 sm:box-border sm:justify-center absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
+      </div> */}
+        {/* Popular Product */}
+        {/* <div className=" sm:w-[560px] sm:top-[1600px] sm:left-0 sm:mx-5 sm:box-border sm:justify-center absolute top-[1400px] left-[130px] w-[1320px] h-[1314px] text-gray-scale-gray-700">
         <div className="absolute top-[-10px] left-[0px] w-[1320px] flex flex-row items-center justify-between text-13xl text-gray-100">
           <div className="relative leading-[120%] font-semibold">
             สินค้ายอดนิยม
@@ -313,7 +311,7 @@ export const Homepage: FunctionComponent = () => {
                   {cartItems.some((check) => check.pid === item.id) ? (
                     <div onClick={() => removeCartItem(item.id)}>
                       <img
-                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
+                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full  max-h-full"
                         alt=""
                         src="/img/add-to-cart2.svg"
                       />
@@ -328,7 +326,7 @@ export const Homepage: FunctionComponent = () => {
                       }}
                     >
                       <img
-                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full overflow-hidden max-h-full"
+                        className="absolute cursor-pointer h-[15.2%] w-[18.09%] top-[80.34%] right-[6.42%] bottom-[7.47%] left-[75.49%] max-w-full  max-h-full"
                         alt=""
                         src="/img/add-to-cart.svg"
                       />
@@ -338,9 +336,9 @@ export const Homepage: FunctionComponent = () => {
               ))}
           </div>
         )}
-      </div>
-      {/* latest New */}
-      <div className=" sm:[560px] sm:top-[3950px] sm:left-0 sm:mx-3 absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
+      </div> */}
+        {/* latest New */}
+        {/* <div className=" sm:[560px] sm:top-[3950px] sm:left-0 sm:mx-3 absolute top-[2900px] left-[130px] w-[1320px] h-[564px] text-center text-xl">
         <div className="absolute top-[0px] left-[563px] text-13xl leading-[120%] font-semibold">
           ใหม่ล่าสุด
         </div>
@@ -364,7 +362,7 @@ export const Homepage: FunctionComponent = () => {
                 >
                   <div className=" sm:w-[406px] relative w-[424px] h-[324px]">
                     <img
-                      className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full overflow-hidden max-h-full object-cover"
+                      className="absolute h-full w-full top-[0%] right-[0%] bottom-[0%] left-[0%] rounded-t-lg rounded-b-none max-w-full  max-h-full object-cover"
                       alt=""
                       src={`${import.meta.env.VITE_BASE_API}/img/${
                         item.imgURL
@@ -422,9 +420,9 @@ export const Homepage: FunctionComponent = () => {
               ))}
           </div>
         )}
-      </div>
-      {/* Header image*/}
-      <div className="sm:top-[4200px] sm:text-[14px] absolute top-[3500px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
+      </div> */}
+        {/* Header image*/}
+        {/* <div className="sm:top-[4200px] sm:text-[14px] absolute top-[3500px] left-[100px] w-[1320px] flex flex-row items-center justify-between py-[60px] px-0 box-border">
         <img
           className="relative w-[81.58px] h-8"
           alt=""
@@ -438,21 +436,21 @@ export const Homepage: FunctionComponent = () => {
         />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
-          className="relative w-[82.64px] h-8 overflow-hidden shrink-0"
+          className="relative w-[82.64px] h-8  shrink-0"
           alt=""
           src="/img/food.svg"
         />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img
-          className="relative w-[131.02px] h-8 overflow-hidden shrink-0"
+          className="relative w-[131.02px] h-8  shrink-0"
           alt=""
           src="/img/bookoffcorporationlogo.svg"
         />
         <div className="relative box-border w-px h-[33px] border-r-[1px] border-solid border-gray-scale-gray-100" />
         <img className="relative w-[95.5px] h-8" alt="" src="/img/group1.svg" />
-      </div>
-      {/* Follow Our */}
-      <div className=" sm:w-[560px] sm:h-fit sm:top-[5520px] sm:left-0 sm:mx-3 absolute top-[3651px] left-[130px] w-[1320px] h-[270px] overflow-hidden text-center text-13xl">
+      </div> */}
+        {/* Follow Our */}
+        {/* <div className=" sm:w-[560px] sm:h-fit sm:top-[5520px] sm:left-0 sm:mx-3 absolute top-[3651px] left-[130px] w-[1320px] h-[270px]  text-center text-13xl">
         <div className="absolute top-[0px] left-[560px] leading-[120%] font-semibold">
           ติดตามเรา
         </div>
@@ -499,15 +497,16 @@ export const Homepage: FunctionComponent = () => {
               src="/img/-instagram-post5@2x.png"
             />
             <img
-              className="absolute top-[84px] left-[84px] w-8 h-8 overflow-hidden"
+              className="absolute top-[84px] left-[84px] w-8 h-8 "
               alt=""
               src="/img/icons.svg"
             />
           </div>
         </div>
+      </div> */}
+        {/* foorter template */}
+        {/* <Foorter /> */}
       </div>
-      {/* foorter template */}
-      <Foorter />
-    </div>
+    </>
   );
 };

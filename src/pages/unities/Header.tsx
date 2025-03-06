@@ -131,39 +131,146 @@ export const Header: FunctionComponent = () => {
       <Search Search={{ openSearch, setOpenSearch }} />
       <SignUp SignUp={{ openSignUp, setOpenSignUp }} />
       <SignIn SignIn={{ openSignIn, setOpenSignIn }} />
-      <div className=" sm:w-full sm:left-0 sm:p-0 sm:right-0 sm:m-0 absolute z-50 top-[0px] left-[-180px] sm:z-50 bg-gray-scale-white h-[190px] sm:h-fit flex flex-col items-center justify-start text-xs text-gray-scale-gray-600">
-        <div className="sm:w-full sm:p-0 bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] grid grid-cols-2 w-full sm:pl-0 gap-[5px] p-1">
-          {cookie.get("_ur") ? (
-            <div className=" sm:hidden relative flex flex-row items-center justify-start left-[300px] gap-[8px]">
-              <img
-                className="relative w-4 h-[19px]"
-                alt=""
-                src="/img/map-pin.svg"
+      <div className="flex flex-row justify-start items-center shadow-lg drop-shadow-lg gap-3 sm:gap-6 bg-slate-100 text-gray-scale-gray-600">
+        <div className=" flex-none">
+          <Link
+            to={"/"}
+            className=" hover:translate-y-[-2px] no-underline text-black"
+          >
+            <img className="max-w-[180px]" alt="" src="/img/Logo.png" />
+          </Link>
+        </div>
+        <div className="hidden basis-2/6 flex-1 lg:flex flex-row items-center justify-start gap-5">
+            <div
+              onClick={handleClick}
+              className=" cursor-pointer flex flex-row items-center justify-start box-border p-[15px] bg-branding-success gap-[12px] text-gray-scale-white hover:translate-x-1 transition-all"
+            >
+              <FontAwesomeIcon icon={faBars} />
+              <div className=" leading-[150%] font-medium">หมวดหมู่</div>
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                className={Categries ? " rotate-180" : ""}
               />
-              <div className="relative leading-[130%]">
-                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน
-                42000, ประเทศไทย
+            </div>
+            <Menu
+              open={Categries}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              sx={{
+                borderRadius: "0",
+                "& .MuiPopover-paper": {
+                  borderRadius: "0",
+                },
+                "& .MuiMenu-list": {
+                  padding: "0",
+                  paddingTop: "8px",
+                  paddingBottom: "0px",
+                  width: "175px",
+                },
+                "& .MuiMenuItem-root": {
+                  minHeight: "50px",
+                  display: "flex",
+                  gap: "12px",
+                  backgroundColor: "white",
+                  ":hover": {
+                    background: "rgba(76, 175, 80, 0.2)",
+                    color: "black",
+                    translate: "3px",
+                  },
+                  ":active": {
+                    backgroundColor: "white",
+                  },
+                },
+                cursor: "pointer",
+                minHeight: null,
+              }}
+            >
+              {categories.map((item, index) => (
+                <Link
+                  key={index}
+                  to={`/product/categories/${item.category_name}/1`}
+                  className=" no-underline text-black"
+                >
+                  <MenuItem onClick={handleClose}>
+                    {" "}
+                    <img
+                      src={`${import.meta.env.VITE_BASE_API}/img/${
+                        item.imgURL
+                      }`}
+                      width={25}
+                      height={25}
+                      alt=""
+                    />
+                    {item.category_name}
+                  </MenuItem>
+                </Link>
+              ))}
+            </Menu>
+            <Link
+              to={"/about"}
+              className=" no-underline hover:opacity-80 cursor-pointer"
+            >
+              <div className=" leading-[150%] font-medium text-gray-scale-gray-600">เกี่ยวกับเรา</div>
+            </Link>
+            <Link
+              to={"/contact"}
+              className=" no-underline divide-y-2 divide-solid divide-white hover:opacity-80 cursor-pointer"
+            >
+              <div className=" leading-[150%] font-medium text-gray-scale-gray-600">ติดต่อเรา</div>
+            </Link>
+          </div>
+        <div className=" flex-1 basis-1/5 text-13xl text-gren-gray-scale-900">
+          <div
+            onClick={() => setOpenSearch(true)}
+            className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500"
+          >
+            <div className=" flex flex-row items-center text-[22px] sm:text-[16px] justify-start sm:border-b-[1px] sm:border-gray-700 sm:border-opacity-20 w-full border-solid">
+              <FontAwesomeIcon
+                icon={faSistrix}
+                fontSize="inherit"
+                className="shrink-0 opacity-50"
+              />
+              <div className=" hidden leading-[21px] sm:inline-block shrink-0">
+                ค้นหา . . .
               </div>
             </div>
-          ) : (
-            <div className=" sm:hidden relative flex flex-row items-center justify-start gap-[8px] left-[300px] h-[50px]">
-              <img
-                className="relative w-4 h-[19px]"
-                alt=""
-                src="/img/map-pin.svg"
+          </div>
+        </div>
+        <div className="basis-2 flex-shrink flex flex-row items-center justify-start gap-3">
+          <div
+            onClick={() => setOpenFavorite(true)}
+            className="rounded-2xl cursor-pointer hover:opacity-80 text-[25px]"
+          >
+            <Badge badgeContent={favoriteItem.length} color="error">
+              <FavoriteIcon
+                className=" hover:text-red-200 text-green-500 opacity-90"
+                fontSize="inherit"
               />
-              <div className="relative leading-[130%]">
-                สถานที่ตั้ง: จังหวัดเลย เมืองเลย ตำบลเมือง ถนนเลย-เชียงคาน
-                42000, ประเทศไทย
-              </div>
+            </Badge>
+          </div>
+          <div
+            onClick={() => setOpenCart(true)}
+            className=" hover:opacity-80 cursor-pointer flex flex-row items-center justify-start gap-[20px] text-black "
+          >
+            <div className="text-[23px]">
+              <Badge badgeContent={quantitySum} color="primary">
+                <FontAwesomeIcon
+                  fontSize="inherit"
+                  icon={faShoppingCart}
+                  className=" text-green-500 opacity-90"
+                />
+              </Badge>
             </div>
-          )}
-          <div className=" sm:w-full sm:bg-transparent sm:justify-start sm:gap-0 flex flex-row items-center justify-between gap-[20px] text-center">
+           
+          </div>
+        </div>
+        <div className="hidden lg:block lg:flex-shrink shadow-[0px_1px_0px_#e5e5e5]">
+          <div className="flex flex-row items-center justify-between">
             {cookie.get("_ur") ? (
-              <div className=" relative flex flex-row w-[700px] justify-end items-center gap-3 left-[0px]">
+              <div className="flex flex-row justify-end items-center ">
                 <Link
                   to={"/Account/Dashboard"}
-                  className="text-[16px] hover:bg-black/10 hover:cursor-pointer text-gray-600 no-underline right-[0px] box-border font-bold"
+                  className=" hover:bg-black/10 hover:cursor-pointer text-gray-600 no-underline font-bold"
                 >
                   {`${userInfo.first_name} ${userInfo.last_name}`}
                 </Link>
@@ -255,17 +362,17 @@ export const Header: FunctionComponent = () => {
                 </Menu>
               </div>
             ) : (
-              <div className=" sm:z-50 sm:absolute sm:top-4 sm:left-[250px] sm:justify-start sm:w-[200px] sm:text-start flex flex-row relative left-16 items-start justify-end w-[600px] gap-[4px] text-left">
+              <div className="flex flex-row items-start justify-end gap-[4px]">
                 <div
                   onClick={() => setOpenSignIn(true)}
-                  className=" sm:text-white sm:text-[12px] relative cursor-pointer leading-[130%] hover:text-black/80 hover:underline text-black text-[14px]"
+                  className="cursor-pointer leading-[130%] hover:text-black/80 hover:underline "
                 >
                   เข้าสู่ระบบ
                 </div>
-                <div className=" sm:text-white relative leading-[130%]">/</div>
+                <div className="leading-[130%]">/</div>
                 <div
                   onClick={() => setOpenSignUp(true)}
-                  className=" sm:text-white sm:text-[12px] relative cursor-pointer leading-[130%] hover:text-black/80 hover:underline text-black text-[14px]"
+                  className="cursor-pointer leading-[130%] hover:text-black/80 hover:underline "
                 >
                   สมัครสมาชิก
                 </div>
@@ -273,82 +380,15 @@ export const Header: FunctionComponent = () => {
             )}
           </div>
         </div>
-        <div className=" sm:h-fit sm:w-full relative sm:absolute w-[1920px] h-[75px] text-13xl text-gren-gray-scale-900 sm:z-0">
-          <div>
-            <Link
-              to={"/"}
-              className=" hover:translate-y-[-2px] no-underline text-black absolute top-[27.5px] sm:top-[5px] sm:left-[250px] left-[300px] flex flex-row items-center justify-start gap-[8px]"
-            >
-              <img
-                className="relative w-[250px] top-[-25px] object-cover h-[70px] sm:w-5 sm:h-5 overflow-hidden shrink-0"
-                alt=""
-                src="/img/Logo.png"
-              />
-            </Link>
-          </div>
-          <div
-            onClick={() => setOpenSearch(true)}
-            className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 absolute sm:w-[60px] top-[15px] sm:left-[60px] sm:top-[13px] left-[711px] rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500 border-[1px] border-solid border-gray-scale-gray-100 sm:border-none"
-          >
-            <div className=" sm:p-0 sm:w-[60px] sm:pl-0 w-[500px] flex flex-row items-center justify-start py-3 pr-[18px] pl-4 box-border gap-[8px]">
-              <FontAwesomeIcon
-                icon={faSistrix}
-                className=" sm:h-4 sm:w-4 relative w-5 h-5 overflow-hidden shrink-0 opacity-50"
-              />
-              <div className=" sm:w-[50px] sm:text-[13px] relative leading-[21px] inline-block w-[400px] shrink-0">
-                ค้นหา . . .
-              </div>
-            </div>
-          </div>
-          <div className="absolute top-[15px] left-[1429px] sm:left-[165px] sm:top-[5px] flex flex-row items-center justify-start gap-[16px] text-center text-3xs text-gray-scale-white sm:gap-[20px]">
-            <div
-              onClick={() => setOpenFavorite(true)}
-              className="rounded-2xl cursor-pointer sm:text-[23px] text-[2.1875rem]"
-            >
-              <Badge badgeContent={favoriteItem.length} color="error">
-                <FavoriteIcon
-                  className="relative hover:text-red-400 text-red-600 opacity-50 sm:text-white"
-                  fontSize="inherit"
-                />
-              </Badge>
-            </div>
-            <div className="relative box-border h-[25px] border-r-[1px] border-solid border-gray-scale-gray-200 sm:hidden" />
-            <div
-              onClick={() => setOpenCart(true)}
-              className=" hover:opacity-80 cursor-pointer flex flex-row items-center justify-start gap-[20px] text-black "
-            >
-              <div className="relative w-[34px] h-[34px] sm:w-[20px]">
-                <Badge badgeContent={quantitySum} color="primary">
-                  <FontAwesomeIcon
-                    icon={faShoppingCart}
-                    className="absolute top-[-8px] left-[0px] w-[30px] h-[34px] text-green-600 sm:w-[21px] sm:text-[#ffffff]/70 sm:relative sm:top-[2px]"
-                  />
-                </Badge>
-              </div>
-              <div className="text-green-700 flex flex-col items-start justify-start gap-[7px] text-left text-2xs sm:hidden ">
-                <div className="relative leading-[120%]">ตะกร้าสินค้า</div>
-                {priceSum ? (
-                  <div className="relative text-sm leading-[100%] font-medium ">
-                    {(priceSum + 50).toFixed(2) + "฿"}
-                  </div>
-                ) : (
-                  <div className="relative text-sm leading-[100%] font-medium ">
-                    {priceSum.toFixed(2) + "฿"}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className=" sm:w-full sm:p-0 sm:px-5 w-[1920px] bg-gray-scale-gray-800 flex flex-row items-center sm:h-[50px] justify-between px-[300px] box-border text-sm text-gray-scale-gray-400">
+        <div className="flex flex-row items-center justify-between box-border text-sm text-gray-scale-gray-600">
           <FontAwesomeIcon
             onClick={() => setOpenBar(true)}
             size="xl"
             icon={faBars}
-            className="hidden sm:block box-border p-1 sm:z-50"
+            className="block lg:hidden box-border mr-[6px] sm:z-50 "
           />
           <Drawer
-            className=" hidden sm:block"
+            className="block lg:hidden"
             sx={{
               "& .MuiDrawer-paper": {
                 width: "80%",
@@ -364,7 +404,7 @@ export const Header: FunctionComponent = () => {
               <span onClick={() => setOpenBar(false)}>
                 <CloseIcon
                   color="inherit"
-                  className=" active:bg-black/50 left-[80%] relative w-full"
+                  className=" active:bg-black/50 left-[80%]  w-full"
                 />
               </span>
               <List>
@@ -395,101 +435,6 @@ export const Header: FunctionComponent = () => {
               </List>
             </div>
           </Drawer>
-          <div className="flex flex-row items-center justify-start sm:hidden">
-            <div
-              onClick={handleClick}
-              className=" cursor-pointer flex flex-row items-center justify-start box-border p-[15px] bg-branding-success gap-[12px] text-gray-scale-white hover:translate-x-1 transition-all"
-            >
-              <FontAwesomeIcon icon={faBars} />
-              <div className="relative leading-[150%] font-medium">
-                หมวดหมู่
-              </div>
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                className={Categries ? " rotate-180" : ""}
-              />
-            </div>
-            <Menu
-              open={Categries}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              sx={{
-                borderRadius: "0",
-                "& .MuiPopover-paper": {
-                  borderRadius: "0",
-                },
-                "& .MuiMenu-list": {
-                  padding: "0",
-                  paddingTop: "8px",
-                  paddingBottom: "0px",
-                  width: "175px",
-                },
-                "& .MuiMenuItem-root": {
-                  minHeight: "50px",
-                  display: "flex",
-                  gap: "12px",
-                  backgroundColor: "white",
-                  ":hover": {
-                    background: "rgba(76, 175, 80, 0.2)",
-                    color: "black",
-                    translate: "3px",
-                  },
-                  ":active": {
-                    backgroundColor: "white",
-                  },
-                },
-                cursor: "pointer",
-                minHeight: null,
-              }}
-            >
-              {categories.map((item, index) => (
-                <Link
-                  key={index}
-                  to={`/product/categories/${item.category_name}/1`}
-                  className=" no-underline text-black"
-                >
-                  <MenuItem onClick={handleClose}>
-                    {" "}
-                    <img
-                      src={`${import.meta.env.VITE_BASE_API}/img/${
-                        item.imgURL
-                      }`}
-                      width={25}
-                      height={25}
-                      alt=""
-                    />
-                    {item.category_name}
-                  </MenuItem>
-                </Link>
-              ))}
-            </Menu>
-            <Link
-              to={"/about"}
-              className=" no-underline py-[15px] pl-[40px] pr-[40px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]"
-            >
-              <div className="relative leading-[150%] font-medium">
-                เกี่ยวกับเรา
-              </div>
-            </Link>
-            <Link
-              to={"/contact"}
-              className=" no-underline divide-y-2 divide-solid divide-white py-[15px] pl-[20px] pr-[20px] hover:bg-black cursor-pointer text-white flex flex-row items-center justify-start gap-[4px]"
-            >
-              <div className="relative leading-[150%] font-medium">
-                ติดต่อเรา
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-row items-center justify-start gap-[8px] text-gray-scale-white sm:hidden">
-            <img
-              className="relative w-7 h-7 overflow-hidden shrink-0"
-              alt=""
-              src="/img/phonecall-1.svg"
-            />
-            <div className="relative leading-[150%] font-medium">
-              (+66) 061-505-9483
-            </div>
-          </div>
         </div>
       </div>
     </>
