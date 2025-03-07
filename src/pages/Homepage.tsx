@@ -118,7 +118,7 @@ export const Homepage: FunctionComponent = () => {
             <img
               alt=""
               src="/img/bannar-big@3x.png"
-              className="object-cover max-w-full "
+              className="object-cover max-w-full"
             />
           </div>
           <div className="text-gray-100 grid grid-cols-2 col-span-5 gap-2 md:grid-cols-1 md:col-span-2 md:grid-rows-2 md:gap-2 justify-items-center">
@@ -139,7 +139,7 @@ export const Homepage: FunctionComponent = () => {
           </div>
         </div>
         {/* Free Shipping */}
-        <div className="container mx-auto py-2 box-border flex flex-wrap justify-stretch gap-2 md:gap-0">
+        <div className="container mx-auto py-2 box-border flex flex-wrap justify-between gap-2 md:gap-0">
           <div className="flex flex-row items-center justify-center gap-[16px]">
             <img
               className="relative w-10 h-10"
@@ -505,8 +505,8 @@ export const Homepage: FunctionComponent = () => {
         </div>
       </div> */}
         {/* foorter template */}
-        {/* <Foorter /> */}
       </div>
+        <Foorter />
     </>
   );
 };
