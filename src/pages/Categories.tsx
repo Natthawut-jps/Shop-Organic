@@ -188,29 +188,62 @@ const Categories: FunctionComponent = () => {
         Detail={undefined}
         EditAndadd={undefined}
       />
-      <div className="container mx-auto p-4 box-border grid grid-flow-row  md:grid-cols-5 justify-items-start items-start bg-gray-scale-white text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
-        <div className=" text-gray-scale-white md:col-span-1">
-          <div className=" top-[2px] left-[376px] flex flex-row items-center justify-start gap-[8px] text-gray-scale-gray-500">
-            <div className=" leading-[150%]">เรียงตาม :</div>
-
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small-label">เรียงตาม</InputLabel>
-              <Select
-                value={sortBy ? sortBy : "sortmin"}
-                onChange={handleChangeSortBy}
-                label="Sort by"
-              >
-                <MenuItem value={"Latest"}>ล่าสุด</MenuItem>
-                <MenuItem value={"sortmin"} selected>
-                  ตามตัวอัษร A-Z
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className="  box-border top-[70px] left-[0px] flex flex-col items-start justify-start text-xl text-gray-scale-gray-900">
-            <div className="flex flex-col items-start justify-start text-sm pb-10">
-              <div className="w-[312px] flex flex-row items-center justify-between pt-0 px-0 pb-5 box-border text-xl">
-                <div className=" leading-[150%] font-medium">หมวดหมู่</div>
+      <div className="container mx-auto p-4 box-border grid grid-flow-row grid-cols-5 gap-3 justify-items-start items-start bg-gray-scale-white text-gray-scale-gray-600 font-body-medium-body-medium-600 bg-gree">
+        <div className="col-span-5 sm:col-span-1 grid grid-flow-row  text-gray-scale-white ">
+          <div className="grid grid-flow-row grid-cols-2 sm:grid-cols-1 text-sm gap-6   text-gray-scale-gray-900">
+            <div className="flex flex-row items-start justify-start gap-[8px] text-gray-scale-gray-500">
+              <div className=" leading-[150%] text-base hidden md:block">
+                เรียงตาม
+              </div>
+              <FormControl>
+                <InputLabel id="demo-select-small-label">เรียงตาม</InputLabel>
+                <Select
+                  className="text-sm"
+                  size="small"
+                  value={sortBy ? sortBy : "sortmin"}
+                  onChange={handleChangeSortBy}
+                  label="Sort by"
+                >
+                  <MenuItem value={"Latest"}>ล่าสุด</MenuItem>
+                  <MenuItem value={"sortmin"} selected>
+                    A-Z
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div className="flex flex-col items-start justify-center max-w-full w-full">
+              <div>ราคา</div>
+              <Slider
+                onChangeCommitted={(event, value) => {
+                  setSortPrice(value as number);
+                  setSortby("");
+                  setSortRating(0);
+                  {
+                    event;
+                  }
+                }}
+                onChange={(event, value) => {
+                  setValueSlider(value as number);
+                  {
+                    event;
+                  }
+                }}
+                value={valueSlider}
+                step={1}
+                max={300}
+                valueLabelDisplay="auto"
+                marks={[
+                  { value: 0, label: "0" },
+                  { value: 50, label: "50" },
+                  { value: 150, label: "150" },
+                  { value: 250, label: "250" },
+                ]}
+              />
+              <div className=" text-baes leading-[150%] text-gray-scale-gray-700"></div>
+            </div>
+            <div className="flex flex-col items-start justify-start text-sm ">
+              <div className="flex flex-row items-center justify-between text-base">
+                <div className="  font-medium">หมวดหมู่</div>
                 <img className=" w-3.5 h-2" alt="" src="/img/vector.svg" />
               </div>
               <FormControl>
@@ -243,56 +276,17 @@ const Categories: FunctionComponent = () => {
                 </RadioGroup>
               </FormControl>
             </div>
-            <div className=" box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
-            <div className="flex flex-col items-start justify-center pt-0 px-0 pb-6 gap-[16px]">
-              <Slider
-                onChangeCommitted={(event, value) => {
-                  setSortPrice(value as number);
-                  setSortby("");
-                  setSortRating(0);
-                  {
-                    event;
-                  }
-                }}
-                onChange={(event, value) => {
-                  setValueSlider(value as number);
-                  {
-                    event;
-                  }
-                }}
-                value={valueSlider}
-                step={1}
-                sx={{ width: 250 }}
-                max={300}
-                valueLabelDisplay="on"
-                marks={[
-                  { value: 0, label: "0" },
-                  { value: 50, label: "50" },
-                  { value: 150, label: "150" },
-                  { value: 250, label: "250" },
-                ]}
-              />
-              <div className=" text-sm leading-[150%] text-gray-scale-gray-700">
-                <span>ราคา :</span>
-                <span className="font-medium text-gray-scale-gray-900">
-                  {" "}
-                  0 — 300
-                </span>
-              </div>
-            </div>
-            <div className=" box-border w-[313px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
             <div className="flex flex-col items-start justify-start text-sm">
-              <div className="bg-gray-scale-white w-[312px] flex flex-row items-center justify-between py-5 px-0 box-border text-xl">
+              <div className="bg-gray-scale-white flex flex-row items-center justify-between box-border text-base">
                 <div className=" leading-[150%] font-medium">รีวิว</div>
                 <img className=" w-3.5 h-2" alt="" src="/img/vector.svg" />
               </div>
-              <div className="flex flex-row items-center justify-center py-2.5 px-0 gap-[8px]">
-                <div className="flex flex-row items-center justify-start gap-5">
+              <div className="flex flex-row items-center justify-center py-2.5 gap-[8px]">
+                <div className="flex flex-row flex-wrap gap-2 items-center justify-start sm:text-[30px] text-base">
+                  <div className=" leading-[150%] text-base">{`5.0`}</div>
                   <Rating
                     name="select"
-                    sx={{
-                      fontSize: "30px",
-                    }}
+                    size="small"
                     precision={1}
                     value={sortRating}
                     emptyIcon={<StarIcon fontSize="inherit" />}
@@ -306,11 +300,10 @@ const Categories: FunctionComponent = () => {
                       }
                     }}
                   />
-                  <div className=" leading-[150%]">{`5.0`}</div>
                 </div>
               </div>
-              <span className="font-medium text-gray-scale-gray-900 flex gap-3">
-                <span>คะแนน : </span>
+              <span className="font-medium text-gray-scale-gray-900 flex flex-wrap items-center gap-2">
+                <span>คะแนน </span>
                 <Rating
                   size="small"
                   value={5}
@@ -321,76 +314,79 @@ const Categories: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <div className=" mx-6 md:col-span-4">
-          <div className="  grid-cols-4 gap-2 col-span-4 box-border justify-items-end">
-            <div className="  text-base text-gray-scale-gray-900">
-              <span>
-                <span className="leading-[120%] font-semibold">
-                  {
-                    ProductsItem.filter(
-                      (item) => item.categories === categoriesParam
-                    ).length
-                  }
-                </span>
+        <div className="col-span-5 sm:col-span-4 box-border justify-items-end">
+          <div className="  text-base text-gray-scale-gray-900">
+            <span>
+              <span className="leading-[120%] font-semibold">
+                {
+                  ProductsItem.filter(
+                    (item) => item.categories === categoriesParam
+                  ).length
+                }
               </span>
-              <span className="leading-[150%] text-gray-scale-gray-600">
-                <span>{` `}</span>
-                <span>รายการ</span>
-              </span>
-            </div>
-            <div className=" flex flex-wrap gap-4 justify-center">
-              {ProductsItem.length > 0 ? (
-                ProductsItem.map((item: datatypesProduct) => (
-                  <div
-                    key={item.id}
-                    className="  top-[69px] left-[0px] border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border h-[307px] text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark"
-                  >
+            </span>
+            <span className="leading-[150%] text-gray-scale-gray-600">
+              <span>{` `}</span>
+              <span>รายการ</span>
+            </span>
+          </div>
+          <div className="grid grid-flow-row xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap-2 sm:gap-4">
+            {ProductsItem.length > 0 ? (
+              ProductsItem.map((item: datatypesProduct) => (
+                <div
+                  key={item.id}
+                  className=" border-gray-scale-gray-100 bg-gray-scale-white hover:shadow-[0px_0px_12px_rgba(32,_181,_38,_0.32)] box-border text-black  hover:text-branding-success-dark border-[1px] border-solid hover:border-branding-success-dark"
+                >
+                  <div className="grid grid-flow-row h-full">
                     <Link
-                      key={item.id}
                       to={`/product/detail/${
                         item.categories
                       }/${item.name.replace(/\s/g, "")}`}
                       state={{ product: item, status: "toTop" }}
-                      className="hover:text-branding-success-dark text-black"
+                      className="flex flex-col items-start justify-start box-border sm:max-h-[150px] sm:h-[150px] max-h-[100px] h-[100px]"
                     >
-                      <div className="  w-full top-[0%] right-[0%] bottom-[0%] left-[0%] flex flex-col items-start justify-start box-border">
-                        <img
-                          className=" w-[252px] h-[202px] object-cover"
-                          alt=""
-                          src={`${import.meta.env.VITE_BASE_API}/img/${
-                            item.imgURL
-                          }`}
-                        />
+                      <img
+                        className="sm:max-h-[150px] max-h-[100px] w-full object-cover"
+                        alt=""
+                        src={`${import.meta.env.VITE_BASE_API}/img/${
+                          item.imgURL
+                        }`}
+                      />
+                    </Link>
+                    <Link
+                      to={`/product/detail/${
+                        item.categories
+                      }/${item.name.replace(/\s/g, "")}`}
+                      state={{ product: item, status: "toTop" }}
+                      className="  flex flex-col items-start justify-end p-4 box-border gap-[6px] no-underline  text-black  hover:text-branding-success-dark"
+                    >
+                      <div className="flex flex-col items-start justify-start">
+                        <div className=" leading-[150%] inline-block">
+                          {item.name}
+                        </div>
+                        <div className="flex flex-row items-start justify-start gap-[2px] text-base">
+                          <div className=" leading-[150%] font-medium">
+                            {`฿${item.price}`}
+                          </div>
+                        </div>
                       </div>
-                      <div className=" h-[0%] w-full top-[76.78%] right-[0%] bottom-[-0.12%] left-[0%] flex flex-col items-start justify-center p-4 box-border gap-[6px]">
-                        <div className="flex flex-col items-start justify-start">
-                          <div className=" leading-[150%] inline-block w-[280px]">
-                            {item.name}
-                          </div>
-                          <div className="flex flex-row items-start justify-start gap-[2px] text-base text-gray-scale-gray-900">
-                            <div className=" leading-[150%] font-medium">
-                              {`฿${item.price}`}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex flex-row items-start justify-start">
-                          <Rating
-                            name="read-only"
-                            sx={{
-                              fontSize: "13px",
-                            }}
-                            precision={0.1}
-                            value={item.rating}
-                            emptyIcon={<StarIcon fontSize="inherit" />}
-                            readOnly
-                          />
-                        </div>
+                      <div className="flex flex-row items-start justify-start">
+                        <Rating
+                          name="read-only"
+                          sx={{
+                            fontSize: "13px",
+                          }}
+                          precision={0.1}
+                          value={item.rating}
+                          emptyIcon={<StarIcon fontSize="inherit" />}
+                          readOnly
+                        />
                       </div>
                     </Link>
                     {cartItems.find((check) => check.pid === item.id) ? (
                       <div onClick={() => removeCartItem(item.id)}>
                         <img
-                          className=" cursor-pointer  h-[15.83%] w-[15.82%] top-[80.42%] right-[6.41%] bottom-[6.76%] left-[75.77%] max-w-full  max-h-full"
+                          className=" cursor-pointer z-50 w-fit"
                           alt=""
                           src="/img/add-to-cart2.svg"
                         />
@@ -404,25 +400,28 @@ const Categories: FunctionComponent = () => {
                             : setOpenSignIn(true);
                         }}
                       >
-                        <img
-                          className=" cursor-pointer h-[15.83%] w-[15.82%] top-[80.42%] right-[6.41%] bottom-[6.76%] left-[75.77%] max-w-full  max-h-full"
-                          alt=""
-                          src="/img/add-to-cart.svg"
-                        />
+                        <div className="flex flex-row items-center justify-center bg-slate-800/10 max-w-full w-full  h-full cursor-pointer">
+                          เพิ่มสินค้า
+                          <img
+                            className=" cursor-pointer z-50"
+                            alt=""
+                            src="/img/add-to-cart.svg"
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
-                ))
-              ) : (
-                <div className="  top-[150px] left-[400px]">
-                  <h2>ไม่มีสินค้า.........</h2>
                 </div>
-              )}
-            </div>
+              ))
+            ) : (
+              <div className="  top-[150px] left-[400px]">
+                <h2>ไม่มีสินค้า.........</h2>
+              </div>
+            )}
           </div>
         </div>
       </div>
-      <div className=" flex flex-row items-start justify-start gap-[12px] text-center">
+      <div className=" container mx-auto p-4 box-border flex flex-row items-center justify-center gap-[12px] text-center">
         <div className="flex flex-row items-start justify-start">
           <Pagination
             count={pageCount}

@@ -98,15 +98,18 @@ const Find_user: FunctionComponent = () => {
           เราได้ส่งลิงค์รีเซตรหัสผ่านไปทางอีเมล์ของคุณแล้ว
         </div>
       ) : (
-        <div className=" absolute w-full top-[10%] items-start justify-start left-[40%] flex flex-col gap-3">
-          <span className=" text-branding-error">{err}</span>
-          <label htmlFor="find_user">Your Email</label>
+        <div className="container mx-auto p-4 box-border w-full tems-start justify-center flex flex-col gap-2">
+          <div className="flex flex-row gap-3">
+            <label htmlFor="find_user">อีเมลล์</label>
+            <span className=" text-branding-error">{err}</span>
+          </div>
           <input
+            placeholder="ใส่อีเมลล์เพื่อค้นกา..."
             form="find"
             type="text"
             name="find_user"
             id="find_user"
-            className="border border-black border-solid outline-none rounded-sm relative left-[0px] w-[200px]"
+            className="border border-black/50 border-solid outline-none rounded-sm relative p-1 w-[200px] placeholder:text-xs"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setData(e.target.value)
             }
@@ -117,7 +120,7 @@ const Find_user: FunctionComponent = () => {
               type="submit"
               className=" text-green-500 bg-green-50 p-2 rounded-sm cursor-pointer relative left-[160px] font-sans font-semibold top-2"
             >
-              send
+              ค้นหา
             </button>
           </form>
         </div>

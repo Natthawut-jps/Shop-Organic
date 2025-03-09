@@ -137,7 +137,7 @@ export const Header: FunctionComponent = () => {
             to={"/"}
             className=" hover:translate-y-[-2px] no-underline text-black"
           >
-            <img className="max-w-[180px]" alt="" src="/img/Logo.png" />
+            <img className="sm:max-w-[180px] max-w-[160px]" alt="" src="/img/Logo.png" />
           </Link>
         </div>
         <div className="hidden basis-2/6 flex-1 lg:flex flex-row items-center justify-start gap-5">
@@ -385,7 +385,7 @@ export const Header: FunctionComponent = () => {
             onClick={() => setOpenBar(true)}
             size="xl"
             icon={faBars}
-            className="block lg:hidden box-border mr-[6px] sm:z-50 "
+            className="block lg:hidden box-border ml-[10px] mr-[16px] sm:z-50 "
           />
           <Drawer
             className="block lg:hidden"

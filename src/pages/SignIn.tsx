@@ -4,7 +4,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import axios, { AxiosResponse } from "axios";
 import GoogleButton from "react-google-button";
 import { Dialog, DialogContent, useMediaQuery, useTheme } from "@mui/material";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faL, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
@@ -147,113 +147,111 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
         onClose={() => props.SignIn.setOpenSignIn(false)}
         open={props.SignIn.openSignIn}
       >
-        <DialogContent className="relative bg-gray-scale-white top-0 left-0 right-0 bottom-0 shadow-[0px_0px_56px_rgba(0,_38,_3,_0.08)] text-left text-sm text-gray-scale-gray-900 font-heading-05-heading-05-600">
-          <div className=" sm:px-0 relative rounded-lg bg-gray-scale-white  flex flex-col items-center justify-start pt-6 px-6 pb-8 gap-[20px]  ">
-            <div className=" absolute box-border top-0 right-0">
+        <DialogContent>
+          <div className="flex flex-col rounded-lg bg-gray-scale-white items-center justify-center  gap-[20px]  ">
+            <div className="flex flex-row justify-end w-full box-border">
               <FontAwesomeIcon
                 onClick={() => {
                   props.SignIn.setOpenSignIn(false);
                   setErr({} as data);
                   setUinfo({} as data);
+                  setIncorrect(false);
                 }}
                 icon={faXmark}
                 size="lg"
                 className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right "
               />
             </div>
-            <div className="relative text-13xl leading-[120%] font-semibold top-[-10px]">
-              {incorrect && (
-                <span className=" absolute top-[35px] left-[-150px] text-[12px] text-branding-error w-[300px]">
-                  อีเมลล์หรือรหัสผ่านไม่ถูกต้อง
-                </span>
-              )}
-              เข้าสู่ระบบ
-            </div>
-            <div className=" sm:w-full flex flex-col items-center justify-center gap-[16px] text-base text-gray-scale-gray-400">
-              <div className=" sm:w-full flex flex-col items-start justify-start gap-[25px]">
-                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-center border-[1px] border-solid border-gray-scale-gray-100">
-                  <div className=" sm:w-full relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
-                    {err.email && (
-                      <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
-                        {err.email}
-                      </span>
-                    )}
-                    <input
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({ ...uinfo, email: e.target.value })
-                      }
-                      form="passwordEyeForm"
-                      type="email"
-                      placeholder="อีเมลล์"
-                      className=" sm:w-[90%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[424px] rounded-lg h-[37px] shrink-0"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className=" sm:w-full rounded-md bg-gray-scale-white flex flex-row items-center justify-start border-[1px] border-solid border-gray-scale-gray-100">
-                  <div className=" sm:w-full relative leading-[130%] inline-block w-[440px] h-[40px] shrink-0">
-                    {err.password && (
-                      <span className=" text-[12px] text-branding-error absolute top-[-22px] left-1">
-                        {err.password}
-                      </span>
-                    )}
-                    <input
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        setUinfo({
-                          ...uinfo,
-                          password: e.target.value.replace(/\s/g, "").trim(),
-                        })
-                      }
-                      form="passwordEyeForm"
-                      type="password"
-                      id="passwordSignIn"
-                      placeholder="รหัสผ่าน"
-                      className=" sm:w-[85%] text-[#373636] relative bg-transparent focus:outline-none text-[16px] left-[10px] w-[380px] h-[37px] rounded-lg shrink-0"
-                      required
-                    />
-                  </div>
+            <div className="w-full flex flex-col justify-center items-center gap-6">
+              <div>เข้าสู่ระบบ</div>
+              <div className="text-xs leading-[120%] font-semibold ">
+                {incorrect && (
+                  <span className=" text-branding-error ">
+                    อีเมลล์หรือรหัสผ่านไม่ถูกต้อง
+                  </span>
+                )}
+              </div>
+              <div className="w-full flex flex-col items-start justify-center gap-[10px] text-base text-gray-scale-gray-400">
+                {err.email && (
+                  <span className=" text-[12px] text-branding-error">
+                    {err.email}
+                  </span>
+                )}
+                <input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setUinfo({ ...uinfo, email: e.target.value })
+                  }
+                  form="passwordEyeForm"
+                  type="email"
+                  placeholder="อีเมลล์"
+                  className="w-full p-2 text-[#373636] bg-transparent focus:outline-none rounded-md border-[1px] border-solid border-gray-scale-gray-100"
+                  required
+                />
+                {err.password && (
+                  <span className=" text-[12px] text-branding-error ">
+                    {err.password}
+                  </span>
+                )}
+                <div className="relative w-full">
+                  <input
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setUinfo({
+                        ...uinfo,
+                        password: e.target.value.replace(/\s/g, "").trim(),
+                      })
+                    }
+                    form="passwordEyeForm"
+                    type="password"
+                    id="passwordSignIn"
+                    placeholder="รหัสผ่าน"
+                    className="  text-[#373636] bg-transparent focus:outline-none rounded-md w-full p-2 border-[1px] border-solid border-gray-scale-gray-100"
+                    required
+                  />
                   {passEye ? (
                     <Visibility
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className=" sm:right-[10px] cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
+                      className="absolute top-[6px] end-0 cursor-pointer"
                     />
                   ) : (
                     <VisibilityOff
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className=" sm:right-[10px] cursor-pointer absolute right-[75px] w-5 h-5 overflow-hidden shrink-0"
+                      className=" absolute top-[6px] end-0 cursor-pointer"
                     />
                   )}
                 </div>
-              </div>
-              <div className=" sm:w-full w-[472px] flex flex-row items-center justify-between text-sm text-gray-scale-gray-600">
-                <div className="flex flex-row items-center justify-center relative left-4 gap-[6px]" />
-                <Link
-                  to={"/reset-password"}
-                  reloadDocument
-                  className=" right-7 no-underline text-black relative leading-[150%]"
-                >
-                  ลืมรหัสผ่าน
-                </Link>
-              </div>
-            </div>
-            <form id="passwordEyeForm" onSubmit={handleSubmit}>
-              <button
-                type="submit"
-                className=" sm:w-full text-[16px] cursor-pointer rounded-24xl bg-branding-success w-[472px] flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
-              >
-                <div className="relative leading-[120%] font-semibold">
-                  เข้าสู่ระบบ
+
+                <div className=" flex flex-row items-center justify-between text-sm text-gray-scale-gray-600">
+                  <div className="flex flex-row items-center justify-center gap-[6px]" />
+                  <Link
+                    to={"/reset-password"}
+                    reloadDocument
+                    className="no-underline text-black leading-[150%]"
+                  >
+                    ลืมรหัสผ่าน
+                  </Link>
                 </div>
-              </button>
-            </form>
-            <div className="flex flex-row items-start justify-start pt-1 px-0 pb-0 text-gray-scale-gray-600">
-              <div className="relative leading-[150%]">ลงชื่อด้วยวิธีอื่น</div>
+              </div>
+              <form id="passwordEyeForm" onSubmit={handleSubmit}>
+                <button
+                  type="submit"
+                  className="cursor-pointer rounded-24xl bg-branding-success  flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
+                >
+                  <div className=" leading-[120%] font-semibold">
+                    เข้าสู่ระบบ
+                  </div>
+                </button>
+              </form>
             </div>
-            <div>
+            <div className="flex flex-col justify-center items-center gap-5">
+              <div className="flex flex-row items-start justify-start pt-1 px-0 pb-0 text-gray-scale-gray-600">
+                <div className="relative leading-[150%]">
+                  ลงชื่อด้วยวิธีอื่น
+                </div>
+              </div>
               <div>
                 <GoogleButton
                   type="light"
