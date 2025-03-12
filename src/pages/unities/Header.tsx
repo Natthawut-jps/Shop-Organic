@@ -7,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Avatar,
   Badge,
@@ -137,89 +138,95 @@ export const Header: FunctionComponent = () => {
             to={"/"}
             className=" hover:translate-y-[-2px] no-underline text-black"
           >
-            <img className="sm:max-w-[180px] max-w-[160px]" alt="" src="/img/Logo.png" />
+            <img
+              className="sm:max-w-[180px] max-w-[160px]"
+              alt=""
+              src="/img/Logo.png"
+            />
           </Link>
         </div>
-        <div className="hidden basis-2/6 flex-1 lg:flex flex-row items-center justify-start gap-5">
-            <div
-              onClick={handleClick}
-              className=" cursor-pointer flex flex-row items-center justify-start box-border p-[15px] bg-branding-success gap-[12px] text-gray-scale-white hover:translate-x-1 transition-all"
-            >
-              <FontAwesomeIcon icon={faBars} />
-              <div className=" leading-[150%] font-medium">หมวดหมู่</div>
-              <FontAwesomeIcon
-                icon={faAngleDown}
-                className={Categries ? " rotate-180" : ""}
-              />
-            </div>
-            <Menu
-              open={Categries}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              sx={{
-                borderRadius: "0",
-                "& .MuiPopover-paper": {
-                  borderRadius: "0",
-                },
-                "& .MuiMenu-list": {
-                  padding: "0",
-                  paddingTop: "8px",
-                  paddingBottom: "0px",
-                  width: "175px",
-                },
-                "& .MuiMenuItem-root": {
-                  minHeight: "50px",
-                  display: "flex",
-                  gap: "12px",
-                  backgroundColor: "white",
-                  ":hover": {
-                    background: "rgba(76, 175, 80, 0.2)",
-                    color: "black",
-                    translate: "3px",
-                  },
-                  ":active": {
-                    backgroundColor: "white",
-                  },
-                },
-                cursor: "pointer",
-                minHeight: null,
-              }}
-            >
-              {categories.map((item, index) => (
-                <Link
-                  key={index}
-                  to={`/product/categories/${item.category_name}/1`}
-                  className=" no-underline text-black"
-                >
-                  <MenuItem onClick={handleClose}>
-                    {" "}
-                    <img
-                      src={`${import.meta.env.VITE_BASE_API}/img/${
-                        item.imgURL
-                      }`}
-                      width={25}
-                      height={25}
-                      alt=""
-                    />
-                    {item.category_name}
-                  </MenuItem>
-                </Link>
-              ))}
-            </Menu>
-            <Link
-              to={"/about"}
-              className=" no-underline hover:opacity-80 cursor-pointer"
-            >
-              <div className=" leading-[150%] font-medium text-gray-scale-gray-600">เกี่ยวกับเรา</div>
-            </Link>
-            <Link
-              to={"/contact"}
-              className=" no-underline divide-y-2 divide-solid divide-white hover:opacity-80 cursor-pointer"
-            >
-              <div className=" leading-[150%] font-medium text-gray-scale-gray-600">ติดต่อเรา</div>
-            </Link>
+        <div className="hidden  flex-none lg:flex flex-row items-center justify-start gap-5">
+          <div
+            onClick={handleClick}
+            className=" cursor-pointer flex flex-row items-center justify-start box-border p-[15px] bg-branding-success gap-[12px] text-gray-scale-white hover:translate-x-1 transition-all"
+          >
+            <FontAwesomeIcon icon={faBars} />
+            <div className=" leading-[150%] font-medium">หมวดหมู่</div>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              className={Categries ? " rotate-180" : ""}
+            />
           </div>
-        <div className=" flex-1 basis-1/5 text-13xl text-gren-gray-scale-900">
+          <Menu
+            open={Categries}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            sx={{
+              borderRadius: "0",
+              "& .MuiPopover-paper": {
+                borderRadius: "0",
+              },
+              "& .MuiMenu-list": {
+                padding: "0",
+                paddingTop: "8px",
+                paddingBottom: "0px",
+                width: "175px",
+              },
+              "& .MuiMenuItem-root": {
+                minHeight: "50px",
+                display: "flex",
+                gap: "12px",
+                backgroundColor: "white",
+                ":hover": {
+                  background: "rgba(76, 175, 80, 0.2)",
+                  color: "black",
+                  translate: "3px",
+                },
+                ":active": {
+                  backgroundColor: "white",
+                },
+              },
+              cursor: "pointer",
+              minHeight: null,
+            }}
+          >
+            {categories.map((item, index) => (
+              <Link
+                key={index}
+                to={`/product/categories/${item.category_name}/1`}
+                className=" no-underline text-black"
+              >
+                <MenuItem onClick={handleClose}>
+                  {" "}
+                  <img
+                    src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
+                    width={25}
+                    height={25}
+                    alt=""
+                  />
+                  {item.category_name}
+                </MenuItem>
+              </Link>
+            ))}
+          </Menu>
+          <Link
+            to={"/about"}
+            className=" no-underline hover:opacity-80 cursor-pointer"
+          >
+            <div className=" leading-[150%] font-medium text-gray-scale-gray-600">
+              เกี่ยวกับเรา
+            </div>
+          </Link>
+          <Link
+            to={"/contact"}
+            className=" no-underline divide-y-2 divide-solid divide-white hover:opacity-80 cursor-pointer"
+          >
+            <div className=" leading-[150%] font-medium text-gray-scale-gray-600">
+              ติดต่อเรา
+            </div>
+          </Link>
+        </div>
+        <div className="flex-1 basis-1/5 text-13xl text-gren-gray-scale-900">
           <div
             onClick={() => setOpenSearch(true)}
             className=" hover:text-green-600 cursor-pointer hover:border-green-600 hover:border-opacity-50 rounded-md flex flex-row items-center justify-start text-mini text-gray-scale-gray-500"
@@ -236,148 +243,166 @@ export const Header: FunctionComponent = () => {
             </div>
           </div>
         </div>
-        <div className="basis-2 flex-shrink flex flex-row items-center justify-start gap-3">
+        <div className="flex flex-row items-center justify-start gap-3 ">
+          <div className="flex flex-row justify-end items-center">
+            {cookie.get("_ur") && (
+              <Link
+                to={"/Account/Dashboard"}
+                className=" hover:bg-black/10 hover:cursor-pointer text-gray-600 no-underline font-bold hidden lg:block w-fit"
+              >
+                {`${userInfo.first_name} ${userInfo.last_name}`}
+              </Link>
+            )}
+            <Tooltip title="Account settings">
+              <IconButton
+                onClick={handleClickAccounting}
+                size="small"
+                className="p-0 m-0 w-[30px] h-[30px]"
+                aria-controls={openAccounting ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openAccounting ? "true" : undefined}
+              >
+                <Avatar
+                  sx={{
+                    "&.MuiAvatar-root": {
+                      width: 30,
+                      height: 30,
+                    },
+                  }}
+                >
+                  <img
+                    src={`${import.meta.env.VITE_BASE_API}/img/profile.jpg`}
+                    className="max-w-full w-full object-cover"
+                  />
+                </Avatar>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              anchorEl={anchorElAccounting}
+              onClose={handleCloseAccounting}
+              onClick={handleCloseAccounting}
+              open={openAccounting}
+              transformOrigin={{ horizontal: "right", vertical: "top" }}
+              anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              sx={{
+                mt: 1.5,
+                "& .MuiMenu-list": {
+                  width: 220,
+                },
+              }}
+            >
+              {cookie.get("_ur") && (
+                <Link
+                  to={"/Account/Dashboard"}
+                  className=" no-underline text-black"
+                >
+                  <MenuItem onClick={handleClose}>
+                    <div className=" flex justify-center items-center gap-4">
+                      <ViewQuiltIcon fontSize="large" />
+                      <span>หน้าหลัก</span>
+                    </div>
+                  </MenuItem>
+                </Link>
+              )}
+              {cookie.get("_ur") && (
+                <Link
+                  to={"/Account/Orders"}
+                  className=" no-underline text-black"
+                >
+                  <MenuItem onClick={handleClose}>
+                    <div className=" flex justify-center items-center gap-4">
+                      <FontAwesomeIcon icon={faCube} size="2xl" />
+                      <span>คำสั่งซื้อ</span>
+                    </div>
+                  </MenuItem>
+                </Link>
+              )}
+              {cookie.get("_ur") && (
+                <Link
+                  to={"/Account/Address"}
+                  className=" no-underline text-black"
+                >
+                  <MenuItem onClick={handleClose}>
+                    <div className=" flex justify-center items-center gap-4">
+                      <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
+                      <span>ที่อยู่</span>
+                    </div>
+                  </MenuItem>
+                </Link>
+              )}
+              {cookie.get("_ur") ? null : (
+                <MenuItem onClick={() => setOpenSignIn(true)}>
+                  <div className=" flex justify-center items-center gap-4">
+                    <span>เข้าสู่ระบบ</span>
+                  </div>
+                </MenuItem>
+              )}
+              {cookie.get("_ur") ? null : (
+                <MenuItem onClick={() => setOpenSignUp(true)}>
+                  <div className=" flex justify-center items-center gap-4">
+                    <span>สมัครสมาชิก</span>
+                  </div>
+                </MenuItem>
+              )}
+              {cookie.get("_ur") ? null : (
+                <Divider className="lg:hidden block" />
+              )}
+              <MenuItem onClick={() => setOpenFavorite(true)}>
+                <div className=" flex justify-center items-center gap-4 lg:hidden">
+                  <FavoriteIcon fontSize="large" />
+                  <span>สินค้าที่ชอบ</span>
+                </div>
+              </MenuItem>
+              {cookie.get("_ur") && <Divider />}
+              {cookie.get("_ur") && (
+                <Link
+                  to={"/Account/Settings"}
+                  className=" no-underline text-black/70"
+                >
+                  <MenuItem onClick={handleClose}>
+                    <ListItemIcon>
+                      <Settings fontSize="medium" />
+                    </ListItemIcon>
+                    ตั้งค่า
+                  </MenuItem>
+                </Link>
+              )}
+              {cookie.get("_ur") && (
+                <MenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="medium" color="error" />
+                  </ListItemIcon>
+                  <span className=" text-branding-error opacity-90">
+                    ออกจากระบบ
+                  </span>
+                </MenuItem>
+              )}
+            </Menu>
+          </div>
           <div
             onClick={() => setOpenFavorite(true)}
-            className="rounded-2xl cursor-pointer hover:opacity-80 text-[25px]"
+            className="rounded-2xl cursor-pointer hover:opacity-80 text-[25px] lg:block hidden"
           >
             <Badge badgeContent={favoriteItem.length} color="error">
               <FavoriteIcon
-                className=" hover:text-red-200 text-green-500 opacity-90"
+                className=" text-gray-scale-gray-600 opacity-80"
                 fontSize="inherit"
               />
             </Badge>
           </div>
           <div
             onClick={() => setOpenCart(true)}
-            className=" hover:opacity-80 cursor-pointer flex flex-row items-center justify-start gap-[20px] text-black "
+            className=" hover:opacity-80 cursor-pointer flex flex-row items-start justify-start gap-[20px] text-black "
           >
-            <div className="text-[23px]">
-              <Badge badgeContent={quantitySum} color="primary">
+            <div className="text-[22px]">
+              <Badge badgeContent={quantitySum} showZero={true} color="primary">
                 <FontAwesomeIcon
                   fontSize="inherit"
                   icon={faShoppingCart}
-                  className=" text-green-500 opacity-90"
+                  className=" text-gray-scale-gray-600 opacity-80"
                 />
               </Badge>
             </div>
-           
-          </div>
-        </div>
-        <div className="hidden lg:block lg:flex-shrink shadow-[0px_1px_0px_#e5e5e5]">
-          <div className="flex flex-row items-center justify-between">
-            {cookie.get("_ur") ? (
-              <div className="flex flex-row justify-end items-center ">
-                <Link
-                  to={"/Account/Dashboard"}
-                  className=" hover:bg-black/10 hover:cursor-pointer text-gray-600 no-underline font-bold"
-                >
-                  {`${userInfo.first_name} ${userInfo.last_name}`}
-                </Link>
-                <Tooltip title="Account settings">
-                  <IconButton
-                    onClick={handleClickAccounting}
-                    size="small"
-                    aria-controls={openAccounting ? "account-menu" : undefined}
-                    aria-haspopup="true"
-                    aria-expanded={openAccounting ? "true" : undefined}
-                  >
-                    <Avatar>
-                      <img
-                        src={`${import.meta.env.VITE_BASE_API}/img/${
-                          userInfo.imgURL
-                        }`}
-                        width={50}
-                      />
-                    </Avatar>
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  anchorEl={anchorElAccounting}
-                  onClose={handleCloseAccounting}
-                  onClick={handleCloseAccounting}
-                  open={openAccounting}
-                  transformOrigin={{ horizontal: "right", vertical: "top" }}
-                  anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-                  sx={{
-                    mt: 1.5,
-                    "& .MuiMenu-list": {
-                      width: 220,
-                    },
-                  }}
-                >
-                  <Link
-                    to={"/Account/Dashboard"}
-                    className=" no-underline text-black"
-                  >
-                    <MenuItem onClick={handleClose}>
-                      <div className=" flex justify-center items-center gap-4">
-                        <ViewQuiltIcon fontSize="large" />
-                        <span>หน้าหลัก</span>
-                      </div>
-                    </MenuItem>
-                  </Link>
-                  <Link
-                    to={"/Account/Orders"}
-                    className=" no-underline text-black"
-                  >
-                    <MenuItem onClick={handleClose}>
-                      <div className=" flex justify-center items-center gap-4">
-                        <FontAwesomeIcon icon={faCube} size="2xl" />
-                        <span>คำสั่งซื้อ</span>
-                      </div>
-                    </MenuItem>
-                  </Link>
-                  <Link
-                    to={"/Account/Address"}
-                    className=" no-underline text-black"
-                  >
-                    <MenuItem onClick={handleClose}>
-                      <div className=" flex justify-center items-center gap-4">
-                        <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
-                        <span>ที่อยู่</span>
-                      </div>
-                    </MenuItem>
-                  </Link>
-                  <Divider />
-                  <Link
-                    to={"/Account/Settings"}
-                    className=" no-underline text-black/70"
-                  >
-                    <MenuItem onClick={handleClose}>
-                      <ListItemIcon>
-                        <Settings fontSize="medium" />
-                      </ListItemIcon>
-                      ตั้งค่า
-                    </MenuItem>
-                  </Link>
-                  <MenuItem onClick={handleLogout}>
-                    <ListItemIcon>
-                      <Logout fontSize="medium" color="error" />
-                    </ListItemIcon>
-                    <span className=" text-branding-error opacity-90">
-                      ออกจากระบบ
-                    </span>
-                  </MenuItem>
-                </Menu>
-              </div>
-            ) : (
-              <div className="flex flex-row items-start justify-end gap-[4px]">
-                <div
-                  onClick={() => setOpenSignIn(true)}
-                  className="cursor-pointer leading-[130%] hover:text-black/80 hover:underline "
-                >
-                  เข้าสู่ระบบ
-                </div>
-                <div className="leading-[130%]">/</div>
-                <div
-                  onClick={() => setOpenSignUp(true)}
-                  className="cursor-pointer leading-[130%] hover:text-black/80 hover:underline "
-                >
-                  สมัครสมาชิก
-                </div>
-              </div>
-            )}
           </div>
         </div>
         <div className="flex flex-row items-center justify-between box-border text-sm text-gray-scale-gray-600">
@@ -385,7 +410,7 @@ export const Header: FunctionComponent = () => {
             onClick={() => setOpenBar(true)}
             size="xl"
             icon={faBars}
-            className="block lg:hidden box-border ml-[10px] mr-[16px] sm:z-50 "
+            className="block lg:hidden box-border ml-[5px] mr-[16px] sm:z-50 "
           />
           <Drawer
             className="block lg:hidden"

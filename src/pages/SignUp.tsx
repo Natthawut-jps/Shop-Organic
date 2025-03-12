@@ -94,6 +94,7 @@ export const SignUp: FunctionComponent<openSignUp> = (props) => {
     } catch (error) {
       console.log(error);
     }
+
   };
 
   return (
