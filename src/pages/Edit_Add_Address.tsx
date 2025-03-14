@@ -5,6 +5,7 @@ import { NavAccount } from "./unities/NavAccount";
 import React, { FunctionComponent, useEffect, useState } from "react";
 import axios from "axios";
 import instance_auth from "./unities/instance_auth";
+import { Foorter } from "./unities/Foorter";
 interface addressType {
   first_name: string;
   last_name: string;
@@ -163,15 +164,15 @@ export const Edit_Add_Address: FunctionComponent = () => {
 
   return (
     <>
+      <Header />
+      <Breadcrumbs
+        categoies={undefined}
+        tltle={undefined}
+        Detail={undefined}
+        EditAndadd={EditAndadd}
+      />
       {EditAndadd === "Edit" ? (
-        <div className="relative bg-gray-scale-white w-full h-[1000px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
-          <Header />
-          <Breadcrumbs
-            categoies={undefined}
-            tltle={undefined}
-            Detail={undefined}
-            EditAndadd={EditAndadd}
-          />
+        <div className="relative bg-gray-scale-white w-full h-[1000px] text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
           <NavAccount />
           <div className=" relative top-[347px] left-[400px] w-[984px] h-[500px]">
             <div className="absolute top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] h-[500px] border-[1px] border-solid border-gray-scale-gray-100" />
@@ -454,7 +455,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
           </div>
         </div>
       ) : (
-        <div className="relative bg-gray-scale-white w-full h-[1000px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
+        <div className="relative bg-gray-scale-white w-full h-[1000px]  text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
           <Header />
           <Breadcrumbs
             categoies={undefined}
@@ -692,6 +693,7 @@ export const Edit_Add_Address: FunctionComponent = () => {
           </div>
         </div>
       )}
+      <Foorter />
     </>
   );
 };

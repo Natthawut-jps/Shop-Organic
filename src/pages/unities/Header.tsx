@@ -286,8 +286,13 @@ export const Header: FunctionComponent = () => {
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               sx={{
                 mt: 1.5,
-                "& .MuiMenu-list": {
+                ".MuiMenu-list": {
                   width: 220,
+                },
+                ".MuiMenu-paper": {
+                  backgroundColor: "#f1f5f9",
+                  boxShadow: "none",
+                  borderRadius: 0,
                 },
               }}
             >
@@ -298,8 +303,8 @@ export const Header: FunctionComponent = () => {
                 >
                   <MenuItem onClick={handleClose}>
                     <div className=" flex justify-center items-center gap-4">
-                      <ViewQuiltIcon fontSize="large" />
-                      <span>หน้าหลัก</span>
+                      <ViewQuiltIcon fontSize="medium" />
+                      <span className="text-base">หน้าหลัก</span>
                     </div>
                   </MenuItem>
                 </Link>
@@ -311,8 +316,8 @@ export const Header: FunctionComponent = () => {
                 >
                   <MenuItem onClick={handleClose}>
                     <div className=" flex justify-center items-center gap-4">
-                      <FontAwesomeIcon icon={faCube} size="2xl" />
-                      <span>คำสั่งซื้อ</span>
+                      <FontAwesomeIcon icon={faCube} size="lg" />
+                      <span className="text-base">คำสั่งซื้อ</span>
                     </div>
                   </MenuItem>
                 </Link>
@@ -324,8 +329,8 @@ export const Header: FunctionComponent = () => {
                 >
                   <MenuItem onClick={handleClose}>
                     <div className=" flex justify-center items-center gap-4">
-                      <FontAwesomeIcon icon={faMapLocationDot} size="2xl" />{" "}
-                      <span>ที่อยู่</span>
+                      <FontAwesomeIcon icon={faMapLocationDot} size="lg" />{" "}
+                      <span className="text-base">ที่อยู่</span>
                     </div>
                   </MenuItem>
                 </Link>
@@ -333,14 +338,14 @@ export const Header: FunctionComponent = () => {
               {cookie.get("_ur") ? null : (
                 <MenuItem onClick={() => setOpenSignIn(true)}>
                   <div className=" flex justify-center items-center gap-4">
-                    <span>เข้าสู่ระบบ</span>
+                    <span className="text-base">เข้าสู่ระบบ</span>
                   </div>
                 </MenuItem>
               )}
               {cookie.get("_ur") ? null : (
                 <MenuItem onClick={() => setOpenSignUp(true)}>
                   <div className=" flex justify-center items-center gap-4">
-                    <span>สมัครสมาชิก</span>
+                    <span className="text-base">สมัครสมาชิก</span>
                   </div>
                 </MenuItem>
               )}
@@ -349,8 +354,8 @@ export const Header: FunctionComponent = () => {
               )}
               <MenuItem onClick={() => setOpenFavorite(true)}>
                 <div className=" flex justify-center items-center gap-4 lg:hidden">
-                  <FavoriteIcon fontSize="large" />
-                  <span>สินค้าที่ชอบ</span>
+                  <FavoriteIcon fontSize="medium" />
+                  <span className="text-base">สินค้าที่ชอบ</span>
                 </div>
               </MenuItem>
               {cookie.get("_ur") && <Divider />}
@@ -363,7 +368,7 @@ export const Header: FunctionComponent = () => {
                     <ListItemIcon>
                       <Settings fontSize="medium" />
                     </ListItemIcon>
-                    ตั้งค่า
+                    <span className="text-base">ตั้งค่า</span>
                   </MenuItem>
                 </Link>
               )}
@@ -372,7 +377,7 @@ export const Header: FunctionComponent = () => {
                   <ListItemIcon>
                     <Logout fontSize="medium" color="error" />
                   </ListItemIcon>
-                  <span className=" text-branding-error opacity-90">
+                  <span className=" text-branding-error opacity-90 text-base">
                     ออกจากระบบ
                   </span>
                 </MenuItem>

@@ -19,33 +19,31 @@ export const NavAccount: FunctionComponent = () => {
   };
   return (
     <>
-      <div className="absolute top-[347px] left-[50px] rounded-lg bg-gray-scale-white flex flex-col items-start justify-start pt-0 px-0 pb-3 text-base text-gray-scale-gray-600 border-[1px] border-solid border-gray-scale-gray-100">
-        <div className="flex flex-row items-start justify-start pt-6 pb-4 pr-0 pl-5 text-xl text-gray-scale-gray-900">
-          <div className="relative leading-[150%] font-medium">บัญชีของฉัน</div>
+      <div className="hidden rounded-lg bg-gray-scale-white lg:flex flex-col items-start justify-start text-base text-gray-scale-gray-600 ">
+        <div className="container mx-auto p-4 box-border flex flex-row items-start justify-start text-lg text-gray-scale-gray-900">
+          <div className=" leading-[150%] font-medium">บัญชีของฉัน</div>
         </div>
         <NavLink
           to={"/Account/Dashboard"}
           className={({ isActive }) =>
             isActive
-              ? " no-underline bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
+              ? " no-underline w-[110px] bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
               : " no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-gray-scale-gray-900"
           }
         >
           <ViewQuiltIcon />
-          <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
-            หน้าหลัก
-          </div>
+          <div className=" leading-[150%] inline-block shrink-0">หน้าหลัก</div>
         </NavLink>
         <NavLink
           to={"/Account/Orders"}
           className={({ isActive }) =>
             isActive
-              ? " no-underline bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
+              ? " no-underline w-[110px] bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
               : " no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-gray-scale-gray-900"
           }
         >
           <FontAwesomeIcon icon={faCube} />
-          <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
+          <div className=" leading-[150%] inline-block shrink-0">
             คำสั่งซื้อ
           </div>
         </NavLink>
@@ -53,12 +51,12 @@ export const NavAccount: FunctionComponent = () => {
           to={"/Account/Address"}
           className={({ isActive }) =>
             isActive
-              ? " no-underline bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
+              ? " no-underline w-[110px] bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
               : " no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-gray-scale-gray-900"
           }
         >
           <FontAwesomeIcon icon={faMapLocationDot} />
-          <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
+          <div className="relative leading-[150%] inline-block shrink-0">
             ที่อยู่
           </div>
         </NavLink>
@@ -66,12 +64,12 @@ export const NavAccount: FunctionComponent = () => {
           to={"/Account/Settings"}
           className={({ isActive }) =>
             isActive
-              ? " no-underline bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
-              : " no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-gray-scale-gray-900"
+              ? "no-underline w-[110px] bg-gren-gray-scale-50 shadow-[3px_0px_0px_#20b526_inset] flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-black"
+              : "no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] text-gray-scale-gray-900"
           }
         >
           <FontAwesomeIcon icon={faGear} />
-          <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
+          <div className="relative leading-[150%] inline-block shrink-0">
             ตั้งค่า
           </div>
         </NavLink>
@@ -80,7 +78,7 @@ export const NavAccount: FunctionComponent = () => {
           className=" text-red-600 no-underline flex flex-row items-center justify-center py-4 px-5 gap-[10px] cursor-pointer"
         >
           <FontAwesomeIcon icon={faArrowRightToBracket} />
-          <div className="relative leading-[150%] inline-block w-[238px] shrink-0">
+          <div className="text-base leading-[150%] inline-block shrink-0">
             ออกจากระบบ
           </div>
         </div>
