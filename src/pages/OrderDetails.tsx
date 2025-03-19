@@ -11,6 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   Step,
   StepLabel,
   Stepper,
@@ -189,52 +190,57 @@ const OrderDetails: FunctionComponent = () => {
       />
       <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-5 gap-3 justify-item-start">
         <NavAccount />
-        <div className="col-span-1 lg:col-span-4 bg-gray-scale-white text-left text-base text-gray-scale-gray-400 font-caps-lock-medium-caps-lock">
-          {/* product-Order */}
-          <div className="scroll-order text-gray-scale-gray-900">
-            <div className=" text-xs text-gray-scale-gray-700">
-              <div className=" bg-gray-scale-gray-50 w-[965px] h-9" />
-              <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
-                สินค้า
+        <div className="container mx-auto p-4 box-border flex flex-col gap-5 col-span-1 lg:col-span-4 bg-gray-scale-white text-base text-gray-scale-gray-700 font-caps-lock-medium-caps-lock">
+          <div className=" rounded-t-lg rounded-b-none flex flex-row items-center justify-between">
+            <div className="flex flex-row flex-wrap items-center justify-start gap-1 text-base">
+              <div className="flex flex-row text-baes font-medium text-gray-scale-gray-900">
+                รายละเอียดคำสั่งซื้อ.
               </div>
-              <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
-                ราคา
-              </div>
-              <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
-                จำนวน
-              </div>
-              <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
-                รวม
-              </div>
-            </div>
-            <div className=" grid grid-cols-1 justify-items-center items-center">
-              {orderActive.map((item, index) => (
-                <div
-                  key={index}
-                  className=" top-[20px] pl-[20px] box-border w-full h-[60px] odd:bg-white even:bg-slate-50"
-                >
-                  <img
-                    className="absolute object-cover"
-                    alt=""
-                    src={`${import.meta.env.VITE_BASE_API}/img/${item.imgURL}`}
-                    width={70}
-                    height={50}
-                  />
-                  <div className=" leading-[150%] inline-block">
-                    {item.name}
-                  </div>
-                  <div className="leading-[150%]">x{item.quantity}</div>
-                  <div className="leading-[150%]">
-                    ฿{item.price / item.quantity}
-                  </div>
-                  <div className="leading-[150%] font-medium">
-                    ฿{item.price}
-                  </div>
+              <div className=" leading-[150%] flex flex-row text-sm gap-2">
+                {`${new Date(orderView ? orderView.createdAt : "").getDate()} ${
+                  months[
+                    new Date(orderView ? orderView.createdAt : "").getMonth()
+                  ]
+                } ${
+                  new Date(orderView ? orderView.createdAt : "").getFullYear() +
+                  543
+                }`}
+                .
+                <div className=" leading-[150%]">
+                  {orderView?.quantity} รายการ
                 </div>
-              ))}
+              </div>
             </div>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="alert-dialog-title"
+              aria-describedby="alert-dialog-description"
+            >
+              <DialogTitle id="alert-dialog-title" className=" text-red-500">
+                {"คุณต้องการยกเลิกรายการสินค้านี้หรือไม่"}
+              </DialogTitle>
+              <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                  ยกเลิกแล้วจะไม่สามารถกู้คืนได้
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleClose}>ยกเลิก</Button>
+                <Button onClick={cancled_order}>ตกลง</Button>
+              </DialogActions>
+            </Dialog>
+            {orderView && orderView.status === 9 ? null : (
+              <div
+                onClick={handleClickOpen}
+                className=" cursor-pointer no-underline hover:text-branding-error/80 text-sm sm:text-base px-[5px] py-[3px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
+              >
+                ยกเลิกคำสั่งซื้อ
+              </div>
+            )}
           </div>
-          {/* <div className="text-center text-branding-success-dark">
+          <Divider />
+          <div className="text-center text-branding-success-dark flex flex-col gap-4">
             {orderView?.status === 9 ? (
               <div className=" text-branding-error">
                 <h2>"ยกเลิกสินค้าแล้ว"</h2>
@@ -268,125 +274,120 @@ const OrderDetails: FunctionComponent = () => {
               </Stepper>
             )}
           </div>
-          <div className="rounded-md flex flex-col items-start justify-start text-xs border-[1px] border-solid border-gray-scale-gray-100">
-            <div className="flex flex-row items-start justify-start py-[18px] px-5 gap-[20px]">
-              <div className="flex flex-col items-start justify-start gap-[6px]">
-                <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
-                  หมายเลขคำสั่งซื้อ
+          <div className="grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="container p-4 box-border max-w-fit w-fit lg:max-w-full lg:w-full rounded-md flex flex-col gap-3 items-start justify-start text-sm border-[1px] border-solid border-gray-scale-gray-100">
+              <div className="flex flex-row items-start justify-start gap-[20px]">
+                <div className="flex flex-col items-start justify-start gap-[6px]">
+                  <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
+                    หมายเลขคำสั่งซื้อ
+                  </div>
+                  <div className=" text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-20">
+                    #{orderView?.id}
+                  </div>
                 </div>
-                <div className=" text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-20">
-                  #{orderView?.id}
-                </div>
-              </div>
-              <img className="" alt="" src="/img/line-20.svg" />
-              <div className="flex flex-col items-start justify-start gap-[6px]">
-                <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
-                  วิธีชำระเงิน
-                </div>
-                <div className=" text-[12px] leading-[150%] text-gray-scale-gray-900 inline-block w-32">
-                  {orderView?.payment_menthod}
-                </div>
-              </div>
-            </div>
-            <div className=" box-border border-t-[1px] border-solid border-gray-scale-gray-100" />
-            <div className="flex flex-col items-start justify-start py-[18px] px-5 gap-[1px] text-sm text-gray-scale-gray-600">
-              <div className="flex flex-row items-center justify-between pt-0 px-0 pb-3 box-border">
-                <div className=" leading-[150%]">รวม</div>
-                <div className=" leading-[150%] font-medium text-gray-scale-gray-900">
-                  ฿{orderView ? orderView.amount_total - 50 : 0}
+                <img className="" alt="" src="/img/line-20.svg" />
+                <div className="flex flex-col items-start justify-start gap-[6px]">
+                  <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
+                    วิธีชำระเงิน
+                  </div>
+                  <div className=" text-[12px] leading-[150%] text-gray-scale-gray-900 inline-block w-32">
+                    {orderView?.payment_menthod}
+                  </div>
                 </div>
               </div>
-              <div className=" box-border border-t-[1px] border-solid border-gray-scale-gray-100" />
-              <div className=" flex flex-row items-center justify-between py-3 px-0 box-border">
-                <div className=" leading-[150%]">ค่าจัดส่ง</div>
-                <div className=" leading-[150%] font-medium text-gray-scale-gray-900">
-                  ฿50.00
+              <div className="flex flex-row gap-6 text-sm text-gray-scale-gray-600">
+                <div className="flex flex-row gap-1 items-center justify-between">
+                  <div className=" leading-[150%]">รวม</div>
+                  <div className=" leading-[150%] font-medium text-gray-scale-gray-900">
+                    ฿{orderView ? orderView.amount_total - 50 : 0}
+                  </div>
+                </div>
+                <div className=" flex flex-row items-center justify-between gap-1 px-0 box-border">
+                  <div className=" leading-[150%]">ค่าจัดส่ง</div>
+                  <div className=" leading-[150%] font-medium text-gray-scale-gray-900">
+                    ฿50.00
+                  </div>
                 </div>
               </div>
-              <div className=" box-border border-t-[1px] border-solid border-gray-scale-gray-100" />
-              <div className="flex flex-row items-center justify-between pt-3 px-0 pb-0 box-border text-lg text-gray-scale-gray-900">
+              <div className="flex flex-row items-center justify-between gap-1 box-border text-base">
                 <div className=" leading-[150%]">ทั้งหมด</div>
-                <div className=" leading-[150%] font-semibold text-branding-success-dark">
+                <div className=" leading-[150%] font-semibold text-gray-scale-gray-900">
                   ฿{orderView?.amount_total}
                 </div>
               </div>
             </div>
+            <div className="container p-4 box-border rounded-md max-w-fit w-fit lg:max-w-full lg:w-full  bg-gray-scale-white border-[1px] border-solid border-gray-scale-gray-100 ">
+              <div className="  box-border">
+                <div className="text-gray-scale-gray-600 underline">
+                  ชื่อผู้รับ
+                </div>
+                <div className=" text-base leading-[150%] text-gray-scale-gray-600">
+                  {`${addressActive?.first_name} ${addressActive?.last_name}`}
+                </div>
+                <div className="tracking-[0.03em] leading-[100%] uppercase font-medium text-gray-scale-gray-600 underline">
+                  ที่อยู่จัดส่ง
+                </div>
+                <div className="  break-words leading-[150%] text-gray-scale-gray-600 inline-block">
+                  {`${addressActive?.street}, ${addressActive?.county}, ${addressActive?.states},
+                  ${addressActive?.tambon}, ${addressActive?.zipCode}`}
+                </div>
+                <div className="flex flex-col items-start justify-start gap-[4px] ">
+                  <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium text-gray-scale-gray-600 underline">
+                    เบอร์โทร
+                  </div>
+                  <div className="break-words leading-[150%] text-gray-scale-gray-600 inline-block">
+                    {addressActive?.phone}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="">
-            <div className=" rounded-md bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-100 " />
-            <div className="  box-border">
-              <div className="  break-words leading-[150%] text-gray-scale-gray-600 inline-block">
-                {`${addressActive?.street}, ${addressActive?.county}, ${addressActive?.states},
-            ${addressActive?.tambon}, ${addressActive?.zipCode}`}
+          <div className=" text-gray-scale-gray-900 flex flex-col gap-3">
+            <div className=" text-base grid grid-cols-4 gap-x-8 p-1 box-border text-gray-scale-gray-700 bg-gray-scale-gray-50">
+              <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
+                สินค้า
               </div>
-              <div className="flex flex-col items-start justify-start gap-[4px] text-xs">
-                <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
-                  เบอร์โทร
-                </div>
-                <div className=" text-sm break-words leading-[150%] text-gray-scale-gray-900 inline-block">
-                  {addressActive?.phone}
-                </div>
-              </div>
-              <div className=" text-base leading-[150%] text-gray-scale-gray-900">
-                {`${addressActive?.first_name} ${addressActive?.last_name}`}
+              <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium">
+                ราคา
               </div>
               <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
-                ที่อยู่จัดส่ง
+                จำนวน
               </div>
-              <div className="box-border border-t-[1px] border-solid border-gray-scale-gray-100" />
+              <div className="tracking-[0.03em] leading-[100%] uppercase font-medium">
+                รวม
+              </div>
+            </div>
+            <div className=" flex flex-col gap-2">
+              {orderActive.map((item, index) => (
+                <div
+                  key={index}
+                  className="grid grid-cols-4 gap-x-8 items-center odd:bg-white even:bg-slate-50"
+                >
+                  <div>
+                    <img
+                      className=" max-w-[100px] w-full object-cover"
+                      alt=""
+                      src={`${import.meta.env.VITE_BASE_API}/img/${
+                        item.imgURL
+                      }`}
+                    />
+                    <div className=" leading-[150%] break-words">
+                      {item.name}
+                    </div>
+                  </div>
+                  <div className="leading-[150%] break-words">
+                    ฿{item.price / item.quantity}
+                  </div>
+                  <div className="leading-[150%] break-words">
+                    x{item.quantity}
+                  </div>
+                  <div className="leading-[150%] font-medium break-words">
+                    ฿{item.price.toFixed(2)}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <div className=" rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] flex flex-row items-center justify-start py-4 px-6 gap-[420px] text-gray-scale-gray-700">
-            <div className="flex flex-row items-center justify-start gap-[8px]">
-              <div className=" text-xl leading-[150%] font-medium text-gray-scale-gray-900">
-                รายละเอียดคำสั่งซื้อ
-              </div>
-              <div className=" leading-[150%]">•</div>
-              <div className=" leading-[150%]">
-                {`${new Date(
-                  orderView ? orderView.createdAt : ""
-                ).getDate()}, ${
-                  months[
-                    new Date(orderView ? orderView.createdAt : "").getMonth()
-                  ]
-                }, ${
-                  new Date(orderView ? orderView.createdAt : "").getFullYear() +
-                  543
-                }`}
-              </div>
-              <div className=" leading-[150%]">•</div>
-              <div className=" leading-[150%]">
-                {orderView?.quantity} รายการ
-              </div>
-            </div>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="alert-dialog-title"
-              aria-describedby="alert-dialog-description"
-            >
-              <DialogTitle id="alert-dialog-title" className=" text-red-500">
-                {"คุณต้องการยกเลิกรายการสินค้านี้หรือไม่"}
-              </DialogTitle>
-              <DialogContent>
-                <DialogContentText id="alert-dialog-description">
-                  ยกเลิกแล้วจะไม่สามารถกู้คืนได้
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose}>ยกเลิก</Button>
-                <Button onClick={cancled_order}>ตกลง</Button>
-              </DialogActions>
-            </Dialog>
-            {orderView && orderView.status === 9 ? null : (
-              <div
-                onClick={handleClickOpen}
-                className=" cursor-pointer no-underline hover:text-branding-error/80 text-base leading-[150%] px-[15px] py-[5px] rounded-md bg-branding-error/10 text-branding-error font-sans font-bold"
-              >
-                ยกเลิกคำสั่งซื้อ
-              </div>
-            )}
-          </div> */}
         </div>
       </div>
       <Foorter />

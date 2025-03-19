@@ -5,6 +5,8 @@ import { NavAccount } from "./unities/NavAccount";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { useEffect, useState } from "react";
 import instance_auth from "./unities/instance_auth";
+import { Foorter } from "./unities/Foorter";
+import { Divider } from "@mui/material";
 
 interface addressType {
   id: number;
@@ -76,97 +78,109 @@ export const Address = () => {
   };
   return (
     <>
-      <div className="relative bg-gray-scale-white w-full h-full pb-[400px] overflow-hidden text-left text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
-        <Header />
-        <Breadcrumbs
-          categoies={undefined}
-          tltle={undefined}
-          Detail={undefined}
-          EditAndadd={undefined}
-        />
+      <Header />
+      <Breadcrumbs
+        categoies={undefined}
+        tltle={undefined}
+        Detail={undefined}
+        EditAndadd={undefined}
+      />
+      <div className="grid grid-flow-row grid-cols-1 lg:grid-cols-5 gap-3 justify-item-start">
         <NavAccount />
-        <div className=" relative top-[347px] left-[400px] w-[980px] h-fit">
-          <div className=" relative top-[-1px] left-[-1px] rounded-lg bg-gray-scale-white box-border w-[986px] pb-[150px] h-fit border-[1px] border-solid border-gray-scale-gray-100">
-            {/* Address */}
-            <div className=" relative grid grid-cols-2 grid-flow-row gap-y-5 w-[950px]">
+        <div className="container mx-auto p-4 box-border col-span-1 lg:col-span-4 bg-gray-scale-white text-base text-gray-scale-gray-600 font-caps-lock-small-caps-lock">
+          <div className=" bg-gray-scale-white box-border border-[1px] border-solid border-gray-scale-gray-100">
+            <div className=" container mx-auto p-4 box-border rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] text-base">
+              <div className="leading-[150%] font-medium">ที่อยู่จัดส่ง</div>
+            </div>
+            <div className="container mx-auto p-4 box-border grid grid-flow-row grid-cols-1 sm:grid-cols-2 gap-2 ">
               {address
                 .sort((a, b) => b.status - a.status)
                 .map((item, index) => (
                   <div
                     key={index}
-                    className=" relative top-[86px] left-[24px] w-[450px] h-[280px]"
+                    className=" container p-4 box-border rounded-md bg-gray-scale-white border-[1px] border-solid border-gray-scale-gray-100 "
                   >
-                    <div className="absolute top-[0px] left-[0px] rounded-md bg-gray-scale-white box-border w-[450px] h-[280px] border-[1px] border-solid border-gray-scale-gray-100 " />
-                    <div className=" absolute top-[18px] left-[0px] box-border pl-[0px] h-[250px] w-[470px] overflow-auto">
-                      <div className=" relative break-words top-[78px] pl-[20px] box-border leading-[150%] text-gray-scale-gray-600 inline-block w-[420px]">
-                        {`${item.street}, ${item.county}, ${item.states},
-                       ${item.tambon}, ${item.zipCode}`}
-                      </div>
-                      <div className=" relative top-[100px] pl-[20px] box-border flex flex-col items-start justify-start gap-y-[4px] text-xs">
-                        <div className="relative tracking-[0.03em] leading-[100%] uppercase font-medium  ">
-                          เบอร์โทร
-                        </div>
-                        <div className="relative break-words text-sm leading-[150%] text-gray-scale-gray-900 inline-block w-[420px] ">
-                          {item.phone}
-                        </div>
-                      </div>
-                      <div className="absolute top-[46px] pl-[20px] box-border text-base leading-[150%] text-gray-scale-gray-900 w-[450px]">
-                        {`${item.first_name} ${item.last_name}`}
-                      </div>
-                      <Link
-                        state={item}
-                        to={"/Account/Address/Edit"}
-                        className="absolute hover:text-[#06e102]/70 top-[0px] cursor-pointer p-[2px] text-[#06e102] left-[20px] tracking-[0.03em] leading-[100%] font-medium"
-                      >
-                        แก้ไข
-                      </Link>
-                      {item.status === 1 ? (
-                        <button
-                          className="absolute bg-transparent top-[0px] p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/30 rounded-sm text-[#666666] cursor-not-allowed"
-                          disabled
+                    <div className="container py-2 box-border">
+                      <div className="flex flex-row justify-between">
+                        <Link
+                          state={item}
+                          to={"/Account/Address/Edit"}
+                          className=" no-underline flex flex-row text-[#06e102] tracking-[0.03em] leading-[100%] font-medium"
                         >
-                          ตั้งเป็นค่าเริ่มต้น
-                        </button>
-                      ) : (
-                        <div>
-                          <button
-                            onClick={() => Deflut(item.id, 1)}
-                            className="absolute hover:text-black/90 active:bg-black/10 bg-transparent top-[0px] cursor-pointer p-[4px] left-[85px] tracking-[0.03em] leading-[100%] text-[11px] border border-solid border-black/50 rounded-sm text-black"
-                          >
-                            ตั้งเป็นค่าเริ่มต้น
-                          </button>
+                          แก้ไข
+                        </Link>
+                        {item.status === 0 && (
                           <div
                             onClick={() => Delete(item.id)}
-                            className="absolute cursor-pointer p-[2px] hover:text-red-400 text-red-600 top-[0px] left-[370px] tracking-[0.03em] leading-[100%] font-medium"
+                            className=" cursor-pointer hover:text-red-400 text-red-600 tracking-[0.03em] leading-[100%] font-medium"
                           >
                             ลบที่อยู่
                           </div>
+                        )}
+                      </div>
+                      <Divider className="p-1 box-border" />
+                    </div>
+                    <div className="box-border pl-[0px] flex flex-col gap-2">
+                      <div>
+                        <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium  underline">
+                          ชื่อผู้รับ
+                        </div>
+                        <div className="box-border text-base leading-[150%] text-gray-scale-gray-600 break-words">
+                          {`${item.first_name} ${item.last_name}`}
+                        </div>
+                      </div>
+                      <div>
+                        <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium underline ">
+                          ที่อยู่จัดส่ง
+                        </div>
+                        <div className="  break-words box-border leading-[150%] text-gray-scale-gray-600 inline-block ">
+                          {`${item.street}, ${item.county}, ${item.states},
+                       ${item.tambon}, ${item.zipCode}`}
+                        </div>
+                      </div>
+                      <div className="box-border flex flex-col items-start justify-start gap-y-[4px] text-base">
+                        <div className=" tracking-[0.03em] leading-[100%] uppercase font-medium underline ">
+                          เบอร์โทร
+                        </div>
+                        <div className=" break-words text-sm leading-[150%] text-gray-scale-gray-600 inline-block">
+                          {item.phone}
+                        </div>
+                      </div>
+                      {item.status === 1 ? (
+                        <div className="container pt-2 box-border">
+                          <button
+                            className=" bg-transparent tracking-[0.03em] border border-solid border-black/30 rounded-sm text-[#666666] cursor-not-allowed"
+                            disabled
+                          >
+                            ตั้งเป็นค่าเริ่มต้น
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="container pt-2 box-border">
+                          <button
+                            onClick={() => Deflut(item.id, 1)}
+                            className=" hover:text-black/90 active:bg-black/10 bg-transparentcursor-pointer tracking-[0.03em] leading-[100%] border border-solid border-black/50 rounded-sm text-black"
+                          >
+                            ตั้งเป็นค่าเริ่มต้น
+                          </button>
                         </div>
                       )}
-                      <div className="absolute top-[31.5px] left-[0px] box-border w-[450px] h-px border-t-[1px] border-solid border-gray-scale-gray-100" />
                     </div>
                   </div>
                 ))}
               <Link
                 to={"/Account/Address/Add"}
-                className=" relative top-[86px] left-[24px] w-[450px] h-[200px] bg-[#06e102]/20 hover:bg-[#06e102]/30"
+                className="container p-4 box-border bg-[#06e102]/20 hover:bg-[#06e102]/30  border-[1px] border-solid border-[#06e102] rounded-md "
               >
-                <div className="absolute rounded-md box-border w-full h-[200px] border-[1px] border-solid border-[#06e102] " />
-                <div className="  relative  box-border w-[450px] h-[200px] ">
-                  <div className=" flex justify-center items-center break-words leading-[150%] text-[#06e102] w-[450px] h-[200px] hover:translate-y-[2px]">
-                    <AddCircleOutlineIcon sx={{ fontSize: "100px" }} />
-                  </div>
+                <div className=" h-full flex flex-col justify-center items-center text-[#06e102]">
+                  <AddCircleOutlineIcon sx={{ fontSize: "80px" }} />
                 </div>
               </Link>
             </div>
           </div>
-          <div className="absolute top-[2px] left-[0px] rounded-t-lg rounded-b-none bg-gray-scale-white shadow-[0px_1px_0px_#e5e5e5] w-[984px] h-[62px] text-xl">
-            <div className="absolute top-[16px] left-[24px] leading-[150%] font-medium">
-              ที่อยู่จัดส่ง
-            </div>
-          </div>
         </div>
       </div>
+      <Foorter />
     </>
   );
 };

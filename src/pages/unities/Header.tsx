@@ -415,7 +415,7 @@ export const Header: FunctionComponent = () => {
             onClick={() => setOpenBar(true)}
             size="xl"
             icon={faBars}
-            className="block lg:hidden box-border ml-[5px] mr-[16px] sm:z-50 "
+            className="block lg:hidden box-border ml-[5px] mr-[16px] sm:z-50 cursor-pointer"
           />
           <Drawer
             className="block lg:hidden"
@@ -430,18 +430,19 @@ export const Header: FunctionComponent = () => {
             open={openBars}
             onClose={() => setOpenBar(false)}
           >
-            <div className=" container mx-auto p-4">
-              <span onClick={() => setOpenBar(false)}>
+            <div className=" container mx-auto p-4 box-border">
+              <div className="flex flex-row justify-end w-full ">
                 <CloseIcon
+                  onClick={() => setOpenBar(false)}
                   color="inherit"
-                  className=" active:bg-black/50 left-[80%]  w-full"
+                  className=" active:bg-black/50 cursor-pointer"
                 />
-              </span>
+              </div>
               <List>
                 <ListItemButton
                   divider
                   onClick={() => setOpenCollape(!openCollape)}
-                  className=" flex gap-[165px]"
+                  className=" flex flex-row"
                 >
                   หมวดหมู่
                   {openCollape ? <ExpandLess /> : <ExpandMore />}
@@ -454,14 +455,24 @@ export const Header: FunctionComponent = () => {
                 >
                   <List component={"div"} disablePadding={true}>
                     {categories.map((item, index) => (
-                      <ListItemButton key={index} sx={{ ml: 4 }} divider>
-                        {item.category_name}
-                      </ListItemButton>
+                      <Link
+                        onClick={() => setOpenBar(false)}
+                        to={`/product/categories/${item.category_name}/1`}
+                        className="no-underline text-white"
+                      >
+                        <ListItemButton key={index} sx={{ ml: 4 }} divider>
+                          {item.category_name}
+                        </ListItemButton>
+                      </Link>
                     ))}
                   </List>
                 </Collapse>
-                <ListItemButton divider>เกี่ยวกับเรา</ListItemButton>
-                <ListItemButton divider>ติดต่อเรา</ListItemButton>
+                <Link to={"/about"} className="no-underline text-white">
+                  <ListItemButton divider>เกี่ยวกับเรา</ListItemButton>
+                </Link>
+                <Link to={"/contact"} className="no-underline text-white">
+                  <ListItemButton divider>ติดต่อเรา</ListItemButton>
+                </Link>
               </List>
             </div>
           </Drawer>

@@ -119,7 +119,7 @@ export const Search: FunctionComponent<open> = (props) => {
             />
           </div>
         </div>
-        <div className="flex flex-col mx-auto p-4 box-border justify-start space-y-0 w-full overflow-auto sm:w-[320px]">
+        <div className="flex flex-col mx-auto p-4 box-border justify-start space-y-0 w-full overflow-auto">
           {input.length >= 1
             ? list.map((item: datatypesProduct) => (
                 <div key={item.id}>
@@ -129,7 +129,7 @@ export const Search: FunctionComponent<open> = (props) => {
                       ""
                     )}`}
                     state={{ product: item, status: "toTop" }}
-                    className=" flex-1 flex justify-start items-center gap-[50px] no-underline text-black cursor-pointer w-full hover:bg-black/10"
+                    className=" flex flex-row items-center gap-7 no-underline text-black cursor-pointer w-full hover:bg-black/10"
                   >
                     <div>
                       <img
@@ -137,16 +137,16 @@ export const Search: FunctionComponent<open> = (props) => {
                           item.imgURL
                         }`}
                         alt=""
-                        width={70}
-                        height={70}
-                        className=" sm:w-[50px] sm:h-[50px]"
+                        className="max-w-[100px] w-[100px] object-cover"
                       />
                     </div>
-                    <div className="sm:relative sm:left-[20px]">
-                      {item.name}
-                    </div>
-                    <div className=" text-[#06e102] font-semibold sm:relative left-[50px] sm:hidden">
-                      {`฿${item.price}`}
+                    <div>
+                      <div className="sm:relative break-words max-w-full">
+                        {item.name}
+                      </div>
+                      <div className=" text-[#06e102] font-semibold sm:relative break-words">
+                        {`฿${item.price}`}
+                      </div>
                     </div>
                   </Link>
                 </div>

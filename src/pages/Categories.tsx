@@ -385,12 +385,15 @@ const Categories: FunctionComponent = () => {
                     </Link>
                     {cartItems.find((check) => check.pid === item.id) ? (
                       <div onClick={() => removeCartItem(item.id)}>
+                      <div className="text-white flex flex-row items-center gap-1 justify-center bg-limegreen-100/80   max-w-full w-full  h-full cursor-pointer">
+                        <div>ยกเลิก</div>
                         <img
-                          className=" cursor-pointer z-50 w-fit"
+                          className=" cursor-pointer z-50 opacity-70"
                           alt=""
                           src="/img/add-to-cart2.svg"
                         />
                       </div>
+                    </div>
                     ) : (
                       <div
                         onClick={() => {

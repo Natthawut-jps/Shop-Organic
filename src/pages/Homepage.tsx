@@ -314,11 +314,14 @@ export const Homepage: FunctionComponent = () => {
                       </Link>
                       {cartItems.find((check) => check.pid === item.id) ? (
                         <div onClick={() => removeCartItem(item.id)}>
-                          <img
-                            className=" cursor-pointer z-50 w-fit"
-                            alt=""
-                            src="/img/add-to-cart2.svg"
-                          />
+                          <div className="text-white flex flex-row items-center gap-1 justify-center bg-limegreen-100/80   max-w-full w-full  h-full cursor-pointer">
+                            <div>ยกเลิก</div>
+                            <img
+                              className=" cursor-pointer z-50 opacity-70"
+                              alt=""
+                              src="/img/add-to-cart2.svg"
+                            />
+                          </div>
                         </div>
                       ) : (
                         <div
@@ -329,7 +332,7 @@ export const Homepage: FunctionComponent = () => {
                               : setOpenSignIn(true);
                           }}
                         >
-                          <div className="flex flex-row items-center justify-center bg-slate-800/10 max-w-full w-full  h-full cursor-pointer">
+                          <div className="flex flex-row gap-1 items-center justify-center bg-slate-800/10 max-w-full w-full  h-full cursor-pointer">
                             เพิ่มสินค้า
                             <img
                               className=" cursor-pointer z-50"
