@@ -177,7 +177,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
         onClose={() => props.Favorite.setOpenFavorite(false)}
         open={props.Favorite.openFavorite}
       >
-        <div className=" ">
+        <div className="">
           <div className="p-2 box-border">
             <FontAwesomeIcon
               onClick={() => props.Favorite.setOpenFavorite(false)}
@@ -207,35 +207,33 @@ export const Favorite: FunctionComponent<open> = (props) => {
                   </div>
                 )}
               </div>
-              <div className=" border-solid border-[#666666] border-opacity-30   box-border border-[1px] " />
+              <div className=" border-solid border-[#666666] border-opacity-30  box-border border-[1px] " />
             </div>
             <div className="container mx-auto p-4 box-border flex flex-col gap-4">
               {favoriteItem.length > 0 &&
                 favoriteItem.map((item) => (
                   <div
                     key={item.id}
-                    className="flex flex-row gap-6 sm:gap-24 flex-wrap  justify-start items-baseline"
+                    className="flex flex-row gap-6 sm:gap-10 flex-wrap justify-start"
                   >
-                    <div>
-                      <div className=" flex flex-row justify-center items-center">
-                        <img
-                          className=" max-w-[100px] w-[100px]"
-                          alt="Image"
-                          src={`${import.meta.env.VITE_BASE_API}/img/${
-                            item.imgURL
-                          }`}
-                        />
-                      </div>
-                      <div className=" flex flex-col justify-center items-start gap-2">
-                        <div className=" flex justify-center items-center ">
-                          <div className="  top-0 [font-family:'Montserrat',Helvetica] font-normal text-[#333435] text-[12px] tracking-[0] leading-[normal]">
-                            {item.name}
-                          </div>
+                    <div className=" flex flex-row justify-center items-center">
+                      <img
+                        className=" max-w-[100px] w-[100px]"
+                        alt="Image"
+                        src={`${import.meta.env.VITE_BASE_API}/img/${
+                          item.imgURL
+                        }`}
+                      />
+                    </div>
+                    <div className=" flex flex-col justify-center items-start gap-2">
+                      <div className=" flex justify-center items-center ">
+                        <div className="text-base  [font-family:'Montserrat',Helvetica] font-normal text-[#333435] tracking-[0] leading-[normal]">
+                          {item.name}
                         </div>
-                        <div className=" flex items-center justify-center ">
-                          <div className="  top-0 [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
-                            {item.price.toFixed(2) + "฿"}
-                          </div>
+                      </div>
+                      <div className=" flex items-center justify-center ">
+                        <div className="  [font-family:'Noto_Serif_Thai',Helvetica] font-semibold text-[#06e102] text-[16px] tracking-[0] leading-[normal]">
+                          {item.price.toFixed(2) + "฿"}
                         </div>
                       </div>
                     </div>
@@ -300,7 +298,7 @@ export const Favorite: FunctionComponent<open> = (props) => {
                 ))}
             </div>
             {favoriteItem.length === 0 && (
-              <div className="  w-full h-[300px] top-[120px] flex justify-center">
+              <div className="w-full h-[300px] flex flex-row items-center justify-center">
                 ไม่มีสินค้าในรายการที่ชอบ
               </div>
             )}

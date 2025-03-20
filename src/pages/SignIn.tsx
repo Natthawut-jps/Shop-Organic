@@ -162,7 +162,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                 className="cursor-pointer p-[5px] opacity-50 active:bg-slate-300 active:bg-opacity-60 float-right "
               />
             </div>
-            <div className="w-full flex flex-col justify-center items-center gap-6">
+            <div className="w-full flex flex-col justify-center items-center gap-6 font-semibold">
               <div>เข้าสู่ระบบ</div>
               <div className="text-xs leading-[120%] font-semibold ">
                 {incorrect && (
@@ -192,7 +192,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                     {err.password}
                   </span>
                 )}
-                <div className="relative w-full">
+                <div className="relative w-full border-[1px] border-solid border-gray-scale-gray-100  p-2 rounded-md">
                   <input
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       setUinfo({
@@ -204,7 +204,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                     type="password"
                     id="passwordSignIn"
                     placeholder="รหัสผ่าน"
-                    className="  text-[#373636] bg-transparent focus:outline-none rounded-md w-full p-2 border-[1px] border-solid border-gray-scale-gray-100"
+                    className="  text-[#373636] bg-transparent focus:outline-none  max-w-[95%] w-full"
                     required
                   />
                   {passEye ? (
@@ -212,14 +212,14 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className="absolute top-[6px] end-0 cursor-pointer"
+                      className="absolute top-[6px] end-0 cursor-pointer mr-2"
                     />
                   ) : (
                     <VisibilityOff
                       onClick={passwordEye}
                       fontSize="small"
                       sx={{ color: "black" }}
-                      className=" absolute top-[6px] end-0 cursor-pointer"
+                      className=" absolute top-[6px] end-0 cursor-pointer mr-2"
                     />
                   )}
                 </div>
@@ -229,7 +229,7 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
                   <Link
                     to={"/reset-password"}
                     reloadDocument
-                    className="no-underline text-black leading-[150%]"
+                    className="no-underline text-gray-scale-gray-800 leading-[150%]"
                   >
                     ลืมรหัสผ่าน
                   </Link>
@@ -238,9 +238,9 @@ export const SignIn: FunctionComponent<openSignIn> = (props) => {
               <form id="passwordEyeForm" onSubmit={handleSubmit}>
                 <button
                   type="submit"
-                  className="cursor-pointer rounded-24xl bg-branding-success  flex flex-row items-center justify-center py-3.5 px-8 box-border text-gray-scale-white"
+                  className="cursor-pointer rounded-24xl bg-branding-success  flex flex-row items-center justify-center py-3 px-7 box-border text-gray-scale-white"
                 >
-                  <div className=" leading-[120%] font-semibold">
+                  <div className=" leading-[120%] font-semibold text-base">
                     เข้าสู่ระบบ
                   </div>
                 </button>
